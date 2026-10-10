@@ -11,7 +11,7 @@
 #include "header.h"
 
 void show_land_player() {
-  Int32 x,y;
+  int x,y;
   x = player.x;
   y = player.y;
   if (player.inship == ' ')

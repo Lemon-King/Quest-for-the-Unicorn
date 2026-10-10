@@ -33,7 +33,7 @@ void check_level_legacy() {
   }
 
 void player_attack_defense() {
-  Int32 i;
+  int i;
   player.armour = 0;
   if (player.invent[I_SHLD].otype == O_SHLD && player.invent[I_SHLD].effect != E_PROT) player.armour = player.invent[I_SHLD].damage + player.invent[I_SHLD].plus * 3;
   if (is_weapon(&(player.invent[I_LHND]))) player.armour = 0;
@@ -60,7 +60,7 @@ void player_attack_defense() {
   if (player.weapon == 0) player.weapon = (get_str() / 5) + 1;
   }
 
-Int32 item_equipped(Int32 item) {
+int item_equipped(int item) {
   if (player.invent[I_ARMR].link == item) return -1;
   if (player.invent[I_SHLD].link == item) return -1;
   if (player.invent[I_HELM].link == item) return -1;
@@ -74,14 +74,12 @@ Int32 item_equipped(Int32 item) {
   if (player.invent[I_BLTB].link == item) return -1;
   if (player.invent[I_BLTL].link == item) return -1;
   if (player.invent[I_BLTR].link == item) return -1;
-  if (player.invent[I_RHND].link == item && is_weapon(&(player.invent[I_RHND]))) return -1;
-  if (player.invent[I_LHND].link == item && is_weapon(&(player.invent[I_LHND]))) return -1;
   return 0;
   }
 
-Int32 can_drop(Int32 destx,Int32 desty,char check_inair) {
-  Int32 i;
-  Int32 x,y;
+int can_drop(int destx,int desty,char check_inair) {
+  int i;
+  int x,y;
   drop_x = -1;
   drop_y = -1;
   if (check_inair == 'Y' && in_air.otype == O_NONE) {
@@ -110,13 +108,13 @@ Int32 can_drop(Int32 destx,Int32 desty,char check_inair) {
 OBJECT_REC* inventory(OBJECT_REC* it) {
   OBJECT_REC* treasure;
   char key;
-  Int32  line;
+  int  line;
   char flag;
-  Int32  i,j;
+  int  i,j;
 
   void show_screen() {
-    Int32 i;
-    Int32 ct;
+    int i;
+    int ct;
     char buffer[40];
     textmode(3);
     textcolor(6);
@@ -165,47 +163,46 @@ OBJECT_REC* inventory(OBJECT_REC* it) {
     txt_write(buffer);
     }
 
-  takes_time = 'N';
   if (it != NULL) {
-    if ((it->flags & OF_COUNTED) == 0) {
-      if (it->otype == O_CARD) stats.counts[it->control] |= (1 << it->control2);
-      if (it->rarity > 2500) stats.counts[STAT_COMMONS]++;
-      if (it->rarity > 500 && it->rarity <= 2500) stats.counts[STAT_UNCOMMONS]++;
-      if (it->rarity > 100 && it->rarity <= 500) stats.counts[STAT_RARES]++;
-      if (it->rarity > 5 && it->rarity <= 100) stats.counts[STAT_VERY_RARES]++;
-      if (it->rarity > 0 && it->rarity <= 5) stats.counts[STAT_ULTRA_RARES]++;
+    if (it->otype == O_CARD) stats.counts[it->control] |= (1 << it->control2);
+    if (it->rarity > 2500) stats.counts[STAT_COMMONS]++;
+    if (it->rarity > 500 && it->rarity <= 2500) stats.counts[STAT_UNCOMMONS]++;
+    if (it->rarity > 100 && it->rarity <= 500) stats.counts[STAT_RARES]++;
+    if (it->rarity > 5 && it->rarity <= 100) stats.counts[STAT_VERY_RARES]++;
+    if (it->rarity > 0 && it->rarity <= 5) stats.counts[STAT_ULTRA_RARES]++;
 
-      if (it->effect != E_MUTA && it->level >= 0 && it->plus >= 0) {
-        if (it->rarity > 2500) it->flags |= OF_IDENT;
-        else if (it->rarity > 500 && (u_random(100)-get_skill(7)*5) < 25) it->flags |= OF_IDENT;
-        else if (it->rarity > 100 && (u_random(1000)-get_skill(7)*10) < 25) it->flags |= OF_IDENT;
-        else if (it->rarity > 5 && (u_random(10000)-get_skill(7)*15) < 25) it->flags |= OF_IDENT;
-        else if (it->rarity > 0 && (u_random(100000)-get_skill(7)*20) < 25) it->flags |= OF_IDENT;
-        }
+  if (it != NULL && it->effect != E_MUTA && it->level >= 0) {
+    if (it->plus >= 0 && it->rarity > 2500) it->level = -it->level;
+    else if (it->plus >= 0 && it->rarity > 500 && (u_random(100)-get_skill(7)*5) < 25) it->level = -it->level;
+    else if (it->plus >= 0 && it->rarity > 100 && (u_random(1000)-get_skill(7)*10) < 25) it->level = -it->level;
+    else if (it->plus >= 0 && it->rarity > 5 && (u_random(10000)-get_skill(7)*15) < 25) it->level = -it->level;
+    else if (it->plus >= 0 && it->rarity > 0 && (u_random(100000)-get_skill(7)*20) < 25) it->level = -it->level;
+    }
 
-      i = 0;
-      while (trophies[i].criteria_type < 999) {
-        if (trophies[i].criteria_type == TC_PICKT) {
-          if (it->otype == trophies[i].control[0]) stats.counts[trophies[i].control[2]]++;
-          if (trophies[i].control[3] > 0)
-            if (it->otype == trophies[i].control[3]) stats.counts[trophies[i].control[5]]++;
-          }
-        if (trophies[i].criteria_type == TC_PICKI) {
-          if (it->link == trophies[i].control[0]) stats.counts[trophies[i].control[2]]++;
-          if (trophies[i].control[3] > 0)
-            if (it->link == trophies[i].control[3]) stats.counts[trophies[i].control[5]]++;
-          }
-        if (trophies[i].criteria_type == TC_PICKR) {
-          if (it->link >= trophies[i].control[0] && it->link <= trophies[i].control[1]) {
-            stats.counts[trophies[i].control[2]] |= (1 << (it->link - trophies[i].control[0]));
-            }
-          }
-        i++;
+  if (it->rarity > 0) {
+    i = 0;
+    while (trophies[i].criteria_type < 999) {
+      if (trophies[i].criteria_type == TC_PICKT) {
+        if (it->otype == trophies[i].control[0]) stats.counts[trophies[i].control[2]]++;
+        if (trophies[i].control[3] > 0)
+          if (it->otype == trophies[i].control[3]) stats.counts[trophies[i].control[5]]++;
         }
+      if (trophies[i].criteria_type == TC_PICKI) {
+        if (it->link == trophies[i].control[0]) stats.counts[trophies[i].control[2]]++;
+        if (trophies[i].control[3] > 0)
+          if (it->link == trophies[i].control[3]) stats.counts[trophies[i].control[5]]++;
+        }
+      if (trophies[i].criteria_type == TC_PICKR) {
+        if (it->link >= trophies[i].control[0] && it->link <= trophies[i].control[1]) {
+          stats.counts[trophies[i].control[2]] |= (1 << (it->link - trophies[i].control[0]));
+          }
+        }
+      i++;
       }
+    }
     if (it->effect == E_MUTA) it->level = player.diff + player.d_level / 3;
+    it->rarity = -(it->rarity);
     if (it->effect == E_SPCL && it->control == 79) convert_recipe(it);
-    it->flags |= OF_COUNTED;
     }
   in_air.otype = O_NONE;
   if (it != NULL) in_air = *it;
@@ -214,7 +211,7 @@ OBJECT_REC* inventory(OBJECT_REC* it) {
     treasure = find_linked_item(links[player.dungeon_number].treasure);
     if (treasure != NULL && strcmp(it->name,treasure->name) == 0) {
       player.quests[player.dungeon_number] = 'Y';
-      in_air.flags |= OF_IDENT;
+      in_air.level = -1;
       }
     }
   it = NULL;
@@ -257,7 +254,6 @@ OBJECT_REC* inventory(OBJECT_REC* it) {
       show_screen();
       textcolor(14);
       gotoxy(1,line); txt_write("->");
-      takes_time = 'Y';
       }
     if (key == 'T') {
       unpack(line - 3);

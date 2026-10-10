@@ -10,80 +10,13 @@
 
 #include "header.h"
 
-typedef struct {
-  Int32 x;
-  Int32 y;
-  Int32 count;
-  } ELEMENT;
-
-char find_path(Int32 startx,Int32 starty,Int32 endx,Int32 endy,char ignoreMonst) {
-  ELEMENT path[1000];
-  Int32     count;
-  Int32 i;
-  Int32 x,y;
-  Int32 pos;
-  char flag;
-  if (los(startx,starty,endx,endy,'Y')) {
-    if (startx >endx && starty  > endy && passable(startx-1,starty-1,'N','N')) return '7';
-    if (startx==endx && starty  > endy && passable(startx  ,starty-1,'N','N')) return '8';
-    if (startx <endx && starty  > endy && passable(startx+1,starty-1,'N','N')) return '9';
-    if (startx >endx && starty == endy && passable(startx-1,starty  ,'N','N')) return '4';
-    if (startx <endx && starty == endy && passable(startx+1,starty  ,'N','N')) return '6';
-    if (startx >endx && starty  < endy && passable(startx-1,starty+1,'N','N')) return '1';
-    if (startx==endx && starty  < endy && passable(startx  ,starty+1,'N','N')) return '2';
-    if (startx <endx && starty  < endy && passable(startx+1,starty+1,'N','N')) return '3';
-    }
-  count = 1;
-  pos = 0;
-  path[0].x=endx;
-  path[0].y = endy;
-  path[0].count = 0;
-  while (pos < count) {
-    for (y=path[pos].y-1;y<=path[pos].y+1;y++)
-      for (x=path[pos].x-1;x<=path[pos].x+1;x++)
-        if (x == startx && y == starty) {
-          if (path[pos].x  < startx && path[pos].y  > starty) return '1';
-          if (path[pos].x == startx && path[pos].y  > starty) return '2';
-          if (path[pos].x  > startx && path[pos].y  > starty) return '3';
-          if (path[pos].x  < startx && path[pos].y == starty) return '4';
-          if (path[pos].x  > startx && path[pos].y == starty) return '6';
-          if (path[pos].x  < startx && path[pos].y  < starty) return '7';
-          if (path[pos].x == startx && path[pos].y  < starty) return '8';
-          if (path[pos].x  > startx && path[pos].y  < starty) return '9';
-          }
-        else if ((x != path[pos].x || y != path[pos].y) && passable(x,y,ignoreMonst,'Y')) {
-          flag = '*';
-          for (i=0; i<count; i++)
-            if (path[i].x == x && path[i].y == y) {
-//              if (path[i].count >= path[pos].count) {
-//                path[i].x = -1;
-//                path[i].y = -1;
-//                }
-              flag = ' ';
-              }
-          if (flag == '*') {
-            path[count].x = x;
-            path[count].y = y;
-            path[count].count = path[pos].count + 1;
-            count++;
-            if (count == 1000) {
-              return '5';
-              }
-            }
-          }
-      pos++;
-    }
-  return '5';
-  }
-
-/*
-Int32 find_path(Int32 start_x,Int32 start_y,Int32 end_x,Int32 end_y,Int32 count) {
-  Int32 directions[10];
-  Int32 i;
-  Int32 best_dir;
-  Int32 best_count;
-  Int32 xdir,ydir;
-  Int32 x,y;
+int find_path(int start_x,int start_y,int end_x,int end_y,int count) {
+  int directions[10];
+  int i;
+  int best_dir;
+  int best_count;
+  int xdir,ydir;
+  int x,y;
 
   x = start_x;
   y = start_y;
@@ -168,4 +101,3 @@ Int32 find_path(Int32 start_x,Int32 start_y,Int32 end_x,Int32 end_y,Int32 count)
   return best_count+1;
   }
 
-*/

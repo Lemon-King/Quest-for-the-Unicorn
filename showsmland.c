@@ -11,8 +11,8 @@
 #include "header.h"
 
 void show_sm_land() {
-  Int32 x,y;
-  Int32 color;
+  int x,y;
+  int color;
   pixel = 0;
   setfillstyle(1,0);
   bar(smap_offset_x,smap_offset_y,smap_offset_x+99,smap_offset_y+99);

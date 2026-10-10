@@ -11,7 +11,7 @@
 #include "header.h"
 
 void poison_trap() {
-  Int32 i;
+  int i;
   char flag;
   flag = ' ';
   if (classes[player.class-1].flags & CF_ROGUE) flag = '*';
@@ -28,7 +28,5 @@ void poison_trap() {
       stats.counts[STAT_POISONED]++;
       show_side();
     }
-  run_x = 0;
-  run_y = 0;
   }
 

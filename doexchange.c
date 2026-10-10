@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void do_exchange(OBJECT_REC* item,Int32 line) {
+void do_exchange(OBJECT_REC* item,int line) {
   OBJECT_REC temp;
 /*
   if (line-3 == I_RHND && player.invent[line-3].plus < 0) {
@@ -52,7 +52,6 @@ void do_exchange(OBJECT_REC* item,Int32 line) {
     }
 */
   if (inv_valid(item,line-3) != 'Y') return;
-  takes_time = 'Y';
   temp = *item;
   *item = player.invent[line - 3];
   player.invent[line - 3] = temp;

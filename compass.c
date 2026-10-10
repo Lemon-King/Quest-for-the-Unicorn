@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-Int32 compass(Int32 suggest) {
-  Int32 dx,dy;
-  Int32 px,py;
+int compass(int suggest) {
+  int dx,dy;
+  int px,py;
   dx = (links[suggest].region % 4) * 100 + links[suggest].x;
   dy = (links[suggest].region / 4) * 100 + links[suggest].y;
   px = (player.region % 4) * 100 + player.x;

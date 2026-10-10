@@ -12,8 +12,8 @@
 
 void miniMap() {
   char key;
-  Int32  x,y;
-  Int32  x1,y1;
+  int  x,y;
+  int  x1,y1;
   char cell[2];
   cell[1] = 0;
   textmode(3);

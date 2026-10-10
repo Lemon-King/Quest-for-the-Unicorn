@@ -11,8 +11,8 @@
 #include "header.h"
 
 
-  void house_show_inventory(Int32 base,Int32 hnum,OBJECT_REC* in_air) {
-    Int32 i;
+  void house_show_inventory(int base,int hnum,OBJECT_REC* in_air) {
+    int i;
     char buffer[80];
     textmode(3);
     textcolor(15); gotoxy(33,1); txt_write("House Inventory");
@@ -74,19 +74,19 @@
       }
     }
 
-void house_inventory(Int32 hnum) {
+void house_inventory(int hnum) {
   char flag;
   char key;
-  Int32  row;
-  Int32  col;
-  Int32  base;
-  Int32  i;
+  int  row;
+  int  col;
+  int  base;
+  int  i;
   OBJECT_REC  it;
   OBJECT_REC* item;
   OBJECT_REC  in_air;
   OBJECT_REC  temp;
-  Int32 item1;
-  Int32 item2;
+  int item1;
+  int item2;
 
   row = 0;
   col = 0;

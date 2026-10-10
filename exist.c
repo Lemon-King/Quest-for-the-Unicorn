@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 exist(char* filename) {
+int exist(char* filename) {
   FILE *file;
   if ((file=fopen(filename,"r"))==NULL) return 0;
   fclose(file);

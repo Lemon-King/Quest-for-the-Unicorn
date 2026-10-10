@@ -12,7 +12,7 @@
 #include "header.h"
 
 void show_stats() {
-  Int32 key;
+  int key;
   char buffer[80];
   double d1,d2;
   struct timeval tim;

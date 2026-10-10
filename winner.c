@@ -13,7 +13,7 @@
 #include "header.h"
 
 void winner() {
-  Int32  i;
+  int  i;
   struct timeval tim;
   gettimeofday(&tim,NULL);
   end_time = tim.tv_sec;

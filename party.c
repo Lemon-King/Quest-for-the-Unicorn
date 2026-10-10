@@ -13,7 +13,7 @@
 void party() {
 
   void party_show_top() {
-    Int32  i;
+    int  i;
     char buffer[80];
     gotoxy(24,1); textcolor(2);
     txt_write("  #  Name               Lvl     Hp");
@@ -45,8 +45,8 @@ void party() {
     txt_write("5");
     }
 
-  void show_member(Int32 member) {
-    Int32  i;
+  void show_member(int member) {
+    int  i;
     char key;
     char flag;
     char buffer[80];
@@ -146,7 +146,7 @@ void party() {
       }
     }
 
-  Int32 i=0,j=0;
+  int i=0,j=0;
   char temp;
   NPC_REC ptemp;
   char key;

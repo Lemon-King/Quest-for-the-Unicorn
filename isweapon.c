@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 is_weapon(OBJECT_REC* item) {
+int is_weapon(OBJECT_REC* item) {
   if (item == NULL) return 0;
   if (item->otype == O_DAGR) return -1;
   if (item->otype == O_WAND) return -1;

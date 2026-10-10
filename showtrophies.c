@@ -11,10 +11,10 @@
 #include "header.h"
 
 void show_trophies() {
-  Int32 i;
-  Int32 key;
-  Int32 top;
-  Int32 bottom;
+  int i;
+  int key;
+  int top;
+  int bottom;
   textmode(3);
   textcolor(10); gotoxy(31,1); txt_write("Trophies Collected:");
   top = 0;

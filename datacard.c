@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void get_attribute_name(char* buffer,Int32 ench) {
+void get_attribute_name(char* buffer,int ench) {
   char plus[255];
   strcpy(buffer,"");
   switch (ench / 100) {
@@ -75,13 +75,13 @@ void get_attribute_name(char* buffer,Int32 ench) {
   }
 
 void data_card(OBJECT_REC* item) {
-  Int32 i;
+  int i;
   char key;
   char buffer[128];
   char buffer2[128];
-  Int32 line;
-  Int32 control;
-  Int32 amount;
+  int line;
+  int control;
+  int amount;
   double price;
   if (item->otype == O_NONE) return;
   base_name(buffer,item);
@@ -124,7 +124,7 @@ void data_card(OBJECT_REC* item) {
     case O_CARD: txt_write("Card"); break;
     case O_GACH: txt_write("Gacha"); break;
     }
-  if (item->flags & OF_IDENT) {
+  if (item->level < 0) {
     if (item->effect == E_LGCY) {
       strcpy(buffer,"Legacy");
       gotoxy(44,7); txt_write(buffer);
@@ -141,7 +141,7 @@ void data_card(OBJECT_REC* item) {
     gotoxy(45,7); txt_write("Unknown");
     }
 
-  if (item->flags & OF_IDENT) {
+  if (item->level < 0) {
     line = 8;
     strcpy(buffer,"");
     switch (item->otype) {
@@ -151,12 +151,12 @@ void data_card(OBJECT_REC* item) {
       case O_BOW:
       case O_BLNT:
       case O_WAND:
-      case O_PROJ: if (item->effect != E_ATCK) sprintf(buffer,"Damage: %d",item->damage); break;
+      case O_PROJ: if (item->effect != E_ATCK) sprintf(buffer,"Damage: %d\n",item->damage); break;
       case O_ARMR:
       case O_SHLD:
       case O_HELM:
       case O_ROBE:
-      case O_BOOT: if (item->effect != E_PROT) sprintf(buffer,"Protection: %d",item->damage);
+      case O_BOOT: if (item->effect != E_PROT) sprintf(buffer,"Protection: %d\n",item->damage);
                    break;
       }
     if (strlen(buffer) > 0) {
@@ -175,11 +175,11 @@ void data_card(OBJECT_REC* item) {
                   strcpy(buffer,"");
                   break;
       case E_ATCK:switch (item->control) {
-                    case 1: sprintf(buffer,"Damage: %d",item->damage); break;
-                    case 2: sprintf(buffer,"Missile: %d",item->damage); break;
-                    case 3: sprintf(buffer,"AOE Damage: %d",item->damage); break;
-                    case 4: sprintf(buffer,"Large AOE: %d",item->damage); break;
-                    case 5: sprintf(buffer,"Missile AOE: %d",item->damage); break;
+                    case 1: sprintf(buffer,"Damage: %d\n",item->damage); break;
+                    case 2: sprintf(buffer,"Missile: %d\n",item->damage); break;
+                    case 3: sprintf(buffer,"AOE Damage: %d\n",item->damage); break;
+                    case 4: sprintf(buffer,"Large AOE: %d\n",item->damage); break;
+                    case 5: sprintf(buffer,"Missile AOE: %d\n",item->damage); break;
                     }
                   break;
       case E_PROT:  sprintf(buffer,"Protection: %d\n", item->control); break;

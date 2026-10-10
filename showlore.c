@@ -11,11 +11,11 @@
 #include "header.h"
 
 void show_message(char* message) {
-  Int32   i;
+  int   i;
   char* cr;
-  Int32 x,y;
-//  Int32 space;
-  Int32 size;
+  int x,y;
+//  int space;
+  int size;
   char last;
   x = 120; y = 100; size = 30;
 //  space = 25;
@@ -50,8 +50,8 @@ void show_message(char* message) {
     }
   }
 
-void show_lore(Int32 item) {
-  Int32 i;
+void show_lore(int item) {
+  int i;
   MESSAGE general;
   i = item;
   general = lore[i];

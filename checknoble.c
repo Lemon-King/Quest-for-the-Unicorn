@@ -13,8 +13,8 @@
 void check_noble() {
   char flag;
   char key;
-  Int32  class;
-  Int32  i;
+  int  class;
+  int  i;
   class = -1;
   for (i=0; i<NUM_CLASSES; i++)
     if (classes[i].flags & CF_NOBLE) class = i+1;

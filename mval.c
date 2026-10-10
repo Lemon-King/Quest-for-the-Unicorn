@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-Int32 mval(STRING13 instr) {
-  Int32 i,j;
-  Int32 add;
+int mval(STRING13 instr) {
+  int i,j;
+  int add;
   j = 0;
   for (i=0; i<strlen(instr); i++) {
     add = -1;

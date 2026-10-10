@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-void copyMap(MAP_TYPE* dest,Int32 num) {
-  Int32 x,y;
+void copyMap(MAP_TYPE* dest,int num) {
+  int x,y;
   for (y=0; y<=100; y++)
     for (x=0; x<=100; x++)
       player.map[x][y] = maps[num][y][x];

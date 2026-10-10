@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 option_value(char* option) {
+int option_value(char* option) {
   while (*option != 0 && *option != '=') option++;
   if (*option == 0) return 0;
   option++;
@@ -19,8 +19,8 @@ Int32 option_value(char* option) {
   return atoi(option);
   }
 
-Int32 process_option(char* pChar) {
-  Int32 ret;
+int process_option(char* pChar) {
+  int ret;
   char option[1024];
   ret = -1;
   if (strlen(pChar) < 1) return ret;
@@ -80,9 +80,6 @@ Int32 process_option(char* pChar) {
     if (strncasecmp(option,"-h=",3) == 0) {
       screen_height = option_value(option);
       }
-#ifdef MHR
-#include "./Mhr/options1.c"
-#endif
     }
   else {
          if (strcasecmp(option,"ArenaCombat"       ) == 0) no_arena = 'N';
@@ -115,9 +112,6 @@ Int32 process_option(char* pChar) {
     else if (strcasecmp(option,"NoCrc"             ) == 0) skipcheck = 'Y';
     else if (strcasecmp(option,"ShowKeys"          ) == 0) show_keys = 'Y';
     else if (strcasecmp(option,"ShowStats"         ) == 0) showStats = -1;
-#ifdef MHR
-#include "./Mhr/options2.c"
-#endif
     else if (strncasecmp(option,"DelayHit=",9) == 0) {
            delay_hit = option_value(option);
            }
@@ -147,23 +141,6 @@ Int32 process_option(char* pChar) {
            downgrade_depth = option_value(option);
            if (downgrade_depth < 2) downgrade_depth = 2;
            }
-    else if (strncasecmp(option,"M1=",3) == 0) strcpy(macros[0], option+3);
-    else if (strncasecmp(option,"M2=",3) == 0) strcpy(macros[1], option+3);
-    else if (strncasecmp(option,"M3=",3) == 0) strcpy(macros[2], option+3);
-    else if (strncasecmp(option,"M4=",3) == 0) strcpy(macros[3], option+3);
-    else if (strncasecmp(option,"M5=",3) == 0) strcpy(macros[4], option+3);
-    else if (strncasecmp(option,"M6=",3) == 0) strcpy(macros[5], option+3);
-    else if (strncasecmp(option,"M7=",3) == 0) strcpy(macros[6], option+3);
-    else if (strncasecmp(option,"M8=",3) == 0) strcpy(macros[7], option+3);
-    else if (strncasecmp(option,"M9=",3) == 0) strcpy(macros[8], option+3);
-    else if (strncasecmp(option,"M10=",4) == 0) strcpy(macros[9], option+4);
-    else if (strncasecmp(option,"M11=",4) == 0) strcpy(macros[10], option+4);
-    else if (strncasecmp(option,"M12=",4) == 0) strcpy(macros[11], option+4);
-
-/* *********************************************************** */
-/* F options for macro definition is now depracted and will be */
-/* removed in a future version                                 */
-/* *********************************************************** */
     else if (strncasecmp(option,"F1=",3) == 0) strcpy(macros[0], option+3);
     else if (strncasecmp(option,"F2=",3) == 0) strcpy(macros[1], option+3);
     else if (strncasecmp(option,"F3=",3) == 0) strcpy(macros[2], option+3);
@@ -174,8 +151,6 @@ Int32 process_option(char* pChar) {
     else if (strncasecmp(option,"F8=",3) == 0) strcpy(macros[7], option+3);
     else if (strncasecmp(option,"F9=",3) == 0) strcpy(macros[8], option+3);
     else if (strncasecmp(option,"F10=",4) == 0) strcpy(macros[9], option+4);
-    else if (strncasecmp(option,"F11=",4) == 0) strcpy(macros[10], option+4);
-    else if (strncasecmp(option,"F12=",4) == 0) strcpy(macros[11], option+4);
     else ret = 0;
     }
   return ret;

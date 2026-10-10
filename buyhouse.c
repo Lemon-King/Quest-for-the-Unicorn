@@ -11,7 +11,7 @@
 #include "header.h"
 #include "math.h"
 
-void buy_house(Int32 hnum) {
+void buy_house(int hnum) {
   double down;
   double ccost;
   double p;
@@ -19,8 +19,8 @@ void buy_house(Int32 hnum) {
   double i;
   char   buffer[80];
   char   key;
-  Int32    flag;
-  Int32    j;
+  int    flag;
+  int    j;
 
   void show_top() {
     textmode(3); gotoxy(33,1); textcolor(11);

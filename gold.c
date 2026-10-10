@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-void add_gold(Int32 g) {
-  Int32 m;
-  Int32 a;
+void add_gold(int32_t g) {
+  int32_t m;
+  int32_t a;
   a = (g / 10000);
   g -= (a * 10000);
   m = (g / 100);
@@ -22,7 +22,7 @@ void add_gold(Int32 g) {
   player.adamantite_coins += a;
   }
 
-void sub_gold(Int32 g) {
+void sub_gold(int32_t g) {
   player.gold_coins -= g;
   while (player.gold_coins < 0) {
     player.gold_coins += 100;

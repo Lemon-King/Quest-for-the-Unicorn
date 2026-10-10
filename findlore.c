@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 find_lore(char* search) {
-  Int32 x;
+int find_lore(char* search) {
+  int x;
   char flag;
   MESSAGE general;
   upper(search);

@@ -11,9 +11,9 @@
 #include "header.h"
 
 void charmmonster() {
-  Int32  x,y;
-  Int32  xdir,ydir;
-  Int32  mon;
+  int  x,y;
+  int  xdir,ydir;
+  int  mon;
   get_dir(&xdir,&ydir);
   x = player.x + xdir;
   y = player.y + ydir;

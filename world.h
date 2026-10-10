@@ -3,7 +3,6 @@
 #define S_UPSTAIR              25
 #define S_SALE                247
 #define S_SOLD                248
-#define S_TREASUREFF          359
 #define FINAL_BOSS            "Eshter"
 #define FINAL_GOLD_REWARD     50000
 #define SPELL_SCROLL           498
@@ -920,48 +919,6 @@ REGION_REC regions[] = {
 #define T_663       663
 #define T_664       664
 #define T_665       665
-#define T_666       666
-#define T_667       667
-#define T_668       668
-#define T_669       669
-#define T_670       670
-#define T_671       671
-#define T_672       672
-#define T_673       673
-#define T_674       674
-#define T_675       675
-#define T_676       676
-#define T_677       677
-#define T_678       678
-#define T_679       679
-#define T_680       680
-#define T_681       681
-#define T_682       682
-#define T_683       683
-#define T_684       684
-#define T_685       685
-#define T_686       686
-#define T_687       687
-#define T_688       688
-#define T_689       689
-#define T_690       690
-#define T_691       691
-#define T_692       692
-#define T_693       693
-#define T_694       694
-#define T_695       695
-#define T_696       696
-#define T_697       697
-#define T_698       698
-#define T_699       699
-#define T_700       700
-#define T_701       701
-#define T_702       702
-#define T_703       703
-#define T_704       704
-#define T_705       705
-#define T_706       706
-#define T_707       707
 
 /* Lore Message Link Codes */
 #define L_001      1001
@@ -1037,7 +994,7 @@ LINK_REC links[] = {
 
   {     9,      6, 93, 98, 11,  6,"Den of the Beast",            L_014,    0,   0,   0,  13,  62,   2 },
   {    30,      6, 75, 83, 11, 15,"Arath Ma Kon",                T_007,    0,   0,   0,  65,  66,   2 },
-  {    22,      6, 33, 81, 11, 12,"Algamar Ruins",               T_696,    0,   0,   0,  45,  46,   3 },
+  {    22,      6, 33, 81, 11, 12,"Algamar Ruins",               L_015,    0,   0,   0,  45,  46,   3 },
   {    19,      6, 78, 68, 11, 11,"Hall of the Kobold Lords",    L_016,    0,   0,   0,  67,  68,   3 },
   {     8,      6, 26, 62, 11,  5,"Temple of the Dark",          L_017,    0,   0,   0,  63,  25,   2 },
   {    34,      6, 71, 46, 11, 16,"Ruins of Caldnar",            T_008,    0,   0,   0,  69,  65,   2 },

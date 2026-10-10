@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 check_level_cleared(Int32 lvl) {
-    Int32 x,y;
+int check_level_cleared(int lvl) {
+    int x,y;
     if (lvl >= current_dungeon.num_levels) return -1;
     y = 0;
     for (x=1; x<=60; x++)

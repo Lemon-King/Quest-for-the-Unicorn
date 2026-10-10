@@ -27,12 +27,12 @@
 /* *****           +amount = Monster level effects to hit        ***** */
 /* ******************************************************************* */
 
-void aoe(Int32 cx,Int32 cy,Int32 effect,Int32 control,Int32 damage,Int32 element,Int32 range,Int32 mtype,Int32 toHit) {
+void aoe(int cx,int cy,int effect,int control,int damage,int element,int range,int mtype,int toHit) {
   NPC_REC* monster;
-  Int32 dmg;
-  Int32 x,y;
-  Int32 tmp;
-  Int32 needed;
+  int dmg;
+  int x,y;
+  int tmp;
+  int needed;
   char crit;
   char buffer[32];
   for (y=cy-range; y<=cy+range; y++)
@@ -77,9 +77,9 @@ void aoe(Int32 cx,Int32 cy,Int32 effect,Int32 control,Int32 damage,Int32 element
               }
             tmp = figure_damage(dmg,element,monster);
             if (monster->defense > 95) {
-              tmp -= (Int32)(95.0 / 100.0 * tmp);
+              tmp -= (int)(95.0 / 100.0 * tmp);
               } else {
-              tmp -= (Int32)(monster->defense / 100.0 * tmp);
+              tmp -= (int)(monster->defense / 100.0 * tmp);
               }
             if (crit) sprintf(buffer,"Crit hit for %d",tmp);
               else sprintf(buffer,"Hit for %d",tmp);

@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 item_has_socket_effect(OBJECT_REC* item,Int32 effect) {
+int item_has_socket_effect(OBJECT_REC* item,int effect) {
   if (item == NULL) return 0;
   if (item->otype == O_NONE) return 0;
   effect /= 100;
@@ -20,8 +20,8 @@ Int32 item_has_socket_effect(OBJECT_REC* item,Int32 effect) {
   return 0;
   }
 
-Int32 has_socket(Int32 intr) {
-  Int32 i;
+int has_socket(int intr) {
+  int i;
   for (i=1; i<=19; i++) {
     if (player.invent[i].otype != O_NONE) {
       if ((i==I_NCK1 || i==I_NCK2) &&

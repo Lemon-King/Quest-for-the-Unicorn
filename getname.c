@@ -11,20 +11,20 @@
 #include "header.h"
 
 char* base_name(char* buffer,OBJECT_REC* item) {
-  Int32 i;
+  int i;
   char *pchar;
   char *pchar2;
   if (item != NULL) strcpy(buffer,item->name);
     else strcpy(buffer," ");
   pchar = strchr(buffer,'|');
   if (pchar != NULL) {
-    if ((item->flags & OF_IDENT) == 0) {
+    if (item->level >= 0) {
       *pchar = 0;
       } else {
       strcpy(buffer,pchar+1);
       }
     } else {
-    if ((item->flags & OF_IDENT) == 0) {
+    if (item->level >= 0) {
       pchar = strchr(buffer,' ');
       pchar2 = strchr(buffer,',');
       if (pchar2 != NULL && pchar2 < pchar) pchar = pchar2;
@@ -36,7 +36,7 @@ char* base_name(char* buffer,OBJECT_REC* item) {
   return buffer;
   }
 
-char* get_enchant_name(Int32 ench) {
+char* get_enchant_name(int ench) {
   static char ename[128];
   char buffer[32];
   switch (ench / 100) {
@@ -102,7 +102,7 @@ char* get_enchant_name(Int32 ench) {
   }
 
 char* get_name(OBJECT_REC* item) {
-  Int32 i;
+  int i;
   static char iname[128];
   char *pchar;
   char *pchar2;
@@ -110,23 +110,23 @@ char* get_name(OBJECT_REC* item) {
     else strcpy(iname," ");
   pchar = strchr(iname,'|');
   if (pchar != NULL) {
-    if ((item->flags & OF_IDENT) == 0) {
+    if (item->level >= 0) {
       *pchar = 0;
       } else {
       strcpy(iname,pchar+1);
       }
     } else {
-    if ((item->flags & OF_IDENT) == 0) {
+    if (item->level >= 0) {
       pchar = strchr(iname,' ');
       pchar2 = strchr(iname,',');
       if (pchar2 != NULL && pchar2 < pchar) pchar = pchar2;
       if (pchar != NULL) *pchar = 0;
       } 
     }
-  if ((item->flags & OF_IDENT) && item->charges >=0) {
+  if (item->level < 0 && item->charges >=0) {
     sprintf(iname,"%s [%d]",iname,item->charges);
     }
-  if (item != NULL && (item->flags & OF_IDENT)) {
+  if (item != NULL && item->level < 0) {
     if (item->otype == O_EDGE ||
         item->otype == O_POLE ||
         item->otype == O_BLNT ||
@@ -145,7 +145,7 @@ char* get_name(OBJECT_REC* item) {
   for (i=0; i<strlen(iname); i++)
     if (iname[i] == '_') iname[i] = ' ';
 
-  if (item->flags & OF_IDENT) {
+  if (item->level < 0) {
     for (i=0; i<item->num_enchantments; i++) {
       strcat(iname," ");
       if (item->enchantments[i] > 0) {

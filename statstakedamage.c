@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void stats_take_damage(Int32 dam) {
+void stats_take_damage(int dam) {
   stats.counts[STAT_DAMAGE_TAKEN] += dam;
   if (dam > stats.counts[STAT_HARDEST_TAKEN]) stats.counts[STAT_HARDEST_TAKEN] = dam;
   }

@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 can_see() {
+int can_see() {
   if (player.effect[PE_BLIND] > 0) return 0;
   if (in_upland == 'Y') return -1;
   if (player.effect[PE_LIGHT] != 0) return -1;

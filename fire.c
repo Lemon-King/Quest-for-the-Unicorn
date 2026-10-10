@@ -10,13 +10,13 @@
 
 #include "header.h"
 
-void fire(Int32 damage,OBJECT_REC* weapon) { 
-  Int32 sprt = 0;
-  Int32  x,y;
+void fire(int damage,OBJECT_REC* weapon) { 
+  int sprt = 0;
+  int  x,y;
   double fx,fy;
-  Int32  i;
-  Int32 exact;
-  Int32 skill;
+  int  i;
+  int exact;
+  int skill;
   NPC_REC* monster;
   OBJECT_REC* item;
   sprt = -1;
@@ -43,11 +43,11 @@ void fire(Int32 damage,OBJECT_REC* weapon) {
     i += get_skill(SK_COMBAT) / 2;
     if (get_skill(skill) >= 5) i += get_skill(skill) / 2;
     if (get_skill(skill) < 5) {
-      if (get_skill(skill) == 0) i = (Int32)(i * 0.16);
-      if (get_skill(skill) == 1) i = (Int32)(i * 0.32);
-      if (get_skill(skill) == 2) i = (Int32)(i * 0.48);
-      if (get_skill(skill) == 3) i = (Int32)(i * 0.64);
-      if (get_skill(skill) == 4) i = (Int32)(i * 0.80);
+      if (get_skill(skill) == 0) i = (int)(i * 0.16);
+      if (get_skill(skill) == 1) i = (int)(i * 0.32);
+      if (get_skill(skill) == 2) i = (int)(i * 0.48);
+      if (get_skill(skill) == 3) i = (int)(i * 0.64);
+      if (get_skill(skill) == 4) i = (int)(i * 0.80);
       }
     if (monster->fear > 0) i += 10;
     if (monster->confused > 0) i += 10;
@@ -104,7 +104,7 @@ void fire(Int32 damage,OBJECT_REC* weapon) {
     i = find_item_slot();
     fx = x + 0.5;
     fy = y + 0.5;
-    if (player.map[(Int32)fx][(Int32)fy] != 7) {
+    if (player.map[(int)fx][(int)fy] != 7) {
       fx -= dir_x;
       fy -= dir_y;
       }

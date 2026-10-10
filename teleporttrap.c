@@ -14,8 +14,6 @@ void teleport_trap() {
   teleport();
   discover();
   show_screen();
-  run_x = 0;
-  run_y = 0;
   }
 
 

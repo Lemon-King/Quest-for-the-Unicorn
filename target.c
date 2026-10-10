@@ -10,15 +10,15 @@
 
 #include "header.h"
 
-Int32 auto_target_x;
-Int32 auto_target_y;
+int auto_target_x;
+int auto_target_y;
 
-Int32 dist(Int32 x1,Int32 y1, Int32 x2, Int32 y2) {
+int dist(int x1,int y1, int x2, int y2) {
   return (x2-x1) * (x2-x1) + (y2-y1) * (y2-y1);
   }
 
-Int32 attempt_auto_target() {
-  Int32 x,y;
+int attempt_auto_target() {
+  int x,y;
   NPC_REC* mob;
   auto_target_x = 999;
   auto_target_y = 999;
@@ -36,11 +36,11 @@ Int32 attempt_auto_target() {
   return (auto_target_x != 999) ? -1 : 0;
   }
 
-void target(Int32 sprt,Int32 stop_at_target,Int32 show_path) {
-  Int32 x,y;
+void target(int sprt,int stop_at_target,int show_path) {
+  int x,y;
   char mflag;
   double fx,fy;
-  Int32 key;
+  int key;
   auto_target_x = 999;
   auto_target_y = 999;
   prompt("Select target");

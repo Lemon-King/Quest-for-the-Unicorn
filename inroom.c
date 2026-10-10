@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 cell_is_wall(Int32 x,Int32 y) {
+int cell_is_wall(int x,int y) {
   if (player.map[x][y] == 21) return -1;
   if (player.map[x][y] == 22) return -1;
   if (player.map[x][y] == 23) return -1;
@@ -18,8 +18,8 @@ Int32 cell_is_wall(Int32 x,Int32 y) {
   return 0;
   }
 
-Int32 wall_in_block(Int32 sx,Int32 sy,Int32 ex,Int32 ey) {
-  Int32 x,y;
+int wall_in_block(int sx,int sy,int ex,int ey) {
+  int x,y;
   for (y=sy; y<=ey; y++)
     for (x=sx; x<=ex; x++)
       if (x > 0 && x < 100 && y > 0 && y < 100)
@@ -27,18 +27,10 @@ Int32 wall_in_block(Int32 sx,Int32 sy,Int32 ex,Int32 ey) {
   return 0;
   }
 
-Int32 in_room(Int32 x,Int32 y) {
-//  Int32 ix,iy;
-  Int32 wallCount;
+int in_room(int x,int y) {
+  int wallCount;
   if (player.gateway == '*') return 0;
   wallCount = 0;
-/*
-  for (ix=x-1; ix<=x+1; ix++)
-    for (iy=y-1; iy<=y+1; iy++)
-      if (cell_is_wall(ix,iy)) wallCount++;
-  return (wallCount < 6) ? -1 : 0;
-*/
-
   if (wall_in_block(x-1,y-1,x,y)) wallCount++;
   if (wall_in_block(x,y-1,x+1,y)) wallCount++;
   if (wall_in_block(x-1,y,x,y+1)) wallCount++;

@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char* yes_no(Int32 input) {
+char* yes_no(int input) {
   static STRING32 ret;
   if (input == 1) strcpy(ret,"Yes"); else strcpy(ret,"No");
   return ret;

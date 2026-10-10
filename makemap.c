@@ -11,14 +11,13 @@
 #include "header.h"
 
 void make_map(char dir) {
-  Int32  i,j,x,y;
-  Int32  upx,upy;
-  Int32  downx,downy;
+  int  i,j,x,y;
+  int  upx,upy;
+  int  downx,downy;
   byte floor;
-  Int32  treasurex,treasurey;
-  Int32 see_stairs;
-  Int32 see_traps;
-  Int32 slot;
+  int  treasurex,treasurey;
+  int see_stairs;
+  int see_traps;
   OBJECT_REC* item;
   if (player.quests[player.dungeon_number] != 'Y') player.quests[player.dungeon_number] = 'E';
   see_stairs = (get_skill(SK_ORACLE) >= 10 && u_random(1000) < get_skill(SK_ORACLE)) ? -1 : 0;
@@ -26,20 +25,17 @@ void make_map(char dir) {
   treasurex = -1;
   treasurey = -1;
   floor = 7;
-  load_level();
-
-//  for (x=0; x<101; x++)
-//    for (y=0; y<101; y++) {
-//      player.map[x][y] = current_dungeon.level[player.d_level-1].map[x][y];
-//      player.known[x][y] = current_dungeon.level[player.d_level-1].known[x][y];
-//      }
-//  for (i=0; i<1000; i++)
-//    player.map_objects[i] = current_dungeon.level[player.d_level-1].objects[i];
-//  for (x=0; x<6; x++)
-//    for (y=0; y<61; y++) {
-//      player.monster[x][y] = current_dungeon.level[player.d_level-1].monsters[x][y];
-//      }
-
+  for (x=0; x<101; x++)
+    for (y=0; y<101; y++) {
+      player.map[x][y] = current_dungeon.level[player.d_level-1].map[x][y];
+      player.known[x][y] = current_dungeon.level[player.d_level-1].known[x][y];
+      }
+  for (i=0; i<1000; i++)
+    player.map_objects[i] = current_dungeon.level[player.d_level-1].objects[i];
+  for (x=0; x<6; x++)
+    for (y=0; y<61; y++) {
+      player.monster[x][y] = current_dungeon.level[player.d_level-1].monsters[x][y];
+      }
   treasurex = current_dungeon.treasurex;
   treasurey = current_dungeon.treasurey;
   upx = current_dungeon.level[player.d_level-1].upx;
@@ -60,7 +56,7 @@ void make_map(char dir) {
         y = treasurey;
         for (i=x-1; i<=x+1; i++)
           for (j=y-1; j<=y+1; j++)
-            player.map[i][j] = 145;
+            player.map[i][j] = 41;
         item = find_linked_item(links[player.dungeon_number].treasure);
         if (item != NULL) {
           player.map_objects[0] = *item;
@@ -72,7 +68,7 @@ void make_map(char dir) {
       y = treasurey;
       for (i=x-1; i<=x+1; i++)
         for (j=y-1; j<=y+1; j++)
-          player.map[i][j] = 145;
+          player.map[i][j] = 41;
       player.map[x][y] = links[player.dungeon_number].treasure + 1000;
       }
     }
@@ -98,34 +94,6 @@ void make_map(char dir) {
     player.x = upx;
     player.y = upy;
     }
-
-/* ********************************************************** */
-/* ***** Reveal stairs or traps if oracle skill allowed ***** */
-/* ********************************************************** */
-  if (see_stairs || see_traps) {
-    for (y=0; y<100; y++)
-      for (x=0; x<100; x++) {
-        if (see_stairs && player.map[x][y] == S_DNSTAIR) player.known[x][y] = 1;
-        if (see_stairs && player.map[x][y] == S_UPSTAIR) player.known[x][y] = 1;
-        if (see_stairs && player.map[x][y] >= 800 && player.map[x][y] < 900)
-          player.known[x][y] = 1;
-        }
-    }
-
-/* ************************************************* */
-/* ***** Place summoned creature if one exists ***** */
-/* ************************************************* */
-  if (player.party[0].hp > 0) {
-    if (find_empty(player.x,player.y,10,dungeon_floor,&x,&y)) {
-      player.party[0].prev = player.map[x][y];
-      player.map[x][y] = 300;
-      player.party[0].treasure = (y << 8) | x;
-      }
-    else {
-      player.party[0].hp = 0;
-      }
-    }
-
   if (player.gateway != '*' && Rcs_Random(25000) < get_skill(SK_ORACLE)) {
     for (x=1; x<=100; x++)
       for (y=1; y<=100; y++) {
@@ -167,21 +135,6 @@ void make_map(char dir) {
       }
     if (player.d_level == 5) {
       strcpy(player.d_name,"Castle Eshter");
-      if (player.gateway != 'F') {
-        slot = find_item_slot();
-        if (slot < 0) return;
-        item = find_linked_item(704);
-        if (item != NULL) {
-          x = u_random(80) + 10;
-          y = u_random(80) + 10;
-          while (player.map[x][y] != floor) {
-            x = u_random(80) + 10;
-            y = u_random(80) + 10;
-            }
-          player.map_objects[slot] = *item;
-          player.map[x][y] = 1000+slot;
-          }
-        }
       }
     }
   }

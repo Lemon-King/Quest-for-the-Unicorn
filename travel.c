@@ -12,34 +12,33 @@
 
 void travel(char* name) {
   char dest[9][33];
-  Int32 cost[9];
-  Int32 where[9];
+  int cost[9];
+  int where[9];
   char flag;
-  Int32  option;
+  int  option;
   char buffer[80];
-  Int32  i;
+  int  i;
   char key;
-  Int32  px,py;
-  Int32  dx,dy;
-  Int32  city;
-  Int32  shipx,shipy;
-  Int32  ndest;
+  int  px,py;
+  int  dx,dy;
+  int  city;
+  int  shipx,shipy;
+  int  ndest;
 
-  void new_town(Int32 where) {
-//    Int32 m_file;
-//#ifdef MINGW
-//    m_file = open("temp01.$$$",O_WRONLY | O_BINARY);
-//#else
-//    m_file = open("temp01.$$$",O_WRONLY);
-//#endif
-//    if (m_file < 0) {
-//      printf("Fatal Error: Could not open temp01.$$$\n");
-//      exit(1);
-//      }
-//    lseek(m_file,sizeof(KNOW_TYPE) * player.city,SEEK_SET);
-//    write(m_file,&(player.known),sizeof(KNOW_TYPE));
-//    close(m_file);
-    memcpy(&(known_maps[player.city]), &(player.known), sizeof(KNOW_TYPE));
+  void new_town(int where) {
+    int m_file;
+#ifdef MINGW
+    m_file = open("temp01.$$$",O_WRONLY | O_BINARY);
+#else
+    m_file = open("temp01.$$$",O_WRONLY);
+#endif
+    if (m_file < 0) {
+      printf("Fatal Error: Could not open temp01.$$$\n");
+      exit(1);
+      }
+    lseek(m_file,sizeof(KNOW_TYPE) * player.city,SEEK_SET);
+    write(m_file,&(player.known),sizeof(KNOW_TYPE));
+    close(m_file);
 
     player.region = links[where].region;
     player.city = links[where].diff;
@@ -49,19 +48,18 @@ void travel(char* name) {
     player.y = links[where].sy;
     strcpy(player.d_name,links[where].name);
     copyMap(&player.map,player.city);
-//#ifdef MINGW
-//    m_file = open("temp01.$$$",O_RDONLY | O_BINARY);
-//#else
-//    m_file = open("temp01.$$$",O_RDONLY);
-//#endif
-//    if (m_file < 0) {
-//      printf("Fatal Error: Could not open temp01.$$$\n");
-//      exit(1);
-//      }
-//    lseek(m_file,sizeof(KNOW_TYPE) * player.city,SEEK_SET);
-//    read(m_file,&(player.known),sizeof(KNOW_TYPE));
-//    close(m_file);
-    memcpy(&(player.known), &(known_maps[player.city]), sizeof(KNOW_TYPE));
+#ifdef MINGW
+    m_file = open("temp01.$$$",O_RDONLY | O_BINARY);
+#else
+    m_file = open("temp01.$$$",O_RDONLY);
+#endif
+    if (m_file < 0) {
+      printf("Fatal Error: Could not open temp01.$$$\n");
+      exit(1);
+      }
+    lseek(m_file,sizeof(KNOW_TYPE) * player.city,SEEK_SET);
+    read(m_file,&(player.known),sizeof(KNOW_TYPE));
+    close(m_file);
     i = 0;
     while (i >= 0) {
       if (shops[i].shoptype != 999) {
@@ -100,13 +98,13 @@ void travel(char* name) {
     show_side();
     show_player();
     saveScreen();
-    } /* void new_town(Int32 where) */
+    } /* void new_town(int where) */
 
-  Int32 getPX(Int32 r,Int32 x) {
+  int getPX(int r,int x) {
     return (((r - 1) % 4) * 100) + x;
     }
 
-  Int32 getPY(Int32 r,Int32 y) {
+  int getPY(int r,int y) {
     return (((r - 1) / 4) * 100) + y;
     }
 
@@ -238,4 +236,4 @@ void travel(char* name) {
       }
     }
   if (flag == '#' && option>0) new_town(where[option]);
-} /* void travel(char* name,Int32 city) */
+} /* void travel(char* name,int city) */

@@ -11,7 +11,7 @@
 #include "header.h"
 
 void auto_detect() {
-  Int32 x,y;
+  int x,y;
   OBJECT_REC* item;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)

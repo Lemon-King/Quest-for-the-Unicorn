@@ -12,8 +12,8 @@
 
 typedef struct {
   char name[32];
-  Int32  cost;
-  Int32  skill;
+  int  cost;
+  int  skill;
   } SCHOOL_CLASSES;
 
 SCHOOL_CLASSES school_classes[] = {
@@ -44,14 +44,14 @@ SCHOOL_CLASSES school_classes[] = {
   };
 
 void school(char* name) {
-  Int32 option;
+  int option;
   double price;
-  Int32 i;
+  int i;
   char buffer[80];
 
-  Int32  class_price(Int32 cls) {
-    Int32 ret;
-    Int32 skill;
+  int  class_price(int cls) {
+    int ret;
+    int skill;
     ret = school_classes[cls].cost;
     skill = school_classes[cls].skill;
     if (get_skill(skill) >= 5 && get_skill(skill) < 10) ret *= 3;
@@ -64,7 +64,7 @@ void school(char* name) {
     }
 
   void show_top() {
-    Int32 i;
+    int i;
     textmode(3); gotoxy(27,1); textcolor(11);
     sprintf(buffer,"Welcome to %s",name);
     txt_write(buffer);

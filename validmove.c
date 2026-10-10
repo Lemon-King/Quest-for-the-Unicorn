@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-char valid_move(Int32 x,Int32 y) {
-  Int32 i;
+char valid_move(int x,int y) {
+  int i;
   char flag;
   flag = '*';
   if (player.map[x][y] == 3) flag = ' ';
@@ -43,5 +43,5 @@ char valid_move(Int32 x,Int32 y) {
     if (player.map[x][y] == 4) flag = '*';
     }
   return flag;
-  } /* char valid(Int32 x,Int32 y) */
+  } /* char valid(int x,int y) */
 

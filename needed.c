@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-double needed(Int32 x) {
+double needed(int x) {
   double i;
-  Int32 j;
+  int j;
   i = 100;
   for (j=1; j<=x; j++)
     if (i<100000) i*=2;

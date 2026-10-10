@@ -10,19 +10,18 @@
 
 #include "header.h"
 
-void enemy_missile(Int32 ex,Int32 ey) {
+void enemy_missile(int ex,int ey) {
   char flag;
-  Int32  x,y;
+  int  x,y;
   double  fx,fy;
   double xdir,ydir;
   NPC_REC* monster;
   char elem[20];
   char buffer[60];
-  Int32  ring;
-  Int32  i,j;
+  int  ring;
+  int  i,j;
   monster = get_monster(ex,ey);
   if (monster == NULL) return;
-  if (abs(player.x - ex) < 2 && abs(player.y - ey) < 2) return;
   run_x = 0; run_y = 0;
   xdir = player.x - ex;
   ydir = player.y - ey;
@@ -49,7 +48,6 @@ void enemy_missile(Int32 ex,Int32 ey) {
       show_spot(x,y);
       }
     if (player.map[x][y] == 21 || player.map[x][y] == 22) flag = '*';
-    if (player.map[x][y] == 33) flag = '*';
     if (player.map[x][y] == 38) flag = '*';
     if (player.map[x][y] == 39) flag = '*';
     if (player.map[x][y] == 3) flag = '*';

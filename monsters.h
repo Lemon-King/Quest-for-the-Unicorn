@@ -30,7 +30,7 @@ typedef struct {
 Current monster number = 105
 */
 
-/* SP   #  HP MHP  MN LV  AT  DF    XP +H  SP                                         SP2 SPR TYPE         NAME */
+/* SP   #  HP MHP  MN LV  AT  DF    XP +H SP                                          SPR NAME */
 NPC_REC monsters[] = {
   { 1,  0,  9,  9,  0, 1,  3, 10,   20, 2, 0,                                           0,121,MT_BEAST    ,"Hobgoblin",      255,0,0,0,0,0,7,0 },
   { 1,  0,  8,  8,  0, 1,  3,  8,    5, 1, 0,                                           0,339,MT_HUMANOID ,"Kobold",         255,0,0,0,0,0,7,0 },
@@ -284,7 +284,7 @@ NPC_REC monsters[] = {
   { 2, 85,176,176,550,22, 94, 26,11000,35, MS_ELEC_ATK | MS_IELEC | MS_DOT,          M2_NORND | M2_BOSS,147,MT_BEAST    ,"Greater Wisp",255,0,0,0,0,0,7,0 },
   { 2, 87,216,216,700,27, 96, 26,90000, 1, MS_FIRE_ATK | MS_IFIRE | MS_DOT,          M2_NORND | M2_BOSS,159,MT_DRAGON   ,"Ancient Dragon",255,0,0,0,0,0,7,0 },
   { 1, 91,100,100,300,30, 50, 50,10000,35, 0,                                        M2_NORND,          160,MT_BEAST    ,"Dalek",255,0,0,0,0,0,7,0 },
-  { 1, 90,-999,100,1200,40,100, 50,90000,35, MS_AMAGIC | MS_ARCN_ATK,                  M2_NORND,          179,MT_HUMANOID ,"Eshter",255,0,0,0,0,0,7,0 },
+  { 1, 90,-999,100,900,40,100, 50,90000,35, MS_AMAGIC | MS_ARCN_ATK,                  M2_NORND,          179,MT_HUMANOID ,"Eshter",255,0,0,0,0,0,7,0 },
 
   { 999,999,999,999,0,0, 0, 0,0,0,0, 0,0,0,"EOL",255,0,0,0,0,0,7,0 },
   };

@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-Int32 intrinsic_count(Int32 intr) {
-  Int32 ret;
-  Int32 i;
+int intrinsic_count(int intr) {
+  int ret;
+  int i;
   ret = 0;
   for (i=5; i<=6; i++)
     if (player.invent[i].otype != O_NONE &&

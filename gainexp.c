@@ -10,11 +10,11 @@
 
 #include "header.h"
 
-void gain_exp(double amt,Int32 who) {
-  Int32 i;
-  Int32 sc;
+void gain_exp(double amt,int who) {
+  int i;
+  int sc;
   char buffer[80];
-  Int32  count;
+  int  count;
   double player_amt;
   double portion;
   if (has_intrinsic(A_DEXP)) amt *= 2;

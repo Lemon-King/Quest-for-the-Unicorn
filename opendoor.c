@@ -11,10 +11,9 @@
 #include "header.h"
 
 void open_door() {
-  Int32 xdir,ydir;
+  int xdir,ydir;
   char dir;
   dir = item_dir(22);
-  if (dir == ' ') dir = item_dir(33);
   if (dir != ' ') {
     switch (dir) {
       case '1': xdir = -1; ydir = 1; break;

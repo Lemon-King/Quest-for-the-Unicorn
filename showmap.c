@@ -11,7 +11,7 @@
 #include "header.h"
 
 void show_map() {
-  Int32 x,y;
+  int x,y;
   setfillstyle(1,12);
 //  bar(0,0,420,10); bar(0,443,420,453);       /* Top/bottom frame */
 //  bar(0,0,10,453); bar(410,0,420,453);       /* Left/Right frame */

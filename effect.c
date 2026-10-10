@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char* effect(Int32 e,Int32 c,char* buffer) {
+char* effect(int e,int c,char* buffer) {
   switch (e) {
     case E_NONE:sprintf(buffer,"Effect: None"); break;
     case E_HEAL:sprintf(buffer,"Effect: Healing"); break;

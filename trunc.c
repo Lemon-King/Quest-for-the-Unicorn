@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 rcs_trunc(double x) {
-  return (Int32)x;
+int rcs_trunc(double x) {
+  return (int)x;
   }
 

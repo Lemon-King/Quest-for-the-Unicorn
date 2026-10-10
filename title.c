@@ -12,8 +12,8 @@
 
 void title() {
   char   key;
-#ifdef MHR
-#include "./Mhr/title.c"
+#ifdef ANNIV
+#include "./Anniv25/title.c"
 #else
   setcolor(14);
   gotoxy(38, 2); txt_write("Quest");

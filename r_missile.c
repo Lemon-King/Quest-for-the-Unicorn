@@ -11,13 +11,13 @@
 
 #include "header.h"
 
-void r_missile(Int32 damage) {
+void r_missile(int damage) {
   char mflag;
   char buffer[32];
-  Int32  x,y;
-  Int32  xdir,ydir;
-  Int32  mon;
-  Int32  i;
+  int  x,y;
+  int  xdir,ydir;
+  int  mon;
+  int  i;
   xdir = 0; ydir = 0;
   switch (u_random(8)) {
     case 0: ydir = 1; break;

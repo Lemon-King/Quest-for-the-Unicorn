@@ -24,73 +24,40 @@ typedef struct {
 typedef struct {
   char    name[33];
   double  exp;
-  Int32     level;
+  int     level;
   char    cause;
   byte    class;
-  Int32 time_played;
+  int32_t time_played;
   } SCORE_ENTRY_OLD;
 
 
 void save_scores() {
-  Int32 i;
-  FILE* file;
-  file = fopen("unicorn.sco","w");
-  fprintf(file,"v7.0.0\n");
-  fprintf(file,"HighScores {\n");
-    for (i=0;i < NUM_CLASSES; i++) {
-      fprintf(file,"  Class %d {\n",i);
-      fprintf(file,"    Name %s\n", high_scores[i].name);
-      fprintf(file,"    Title %s\n", high_scores[i].title);
-      fprintf(file,"    Exp %f\n", high_scores[i].exp);
-      fprintf(file,"    Mode %c\n", high_scores[i].mode);
-      fprintf(file,"    }\n");
-      }
-  fprintf(file,"  }\n");
-
-  fprintf(file,"Legends {\n");
-    for (i=0;i < NUM_CLASSES; i++) {
-      fprintf(file,"  Class %d {\n",i);
-      fprintf(file,"    Name %s\n", legend_scores[i].name);
-      fprintf(file,"    Title %s\n", legend_scores[i].title);
-      fprintf(file,"    Exp %f\n", legend_scores[i].exp);
-      fprintf(file,"    Mode %c\n", legend_scores[i].mode);
-      fprintf(file,"    }\n");
-      }
-  fprintf(file,"  }\n");
-
-  fprintf(file,"HallOfFame {\n");
-    for (i=0;i < num_hall_of_fame; i++) {
-      fprintf(file,"  Entry %d {\n",i);
-      fprintf(file,"    Name %s\n", hall_of_fame[i].name);
-      fprintf(file,"    Exp %f\n", hall_of_fame[i].exp);
-      fprintf(file,"    Level %d\n", hall_of_fame[i].level);
-      fprintf(file,"    Cause %c\n", hall_of_fame[i].cause);
-      fprintf(file,"    Class %d\n", hall_of_fame[i].class);
-      fprintf(file,"    Time %d\n", hall_of_fame[i].time_played);
-      fprintf(file,"    Mode %c\n", hall_of_fame[i].mode);
-      fprintf(file,"    }\n");
-      }
-  fprintf(file,"  }\n");
-
-  fprintf(file,"FinalScores {\n");
-    for (i=0;i < num_final_scores; i++) {
-      fprintf(file,"  Entry %d {\n",i);
-      fprintf(file,"    Name %s\n", final_scores[i].name);
-      fprintf(file,"    Exp %f\n", final_scores[i].exp);
-      fprintf(file,"    Level %d\n", final_scores[i].level);
-      fprintf(file,"    Cause %c\n", final_scores[i].cause);
-      fprintf(file,"    Class %d\n", final_scores[i].class);
-      fprintf(file,"    Time %d\n", final_scores[i].time_played);
-      fprintf(file,"    Mode %c\n", final_scores[i].mode);
-      fprintf(file,"    }\n");
-      }
-  fprintf(file,"  }\n");
-
-  fclose(file);
+  int i;
+  int sc_file;
+#ifdef MINGW
+  sc_file = open("unicorn.sco",O_WRONLY | O_CREAT | O_TRUNC | O_BINARY,0660);
+#else
+  sc_file = open("unicorn.sco",O_WRONLY | O_CREAT | O_TRUNC,0660);
+#endif
+  score_version.version[0] = '6'; score_version.version[1] = '0'; score_version.version[2] = '1';
+  write(sc_file,&score_version,sizeof(SCORE_VER));
+  i = NUM_CLASSES;
+  write(sc_file,&i,sizeof(i));
+  for (i=0; i<NUM_CLASSES; i++) {
+    write(sc_file,&(high_scores[i]),sizeof(SCORE_RECORD));
+    write(sc_file,&(legend_scores[i]),sizeof(SCORE_RECORD));
+    }
+  write(sc_file,&num_hall_of_fame,sizeof(num_hall_of_fame));
+  write(sc_file,&num_final_scores,sizeof(num_final_scores));
+  for (i=0; i<num_hall_of_fame; i++)
+    write(sc_file,&(hall_of_fame[i]),sizeof(SCORE_ENTRY));
+  for (i=0; i<num_final_scores; i++)
+    write(sc_file,&(final_scores[i]),sizeof(SCORE_ENTRY));
+  close(sc_file);
   }
 
 void clear_scores() {
-  Int32 i;
+  int i;
   for (i=0; i<NUM_CLASSES; i++) {
     strcpy(high_scores[i].name,"");
     strcpy(high_scores[i].title,"");
@@ -128,7 +95,7 @@ void clear_scores() {
   }
 
 void convert_600_to_new() {
-  Int32 i;
+  int i;
   clear_scores();
   for (i=0; i<12; i++) {
     strcpy(high_scores[i].name,scores_600.high_name[i+1]);
@@ -143,8 +110,8 @@ void convert_600_to_new() {
   }
 
 void load_old_scores() {
-  Int32 i;
-  Int32 sc_file;
+  int i;
+  int sc_file;
   SCORE_REC_OLD scores_old;
   SCORE_ENTRY_OLD score_entry_old;
 #ifdef MINGW
@@ -192,10 +159,10 @@ void load_old_scores() {
       close(sc_file);
   }
 
-void load_scores_600() {
-  Int32 i;
-  Int32 count;
-  Int32 sc_file;
+void load_scores() {
+  int i;
+  int count;
+  int sc_file;
   clear_scores();
   if (exist("unicorn.sco")) {
 #ifdef MINGW
@@ -267,154 +234,11 @@ void load_scores_600() {
       }
     save_scores();
     }
-  }
-
-void read_save_file(FILE* file, char* buffer) {
-  Int32 i;
-  Int32 j;
-  fgets(buffer, 1024, file);
-  for (i=0; i<strlen(buffer); i++)
-    if (buffer[i] > 0 && buffer[i] < ' ') buffer[i] = 0;
-  while (buffer[0] == ' ') for (j=0; j<strlen(buffer); j++) buffer[j] = buffer[j+1];
-  }
-
-void load_scores() {
-  Int32 ver;
-  Int32 change_set;
-  Int32 class;
-  byte  flag;
-  byte  flag2;
-  char  line[1024];
-  char* next;
-  FILE* file;
-  if (exist("unicorn.sco")) {
-    file = fopen("unicorn.sco","r");
-    ver = fgetc(file);
-    if (ver != 'v' && ver != 'V') {
-      load_scores_600();
-      return;
-      }
-    fclose(file);
-    fopen("unicorn.sco","r");
-    change_set = -1;
-    read_save_file(file, line);
-    if (strcmp(line, "v7.0.0") == 0) change_set = 0;
-    if (change_set < 0) {
-      printf("Error:  Save file is unknown format.  Ignoring it.\n");
-      fclose(file);
-      return;
-      }
-    while (!feof(file)) {
-      read_save_file(file, line);
-      if (match(line, "HighScores {")) {
-        flag = 0xff;
-        while (flag) {
-          read_save_file(file, line);
-          if (match(line, "Class ")) {
-            next = next_word(line);
-            class = atoi(next);
-            flag2 = 0xff;
-            while (flag2) {
-              read_save_file(file, line);
-              if (match(line, "Name ")) strcpy(high_scores[class].name, next_word(line));
-              if (match(line, "Title ")) strcpy(high_scores[class].title, next_word(line));
-              if (match(line, "Exp ")) high_scores[class].exp = atof(next_word(line));
-              if (match(line, "Mode ")) high_scores[class].mode = next_word(line)[0];
-              if (match(line, "}")) flag2 = 0;
-              if (feof(file)) flag2 = 0;
-              }
-            }
-          else if (match(line, "}")) flag = 0;
-          if (feof(file)) flag = 0;
-          }
-        }
-      if (match(line, "Legends {")) {
-        flag = 0xff;
-        while (flag) {
-          read_save_file(file, line);
-          if (match(line, "Class ")) {
-            next = next_word(line);
-            class = atoi(next);
-            flag2 = 0xff;
-            while (flag2) {
-              read_save_file(file, line);
-              if (match(line, "Name ")) strcpy(legend_scores[class].name, next_word(line));
-              if (match(line, "Title ")) strcpy(legend_scores[class].title, next_word(line));
-              if (match(line, "Exp ")) legend_scores[class].exp = atof(next_word(line));
-              if (match(line, "Mode ")) legend_scores[class].mode = next_word(line)[0];
-              if (match(line, "}")) flag2 = 0;
-              if (feof(file)) flag2 = 0;
-              }
-            }
-          else if (match(line, "}")) flag = 0;
-          if (feof(file)) flag = 0;
-          }
-        }
-      if (match(line, "FinalScores {")) {
-        flag = 0xff;
-        while (flag) {
-          read_save_file(file, line);
-          if (match(line, "Entry ")) {
-            next = next_word(line);
-            class = atoi(next);
-            if (class >= num_final_scores) num_final_scores = class + 1;
-            flag2 = 0xff;
-            while (flag2) {
-              read_save_file(file, line);
-              if (match(line, "Name ")) strcpy(final_scores[class].name, next_word(line));
-              if (match(line, "Exp ")) final_scores[class].exp = atof(next_word(line));
-              if (match(line, "Level ")) final_scores[class].level = atoi(next_word(line));
-              if (match(line, "Class ")) final_scores[class].class = atoi(next_word(line));
-              if (match(line, "Time ")) final_scores[class].time_played = atoi(next_word(line));
-              if (match(line, "Cause ")) final_scores[class].cause = next_word(line)[0];
-              if (match(line, "Mode ")) final_scores[class].mode = next_word(line)[0];
-              if (match(line, "}")) flag2 = 0;
-              if (feof(file)) flag2 = 0;
-              }
-            }
-          else if (match(line, "}")) flag = 0;
-          if (feof(file)) flag = 0;
-          }
-        }
-      if (match(line, "HallOfFame {")) {
-        flag = 0xff;
-        while (flag) {
-          read_save_file(file, line);
-          if (match(line, "Entry ")) {
-            next = next_word(line);
-            class = atoi(next);
-            if (class >= num_hall_of_fame) num_hall_of_fame = class + 1;
-            flag2 = 0xff;
-            while (flag2) {
-              read_save_file(file, line);
-              if (match(line, "Name ")) strcpy(hall_of_fame[class].name, next_word(line));
-              if (match(line, "Exp ")) hall_of_fame[class].exp = atof(next_word(line));
-              if (match(line, "Level ")) hall_of_fame[class].level = atoi(next_word(line));
-              if (match(line, "Class ")) hall_of_fame[class].class = atoi(next_word(line));
-              if (match(line, "Time ")) hall_of_fame[class].time_played = atoi(next_word(line));
-              if (match(line, "Cause ")) hall_of_fame[class].cause = next_word(line)[0];
-              if (match(line, "Mode ")) hall_of_fame[class].mode = next_word(line)[0];
-              if (match(line, "}")) flag2 = 0;
-              if (feof(file)) flag2 = 0;
-              }
-            }
-          else if (match(line, "}")) flag = 0;
-          if (feof(file)) flag = 0;
-          }
-        }
-// else
-      }
-    fclose(file);
-    }
-    else {
-    printf("Score file not found. Building a new one\n");
-    clear_scores();
-    }
-  }
+}
 
 void show_final_scores() {
-  Int32 i;
-  Int32 first;
+  int i;
+  int first;
   char key;
   char buffer[34];
   textmode(3);
@@ -479,7 +303,7 @@ void show_final_scores() {
   }
 
 void show_scores() {
-  Int32 i;
+  int i;
   char key;
   char buffer[80];
   textmode(3);
@@ -502,7 +326,7 @@ void show_scores() {
 
 
 void show_legends() {
-  Int32 i;
+  int i;
   char key;
   char buffer[80];
   textmode(3);

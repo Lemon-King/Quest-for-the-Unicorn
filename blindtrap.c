@@ -11,7 +11,7 @@
 #include "header.h"
 
 void blind_trap() {
-  Int32 i;
+  int i;
   i = (player.diff + player.d_level) * 5;
   i += u_random((player.diff+player.d_level) * 5);
   player.effect[PE_BLIND] += i;
@@ -19,7 +19,5 @@ void blind_trap() {
   msg("Bright flash of light!",11);
   show_side();
   show_map();
-  run_x = 0;
-  run_y = 0;
   }
 

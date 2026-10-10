@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 check_intrinsic(OBJECT_REC obj,Int32 intr) {
+int check_intrinsic(OBJECT_REC obj,int intr) {
   if (obj.otype == O_NONE) return 0;
   if (obj.effect != E_INTR) return 0;
   if (obj.control == intr) return -1;

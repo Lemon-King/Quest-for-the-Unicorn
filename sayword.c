@@ -14,7 +14,7 @@ void say_word() {
   char invoke[33];
   char buffer[80];
   char key;
-  Int32  x,y;
+  int  x,y;
   word_counter = 1000;
   strcpy(invoke,"");
   prompt("Say ? _");

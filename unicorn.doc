@@ -1,6 +1,6 @@
                               Quest for the Unicorn
-                                      v 7.0
-                                    4/7/2017
+                                   v 6.2 (HC)
+                                   11/30/2015
                                        by
                                    Mike Riley
 
@@ -161,49 +161,49 @@
          -clr      - Color mode (Text version only)
          -s        - Show stats/settings and exit
 
-     Long options
-     ============
+         downgradedepth depth     Permenently change the maximum depth in a
+                                  saved game
+         downgradearena           Permenently turn off the arena comabe
+                                  mode in a saved game.
+         FKeyGear                 Unshifted F keys select gear
+         FKeyMacros               Unshifted F keys select macros
+         FKeySpells               Unshifted F keys select spells
+         FKeyWeapons              Unshifted F keys select weapons
+         Fn=macro                 Assigne Fn macro (Ex. F1=Rs)
 
-         Long option          Equivalent to short option
-         ArenaCombat          -ac
-         AutoOpenDoors        -aod
-         AutoPickupGold       -apg
-         AutoPickupTorch      -apt
-         AutoSearchWalls      -asw
-         AutoTarget           -at
-         Casual               -c
-         Color                -clr
-         DungeonScaling       -eds
-         Epic                 -e
-         FullPartyCombat      -fcd
-         Heroic               -h
-         Monochrome           -m
-         NoArenaComabe        -nac
-         NoAutoOpenDoors      -naod
-         NoAutoPickupgold     -napg
-         NoAutoPickuptorch    -napt
-         NoAutoSearchWalls    -nasw
-         NoAutoTarget         -nat
-         NoDungeonScaling     -nds
-         NoFullPartyCombat    -rcd
-         Normal               -n
-         ShowStats            -s
-         DelayHit             -dh
-         DelayTraps           -dt
-         DelayRanged          -dr
-         Depth                -d
-         MonsterCount         -mc
-         Width                -w
-         Height               -h
-         downgradedepth depth Permenently change the maximum depth in a
-                              saved game
-         downgradearena       Permenently turn off the arena comabe mode in
-                              a saved game.
-         FKeyGear             Unshifted F keys select gear
-         FKeyMacros           Unshifted F keys select macros
-         FKeySpells           Unshifted F keys select spells
-         FKeyWeapons          Unshifted F keys select weapons
-         Fn=macro             Assigne Fn macro (Ex. F1=Rs)
+       Long options
+
+         Long option       Equivalent to short option
+         ArenaCombat       -ac
+         AutoOpenDoors     -aod
+         AutoPickupGold    -apg
+         AutoPickupTorch   -apt
+         AutoSearchWalls   -asw
+         AutoTarget        -at
+         Casual            -c
+         Color             -clr
+         DungeonScaling    -eds
+         Epic              -e
+         FullPartyCombat   -fcd
+         Heroic            -h
+         Monochrome        -m
+         NoArenaComabe     -nac
+         NoAutoOpenDoors   -naod
+         NoAutoPickupgold  -napg
+         NoAutoPickuptorch -napt
+         NoAutoSearchWalls -nasw
+         NoAutoTarget      -nat
+         NoDungeonScaling  -nds
+         NoFullPartyCombat -rcd
+         Normal            -n
+         ShowStats         -s
+         DelayHit          -dh
+         DelayTraps        -dt
+         DelayRanged       -dr
+         Depth             -d
+         MonsterCount      -mc
+         Width             -w
+         Height            -h
 
 
        note: Switches -d, -c, -h, -e, -mc, and -ac, -nac only have an
@@ -233,20 +233,6 @@
      to use, you can put them in this file and then you will no longer need
      to specify them on the command line.
 
-     Character config file
-     =====================
-       New to version 6.3 is the ability to load character specific config
-     files. Character config files are checked after the unicorn.cfg and
-     command line arguments are parsed.  As such the character specific
-     config options override all others.  To create a character specific
-     config file, name it after your character with a .cfg extension.  For
-     example, If you character is named Xun, then the character specific
-     config file would be named Xun.cfg.  The main use for character
-     specific configs is how the function keys are used.  For example on a
-     warrior you may prefer the function keys access the gear manager while
-     on a mage you would want them to access your spells.  Or you may want
-     to define different macros depending on the character.
-
      Loading a Saved Game
      ====================
        To load a saved game, just specify the name of the save file (no
@@ -254,11 +240,10 @@
 
      Modes of Play
      =============
-       Quest now suports 4 modes of play.  They are as follows:
-
-       Normal - This is the standard mode.  Players qualify for scores as
-     well as rebirth.  Monsters are at the normal level.  Permadeath is
-     active in this mode.
+       Quest now suports 4 modes of play.  They are as follows: Normal -
+     This is the standard mode.  Players qualify for scores as well as
+     rebirth.  Monsters are at the normal level.  Permadeath is active in
+     this mode.
 
        Heroic - This is meant to give more of a challenge.  This mode also
      qualifies for scoring and rebirth.  Monsters are double the strength
@@ -413,108 +398,6 @@
          M - The player has resistance to mind attacks
          E - The player is ethereal
          e - The player is ethereal, but the effect is about to run out
-
-     Macros
-     ======
-       Version 6.3 introduced the ability to use macros.  Whenever you have
-     something that you do that requires the same keystrokes, you can
-     create a macro for it. Macros can also be used for mixed use of the F
-     keys, for example, you can assign some F keys to select weapons and
-     others for casting spells.
-
-       Macros at this time can only be defined within the .cfg files,
-     either the global unicorn.cfg or a character .cfg.  Note that like
-     other options, a character .cfg that defines macros will override
-     macros assigned to the same keys defined in unicorn.cfg.  This allows
-     you to define macros that can be used globally amongst all your
-     characters, and others that are character specific.
-
-       Here is a sample .cfg file from one of my paladins that shows how to
-     create macros:
-
-       FKeyMacros
-       M1=[1
-       M2=[2
-       M3=[3
-       M4=[4
-       M5=mf$E
-       M6=mp$E
-       M9=ms$E
-       M10=mc$E
-
-       The FKeyMacros line specifies that I want the unshifted F keys to be
-     assigned to the macros instead of spells.  Normally macros are
-     executed with <CTRL><Fkey>.
-
-       The other lines define my macros.  M1 through M4 give me single key
-     access to 4 different weapon sets in my gear manager.  M5 gives me
-     single key cast of Find Traps spell, M6 will cast Protection From
-     Evil, M9 will cast Slow Poison, and M10 will cast Cure Light Wounds.
-
-       Notice how the macro definition is just simply the keys you would
-     normally press inside the game.  The only difference is the $E, when
-     the macro expander sees the $E it actually replaces it with the
-     <Enter> key, and $e will be replaced by the <Esc> key.  To specify
-     arrows, just use the number pad number equivalent, for example left
-     arrow would be 4, right arrow would be 6.
-
-       Let me also explain about my spell casts.  When you use the <m>agic
-     command, you only need to type enough letters to make the spell name
-     unique, the rest of the name will come up automatically.  In the case
-     of my paladin, he only knows those particular 4 spells and so only
-     needs to type the first letter of each spell for it to be unique. 
-     When my paladin learns Cure Serious Wounds, then my F10 macro will no
-     longer work, since c is no longer capable of identifiying a complete
-     spell. In which case I will have to change my F10 macro, if I want to
-     keep it as Cure Light Wounds, then I would change the macro line to
-     read:
-
-       M10=mcure l$E
-
-       Macros can be executed in towns, dungeons, or arena combats.  They
-     cannot be used upland, as the F keys have special meaning upland if
-     you possess a particular artifact.  Macros also cannot be triggerd in
-     subscreens (inventory, character record, etc).  However, if you want a
-     macro to do something with your inventory, you can put in your macro
-     the ability to enter inventory and do something.  For example, you
-     could create a macro like this:
-
-       M8=uj$Ec$E
-
-       If you keep an identification item in slot j (Belt Back), then this
-     macro will allow you to identify the item in slot c (Left Shoulder),
-     just by pressint <CTRL> <F8>, or just <F8> if you are using
-     FKeyMacros.
-
-       Another good use of macros is if you have a piece of gear that
-     grants you a special action when worn, but you do not want that piece
-     of gear worn all the time.  For example, on one of my characters I
-     have a Robe of Eyes, but its protection value is not as good as my
-     main cloak, but I would like to use the power of the Robe of Eyes when
-     entering a new dungeon level.  I have this macro defined:
-
-       M9=uqT84$E$EiqT84$E$e
-
-       This macro equips the cloak that I have in the last slot of my pack,
-     uses it and then swaps it back for my main cloak.  Now all I have to
-     do is press <F9> and I have single key access to the power of the Robe
-     of Eyes, while not having to move gear around manually to use it.
-
-       So, macros can only be triggered from the main screen, but macros
-     can go into subscreens to do things.
-
-       There is also one more place that a macro can be executed, and that
-     is during name entry on new character creation.  I have in my
-     unicorn.cfg macros like this:
-
-       M10=$Em22444444424444442226268884444444$E
-
-       I can hit F10 after entering my new characters name (Before pressing
-     <ENTER>!) and the macro will hit all the remaining keys to build me a
-     male elf paladin with stats appropriate for a paladin.  I have such
-     macros for all the base classes.  When I want to start a new character
-     all I need to do is enter the name and press the F key for the class
-     that I want to build.
 
      Item Merchants
      ==============
@@ -814,16 +697,6 @@
      will be reset and you will have to begin your journey towards those
      trophies again.
 
-       Any quest rewards or items will be removed from your inventory
-     during rebirth, so if you have any quest items belonging to object
-     quests, you may want to consider not performing a rebirth until after
-     completing the object quest. There is an exception to this, one of the
-     object quests requires a large number of components, these components
-     are not considered quest objects and will not be removed.  It should
-     be fairly obvious which items these are. Objects acquired as the
-     result of an object quest are not considered quest objects and will
-     not be removed by rebirth.
-
        In order to perform the Ritual of Rebirth, visit any druidic temple.
      If you qualify for the ritual it will appear as one of the options. 
      In order to qualify you must have completed the main goal of the game
@@ -838,14 +711,9 @@
        save you selections.
      - Go into the town where you begin (Radon) and talk to the people,
        they will give you clues as to where to find dungeons, or
-       information about the realm in general.
-     - Travel in the wilderness takes a lot of time and therefore a lot of
-       food. Be sure you have plenty of food before travelling far in the
-       wilderness.
-     - Some terrain types in the wilderness take more time to travel
-       through, so it is best to stick to roads when possible.
-     - If you do run low on food in the wilderness, get off the road and
-       <s>earch, you may just find some food.
+       information about the realm in general.  Be sure to buy a weapon,
+       Armour, and LOTS of food.  Travel in the wilderness makes you
+       hungry.
      - The first, easiest, and closest dungeon can be found directly north
        of Radon at the base of the mountains.
      - in dungeons, use the <s>earch command often, there are many hidden

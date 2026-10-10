@@ -12,7 +12,7 @@
 
 void itemColor(OBJECT_REC* item) {
   if (item == NULL) return;
-  if ((item->flags & OF_IDENT) == 0) {
+  if (item->level >= 0) {
     textcolor(3); 
     return;
     }

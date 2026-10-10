@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void skillcolor(Int32 skill) {
+void skillcolor(int skill) {
   if (skill >= 90) {
     textcolor(14);   /* Yellow */
     return;
@@ -39,7 +39,7 @@ void skillcolor(Int32 skill) {
   }
 
 void show_skills() {
-  Int32 i;
+  int i;
   for (i=18; i<23; i++) {
     gotoxy(1,i); txt_write("                                       ");
     gotoxy(40,i); txt_write("                                       ");
@@ -126,7 +126,7 @@ void char_sheet_labels(char showall) {
   }
 
 void char_sheet_data() {
-  Int32 i;
+  int i;
   char buffer[32];
   textcolor(14);
   gotoxy(10,1); txt_write(player.name);
@@ -145,12 +145,12 @@ void char_sheet_data() {
   gotoxy(10,8); txt_write(player.title);
   for (i=1; i<7; i++) {
     gotoxy(40,i);
-    if (i==1) sprintf(buffer,"%2d/%2d",get_str(),get_base_str());
-    if (i==2) sprintf(buffer,"%2d/%2d",get_dex(),get_base_dex());
-    if (i==3) sprintf(buffer,"%2d/%2d",get_con(),get_base_con());
-    if (i==4) sprintf(buffer,"%2d/%2d",get_int(),get_base_int());
-    if (i==5) sprintf(buffer,"%2d/%2d",get_wis(),get_base_wis());
-    if (i==6) sprintf(buffer,"%2d/%2d",get_chr(),get_base_chr());
+    if (i==1) sprintf(buffer,"%d/%d",get_str(),get_base_str());
+    if (i==2) sprintf(buffer,"%d/%d",get_dex(),get_base_dex());
+    if (i==3) sprintf(buffer,"%d/%d",get_con(),get_base_con());
+    if (i==4) sprintf(buffer,"%d/%d",get_int(),get_base_int());
+    if (i==5) sprintf(buffer,"%d/%d",get_wis(),get_base_wis());
+    if (i==6) sprintf(buffer,"%d/%d",get_chr(),get_base_chr());
     txt_write(buffer);
     }
   gotoxy(40,7); txt_write(show_int(player.chp));
@@ -174,7 +174,7 @@ void char_sheet_data() {
   gotoxy(64,13); txt_write(buffer);
   sprintf(buffer,"%+d",get_attack_power()); gotoxy(64,14); txt_write(buffer);
   sprintf(buffer,"%+d",get_spell_power()); gotoxy(64,15); txt_write(buffer);
-  sprintf(buffer,"%+d",(Int32)(get_magic_resistance() * 100)); gotoxy(64,16); txt_write(buffer);
+  sprintf(buffer,"%+d",(int)(get_magic_resistance() * 100)); gotoxy(64,16); txt_write(buffer);
   sprintf(buffer,"%+d",get_magic_find()); gotoxy(10,16); txt_write(buffer);
   sprintf(buffer,"%+d",get_hit()); gotoxy(40,12); txt_write(buffer);
   sprintf(buffer,"%+d",get_crit()); gotoxy(40,13); txt_write(buffer);

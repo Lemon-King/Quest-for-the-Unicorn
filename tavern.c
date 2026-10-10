@@ -11,9 +11,9 @@
 #include "header.h"
 
 void tavern(char* name) {
-  Int32 option;
+  int option;
   double price;
-  Int32  i;
+  int  i;
   char buffer[80];
 
   void move_player() {

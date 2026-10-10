@@ -10,10 +10,10 @@
 
 #include "header.h"
 
-Int32 get_bonus(Int32 typ) {
-  Int32 ret;
-  Int32 slot;
-  Int32 i;
+int get_bonus(int typ) {
+  int ret;
+  int slot;
+  int i;
   ret = 0;
   for (slot=1; slot < 20; slot++)
     if (slot == I_NCK1 ||
@@ -45,7 +45,7 @@ Int32 get_bonus(Int32 typ) {
   return ret;
   }
 
-Int32 has_birthstone_ring() {
+int has_birthstone_ring() {
   if (player.invent[I_RNG1].link-265 == date.tm_mon) return 1;
   if (player.invent[I_RNG2].link-265 == date.tm_mon) return 1;
   if (player.invent[I_RNG3].link-265 == date.tm_mon) return 1;
@@ -53,48 +53,48 @@ Int32 has_birthstone_ring() {
   return 0;
   }
 
-Int32 get_base_str() {
+int get_base_str() {
   return player.stat[1];
  }
 
-Int32 get_base_dex() {
+int get_base_dex() {
   return player.stat[2];
  }
 
-Int32 get_base_con() {
+int get_base_con() {
   return player.stat[3];
  }
 
-Int32 get_base_int() {
+int get_base_int() {
   return player.stat[4];
  }
 
-Int32 get_base_wis() {
+int get_base_wis() {
   return player.stat[5];
  }
 
-Int32 get_base_chr() {
+int get_base_chr() {
   return player.stat[6];
  }
 
-Int32 get_base_mmana() {
+int get_base_mmana() {
   return player.mmana;
   }
 
-Int32 get_base_mhp() {
+int get_base_mhp() {
   return player.mhp;
   }
 
-Int32 get_base_weapon() {
+int get_base_weapon() {
   return player.weapon;
   }
 
-Int32 get_base_armour() {
+int get_base_armour() {
   return player.armour;
   }
 
-Int32 get_str() {
-  Int32 ret;
+int get_str() {
+  int ret;
   ret = player.stat[1];
   ret += get_bonus(S_STR);
   ret += get_bonus(S_ALL);
@@ -103,8 +103,8 @@ Int32 get_str() {
   return ret;
   }
 
-Int32 get_dex() {
-  Int32 ret;
+int get_dex() {
+  int ret;
   ret = player.stat[2];
   ret += get_bonus(S_DEX);
   ret += get_bonus(S_ALL);
@@ -113,8 +113,8 @@ Int32 get_dex() {
   return ret;
   }
 
-Int32 get_con() {
-  Int32 ret;
+int get_con() {
+  int ret;
   ret = player.stat[3];
   ret += get_bonus(S_CON);
   ret += get_bonus(S_ALL);
@@ -123,8 +123,8 @@ Int32 get_con() {
   return ret;
   }
 
-Int32 get_int() {
-  Int32 ret;
+int get_int() {
+  int ret;
   ret = player.stat[4];
   ret += get_bonus(S_INT);
   ret += get_bonus(S_ALL);
@@ -133,8 +133,8 @@ Int32 get_int() {
   return ret;
   }
 
-Int32 get_wis() {
-  Int32 ret;
+int get_wis() {
+  int ret;
   ret = player.stat[5];
   ret += get_bonus(S_WIS);
   ret += get_bonus(S_ALL);
@@ -143,8 +143,8 @@ Int32 get_wis() {
   return ret;
   }
 
-Int32 get_chr() {
-  Int32 ret;
+int get_chr() {
+  int ret;
   ret = player.stat[6];
   ret += get_bonus(S_CHR);
   ret += get_bonus(S_ALL);
@@ -153,8 +153,8 @@ Int32 get_chr() {
   return ret;
   }
 
-Int32 get_mmana() {
-  Int32 ret;
+int get_mmana() {
+  int ret;
   ret = player.mmana;
   ret += get_bonus(S_MAN);
   ret += get_bonus(S_MAG);
@@ -166,8 +166,8 @@ Int32 get_mmana() {
   return ret;
   }
 
-Int32 get_mhp() {
-  Int32 ret;
+int get_mhp() {
+  int ret;
   ret = player.mhp;
   ret += get_bonus(S_HPS);
   ret += get_bonus(S_MAG);
@@ -175,8 +175,8 @@ Int32 get_mhp() {
   return ret;
   }
 
-Int32 get_weapon() {
-  Int32 ret;
+int get_weapon() {
+  int ret;
   double tmp;
   double wtmp;
   OBJECT_REC *weapon;
@@ -208,8 +208,8 @@ Int32 get_weapon() {
   return ret;
   }
 
-Int32 offhand_weapon() {
-  Int32 ret;
+int offhand_weapon() {
+  int ret;
   double tmp;
   double wtmp;
   OBJECT_REC *weapon;
@@ -240,9 +240,9 @@ Int32 offhand_weapon() {
   return ret;
   }
 
-Int32 get_attack_power() {
-  Int32 ret;
-  Int32 i;
+int get_attack_power() {
+  int ret;
+  int i;
   ret = get_bonus(S_ATP);
   i = get_str();
   if (i > 18) {
@@ -252,9 +252,9 @@ Int32 get_attack_power() {
   return ret;
   }
 
-Int32 get_spell_power() {
-  Int32 ret;
-  Int32 i;
+int get_spell_power() {
+  int ret;
+  int i;
   ret = get_bonus(S_SPP);
   i = get_int();
   if (i > 18) {
@@ -264,9 +264,9 @@ Int32 get_spell_power() {
   return ret;
   }
 
-Int32 get_armour() {
-  Int32 i;
-  Int32 ret;
+int get_armour() {
+  int i;
+  int ret;
   ret = player.armour;
   ret += get_bonus(S_DEF);
   if (player.effect[PE_PROT] != 0) ret += player.effect[PE_APROT];
@@ -285,9 +285,9 @@ Int32 get_armour() {
   return ret;
   }
 
-Int32 get_hpr() {
-  Int32 i;
-  Int32 ret;
+int get_hpr() {
+  int i;
+  int ret;
   ret = 1;
   if (napping == '*') {
     ret += 5;
@@ -347,17 +347,17 @@ Int32 get_hpr() {
   return ret;
   }
 
-Int32 get_manar() {
-  Int32 ret;
+int get_manar() {
+  int ret;
   ret = 1;
   ret += get_bonus(S_MNR);
   if (napping == '*') ret += 5;
   return ret;
   }
 
-Int32 get_hit() {
-  Int32 i;
-  Int32 ret;
+int get_hit() {
+  int i;
+  int ret;
   ret = 0;
   ret += get_bonus(S_HIT);
   for (i=1; i<=10; i++) {
@@ -377,8 +377,8 @@ double get_exp_multiplier() {
   return bonus;
   }
 
-Int32 get_magic_find() {
-  Int32 ret;
+int get_magic_find() {
+  int ret;
   ret = 0;
   ret += get_bonus(S_MGF);
   ret += has_birthstone_ring() * 3;
@@ -397,15 +397,15 @@ double get_magic_resistance() {
   return ret;
   }
 
-Int32 get_monster_level_plus() {
-  Int32 ret;
+int get_monster_level_plus() {
+  int ret;
   ret = 0;
   ret += (get_bonus(S_MLV));
   return ret;
   }
 
-Int32 get_crit() {
-  Int32 ret;
+int get_crit() {
+  int ret;
   ret = 0;
   if (get_dex() > 16) ret = (get_dex() - 15) / 5;
   ret += get_bonus(S_CRT);
@@ -413,8 +413,8 @@ Int32 get_crit() {
   return ret;
   }
 
-Int32 get_dodge() {
-  Int32 ret;
+int get_dodge() {
+  int ret;
   ret = 0;
   if (get_dex() > 16) ret = (get_dex() - 15) / 5;
   ret += get_bonus(S_DDG);
@@ -423,9 +423,9 @@ Int32 get_dodge() {
   return ret;
   }
 
-Int32 get_weight() {
-  Int32 ret;
-  Int32 i;
+int get_weight() {
+  int ret;
+  int i;
   ret = 0;
   for (i=0; i<20; i++) {
     if (player.invent[i].otype != O_NONE) ret += player.invent[i].weight;
@@ -437,8 +437,8 @@ Int32 get_weight() {
   return ret;
   }
 
-Int32 get_max_weight() {
-  Int32 ret;
+int get_max_weight() {
+  int ret;
   ret = get_str() * 10;
   if (player.invent[I_RNG1].otype == O_RING && player.invent[I_RNG1].effect == E_WGHT) ret += player.invent[I_RNG1].control;
   if (player.invent[I_RNG2].otype == O_RING && player.invent[I_RNG2].effect == E_WGHT) ret += player.invent[I_RNG2].control;
@@ -450,19 +450,19 @@ Int32 get_max_weight() {
   return ret;
   }
 
-Int32 get_gold() {
-  Int32 ret;
+int32_t get_gold() {
+  int32_t ret;
   ret = player.gold_coins;
   ret += (player.mithril_coins * 100);
   ret += (player.adamantite_coins * 10000);
   return ret;
   }
 
-Int32 get_coins() {
+int32_t get_coins() {
   return player.gold_coins + player.mithril_coins + player.adamantite_coins;
   }
 
-Int32 can_be_seen() {
+int can_be_seen() {
   if (player.effect[PE_INVIS] != 0) return 0;
   if ((classes[player.class-1].flags & CF_ROGUE) == CF_ROGUE) return 0;
   return -1;

@@ -11,8 +11,8 @@
 #include "header.h"
 
 void make_n() {
-  Int32 i;
-  Int32 flag;
+  int i;
+  int flag;
   flag = -1;
   for (i=0; i<NUM_CLASSES; i++) if (classes[i].flags & CF_NOBLE) flag = i;
   if (flag >= 0) {

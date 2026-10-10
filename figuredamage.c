@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 figure_damage(Int32 damage,Int32 elem,NPC_REC* monster) {
+int figure_damage(int damage,int elem,NPC_REC* monster) {
   if (elem == MS_FIRE_ATK && (monster->special & MS_RFIRE) == MS_RFIRE) damage /= 2;
   if (elem == MS_FIRE_ATK && (monster->special & MS_IFIRE) == MS_IFIRE) damage = 0;
   if (elem == MS_FIRE_ATK && (monster->special & MS_RCOLD) == MS_RCOLD) damage += (damage / 2);

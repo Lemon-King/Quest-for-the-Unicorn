@@ -11,13 +11,13 @@
 #include "header.h"
 
 void new_spell() {
-  Int32 i;
-  Int32 col,row;
+  int i;
+  int col,row;
   char flag;
-  Int32  newone;
-  Int32  allign = 0;
-  Int32  level = 0;
-  Int32  no_spells;
+  int  newone;
+  int  allign = 0;
+  int  level = 0;
+  int  no_spells;
   char buffer[80];
   no_spells = 0;
   allign = classes[player.class-1].spell_group;

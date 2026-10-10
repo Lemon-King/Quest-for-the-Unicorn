@@ -11,7 +11,7 @@
 #include "header.h"
 
 void transcribe() {
-  Int32 i;
+  int i;
   OBJECT_REC* item;
   item = NULL;
   saveScreen();

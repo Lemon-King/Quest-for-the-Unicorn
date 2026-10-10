@@ -11,8 +11,8 @@
 #include "header.h"
 
 void load_level() {
-  Int32 i;
-  Int32 x,y;
+  int i;
+  int x,y;
   for (x=0; x<101; x++)
     for (y=0; y<101; y++) {
       player.map[x][y] = current_dungeon.level[player.d_level-1].map[x][y];

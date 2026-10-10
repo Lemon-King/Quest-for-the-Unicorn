@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 has_intrinsic2(Int32 intr) {
-  Int32 i;
+int has_intrinsic2(int intr) {
+  int i;
   i = 0;
   while (class_traits[i].class != 99) {
     if (class_traits[i].class == player.class - 1 &&
@@ -89,7 +89,6 @@ Int32 has_intrinsic2(Int32 intr) {
   if (intr == A_SPD && player.effect[PE_HASTE] != 0) return -1;
   if (intr == A_RFIR && player.effect[PE_FIRE] != 0) return -1;
   if (intr == A_LEV && player.effect[PE_LEV] != 0) return -1;
-  if (intr == A_RPSI && player.effect[PE_MIND] != 0) return -1;
   if (intr == A_LEV) return has_intrinsic(A_SPLV);
   if (intr == A_SPD) return has_intrinsic(A_SPLV);
   if (intr == A_RELE) return has_socket(S_ELE);
@@ -103,7 +102,7 @@ Int32 has_intrinsic2(Int32 intr) {
   return 0;
   }
 
-Int32 has_intrinsic(Int32 intr) {
+int has_intrinsic(int intr) {
   if (has_intrinsic2(intr)) return -1;
   if (intr == A_RFIR) {
     if (has_intrinsic2(A_RELE)) return -1;

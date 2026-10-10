@@ -15,7 +15,7 @@
 #include "unicorn.xpm"
 #endif
 
-char** select_sprite(Int32 n) {
+char** select_sprite(int n) {
   switch (n) {
     case 1:return sprite_1;                     /* Plains                */
     case 2:return sprite_2;                     /* Forest                */
@@ -374,17 +374,6 @@ char** select_sprite(Int32 n) {
     case 355:return sprite_355;                 /* Resist Electric      */
     case 356:return sprite_356;                 /* Resist Arcane        */
     case 357:return sprite_357;                 /* Resist Psionic       */
-    case 358:return sprite_358;                 /* Pickaxe              */
-    case 359:return sprite_359;                 /* Treasure forcefield  */
-    case 360:return sprite_360;                 /* Mech Head            */
-    case 361:return sprite_361;                 /* Mech Body            */
-    case 362:return sprite_362;                 /* Mech Arm             */
-    case 363:return sprite_363;                 /* Mech Leg             */
-    case 364:return sprite_364;                 /* Mech Heart           */
-    case 365:return sprite_365;                 /* Mech Merchant        */
-    case 366:return sprite_366;                 /* Nether Core          */
-    case 367:return sprite_367;                 /* Nether Shard         */
-    case 368:return sprite_368;                 /* Portable Hole        */
     }
   return sprite_200;
   }

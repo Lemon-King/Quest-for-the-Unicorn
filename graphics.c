@@ -4,21 +4,12 @@
 #include <string.h>
 #include "graphics.h"
 
-#ifdef MINGW
-#include <stdint.h>
-typedef int32_t  Int32;
-typedef uint32_t UInt32;
-#else
-typedef int32_t   Int32;
-typedef u_int32_t UInt32;
-#endif
-
-Int32 red_mask;
-Int32 green_mask;
-Int32 blue_mask;
-Int32 red_shift;
-Int32 green_shift;
-Int32 blue_shift;
+int red_mask;
+int green_mask;
+int blue_mask;
+int red_shift;
+int green_shift;
+int blue_shift;
 
 void rcs_buildColorMapping(rcs_Display* display) {
 #ifndef WIN32
@@ -59,13 +50,13 @@ void rcs_buildColorMapping(rcs_Display* display) {
 
 #ifdef WIN32
 rcs_Display disp;
-Int32 _shiftState;
-Int32 _ctrlState;
-Int32 _capsState;
+int _shiftState;
+int _ctrlState;
+int _capsState;
 
 #include "rgb.h"
 
-Int32 _rcs_winTranslate(Int32 key) {
+int _rcs_winTranslate(int key) {
         if (key >= 'A' && key <= 'Z') {
                 if (_ctrlState == 1) key -= 64;
                 else if ((_shiftState ^ ((GetKeyState(VK_CAPITAL))?1:0)) == 0) key+=32;
@@ -134,8 +125,8 @@ Int32 _rcs_winTranslate(Int32 key) {
         return key;
 }
 
-Int32 _rcs_isBitmap(rcs_Window w) {
-  Int32 i;
+int _rcs_isBitmap(rcs_Window w) {
+  int i;
   if (disp.numPixmaps==0) return FALSE;
   for (i=0;i<disp.numPixmaps;i++)
     if (disp.pixmapIDs[i]==w) return TRUE;
@@ -184,7 +175,7 @@ void rcs_initWin32(HINSTANCE hInstance) {
 
 #endif
 
-unsigned long rcs_RGBToPixel(Int32 red, Int32 green, Int32 blue) {
+unsigned long rcs_RGBToPixel(int red, int green, int blue) {
   unsigned long pixel;
   if (red_shift < 0)
     pixel = (red & red_mask) << -red_shift;
@@ -205,19 +196,19 @@ unsigned long rcs_RGBToPixel(Int32 red, Int32 green, Int32 blue) {
 /* ***** Build Colors ***** */
 /* ************************ */
 #ifdef X
-void  _rcs_buildColors(rcs_Display* d,unsigned long* colors,const char** data,Int32 *none) {
+void  _rcs_buildColors(rcs_Display* d,unsigned long* colors,const char** data,int *none) {
   XColor clr1,clr2;
 #endif
 #ifdef WIN32
-void  _rcs_buildColors(rcs_Display* d,COLORREF* colors,const char** data,Int32 *none) {
+void  _rcs_buildColors(rcs_Display* d,COLORREF* colors,const char** data,int *none) {
 #endif
-  Int32        sizeX,sizeY,numColors;
-  Int32        x,i;
+  int        sizeX,sizeY,numColors;
+  int        x,i;
   char       index,temp,index2;
   char       buffer[80];
   char       nbuffer[8];
-  Int32        colorIndex;
-  Int32        bytesPer;
+  int        colorIndex;
+  int        bytesPer;
   unsigned long        red,green,blue;
   *none=-1;
   sscanf(data[0],"%d %d %d %d",&sizeX,&sizeY,&numColors,&bytesPer);
@@ -285,7 +276,7 @@ void rcs_closeGC(rcs_Display* d,rcs_GC gc) {
 /* ********************* */
 /* ***** Copy Area ***** */
 /* ********************* */
-void rcs_copyArea(rcs_Display* d,rcs_Window src,rcs_Window dest,rcs_GC gc,Int32 sx,Int32 sy,Int32 w,Int32 h,Int32 dx,Int32 dy) {
+void rcs_copyArea(rcs_Display* d,rcs_Window src,rcs_Window dest,rcs_GC gc,int sx,int sy,int w,int h,int dx,int dy) {
 #ifdef X
   XCopyArea(d,src,dest,gc,sx,sy,w,h,dx,dy);
 #endif
@@ -311,7 +302,7 @@ void rcs_copyArea(rcs_Display* d,rcs_Window src,rcs_Window dest,rcs_GC gc,Int32 
 /* ************************* */
 /* ***** Create Pixmap ***** */
 /* ************************* */
-rcs_Pixmap rcs_createPixmap(rcs_Display* d,rcs_Window win,Int32 x,Int32 y) {
+rcs_Pixmap rcs_createPixmap(rcs_Display* d,rcs_Window win,int x,int y) {
   rcs_Pixmap ret;
 #ifdef X
   XWindowAttributes attr;
@@ -335,7 +326,7 @@ rcs_Pixmap rcs_createPixmap(rcs_Display* d,rcs_Window win,Int32 x,Int32 y) {
 /* ************************* */
 /* ***** Create Window ***** */
 /* ************************* */
-rcs_Window  rcs_createWindow(rcs_Display* d,rcs_Window parent,Int32 x,Int32 y,Int32 width,Int32 height) {
+rcs_Window  rcs_createWindow(rcs_Display* d,rcs_Window parent,int x,int y,int width,int height) {
   rcs_Window ret;
 #ifdef X
   unsigned long mask;
@@ -376,7 +367,7 @@ rcs_Window  rcs_createWindow(rcs_Display* d,rcs_Window parent,Int32 x,Int32 y,In
 /* ***** Draw Filled Box ***** */
 /* *************************** */
 void rcs_drawFilledBox(rcs_Display* d,rcs_Window win,rcs_GC gc,
-                  Int32 x,Int32 y,Int32 w,Int32 h) {
+                  int x,int y,int w,int h) {
 #ifdef X
   XFillRectangle(d,win,gc,x,y,w,h);
 #endif
@@ -408,7 +399,7 @@ void rcs_drawFilledBox(rcs_Display* d,rcs_Window win,rcs_GC gc,
 /* ********************* */
 /* ***** Draw Line ***** */
 /* ********************* */
-void rcs_drawLine(rcs_Display* d,rcs_Window win,rcs_GC gc,Int32 x1,Int32 y1,Int32 x2,Int32 y2) {
+void rcs_drawLine(rcs_Display* d,rcs_Window win,rcs_GC gc,int x1,int y1,int x2,int y2) {
 #ifdef X
   XDrawLine(d,win,gc,x1,y1,x2,y2);
 #endif
@@ -433,13 +424,13 @@ void rcs_drawLine(rcs_Display* d,rcs_Window win,rcs_GC gc,Int32 x1,Int32 y1,Int3
 /* *********************** */
 /* ***** Draw Pixmap ***** */
 /* *********************** */
-void  rcs_drawPixmap(rcs_Display* d,rcs_Window win,rcs_GC gc,Int32 dx,Int32 dy,const char** data) {
-  Int32        sizeX,sizeY,numColors;
-  Int32        x,y;
+void  rcs_drawPixmap(rcs_Display* d,rcs_Window win,rcs_GC gc,int dx,int dy,const char** data) {
+  int        sizeX,sizeY,numColors;
+  int        x,y;
 /*  char       index; */
-  Int32        none;
-  Int32        colorIndex;
-  Int32        bytesPer;
+  int        none;
+  int        colorIndex;
+  int        bytesPer;
 #ifdef X
   unsigned long colors[10000];
 #endif
@@ -486,7 +477,7 @@ void  rcs_drawPixmap(rcs_Display* d,rcs_Window win,rcs_GC gc,Int32 dx,Int32 dy,c
 /* ********************** */
 /* ***** Draw Point ***** */
 /* ********************** */
-void rcs_drawPoint(rcs_Display* d,rcs_Window win,rcs_GC gc,Int32 x,Int32 y) {
+void rcs_drawPoint(rcs_Display* d,rcs_Window win,rcs_GC gc,int x,int y) {
 #ifdef X
   XDrawPoint(d,win,gc,x,y);
 #endif
@@ -511,7 +502,7 @@ void rcs_drawPoint(rcs_Display* d,rcs_Window win,rcs_GC gc,Int32 x,Int32 y) {
 /* *********************** */
 /* ***** Draw String ***** */
 /* *********************** */
-void rcs_drawString(rcs_Display* d,rcs_Window win,rcs_GC gc,Int32 x,Int32 y,char* buffer,Int32 clr) {
+void rcs_drawString(rcs_Display* d,rcs_Window win,rcs_GC gc,int x,int y,char* buffer,int clr) {
 #ifdef X
   if (clr) XDrawImageString(d,win,gc,x,y,buffer,strlen(buffer));
   else     XDrawString(d,win,gc,x,y,buffer,strlen(buffer));
@@ -520,7 +511,7 @@ void rcs_drawString(rcs_Display* d,rcs_Window win,rcs_GC gc,Int32 x,Int32 y,char
   HDC dc;
   HPEN pen;
   RECT rect;
-  Int32  height;
+  int  height;
   rect.top=y;
   rect.left=x;
   rect.bottom=20;
@@ -816,7 +807,7 @@ void rcs_namedBackground(rcs_Display* d,rcs_GC gc,const char* color) {
   XSetBackground(d,gc,clr.pixel);
 #endif
 #ifdef WIN32
-  Int32 red,green,blue;
+  int red,green,blue;
   rcs_namedColor(color,&red,&green,&blue);
   gc->background=RGB(red,green,blue);
 #endif
@@ -833,7 +824,7 @@ void rcs_namedForeground(rcs_Display* d,rcs_GC gc,const char* color) {
   XSetForeground(d,gc,clr.pixel);
 #endif
 #ifdef WIN32
-  Int32 red,green,blue;
+  int red,green,blue;
   rcs_namedColor(color,&red,&green,&blue);
   gc->foreground=RGB(red,green,blue);
 #endif
@@ -890,7 +881,7 @@ rcs_Event rcs_pollEvent(rcs_Display* d) {
   return ret;
   }
 
-void  rcs_getDisplaySize(rcs_Display* d,Int32* width,Int32* height) {
+void  rcs_getDisplaySize(rcs_Display* d,int* width,int* height) {
 #ifdef X
   *height = XDisplayHeight(d,DefaultScreen(d));
   *width = XDisplayWidth(d,DefaultScreen(d));

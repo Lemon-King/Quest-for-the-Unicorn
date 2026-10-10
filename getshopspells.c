@@ -11,7 +11,7 @@
 #include "header.h"
 
 void sort_shop_spells_class() {
-  Int32 i;
+  int i;
   char flag;
   OBJECT_REC temp;
   flag = '*';
@@ -27,7 +27,7 @@ void sort_shop_spells_class() {
   }
 
 void sort_shop_spells_level() {
-  Int32 i;
+  int i;
   char flag;
   OBJECT_REC temp;
   flag = '*';
@@ -42,8 +42,8 @@ void sort_shop_spells_level() {
     }
   }
 
-void get_shop_spells(Int32 level) {
-  Int32 i;
+void get_shop_spells(int level) {
+  int i;
   n_shop_items = 0;
   i = 1;
   while (i >= 0) {

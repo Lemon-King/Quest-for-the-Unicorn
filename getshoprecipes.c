@@ -11,7 +11,7 @@
 #include "header.h"
 
 void get_shop_recipes() {
-  Int32 i;
+  int i;
   OBJECT_REC *item;
   OBJECT_REC *dest;
   n_shop_items = 0;

@@ -11,10 +11,10 @@
 #include "header.h"
 
 void advancement() {
-  Int32 i;
+  int i;
   char buffer[40];
 
-  void show_gain(Int32 g) {
+  void show_gain(int g) {
     switch (g) {
       case 1:msg("Gained Missile",14); break;
       case 2:msg("Gained Edge",14); break;
@@ -36,9 +36,9 @@ void advancement() {
     }
 
   void skills1() {
-    Int32 i;
-    Int32 j;
-    Int32 s;
+    int i;
+    int j;
+    int s;
     return;
     for (i=0; i<2; i++) {
       j = u_random(29);
@@ -65,9 +65,9 @@ void advancement() {
     }
 
   void skills2() {
-    Int32 i;
-    Int32 j;
-    Int32 s;
+    int i;
+    int j;
+    int s;
     return;
     for (i=0; i<3; i++) {
       j = u_random(42);
@@ -96,9 +96,9 @@ void advancement() {
     }
 
   void skills3() {
-    Int32 i;
-    Int32 j;
-    Int32 s;
+    int i;
+    int j;
+    int s;
     return;
     for (i=0; i<3; i++) {
       j = u_random(42);
@@ -127,9 +127,9 @@ void advancement() {
     }
 
   void skills4() {
-    Int32 i;
-    Int32 j;
-    Int32 s;
+    int i;
+    int j;
+    int s;
     return;
     for (i=0; i<2; i++) {
       j = u_random(22);
@@ -158,9 +158,9 @@ void advancement() {
     }
 
   void skills5() {
-    Int32 i;
-    Int32 j;
-    Int32 s;
+    int i;
+    int j;
+    int s;
     return;
     for (i=0; i<3; i++) {
       j = u_random(30);
@@ -189,9 +189,9 @@ void advancement() {
     }
 
   void skills6() {
-    Int32 i;
-    Int32 j;
-    Int32 s;
+    int i;
+    int j;
+    int s;
     return;
     for (i=0; i<2; i++) {
       j = u_random(24);
@@ -220,9 +220,9 @@ void advancement() {
     }
 
   void skills7() {
-    Int32 i;
-    Int32 j;
-    Int32 s;
+    int i;
+    int j;
+    int s;
     return;
     for (i=0; i<2; i++) {
       j = u_random(41);

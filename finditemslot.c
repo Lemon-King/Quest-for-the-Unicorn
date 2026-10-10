@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 find_item_slot() {
-  Int32 i;
+int find_item_slot() {
+  int i;
   for (i=1; i<1000; i++) {
     if (player.map_objects[i].otype == O_NONE) return i;
     }

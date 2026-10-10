@@ -23,7 +23,6 @@
  10 - Cavalier
  11 - Noble
  12 - Enchanter
- 13 - shaman
 */
 
 void mutable_legendary(OBJECT_REC* item) {

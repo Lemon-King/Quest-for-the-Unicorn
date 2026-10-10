@@ -11,7 +11,7 @@
 #include "header.h"
 
 void dart_trap() {
-  Int32 i;
+  int i;
   i = u_random((player.diff+player.d_level / 3) * 5);
   stats_take_damage(i);
   player.chp -= i;
@@ -19,7 +19,5 @@ void dart_trap() {
   clear_prompt();
   msg("Hit by a dart!",11);
   show_side();
-  run_x = 0;
-  run_y = 0;
   }
 

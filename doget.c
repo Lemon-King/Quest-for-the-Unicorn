@@ -11,7 +11,7 @@
 #include "header.h"
 
 void do_get() {
-  Int32 i;
+  int i;
   OBJECT_REC* item;
   char buffer[80];
   if (player.map[player.x][player.y] >= 2000 &&

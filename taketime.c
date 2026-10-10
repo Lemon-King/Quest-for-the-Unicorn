@@ -11,7 +11,7 @@
 #include "header.h"
 
 void take_time() {
-  Int32 time;
+  int time;
   double mult;
   double skill;
   if (player.mount == 0) time = 15;
@@ -58,7 +58,7 @@ void take_time() {
     skill *= 2;
     mult -= skill;
     }
-  time = (Int32)(time*mult);
+  time = (int)(time*mult);
   player.min = player.min+time;
   while (player.min>59) {
     player.min = player.min-60;

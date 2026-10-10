@@ -11,9 +11,9 @@
 #include "header.h"
 
 void do_sleep() {
-  Int32  x,y;
-  Int32  mon;
-  Int32  i;
+  int  x,y;
+  int  mon;
+  int  i;
   target(80,0,-1);
   x = target_x;
   y = target_y;

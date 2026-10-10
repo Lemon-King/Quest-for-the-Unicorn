@@ -11,11 +11,11 @@
 #include "header.h"
 
 void light_room() {
-  Int32 flag;
-  Int32 color;
-  Int32 min_x,max_x;
-  Int32 min_y,max_y;
-  Int32 x,y;
+  int flag;
+  int color;
+  int min_x,max_x;
+  int min_y,max_y;
+  int x,y;
   if (player.gateway == '*') return;
   flag = -1;
   x = player.x; y = player.y;
@@ -52,8 +52,8 @@ void light_room() {
           case  23:color = 14; break;
           case   1:color = 10; break;
           case   4:color = 1; break;
-          case  24:color = 12; break;
-          case  25:color = 10; break;
+          case  24:color = 3; break;
+          case  25:color = 11; break;
           case  41:color = 9; break;
           case  38:color = 12; break;
           case  39:color = 1; break;

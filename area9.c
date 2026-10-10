@@ -10,11 +10,11 @@
 
 #include "header.h"
 
-void area9(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y) {
-  Int32  x,y;
-  Int32  x1,y1;
-  Int32  mon;
-  Int32  i;
+void area9(int damage,int elem,int center_x,int center_y) {
+  int  x,y;
+  int  x1,y1;
+  int  mon;
+  int  i;
   x1 = center_x; y1 = center_y;
   if (x1<1) x1=1; else if (x1>99) x1 = 99;
   if (y1<1) y1=1; else if (y1>99) y1 = 99;

@@ -11,7 +11,7 @@
 #include "header.h"
 
 void sort_shop_items() {
-  Int32 i;
+  int i;
   char flag;
   OBJECT_REC temp;
   flag = '*';

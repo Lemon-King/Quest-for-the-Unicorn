@@ -11,7 +11,7 @@
 #include "header.h"
 
 void show_f_keys() {
-  Int32 i;
+  int i;
   for (i=18; i<23; i++) {
     gotoxy(1,i); txt_write("                                       ");
     gotoxy(40,i); txt_write("                                       ");

@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 write_message(char* msg,Int32 line) {
-  Int32 pos;
+int write_message(char* msg,int line) {
+  int pos;
   while (strlen(msg) > 0) {
     if (strlen(msg) < 80) {
       gotoxy(1,line); txt_write(msg);
@@ -30,10 +30,10 @@ Int32 write_message(char* msg,Int32 line) {
   }
 
 void show_log() {
-  Int32 x;
+  int x;
   char msg[1024];
   MESSAGE general;
-  Int32  lin;
+  int  lin;
   saveScreen();
   textmode(3);
   textcolor(3);

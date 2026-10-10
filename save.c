@@ -9,14 +9,23 @@
 */
 
 #include "header.h"
+#ifdef ANNIV
+#include "./Mhr/crc.c"
+#endif
 
 void save() {
   int i;
   int save_file;
-//  int temp_file;
-//  KNOW_TYPE known;
+  int temp_file;
+  KNOW_TYPE known;
   char filename[80];
   char buffer[20];
+#ifdef ANNIV
+  unsigned short check_val;
+  player.effect[254] = 0;
+  check_val = crc((unsigned char*)(&player),sizeof(PLAYER_REC),0);
+  player.effect[254] = check_val;
+#endif
   gotoxy(1,1); textcolor(14);
   strcpy(filename,"");
   while (strlen(filename)<=1) {
@@ -39,22 +48,21 @@ void save() {
   strcpy(buffer,VERSION);
   write(save_file,buffer,sizeof(buffer));
   write(save_file,&player,sizeof(PLAYER_REC));
-//  temp_file = open("temp01.$$$",O_RDONLY);
-//  if (temp_file < 0) {
-//    printf("Fatal Error: Could not open temp01.$$$\n");
-//    exit(1);
-//    }
+  temp_file = open("temp01.$$$",O_RDONLY);
+  if (temp_file < 0) {
+    printf("Fatal Error: Could not open temp01.$$$\n");
+    exit(1);
+    }
   for (i=1; i<=NO_OF_MAPS; i++) {
-//    lseek(temp_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
-//    read(temp_file,&known,sizeof(KNOW_TYPE));
-//    write(save_file,&known,sizeof(KNOW_TYPE));
-    write(save_file,&(known_maps[i]),sizeof(KNOW_TYPE));
+    lseek(temp_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
+    read(temp_file,&known,sizeof(KNOW_TYPE));
+    write(save_file,&known,sizeof(KNOW_TYPE));
     }
   write(save_file,&stats,sizeof(STATS_REC));
   write(save_file,&current_dungeon,sizeof(DUNGEON));
   write(save_file,&gear_manager,sizeof(GEAR_MANAGER));
   write(save_file,&spellbook,sizeof(SPELLBOOK));
   close(save_file);
-//  close(temp_file);
+  close(temp_file);
   }
 

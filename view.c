@@ -10,13 +10,13 @@
 
 #include "header.h"
 
-void view(Int32 floor) {
-  Int32  i = 0,x,y;
-  Int32  key;
+void view(int floor) {
+  int  i = 0,x,y;
+  int  key;
   char buffer[255];
 /*
   char mflag;
-  Int32  xdir,ydir;
+  int  xdir,ydir;
   get_dir(&xdir,&ydir);
   x = player.x;
   y = player.y;

@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-  void show_gain(Int32 g) {
+  void show_gain(int g) {
     switch (g) {
       case 1:msg("Gained Bow",14); break;
       case 2:msg("Gained 1H Sword",14); break;

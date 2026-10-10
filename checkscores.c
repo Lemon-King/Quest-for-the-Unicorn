@@ -10,17 +10,17 @@
 
 #include "header.h"
 
-#ifdef MHR
+#ifdef ANNIV
 #include "./Mhr/writewinner.c"
 #endif
 
 void final_score(char cause) {
-  Int32 i,j;
+  int i,j;
   if (player.effect[PE_HEROIC] < 0) return;
   death_position = -1;
   hall_position = -1;
   if (cause == 'W') {
-#ifdef MHR
+#ifdef ANNIV
     write_winner();
 #endif
     j=-1;

@@ -11,14 +11,14 @@
 #include "header.h"
 
 void scroll_msg() {
-  Int32 i;
+  int i;
   for (i=0; i<NUM_MSG-1; i++) {
     strcpy(messages[i],messages[i+1]);
     msg_clr[i] = msg_clr[i+1];
     }
   }
 
-void msg(char* message,Int32 color) {
+void msg(char* message,int color) {
   char buffer[256];
   char *pChar;
   char *next;

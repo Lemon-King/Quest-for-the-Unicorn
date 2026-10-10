@@ -14,7 +14,7 @@ void dragon_dice() {
   double bet;
   byte dice[4];
   char buffer[80];
-  Int32 i,j,k = 0;
+  int i,j,k = 0;
   double pay;
   clrscr();
   gotoxy(35,1); textcolor(12);

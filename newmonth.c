@@ -11,8 +11,8 @@
 #include "header.h"
 
 void new_month() {
-  Int32 i;
-  Int32 n;
+  int i;
+  int n;
   double p;
   player.day -= 31;
   player.month = player.month+1;

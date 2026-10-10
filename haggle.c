@@ -10,14 +10,14 @@
 
 #include "header.h"
 
-Int32 haggle(double price,OBJECT_REC item) {
-  Int32 oprice;
-  Int32 offer;
-  Int32 lowest;
-  Int32 merchant;
-  Int32 lastoffer;
+int haggle(double price,OBJECT_REC item) {
+  int32_t oprice;
+  int32_t offer;
+  int32_t lowest;
+  int32_t merchant;
+  int32_t lastoffer;
   double sk;
-  Int32 diff;
+  int32_t diff;
   char   buffer[80];
   oprice = price;
   sk = get_skill(SK_CHARM);
@@ -41,7 +41,7 @@ Int32 haggle(double price,OBJECT_REC item) {
     else if (offer >= merchant && price>0) {
       if (offer < oprice) add_skill(SK_CHARM,2); else add_skill(SK_CHARM,1);
       sub_gold(offer);
-      item.flags |= OF_IDENT;
+      item.level = -1;                  /* Indicates object is known */
       inventory(&item);
       return -1;
       price = 0;
@@ -73,7 +73,7 @@ Int32 haggle(double price,OBJECT_REC item) {
         if (merchant  <= lastoffer) {
           if (offer < oprice) add_skill(SK_CHARM,2); else add_skill(SK_CHARM,1);
           sub_gold(offer);
-          item.flags |= OF_IDENT;
+          item.level = -1;                  /* Indicates object is known */
           inventory(&item);
           return -1;
           } else {
@@ -99,5 +99,5 @@ Int32 haggle(double price,OBJECT_REC item) {
       }
     }
     return 0;
-  } /* void haggle(double price,Int32 item) */
+  } /* void haggle(double price,int item) */
 

@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char in_sight(Int32 x,Int32 y) {
+char in_sight(int x,int y) {
   char flag;
   flag = '*';
   if (x<player.map_x) flag = ' ';

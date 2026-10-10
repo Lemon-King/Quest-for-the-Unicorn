@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 adjust_thrown_damage(Int32 dmg) {
-  Int32 ret;
+int adjust_thrown_damage(int dmg) {
+  int ret;
   double tmp;
   double wtmp;
   tmp = dmg;
@@ -33,8 +33,8 @@ Int32 adjust_thrown_damage(Int32 dmg) {
   }
 
 void throw(char hnd) {
-  Int32 hand;
-  Int32 damage;
+  int hand;
+  int damage;
   byte key;
   hand = 0;
   if (hnd == 'L') hand = I_LHND;

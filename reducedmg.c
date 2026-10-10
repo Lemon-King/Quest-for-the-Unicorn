@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 reduce_damage(Int32 damage,Int32 element) {
+int reduce_damage(int damage,int element) {
   double dmg;
   double reduction;
   dmg = damage;
@@ -22,6 +22,6 @@ Int32 reduce_damage(Int32 damage,Int32 element) {
   reduction = dmg * reduction;
   dmg = dmg - reduction;
   if (dmg < 0) dmg = 0;
-  return (Int32)dmg;
+  return (int)dmg;
   }
 

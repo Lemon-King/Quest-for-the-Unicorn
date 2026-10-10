@@ -11,9 +11,9 @@
 #include "header.h"
 
 void discover() {
-  Int32 i,j,color;
-  Int32 xmax,xmin;
-  Int32 ymax,ymin;
+  int i,j,color;
+  int xmax,xmin;
+  int ymax,ymin;
   char show_flag;
   show_flag = ' ';
   if (can_see() != 0) show_flag = '*';
@@ -48,8 +48,8 @@ void discover() {
           case  23:color = 14; break;
           case   1:color = 10; break;
           case   4:color = 1; break;
-          case  24:color = 12; break;
-          case  25:color = 10; break;
+          case  24:color = 3; break;
+          case  25:color = 11; break;
           case  41:color = 9; break;
           case  38:color = 12; break;
           case  39:color = 1; break;

@@ -11,14 +11,14 @@
 #include "header.h"
 
 void crafting() {
-  Int32 i;
-  Int32 tmp;
-  Int32 line;
+  int i;
+  int tmp;
+  int line;
   char flag;
   char key;
-  Int32  recipe_book[1000];
-  Int32  num_recipes;
-  Int32  current_recipe;
+  int  recipe_book[1000];
+  int  num_recipes;
+  int  current_recipe;
   OBJECT_REC* pItem;
   OBJECT_REC* craft;
   OBJECT_REC* ing[10];
@@ -26,16 +26,15 @@ void crafting() {
   char name1[1024];
   char name2[1024];
 
-  Int32 already_taken(OBJECT_REC* item) {
-    Int32 i;
+  int already_taken(OBJECT_REC* item) {
+    int i;
     for (i=0; i<10; i++) 
       if (ing[i] != NULL && ing[i] == item) return -1;
     return 0;
     }
 
-  OBJECT_REC* get_item(Int32 link) {
-    Int32 i;
-    Int32 j;
+  OBJECT_REC* get_item(int link) {
+    int i;
     for (i=1; i<20; i++)
       if (player.invent[i].otype != O_NONE &&
           player.invent[i].link == link &&
@@ -46,30 +45,11 @@ void crafting() {
           player.pack[i].link == link &&
           already_taken(&(player.pack[i])) == 0)
         return &(player.pack[i]);
-    for (i=0; i<1000; i++)
-      if (player.hole[i].otype != O_NONE &&
-          player.hole[i].link == link &&
-          already_taken(&(player.hole[i])) == 0)
-        return &(player.hole[i]);
-    for (i=0; i<5; i++)
-      if (player.region == player.houses[i].region &&
-          player.land_x == player.houses[i].rx &&
-          player.land_y == player.houses[i].ry &&
-          player.x >= player.houses[i].cx-1 &&
-          player.x <= player.houses[i].cx+1 &&
-          player.y >= player.houses[i].cy-1 &&
-          player.y <= player.houses[i].cy+1) {
-        for (j=0; j<500; j++)
-          if (player.houses[i].inventory[j].otype != O_NONE &&
-              player.houses[i].inventory[j].link == link &&
-              already_taken(&(player.houses[i].inventory[j])) == 0)
-            return &(player.houses[i].inventory[j]);
-        }
     return NULL;
     }
 
   void auto_add() {
-    Int32 recipe;
+    int recipe;
     recipe = recipe_book[current_recipe];
     craft = (recipes[recipe].craft_item > 0) ? get_item(recipes[recipe].craft_item) : NULL;
     ing[0] = (recipes[recipe].object1 > 0) ? get_item(recipes[recipe].object1) : NULL;
@@ -90,7 +70,7 @@ void crafting() {
     }
 
   void show_recipe() {
-    Int32 i;
+    int i;
     char buffer[1024];
     char *pChar1;
     char *pChar2;
@@ -135,7 +115,7 @@ void crafting() {
     }
 
   void show_screen() {
-    Int32 i;
+    int i;
     textmode(3);
     textcolor(15); gotoxy(10,4); txt_write("Crafting");
     textcolor(2); gotoxy(10,6); txt_write("Craft Item:");
@@ -176,9 +156,9 @@ void crafting() {
     }
 
   char check_recipe(RECIPE rec) {
-    Int32 i;
-    Int32 j;
-    Int32 l;
+    int i;
+    int j;
+    int l;
     char flag;
     char used[10];
     l = 0;
@@ -220,8 +200,8 @@ void crafting() {
     return 'Y';
     }
 
-  Int32 find_recipe() {
-    Int32 i;
+  int find_recipe() {
+    int i;
     i = 0;
     while (recipes[i].craft_item != 999) {
       if (check_recipe(recipes[i]) == 'Y') return i;
@@ -327,7 +307,7 @@ void crafting() {
       pItem = find_linked_item(recipes[line].object);
       if (pItem != NULL) {
         item = *pItem;
-        item.flags |= OF_IDENT;
+        item.level = -1;
         inventory(&item);
 	stats.counts[STAT_ITEMS_CRAFTED]++;
         }

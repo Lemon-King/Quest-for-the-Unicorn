@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-void pack_item(OBJECT_REC* item,Int32 line) {
+void pack_item(OBJECT_REC* item,int line) {
   char flag;
-  Int32  slot;
+  int  slot;
   OBJECT_REC  pitem;
   slot = 1;
   if (line > 3) pitem = player.invent[line - 3];

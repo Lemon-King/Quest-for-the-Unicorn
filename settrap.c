@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-Int32 set_trap(Int32 n) {
-  Int32 x,y;
-  Int32 xdir,ydir;
+int set_trap(int n) {
+  int x,y;
+  int xdir,ydir;
   get_dir(&xdir,&ydir);
   x = player.x + xdir;
   y = player.y + ydir;

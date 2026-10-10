@@ -11,7 +11,7 @@
 #include "header.h"
 
 void remove_player() {
-  Int32 x,y;
+  int x,y;
   byte color;
   x = player.x; y = player.y;
   if (player.known[player.x][player.y] != 0) show_spot(player.x,player.y);
@@ -25,8 +25,8 @@ void remove_player() {
     case  1:color=10; break;
     case  2:color=2;  break;
     case  4:color=1;  break;
-    case 24:color=12;  break;
-    case 25:color=10; break;
+    case 24:color=3;  break;
+    case 25:color=11; break;
     case 41:color=9; break;
     case 38:color=12; break;
     case 39:color=1; break;

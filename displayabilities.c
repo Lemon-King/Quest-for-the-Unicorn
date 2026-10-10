@@ -11,7 +11,7 @@
 #include "header.h"
 
 void display_abilities() {
-  Int32 i;
+  int i;
   for (i=1; i<11; i++) {
     gotoxy(65,i);
     if (player.ability[i] >= -99 && player.ability[i] <= -5) {

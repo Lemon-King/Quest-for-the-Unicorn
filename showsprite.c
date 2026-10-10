@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void show_sprite(Int32 x,Int32 y,Int32 sprt) {
+void show_sprite(int x,int y,int sprt) {
   if (x<1 || x>100 || y<1 || y>100) return;
   if (sprt >= 2000 && sprt <2100) sprt = 88;
   if (sprt >= 600 && sprt <700) sprt = 41;

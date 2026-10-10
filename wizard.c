@@ -12,7 +12,7 @@
 
 typedef struct {
   char name[26];
-  Int32  number;
+  int  number;
   } WIZARD_SPECIALS;
 
 WIZARD_SPECIALS special_names[] = {
@@ -116,11 +116,11 @@ void wizard() {
   char buffer2[80];
   char key;
   char pword[41];
-  Int32  sorted[2500];
-  Int32  num_sorted;
+  int  sorted[2500];
+  int  num_sorted;
 
   void sort_special_names() {
-    Int32 i;
+    int i;
     char flag;
     WIZARD_SPECIALS tmp;
     flag = '*';
@@ -136,8 +136,8 @@ void wizard() {
       }
     }
 
-  Int32 input(char* prompt) {
-    Int32 ret;
+  int input(char* prompt) {
+    int ret;
     strcpy(buffer,"");
     strcpy(pword,prompt);
     msg(pword,11);
@@ -163,13 +163,13 @@ void wizard() {
     }
 
   void character() {
-    Int32  i;
-    Int32  x,y;
+    int  i;
+    int  x,y;
     char key;
-    Int32  pos;
-    Int32  dir;
-    Int32  original_class;
-    Int32  original_level;
+    int  pos;
+    int  dir;
+    int  original_class;
+    int  original_level;
     char buffer[32];
     original_class = player.class;
     original_level = player.level;
@@ -361,9 +361,9 @@ void wizard() {
       }
     }
 
-  Int32 show_trophies(Int32 top) {
-    Int32 i;
-    Int32 count;
+  int show_trophies(int top) {
+    int i;
+    int count;
     char buffer[256];
     i = 0;
     count = 0;
@@ -387,14 +387,14 @@ void wizard() {
     return count;
     }
 
-  void view_trophy(Int32 num) {
-    Int32 i;
-    UInt32 u;
-    Int32 count,count2;
-    Int32 ox,oy;
+  void view_trophy(int num) {
+    int i;
+    unsigned int u;
+    int count,count2;
+    int ox,oy;
     OBJECT_REC* item;
     char buffer[32];
-    Int32 line;
+    int line;
     ox = 21;
     oy = 4;
     textcolor(7);
@@ -736,9 +736,9 @@ void wizard() {
   void trphies() {
     char key;
     char buffer[40];
-    Int32  pos;
-    Int32  top;
-    Int32  count;
+    int  pos;
+    int  top;
+    int  count;
     pos = 0;
     top = 0;
     clrscr();
@@ -791,9 +791,9 @@ void wizard() {
       }
     }
 
-  Int32 show_recipes(Int32 top) {
-    Int32 i;
-    Int32 count;
+  int show_recipes(int top) {
+    int i;
+    int count;
     OBJECT_REC* item;
     char buffer[256];
     i = 0;
@@ -819,11 +819,11 @@ void wizard() {
     return count;
     }
 
-  void view_recipe(Int32 num) {
-    Int32 i;
-    Int32 ox,oy;
+  void view_recipe(int num) {
+    int i;
+    int ox,oy;
     OBJECT_REC* item;
-    Int32 line;
+    int line;
     ox = 23;
     oy = 4;
     textcolor(7);
@@ -887,9 +887,9 @@ void wizard() {
   void rcipes() {
     char key;
     char buffer[40];
-    Int32  pos;
-    Int32  top;
-    Int32  count;
+    int  pos;
+    int  top;
+    int  count;
     pos = 0;
     top = 0;
     clrscr();
@@ -946,9 +946,9 @@ void wizard() {
       }
     }
 
-  Int32 show_specials(Int32 top) {
-    Int32 i;
-    Int32 count;
+  int show_specials(int top) {
+    int i;
+    int count;
     char buffer[256];
     i = 0;
     count = 0;
@@ -974,9 +974,9 @@ void wizard() {
 
   void spcials() {
     char key;
-    Int32  pos;
-    Int32  top;
-    Int32  count;
+    int  pos;
+    int  top;
+    int  count;
     pos = 0;
     top = 0;
     clrscr();
@@ -1040,9 +1040,9 @@ void wizard() {
       }
     }
 
-  Int32 show_objects(Int32 top) {
-    Int32 i;
-    Int32 count;
+  int show_objects(int top) {
+    int i;
+    int count;
     char buffer[256];
     i = 0;
     count = 0;
@@ -1091,10 +1091,10 @@ void wizard() {
     textcolor(14);
     }
 
-  void view_object(Int32 num) {
-    Int32 i;
-    Int32 ox,oy;
-    Int32 line;
+  void view_object(int num) {
+    int i;
+    int ox,oy;
+    int line;
     double d;
     char buffer[64];
     ox = 23;
@@ -1205,9 +1205,9 @@ void wizard() {
     }
 
   void sort_objects() {
-    Int32 i;
-    Int32 t;
-    Int32 flag;
+    int i;
+    int t;
+    int flag;
     flag = -1;
     while (flag) {
       flag = 0;
@@ -1224,9 +1224,9 @@ void wizard() {
   void objcts() {
     char key;
     char buffer[40];
-    Int32  pos;
-    Int32  top;
-    Int32  count;
+    int  pos;
+    int  top;
+    int  count;
     OBJECT_REC item;
     pos = 0;
     top = 0;
@@ -1287,7 +1287,8 @@ void wizard() {
       if (key == 'a' || key == 'A') {
         game_edited = 'Y';
         item = objects[sorted[top+pos]];
-        item.flags |= OF_IDENT;
+        if (item.level > 0) item.level = -item.level;
+        if (item.level == 0) item.level = -1;
         inventory(&item);
         clrscr();
         count = 0;
@@ -1307,9 +1308,9 @@ void wizard() {
       }
     }
 
-  Int32 show_messages(Int32 top,char mode) {
-    Int32 i;
-    Int32 count;
+  int show_messages(int top,char mode) {
+    int i;
+    int count;
     char buffer[256];
     i = 0;
     count = 0;
@@ -1349,9 +1350,9 @@ void wizard() {
   void messages(char mode) {
     char key;
     char buffer[40];
-    Int32  pos;
-    Int32  top;
-    Int32  count;
+    int  pos;
+    int  top;
+    int  count;
     pos = 0;
     top = 0;
     clrscr();
@@ -1399,9 +1400,9 @@ void wizard() {
     }
 
 
-  Int32 show_spells(Int32 top) {
-    Int32 i;
-    Int32 count;
+  int show_spells(int top) {
+    int i;
+    int count;
     char buffer[256];
     i = 0;
     count = 0;
@@ -1426,11 +1427,11 @@ void wizard() {
     return count;
     }
 
-  void view_spell(Int32 num) {
-    Int32 i;
-    Int32 ox,oy;
+  void view_spell(int num) {
+    int i;
+    int ox,oy;
     char buffer[32];
-    Int32 line;
+    int line;
     ox = 23;
     oy = 4;
     textcolor(7);
@@ -1453,13 +1454,13 @@ void wizard() {
     }
 
   void splls() {
-    Int32  i;
+    int  i;
     char known;
     char key;
     char buffer[40];
-    Int32  pos;
-    Int32  top;
-    Int32  count;
+    int  pos;
+    int  top;
+    int  count;
     pos = 0;
     top = 0;
     clrscr();
@@ -1524,9 +1525,9 @@ void wizard() {
       }
     }
 
-  Int32 show_monsters(Int32 top) {
-    Int32 i;
-    Int32 count;
+  int show_monsters(int top) {
+    int i;
+    int count;
     char buffer[256];
     char tmp[32];
     i = 0;
@@ -1554,9 +1555,9 @@ void wizard() {
     return count;
     }
 
-  void view_monster(Int32 num) {
-    Int32 i;
-    Int32 ox,oy;
+  void view_monster(int num) {
+    int i;
+    int ox,oy;
     char buffer[32];
     ox = 23;
     oy = 4;
@@ -1688,9 +1689,9 @@ void wizard() {
   void mnsters() {
     char key;
     char buffer[40];
-    Int32  pos;
-    Int32  top;
-    Int32  count;
+    int  pos;
+    int  top;
+    int  count;
     pos = 0;
     top = 0;
     clrscr();
@@ -1786,7 +1787,7 @@ void wizard() {
 
   void main_menu() {
     char key;
-    Int32  line;
+    int  line;
     key = '*';
     while (key != '0') {
       clrscr();

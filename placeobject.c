@@ -11,8 +11,8 @@
 #include "header.h"
 
 void random_spell(OBJECT_REC* item) {
-  Int32 spell;
-  Int32 i;
+  int spell;
+  int i;
   char buffer[64];
   item->effect = E_SPEL;
   for (i=0; i<100; i++) {
@@ -28,9 +28,9 @@ void random_spell(OBJECT_REC* item) {
   strcpy(item->name,buffer);
   }
 
-Int32 random_enchant(Int32 e1, Int32 e2, Int32 e3) {
-  Int32 e;
-  Int32 a;
+int random_enchant(int e1, int e2, int e3) {
+  int e;
+  int a;
   a = 0;
   e = u_random(S_MAX_ENCH) + 1;
   if (e == 31) e = 31 + u_random(24);
@@ -104,24 +104,18 @@ Int32 random_enchant(Int32 e1, Int32 e2, Int32 e3) {
   return (e * 100) + a;;
   }
 
-Int32 place_object(Int32 level) {
-  Int32 j;
-  Int32 s;
-  Int32 pls;
-  Int32 enchants;
-  Int32 e1,e2,e3;
-  byte  flag;
-  flag = 0xff;
-  while (flag) {
-    flag = 0;
-    j = u_random(NO_OF_OBJECTS) + 1;
-    if (abs(objects[j].level) > level) flag = 0xff;
-    if (objects[j].level == 0) flag = 0xff;
-    if (objects[j].control2 < 0 && -objects[j].control2 != date.tm_mon) flag = 0xff;
-    if ((u_random(20000) - get_magic_find() * 5) >= objects[j].rarity) flag = 0xff;
-    if (objects[j].flags & OF_UNIQUE) if (possesses(objects[j].link)) flag = 0xff;
-    if (objects[j].flags & OF_OBJECT) if (!possesses(objects[j].flags2)) flag = 0xff;
-    }
+int place_object(int level) {
+  int j;
+  int s;
+  int pls;
+  int enchants;
+  int e1,e2,e3;
+  j = u_random(NO_OF_OBJECTS) + 1;
+  while (abs(objects[j].level) > level ||
+         objects[j].level == 0 ||
+         (objects[j].control2 < 0 && -objects[j].control2 != date.tm_mon) ||
+         (u_random(20000) - get_magic_find() * 5) >= objects[j].rarity)
+     j = u_random(NO_OF_OBJECTS) + 1;
   s = find_item_slot();
   if (s >= 0) {
     player.map_objects[s] = objects[j];

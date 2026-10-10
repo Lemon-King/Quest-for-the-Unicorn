@@ -11,7 +11,7 @@
 #include "header.h"
 
 void show_messages() {
-  Int32 i;
+  int i;
   setfillstyle(1,0);
   bar(screen_width-220,94,screen_width,100 + NUM_MSG * MESSAGE_HEIGHT);
   for (i=0; i<NUM_MSG; i++) {

@@ -11,7 +11,7 @@
 #include "header.h"
 
 void check_mount() {
-  Int32 i;
+  int i;
   player.mount = 0; player.peg = 0;
   for (i=1; i<=5; i++)
     if (player.party[i].hp > 0) {

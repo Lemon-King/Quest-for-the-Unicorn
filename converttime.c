@@ -10,10 +10,10 @@
 
 #include "header.h"
 
-void convert_time(Int32 t,char* buffer) {
-  Int32 days;
-  Int32 hours;
-  Int32 minutes;
+void convert_time(int32_t t,char* buffer) {
+  int days;
+  int hours;
+  int minutes;
   days = t / 86400;
   t -= (days * 86400);
   hours = t / 3600;

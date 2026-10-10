@@ -11,11 +11,11 @@
 #include "header.h"
 
 void show_quest() {
-  Int32  i;
-  Int32  row;
-  Int32  col;
-  Int32  suggest;
-  Int32  sug_level;
+  int  i;
+  int  row;
+  int  col;
+  int  suggest;
+  int  sug_level;
   saveScreen();
   textmode(3);
   textcolor(15);

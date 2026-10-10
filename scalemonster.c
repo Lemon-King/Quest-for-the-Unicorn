@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-void scale_monster(NPC_REC* monster, Int32 scale) {
-  Int32    i;
+void scale_monster(NPC_REC* monster, int scale) {
+  int    i;
   double d;
   i = (monster->hp / monster->level) * scale;
   monster->hp += i;
@@ -28,7 +28,7 @@ void scale_monster(NPC_REC* monster, Int32 scale) {
   monster->level += scale;
   }
 
-void multiply_monster(NPC_REC* monster, Int32 scale) {
+void multiply_monster(NPC_REC* monster, int scale) {
   monster->hp *= scale;
   monster->mana *= scale;
   monster->attack *= scale;

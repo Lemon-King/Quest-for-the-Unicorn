@@ -10,21 +10,21 @@
 
 #include "header.h"
 
-void stock_monsters(Int32 depth,Int32 treasurex,Int32 treasurey,MAP_TYPE* map,DUNGEON_MONSTERS* dmonsters) {
-  Int32 i,j;
+void stock_monsters(int depth,int treasurex,int treasurey,MAP_TYPE* map,DUNGEON_MONSTERS* dmonsters) {
+  int i,j;
   byte x,y;
-  Int32  min,max;
+  int  min,max;
   char flag;
-  Int32  number;
-  Int32  groupsize;
-  Int32  friend;
-  Int32  x1,y1;
+  int  number;
+  int  groupsize;
+  int  friend;
+  int  x1,y1;
   char mflag;
   double texp;
-  Int32    mnst;
-  Int32    scale;
-  Int32    retries;
-  Int32    bossscale;
+  int    mnst;
+  int    scale;
+  int    retries;
+  int    bossscale;
   scale = get_monster_level_plus();
   texp = 0;
   friend = 5;
@@ -75,7 +75,7 @@ void stock_monsters(Int32 depth,Int32 treasurex,Int32 treasurey,MAP_TYPE* map,DU
       if (player.gateway == '*' && player.d_level == 5 && j == 1 && i == 1) {
         for (x1=x-2; x1<=x+2; x1++)
           for (y1=y-2; y1<=y+2; y1++)
-            (*map)[x1][y1] = 145;
+            (*map)[x1][y1] = 41;
         (*map)[x][y] = 0-i;
         }
       bossscale = 0;

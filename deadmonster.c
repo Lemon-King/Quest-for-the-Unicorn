@@ -10,10 +10,10 @@
 
 #include "header.h"
 
-void dead_monster(NPC_REC* mon,char tr,Int32 x,Int32 y) {
-  Int32 i;
-  Int32 lvl;
-  Int32 drop;
+void dead_monster(NPC_REC* mon,char tr,int x,int y) {
+  int i;
+  int lvl;
+  int drop;
   if (mon->hp <= 0) {
     if (mon->level >= (player.level + 10)) stats.counts[STAT_HARD_MOB]++;
     stats.counts[STAT_MOBS_KILLED]++;

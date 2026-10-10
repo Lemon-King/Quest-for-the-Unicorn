@@ -28,7 +28,6 @@ void use_item() {
   show_spot(player.x,player.y);
   show_player();
   if (item != NULL && item->otype != O_NONE) {
-    takes_time = 'Y';
     if (item->otype == O_FOOD && player.health > 100) {
       msg("Too full to eat any more",10);
       }

@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char inv_valid(OBJECT_REC* item,Int32 line) {
+char inv_valid(OBJECT_REC* item,int line) {
   char ret;
   char classValid;
   ret = 'Y';
@@ -34,7 +34,7 @@ char inv_valid(OBJECT_REC* item,Int32 line) {
   if (line == I_LHND && item->otype == O_BOW) return ' ';
   if (line == I_LHND && player.invent[I_RHND].otype == O_POLE) return ' ';
   if (line == I_LHND && player.invent[I_RHND].otype == O_EDGE && player.invent[I_RHND].skill == SK_2HSWORD) return ' ';
-  if ((item->align & 0xffff) == 0) classValid = 'Y';
+  if (item->align == 0 || item->align == 0x40000000) classValid = 'Y';
   else {
     classValid = ((item->align & (1 << player.class)) != 0) ? 'Y' : 'N';
     }

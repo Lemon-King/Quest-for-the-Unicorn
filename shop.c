@@ -10,21 +10,21 @@
 
 #include "header.h"
 
-void shop(char* name,Int32 shop_type) {
+void shop(char* name,int shop_type) {
   double price;
   OBJECT_REC item;
-  Int32 i;
-  Int32 offset;
-  Int32 page_size;
+  int i;
+  int offset;
+  int page_size;
   char buffer[80];
   char key;
-  Int32  line;
+  int  line;
 
   void show_spells() {
-    Int32 j;
-    Int32 line,col;
+    int j;
+    int line,col;
     char buffer2[80];
-    Int32 count;
+    int count;
     line = 3;
     col = 12;
     textcolor(14);
@@ -54,10 +54,10 @@ void shop(char* name,Int32 shop_type) {
     }
 
   void show_items() {
-    Int32 count;
-    Int32 i;
-    Int32 j;
-    Int32 line;
+    int count;
+    int i;
+    int j;
+    int line;
     char buffer[80];
     char buffer2[80];
     if (shop_type == SHOP_SPEL) {
@@ -91,10 +91,10 @@ void shop(char* name,Int32 shop_type) {
     }
 
   void show_top_spell() {
-    Int32 j;
-    Int32 line,col;
+    int j;
+    int line,col;
     char buffer2[80];
-    Int32 count;
+    int count;
     line = 3;
     col = 12;
     textmode(3); gotoxy(27,1); textcolor(11);
@@ -255,7 +255,7 @@ void shop(char* name,Int32 shop_type) {
       show_arrows();
       }
     if (key == 'I') {
-      shop_items[offset+line].flags |= OF_IDENT;
+      shop_items[offset+line].level = -1;
       data_card(&(shop_items[offset + line]));
       show_top();
       show_arrows();

@@ -14,7 +14,7 @@ void mutable_set_name(OBJECT_REC* it) {
   char prefix[10];
   char postfix[20];
   char fullname[100];
-  Int32  e;
+  int  e;
   strcpy(prefix,"");
   strcpy(postfix,"");
   strcpy(fullname,"");
@@ -117,9 +117,9 @@ void mutable_set_name(OBJECT_REC* it) {
   strcpy(it->name,fullname);
   }
 
-Int32 mutable_enchant() {
-  Int32 e;
-  Int32 a;
+int mutable_enchant() {
+  int e;
+  int a;
   a = 1;
   e = u_random(S_MAX_ENCH) + 1;
   switch(e) {
@@ -162,7 +162,7 @@ Int32 mutable_enchant() {
   }
 
 void mutable(OBJECT_REC* it) {
-  Int32  e;
+  int  e;
   char flag;
   it->num_enchantments = 0;
   if (it->otype == O_DAGR ||

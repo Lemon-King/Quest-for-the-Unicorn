@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void add_ingredient(Int32 num,char* buffer) {
+void add_ingredient(int num,char* buffer) {
   OBJECT_REC* item;
   if (num != 0) {
     item = find_linked_item(num);
@@ -21,8 +21,8 @@ void add_ingredient(Int32 num,char* buffer) {
     }
   }
 
-void recipe_string(Int32 num,char* buffer) {
-  Int32 i;
+void recipe_string(int num,char* buffer) {
+  int i;
   OBJECT_REC* item;
   strcpy(buffer,"Recipe: ");
   if (recipes[num].object == 0) return;

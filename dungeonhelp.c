@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void help_item(char* msg,Int32 col_width,Int32 num_rows,Int32 indent) {
+void help_item(char* msg,int col_width,int num_rows,int indent) {
   gotoxy(indent+col*col_width,row);
   txt_write(msg);
   row++;

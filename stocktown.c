@@ -11,8 +11,8 @@
 #include "header.h"
 
 void stock_town(byte town) {
-  Int32 i;
-  Int32 x,y;
+  int i;
+  int x,y;
   char flag;
   for (i=1; i<=60; i++) {
     for (x=1; x<=5; x++) player.monster[x][i].hp = 0;

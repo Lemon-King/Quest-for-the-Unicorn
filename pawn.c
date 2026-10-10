@@ -11,17 +11,17 @@
 #include "header.h"
 
 void pawn(char* name, byte city) {
-  Int32 option;
+  int option;
   double price;
   OBJECT_REC item;
   OBJECT_REC* pItem;
-  Int32 j,i;
+  int j,i;
   char buffer[80];
   char key;
 
   void show_top() {
-    Int32 j;
-    Int32 pos;
+    int j;
+    int pos;
     char buffer2[80];
     textmode(3); gotoxy(27,1); textcolor(11);
     sprintf(buffer,"Welcome to %s",name);
@@ -60,7 +60,7 @@ void pawn(char* name, byte city) {
       return price;
       }
     price *= 0.08;
-    if ((item->flags & OF_IDENT) == 0) price /= 2.0;
+    if (item->level > 0) price /= 2.0;
     discount = 30.0 * (get_skill(SK_CHARM)/100.0);
     discount = 1.0 + (discount / 100.0);
     if (player.sex == 'F') discount += 0.02;
@@ -124,7 +124,7 @@ void pawn(char* name, byte city) {
           key = inkey();
           if (key == 'y' || key == 'Y') {
             sub_gold(price);
-            pItem->flags |= OF_IDENT;
+            pItem->level = -1;
             if (pItem->effect == E_MUTA) mutable_set_name(pItem);
             gotoxy(15,22); textcolor(15);
             sprintf(buffer,"It is a %s (press a key)",get_name(pItem));
@@ -172,7 +172,7 @@ void pawn(char* name, byte city) {
         }
     if (option == 14)
       for (i=1; i<=32; i++)
-        if (player.pack[i].otype != O_NONE && (player.pack[i].flags & OF_IDENT) == 0) {
+        if (player.pack[i].otype != O_NONE && player.pack[i].level >= 0) {
           gotoxy(15,19); textcolor(12);
           price = rcs_trunc(item_cost(&(player.pack[i])) * 0.08);
           sprintf(buffer,"To identify a %s",get_name(&(player.pack[i])));
@@ -191,7 +191,7 @@ void pawn(char* name, byte city) {
             key = inkey();
             if (key == 'y' || key == 'Y') {
               sub_gold(price);
-              player.pack[i].flags |= OF_IDENT;
+              player.pack[i].level = -1;
               if (player.pack[i].effect == E_MUTA) mutable_set_name(&(player.pack[i]));
               gotoxy(15,22); textcolor(15);
               sprintf(buffer,"It is a %s (press a key)",get_name(&(player.pack[i])));

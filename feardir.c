@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-char fear_dir(Int32 start_x,Int32 start_y,Int32 end_x,Int32 end_y) {
-  Int32 xdir,ydir;
-  Int32 x,y;
+char fear_dir(int start_x,int start_y,int end_x,int end_y) {
+  int xdir,ydir;
+  int x,y;
   x = start_x;
   y = start_y;
   xdir=0; ydir=0;
@@ -26,13 +26,13 @@ char fear_dir(Int32 start_x,Int32 start_y,Int32 end_x,Int32 end_y) {
   if (x > end_x && y == end_y) xdir = -1;
   xdir = -xdir;
   ydir = -ydir;
-  if (passable(start_x+xdir,start_y+ydir,'N','N')) { x+=xdir; y+=ydir; }
-  else if (passable(start_x+xdir,start_y,'N','N')) x+=xdir;
-  else if (passable(start_x,start_y+ydir,'N','N')) y+=ydir;
-  else if (xdir == 0 && passable(start_x+1,start_y+ydir,'N','N')) { x++; y+=ydir; }
-  else if (xdir == 0 && passable(start_x-1,start_y+ydir,'N','N')) { x--; y+=ydir; }
-  else if (ydir == 0 && passable(start_x+xdir,start_y-1,'N','N')) { x+=xdir; y--; }
-  else if (ydir == 0 && passable(start_x+xdir,start_y+1,'N','N')) { x+=xdir; y++; }
+  if (passable(start_x+xdir,start_y+ydir,'N')) { x+=xdir; y+=ydir; }
+  else if (passable(start_x+xdir,start_y,'N')) x+=xdir;
+  else if (passable(start_x,start_y+ydir,'N')) y+=ydir;
+  else if (xdir == 0 && passable(start_x+1,start_y+ydir,'N')) { x++; y+=ydir; }
+  else if (xdir == 0 && passable(start_x-1,start_y+ydir,'N')) { x--; y+=ydir; }
+  else if (ydir == 0 && passable(start_x+xdir,start_y-1,'N')) { x+=xdir; y--; }
+  else if (ydir == 0 && passable(start_x+xdir,start_y+1,'N')) { x+=xdir; y++; }
   if (x<start_x && y>start_y) return '1';
   if (x==start_x && y>start_y) return '2';
   if (x>start_x && y>start_y) return '3';

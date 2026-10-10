@@ -10,13 +10,13 @@
 
 #include "header.h"
 
-Int32 u_random(Int32 range) {
+int u_random(int range) {
   float r;
   if (range < 0) range = 0;
   r=(float)rand();
   r/=RAND_MAX;
-  r-=(Int32)r;
+  r-=(int)r;
   r*=range;
-  return (Int32)r;
+  return (int)r;
   }
 

@@ -161,10 +161,6 @@ TROPHY_REC trophies[] = {
   { TC_CARDS,   {     68, 0x0000ffff,0,    0,    0,    0,    0,    0, },   "Item Collector",    "Collecting all the item cards"},      /* 96 */
   { TC_ITEM,    {  T_638,     15,   69,    0,    0,    0,    0,    0, },   "Living Dangerously","Use a Deck of Many Things 15 times" },/* 97 */
   { TC_PICKI,   {  T_638,      1,   70,    0,    0,    0,    0,    0, },   "The Gambler",       "Acquiring a Deck of Many Things"},    /* 98 */
-  { TC_EQUIP,   {  T_690,  T_691,T_692,T_693,T_694,T_695,    0,   71, },   "Mythic",            "Equip all Mythical gear"},            /* 99 */
-  { TC_PICKI,   {  T_522,      1,   72,    0,    0,    0,    0,    0, },   "Sunny Days",        "Acquiring a Sun Stone"},              /* 100 */
-  { TC_PICKI,   {  T_706,      1,   73,    0,    0,    0,    0,    0, },   "Pack Rat",          "Acquiring a Portable Hole"},          /* 101 */
-  { TC_PICKI,   {  T_703,      1,   74,    0,    0,    0,    0,    0, },   "Robo-Master",       "Acquiring a Mech Merchant"},          /* 102 */
 
   {     999,    {  T_298,    100,    0,    0,    0,    0,    0,    0, },   "Be My Valentine",   "Giving 100 candy hearts to monsters"},/*    */
   };

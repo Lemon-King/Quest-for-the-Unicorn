@@ -10,13 +10,13 @@
 
 #include "header.h"
 
-void get_shop_items(Int32 otype1,Int32 otype2,Int32 otype3,Int32 otype4,Int32 otype5,Int32 otype6,Int32 rarity) {
-  Int32 i;
+void get_shop_items(int otype1,int otype2,int otype3,int otype4,int otype5,int otype6,int rarity) {
+  int i;
   n_shop_items = 0;
   i = 0;
   while (i >= 0) {
     if (objects[i].control2 >= 0 &&
-        (objects[i].flags & OF_FOR_SALE) != 0 &&
+        (objects[i].align & 0x40000000) != 0 &&
         ( objects[i].otype == otype1 ||
           objects[i].otype == otype2 ||
           objects[i].otype == otype3 ||

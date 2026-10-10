@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 get_linked_msg(Int32 n) {
-  Int32 i;
+int get_linked_msg(int n) {
+  int i;
   i = 0;
   while (gen[i].region < 90) {
     if (gen[i].link == n) return i;

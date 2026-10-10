@@ -40,16 +40,15 @@ rcs_GC             gc;
 #include <sys/timeb.h>
 
 #include "header.h"
-#include "terminal.h"
 
 char screen[80][25][2];
 char store[80][25][2];
-Int32  esc_mode;
+int  esc_mode;
 char esc_seq[80];
-Int32 cursor_x;
-Int32 cursor_y;
-Int32 text_color;
-Int32 g_color;
+int cursor_x;
+int cursor_y;
+int text_color;
+int g_color;
 
 void hide_cursor() {
 #ifdef MINGW
@@ -79,7 +78,7 @@ void show_cursor() {
 
 void clrscr() {
 #ifdef ASCII
-  Int32 x,y;
+  int x,y;
   hide_cursor();
 #ifdef MINGW
   HANDLE hConsole;
@@ -116,7 +115,7 @@ void clrscr() {
 #endif
   }
 
-void position(Int32 x,Int32 y) {
+void position(int x,int y) {
 #ifdef MINGW
   HANDLE hConsole;
   COORD coordScreen;
@@ -130,7 +129,7 @@ void position(Int32 x,Int32 y) {
   }
 
 #ifdef ASCII
-void gc_color(Int32 clr) {
+void gc_color(int clr) {
 #ifdef MINGW
   HANDLE h;
   h = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -178,7 +177,7 @@ void gc_color(Int32 clr) {
   fflush(stdout);
   }
 #else
-void gc_color(rcs_GC* gc,Int32 clr) {
+void gc_color(rcs_GC* gc,int clr) {
   switch (clr) {
     case 0:rcs_namedForeground(display,*gc,"black"); break;
     case 1:rcs_namedForeground(display,*gc,"blue3"); break;
@@ -201,7 +200,7 @@ void gc_color(rcs_GC* gc,Int32 clr) {
   }
 #endif
 
-Int32 unbuffer() {
+int unbuffer() {
 #ifdef ASCII
 #ifndef MINGW
   struct termios terminal;
@@ -219,7 +218,7 @@ Int32 unbuffer() {
 
 #ifdef ASCII
 void init_graph() {
-  Int32 x,y;
+  int x,y;
   for (x=0; x<80; x++)
     for (y=0; y<25; y++) {
       screen[x][y][0] = ' ';
@@ -229,7 +228,7 @@ void init_graph() {
   }
 #else
 void init_graph() {
-  Int32 i;
+  int i;
   rcs_GC gc;
   display = rcs_openDisplay(":0.0");
   rcs_buildColorMapping(display);
@@ -252,7 +251,7 @@ void init_graph() {
 
 #ifdef ASCII
 void saveScreen() {
-  Int32 x,y;
+  int x,y;
   for (x=0; x<80; x++)
     for (y=0; y<25; y++) {
       store[x][y][0] = screen[x][y][0];
@@ -270,7 +269,7 @@ void saveScreen() {
 
 #ifdef ASCII
 void restoreScreen() {
-  Int32 x,y;
+  int x,y;
   for (y=0; y<25; y++) {
     for (x=0; x<79; x++) {
       screen[x][y][0] = store[x][y][0];
@@ -296,7 +295,7 @@ void restoreScreen() {
   }
 #endif
 
-void draw(Int32 x1,Int32 y1,Int32 x2,Int32 y2,Int32 clr) {
+void draw(int x1,int y1,int x2,int y2,int clr) {
 #ifndef ASCII
   rcs_drawLine(display,window,colors[clr],x1,y1,x2,y2);
   rcs_drawLine(display,xscreen,colors[clr],x1,y1,x2,y2);
@@ -316,7 +315,7 @@ void graphmode() {
 #endif
   }
 
-void textmode(Int32 mode) {
+void textmode(int mode) {
 #ifdef ASCII
   clrscr();
 #else
@@ -329,18 +328,18 @@ void textmode(Int32 mode) {
 #endif
   }
 
-void textcolor(Int32 color) {
+void textcolor(int color) {
   text_color = color;
   }
 
-void gotoxy(Int32 x,Int32 y) {
+void gotoxy(int x,int y) {
   cursor_x = x - 1;
   cursor_y = y - 1;
   }
 
 void txt_write(char* buffer) {
 #ifdef ASCII
-  Int32 i;
+  int i;
   if (cursor_x < 0 || cursor_y < 0 || cursor_x > 79 || cursor_y > 24) return;
   position(cursor_x,cursor_y);
   gc_color(text_color);
@@ -359,8 +358,8 @@ void txt_write(char* buffer) {
   printf("%s",buffer);
   fflush(stdout);
 #else
-  Int32 i;
-  Int32 x,y;
+  int i;
+  int x,y;
   char b2[2];
   rcs_GC gc;
   rcs_GC black;
@@ -400,14 +399,14 @@ void txt_writeln(char* buffer) {
   if (cursor_y > 24) cursor_y = 24;
   }
 
-Int32 keypressed() {
+int keypressed() {
   if (strlen(currentMacro) > 0) return 1;
 #ifdef ASCII
 #ifdef MINGW
   if (kbhit()) return 1;
   return 0;
 #else
-  Int32           c;
+  int           c;
   fd_set         rfds;
   struct timeval tv;
   tv.tv_sec=0;
@@ -439,7 +438,7 @@ Int32 keypressed() {
 #endif
   }
 
-Int32 keytrans(Int32 n) {
+int keytrans(int n) {
 #ifdef ASCII
   return n;
 #else
@@ -473,62 +472,46 @@ Int32 keytrans(Int32 n) {
     case KEY_KP_7:return '7';
     case KEY_KP_8:return '8';
     case KEY_KP_9:return '9';
-    case  KEY_F1: return KY_F1;
-    case  KEY_F2: return KY_F2;
-    case  KEY_F3: return KY_F3;
-    case  KEY_F4: return KY_F4;
-    case  KEY_F5: return KY_F5;
-    case  KEY_F6: return KY_F6;
-    case  KEY_F7: return KY_F7;
-    case  KEY_F8: return KY_F8;
-    case  KEY_F9: return KY_F9;
-    case KEY_F10: return KY_F10;
-#ifndef MINGW
-    case KEY_F11: return KY_F11;
-    case KEY_F12: return KY_F12;
-#endif
-    case  KEY_SHIFT_F1: return KY_S_F1;
-    case  KEY_SHIFT_F2: return KY_S_F2;
-    case  KEY_SHIFT_F3: return KY_S_F3;
-    case  KEY_SHIFT_F4: return KY_S_F4;
-    case  KEY_SHIFT_F5: return KY_S_F5;
-    case  KEY_SHIFT_F6: return KY_S_F6;
-    case  KEY_SHIFT_F7: return KY_S_F7;
-    case  KEY_SHIFT_F8: return KY_S_F8;
-    case  KEY_SHIFT_F9: return KY_S_F9;
-    case KEY_SHIFT_F10: return KY_S_F10;
-#ifndef MINGW
-    case KEY_SHIFT_F11: return KY_S_F11;
-    case KEY_SHIFT_F12: return KY_S_F12;
-#endif
-    case  KEY_ALT_F1: return KY_A_F1;
-    case  KEY_ALT_F2: return KY_A_F2;
-    case  KEY_ALT_F3: return KY_A_F3;
-    case  KEY_ALT_F4: return KY_A_F4;
-    case  KEY_ALT_F5: return KY_A_F5;
-    case  KEY_ALT_F6: return KY_A_F6;
-    case  KEY_ALT_F7: return KY_A_F7;
-    case  KEY_ALT_F8: return KY_A_F8;
-    case  KEY_ALT_F9: return KY_A_F9;
-    case KEY_ALT_F10: return KY_A_F10;
-#ifndef MINGW
-    case KEY_ALT_F11: return KY_A_F11;
-    case KEY_ALT_F12: return KY_A_F12;
-#endif
-    case  KEY_CTRL_F1: return KY_C_F1;
-    case  KEY_CTRL_F2: return KY_C_F2;
-    case  KEY_CTRL_F3: return KY_C_F3;
-    case  KEY_CTRL_F4: return KY_C_F4;
-    case  KEY_CTRL_F5: return KY_C_F5;
-    case  KEY_CTRL_F6: return KY_C_F6;
-    case  KEY_CTRL_F7: return KY_C_F7;
-    case  KEY_CTRL_F8: return KY_C_F8;
-    case  KEY_CTRL_F9: return KY_C_F9;
-    case KEY_CTRL_F10: return KY_C_F10;
-#ifndef MINGW
-    case KEY_CTRL_F11: return KY_C_F11;
-    case KEY_CTRL_F12: return KY_C_F12;
-#endif
+    case  KEY_F1: return 161;
+    case  KEY_F2: return 162;
+    case  KEY_F3: return 163;
+    case  KEY_F4: return 164;
+    case  KEY_F5: return 165;
+    case  KEY_F6: return 166;
+    case  KEY_F7: return 167;
+    case  KEY_F8: return 168;
+    case  KEY_F9: return 169;
+    case KEY_F10: return 160;
+    case  KEY_SHIFT_F1: return 201;
+    case  KEY_SHIFT_F2: return 202;
+    case  KEY_SHIFT_F3: return 203;
+    case  KEY_SHIFT_F4: return 204;
+    case  KEY_SHIFT_F5: return 205;
+    case  KEY_SHIFT_F6: return 206;
+    case  KEY_SHIFT_F7: return 207;
+    case  KEY_SHIFT_F8: return 208;
+    case  KEY_SHIFT_F9: return 209;
+    case KEY_SHIFT_F10: return 210;
+    case  KEY_ALT_F1: return 211;
+    case  KEY_ALT_F2: return 212;
+    case  KEY_ALT_F3: return 213;
+    case  KEY_ALT_F4: return 214;
+    case  KEY_ALT_F5: return 215;
+    case  KEY_ALT_F6: return 216;
+    case  KEY_ALT_F7: return 217;
+    case  KEY_ALT_F8: return 218;
+    case  KEY_ALT_F9: return 219;
+    case KEY_ALT_F10: return 220;
+    case  KEY_CTRL_F1: return 221;
+    case  KEY_CTRL_F2: return 222;
+    case  KEY_CTRL_F3: return 223;
+    case  KEY_CTRL_F4: return 224;
+    case  KEY_CTRL_F5: return 225;
+    case  KEY_CTRL_F6: return 226;
+    case  KEY_CTRL_F7: return 227;
+    case  KEY_CTRL_F8: return 228;
+    case  KEY_CTRL_F9: return 229;
+    case KEY_CTRL_F10: return 230;
     }
       if (show_keys == 'Y') {
         sprintf(temp,"key=%d",n);
@@ -538,10 +521,10 @@ Int32 keytrans(Int32 n) {
 #endif
   }
 
-Int32 readkey() {
+int readkey() {
 #ifdef ASCII
 #ifdef MINGW
-  Int32           c;
+  int           c;
   char          temp[32];
   unsigned char          key;
   c = 0;
@@ -557,46 +540,46 @@ Int32 readkey() {
       if (key == 73) c = '9';
       if (key == 79) c = '1';
       if (key == 81) c = '3';
-      if (key == 59) c = KY_F1;     // F1
-      if (key == 60) c = KY_F2;     // F2
-      if (key == 61) c = KY_F3;     // F3
-      if (key == 62) c = KY_F4;     // F4
-      if (key == 63) c = KY_F5;     // F5
-      if (key == 64) c = KY_F6;     // F6
-      if (key == 65) c = KY_F7;     // F7
-      if (key == 66) c = KY_F8;     // F8
-      if (key == 67) c = KY_F9;     // F9
-      if (key == 68) c = KY_F10;     // F10
-      if (key == 84) c = KY_S_F1;     // Shift F1
-      if (key == 85) c = KY_S_F2;     // Shift F2
-      if (key == 86) c = KY_S_F3;     // Shift F3
-      if (key == 87) c = KY_S_F4;     // Shift F4
-      if (key == 88) c = KY_S_F5;     // Shift F5
-      if (key == 89) c = KY_S_F6;     // Shift F6
-      if (key == 90) c = KY_S_F7;     // Shift F7
-      if (key == 91) c = KY_S_F8;     // Shift F8
-      if (key == 92) c = KY_S_F9;     // Shift F9
-      if (key == 93) c = KY_S_F10;     // Shift F10
-      if (key == 94) c = KY_C_F1;     // Ctrl F1
-      if (key == 95) c = KY_C_F2;     // Ctrl F2
-      if (key == 96) c = KY_C_F3;     // Ctrl F3
-      if (key == 97) c = KY_C_F4;     // Ctrl F4
-      if (key == 98) c = KY_C_F5;     // Ctrl F5
-      if (key == 99) c = KY_C_F6;     // Ctrl F6
-      if (key == 100) c = KY_C_F7;     // Ctrl F7
-      if (key == 101) c = KY_C_F8;     // Ctrl F8
-      if (key == 102) c = KY_C_F9;     // Ctrl F9
-      if (key == 103) c = KY_C_F10;     // Ctrl F10
-      if (key == 104) c = KY_A_F1;     // Alt F1
-      if (key == 105) c = KY_A_F2;     // Alt F2
-      if (key == 106) c = KY_A_F3;     // Alt F3
-      if (key == 107) c = KY_A_F4;     // Alt F4
-      if (key == 108) c = KY_A_F5;     // Alt F5
-      if (key == 109) c = KY_A_F6;     // Alt F6
-      if (key == 110) c = KY_A_F7;     // Alt F7
-      if (key == 111) c = KY_A_F8;     // Alt F8
-      if (key == 112) c = KY_A_F9;     // Alt F9
-      if (key == 113) c = KY_A_F10;     // Alt F10
+      if (key == 59) c = 161;     // F1
+      if (key == 60) c = 162;     // F2
+      if (key == 61) c = 163;     // F3
+      if (key == 62) c = 164;     // F4
+      if (key == 63) c = 165;     // F5
+      if (key == 64) c = 166;     // F6
+      if (key == 65) c = 167;     // F7
+      if (key == 66) c = 168;     // F8
+      if (key == 67) c = 169;     // F9
+      if (key == 68) c = 160;     // F10
+      if (key == 84) c = 201;     // Shift F1
+      if (key == 85) c = 202;     // Shift F2
+      if (key == 86) c = 203;     // Shift F3
+      if (key == 87) c = 204;     // Shift F4
+      if (key == 88) c = 205;     // Shift F5
+      if (key == 89) c = 206;     // Shift F6
+      if (key == 90) c = 207;     // Shift F7
+      if (key == 91) c = 208;     // Shift F8
+      if (key == 92) c = 209;     // Shift F9
+      if (key == 93) c = 210;     // Shift F10
+      if (key == 94) c = 221;     // Ctrl F1
+      if (key == 95) c = 222;     // Ctrl F2
+      if (key == 96) c = 223;     // Ctrl F3
+      if (key == 97) c = 224;     // Ctrl F4
+      if (key == 98) c = 225;     // Ctrl F5
+      if (key == 99) c = 226;     // Ctrl F6
+      if (key == 100) c = 227;     // Ctrl F7
+      if (key == 101) c = 228;     // Ctrl F8
+      if (key == 102) c = 229;     // Ctrl F9
+      if (key == 103) c = 230;     // Ctrl F10
+      if (key == 104) c = 211;     // Alt F1
+      if (key == 105) c = 212;     // Alt F2
+      if (key == 106) c = 213;     // Alt F3
+      if (key == 107) c = 214;     // Alt F4
+      if (key == 108) c = 215;     // Alt F5
+      if (key == 109) c = 216;     // Alt F6
+      if (key == 110) c = 217;     // Alt F7
+      if (key == 111) c = 218;     // Alt F8
+      if (key == 112) c = 219;     // Alt F9
+      if (key == 113) c = 220;     // Alt F10
       if (show_keys == 'Y') {
         sprintf(temp,"key=%d",key);
         msg(temp,15);
@@ -606,7 +589,7 @@ Int32 readkey() {
   return c;
 #else                 // ifdef MINGW
   char temp[64];
-  Int32           c;
+  int           c;
   char          key;
   c = 0;
   while (c == 0) {
@@ -633,46 +616,46 @@ Int32 readkey() {
         if (strcmp(esc_seq,"[1~") == 0) c = '7';
         if (strcmp(esc_seq,"[5~") == 0) c = '9';
         if (strcmp(esc_seq,"[6~") == 0) c = '3';
-        if (strcmp(esc_seq,"OP") == 0) c = KY_F1;       /* F1 */
-        if (strcmp(esc_seq,"OQ") == 0) c = KY_F2;       /* F2 */
-        if (strcmp(esc_seq,"OR") == 0) c = KY_F3;       /* F3 */
-        if (strcmp(esc_seq,"OS") == 0) c = KY_F4;       /* F4 */
-        if (strcmp(esc_seq,"[15~") == 0) c = KY_F5;     /* F5 */
-        if (strcmp(esc_seq,"[17~") == 0) c = KY_F6;     /* F6 */
-        if (strcmp(esc_seq,"[18~") == 0) c = KY_F7;     /* F7 */
-        if (strcmp(esc_seq,"[19~") == 0) c = KY_F8;     /* F8 */
-        if (strcmp(esc_seq,"[20~") == 0) c = KY_F9;     /* F9 */
-        if (strcmp(esc_seq,"[21~") == 0) c = KY_F10;     /* F10 */
-        if (strcmp(esc_seq,"[1;2P") == 0) c = KY_S_F1;    /* Shift F1 */
-        if (strcmp(esc_seq,"[1;2Q") == 0) c = KY_S_F2;    /* Shift F2 */
-        if (strcmp(esc_seq,"[1;2R") == 0) c = KY_S_F3;    /* Shift F3 */
-        if (strcmp(esc_seq,"[1;2S") == 0) c = KY_S_F4;    /* Shift F4 */
-        if (strcmp(esc_seq,"[15;2~") == 0) c = KY_S_F5;   /* Shift F5 */
-        if (strcmp(esc_seq,"[17;2~") == 0) c = KY_S_F6;   /* Shift F6 */
-        if (strcmp(esc_seq,"[18;2~") == 0) c = KY_S_F7;   /* Shift F7 */
-        if (strcmp(esc_seq,"[19;2~") == 0) c = KY_S_F8;   /* Shift F8 */
-        if (strcmp(esc_seq,"[20;2~") == 0) c = KY_S_F9;   /* Shift F9 */
-        if (strcmp(esc_seq,"[21;2~") == 0) c = KY_S_F10;   /* Shift F10 */
-        if (strcmp(esc_seq,"[1;5P") == 0) c = KY_C_F1;    /* Ctrl F1 */
-        if (strcmp(esc_seq,"[1;5Q") == 0) c = KY_C_F2;    /* Ctrl F2 */
-        if (strcmp(esc_seq,"[1;5R") == 0) c = KY_C_F3;    /* Ctrl F3 */
-        if (strcmp(esc_seq,"[1;5S") == 0) c = KY_C_F4;    /* Ctrl F4 */
-        if (strcmp(esc_seq,"[15;5~") == 0) c = KY_C_F5;    /* Ctrl F5 */
-        if (strcmp(esc_seq,"[17;5~") == 0) c = KY_C_F6;    /* Ctrl F6 */
-        if (strcmp(esc_seq,"[18;5~") == 0) c = KY_C_F7;    /* Ctrl F7 */
-        if (strcmp(esc_seq,"[19;5~") == 0) c = KY_C_F8;    /* Ctrl F8 */
-        if (strcmp(esc_seq,"[20;5~") == 0) c = KY_C_F9;    /* Ctrl F9 */
-        if (strcmp(esc_seq,"[21;5~") == 0) c = KY_C_F10;    /* Ctrl F10 */
-        if (strcmp(esc_seq,"[1;3P") == 0) c = KY_A_F1;    /* Alt F1 */
-        if (strcmp(esc_seq,"[1;3Q") == 0) c = KY_A_F2;    /* Alt F2 */
-        if (strcmp(esc_seq,"[1;3R") == 0) c = KY_A_F3;    /* Alt F3 */
-        if (strcmp(esc_seq,"[1;3S") == 0) c = KY_A_F4;    /* Alt F4 */
-        if (strcmp(esc_seq,"[15;3~") == 0) c = KY_A_F5;    /* Alt F5 */
-        if (strcmp(esc_seq,"[17;3~") == 0) c = KY_A_F6;    /* Alt F6 */
-        if (strcmp(esc_seq,"[18;3~") == 0) c = KY_A_F7;    /* Alt F7 */
-        if (strcmp(esc_seq,"[19;3~") == 0) c = KY_A_F8;    /* Alt F8 */
-        if (strcmp(esc_seq,"[20;3~") == 0) c = KY_A_F9;    /* Alt F9 */
-        if (strcmp(esc_seq,"[21;3~") == 0) c = KY_A_F10;    /* Alt F10 */
+        if (strcmp(esc_seq,"OP") == 0) c = 161;       /* F1 */
+        if (strcmp(esc_seq,"OQ") == 0) c = 162;       /* F2 */
+        if (strcmp(esc_seq,"OR") == 0) c = 163;       /* F3 */
+        if (strcmp(esc_seq,"OS") == 0) c = 164;       /* F4 */
+        if (strcmp(esc_seq,"[15~") == 0) c = 165;     /* F5 */
+        if (strcmp(esc_seq,"[17~") == 0) c = 166;     /* F6 */
+        if (strcmp(esc_seq,"[18~") == 0) c = 167;     /* F7 */
+        if (strcmp(esc_seq,"[19~") == 0) c = 168;     /* F8 */
+        if (strcmp(esc_seq,"[20~") == 0) c = 169;     /* F9 */
+        if (strcmp(esc_seq,"[21~") == 0) c = 160;     /* F10 */
+        if (strcmp(esc_seq,"[1;2P") == 0) c = 201;    /* Shift F1 */
+        if (strcmp(esc_seq,"[1;2Q") == 0) c = 202;    /* Shift F2 */
+        if (strcmp(esc_seq,"[1;2R") == 0) c = 203;    /* Shift F3 */
+        if (strcmp(esc_seq,"[1;2S") == 0) c = 204;    /* Shift F4 */
+        if (strcmp(esc_seq,"[15;2~") == 0) c = 205;   /* Shift F5 */
+        if (strcmp(esc_seq,"[17;2~") == 0) c = 206;   /* Shift F6 */
+        if (strcmp(esc_seq,"[18;2~") == 0) c = 207;   /* Shift F7 */
+        if (strcmp(esc_seq,"[19;2~") == 0) c = 208;   /* Shift F8 */
+        if (strcmp(esc_seq,"[20;2~") == 0) c = 209;   /* Shift F9 */
+        if (strcmp(esc_seq,"[21;2~") == 0) c = 210;   /* Shift F10 */
+        if (strcmp(esc_seq,"[1;5P") == 0) c = 221;    /* Ctrl F1 */
+        if (strcmp(esc_seq,"[1;5Q") == 0) c = 222;    /* Ctrl F2 */
+        if (strcmp(esc_seq,"[1;5R") == 0) c = 223;    /* Ctrl F3 */
+        if (strcmp(esc_seq,"[1;5S") == 0) c = 224;    /* Ctrl F4 */
+        if (strcmp(esc_seq,"[15;5~") == 0) c = 225;    /* Ctrl F5 */
+        if (strcmp(esc_seq,"[17;5~") == 0) c = 226;    /* Ctrl F6 */
+        if (strcmp(esc_seq,"[18;5~") == 0) c = 227;    /* Ctrl F7 */
+        if (strcmp(esc_seq,"[19;5~") == 0) c = 228;    /* Ctrl F8 */
+        if (strcmp(esc_seq,"[20;5~") == 0) c = 229;    /* Ctrl F9 */
+        if (strcmp(esc_seq,"[21;5~") == 0) c = 230;    /* Ctrl F10 */
+        if (strcmp(esc_seq,"[1;3P") == 0) c = 211;    /* Alt F1 */
+        if (strcmp(esc_seq,"[1;3Q") == 0) c = 212;    /* Alt F2 */
+        if (strcmp(esc_seq,"[1;3R") == 0) c = 213;    /* Alt F3 */
+        if (strcmp(esc_seq,"[1;3S") == 0) c = 214;    /* Alt F4 */
+        if (strcmp(esc_seq,"[15;3~") == 0) c = 215;    /* Alt F5 */
+        if (strcmp(esc_seq,"[17;3~") == 0) c = 216;    /* Alt F6 */
+        if (strcmp(esc_seq,"[18;3~") == 0) c = 217;    /* Alt F7 */
+        if (strcmp(esc_seq,"[19;3~") == 0) c = 218;    /* Alt F8 */
+        if (strcmp(esc_seq,"[20;3~") == 0) c = 219;    /* Alt F9 */
+        if (strcmp(esc_seq,"[21;3~") == 0) c = 220;    /* Alt F10 */
         if (show_keys == 'Y') {
           sprintf(temp,"seq=%s",esc_seq);
           msg(temp,15);
@@ -718,7 +701,7 @@ Int32 readkey() {
 
 
 /*
-void putpixel(Int32 x,Int32 y,Int32 clr) {
+void putpixel(int x,int y,int clr) {
 #ifndef ASCII
   rcs_GC gc;
   gc = rcs_openGC(display,window);
@@ -752,7 +735,7 @@ void close_display() {
 #endif
   }
 
-void plot(Int32 x,Int32 y,Int32 clr) {
+void plot(int x,int y,int clr) {
 #ifndef ASCII
 //  gc_color(&gc,clr);
   rcs_drawPoint(display,window,colors[clr],x,y);
@@ -760,11 +743,11 @@ void plot(Int32 x,Int32 y,Int32 clr) {
 #endif
   }
 
-void setfillstyle(Int32 st,Int32 clr) {
+void setfillstyle(int st,int clr) {
   g_color = clr;
   }
 
-void bar(Int32 x1,Int32 y1,Int32 x2,Int32 y2) {
+void bar(int x1,int y1,int x2,int y2) {
 #ifndef ASCII
   rcs_GC gc;
   gc = rcs_openGC(display,window);
@@ -775,17 +758,17 @@ void bar(Int32 x1,Int32 y1,Int32 x2,Int32 y2) {
 #endif
   }
 
-void setcolor(Int32 clr) {
+void setcolor(int clr) {
   text_color = clr;
   g_color = clr;
   }
 
-void settextstyle(Int32 a,Int32 b,Int32 c) {
+void settextstyle(int a,int b,int c) {
   }
 
-void outtext_xy(Int32 x,Int32 y,char* buffer) {
+void outtext_xy(int x,int y,char* buffer) {
 #ifdef ASCII
-  Int32 oldX,oldY;
+  int oldX,oldY;
   x += 1;
   y += 1;
   oldX = cursor_x;
@@ -804,9 +787,9 @@ void outtext_xy(Int32 x,Int32 y,char* buffer) {
 #endif
   }
 
-void outtextxy(Int32 x,Int32 y,char* buffer) {
+void outtextxy(int x,int y,char* buffer) {
 #ifdef ASCII
-  Int32 oldX,oldY;
+  int oldX,oldY;
   oldX = cursor_x;
   oldY = cursor_y;
   gotoxy(x/8+1,y/10+1);
@@ -823,9 +806,9 @@ void outtextxy(Int32 x,Int32 y,char* buffer) {
 #endif
   }
 
-void outtextxyclr(Int32 x,Int32 y,char* buffer) {
+void outtextxyclr(int x,int y,char* buffer) {
 #ifdef ASCII
-  Int32 oldX,oldY;
+  int oldX,oldY;
   oldX = cursor_x;
   oldY = cursor_y;
   gotoxy(x/8+1,y/10+1);
@@ -842,9 +825,9 @@ void outtextxyclr(Int32 x,Int32 y,char* buffer) {
 #endif
   }
 
-void putimage(Int32 x,Int32 y,char** img,Int32 typ) {
+void putimage(int x,int y,char** img,int typ) {
 #ifdef ASCII
-  Int32 oldX,oldY,oldClr;
+  int oldX,oldY,oldClr;
   char buffer[10];
   oldX = cursor_x;
   oldY = cursor_y;
@@ -870,16 +853,16 @@ void putimage(Int32 x,Int32 y,char** img,Int32 typ) {
 #else
   rcs_GC gc;
   gc = rcs_openGC(display,window);
-  rcs_drawPixmap(display,window,gc,x,y,(const char**)img);
-  rcs_drawPixmap(display,xscreen,gc,x,y,(const char**)img);
+  rcs_drawPixmap(display,window,gc,x,y,img);
+  rcs_drawPixmap(display,xscreen,gc,x,y,img);
   rcs_closeGC(display,gc);
 #endif
   }
 
-void delay(Int32 tm) {
+void delay(int tm) {
   usleep(tm * 1000);
 /*
-  Int32 sec;
+  int sec;
   long te;
   long ts;
   struct timeval tim;
@@ -898,8 +881,8 @@ void delay(Int32 tm) {
   }
 
 /*
-void delay(Int32 tm) {
-  Int32 sec;
+void delay(int tm) {
+  int sec;
   struct timeval ts,te;
 debugLog("entering delay\n");
   sec = tm / 1000;
@@ -922,8 +905,8 @@ debugLog(debugMSG);
 debugLog("exiting delay\n");
   }
 */
-Int32 p_read(char* buffer) {
-  Int32 temp_x,temp_y;
+int p_read(char* buffer) {
+  int temp_x,temp_y;
   unsigned char key;
 /*  strcpy(buffer,""); */
   key = 0;
@@ -934,18 +917,16 @@ Int32 p_read(char* buffer) {
   txt_write("_");
   while (key != 13 && key != 27) {
     key = inkey();
-    if (key == KY_F1) strcpy(currentMacro, macros[0]);
-    if (key == KY_F2) strcpy(currentMacro, macros[1]);
-    if (key == KY_F3) strcpy(currentMacro, macros[2]);
-    if (key == KY_F4) strcpy(currentMacro, macros[3]);
-    if (key == KY_F5) strcpy(currentMacro, macros[4]);
-    if (key == KY_F6) strcpy(currentMacro, macros[5]);
-    if (key == KY_F7) strcpy(currentMacro, macros[6]);
-    if (key == KY_F8) strcpy(currentMacro, macros[7]);
-    if (key == KY_F9) strcpy(currentMacro, macros[8]);
-    if (key == KY_F10) strcpy(currentMacro, macros[9]);
-    if (key == KY_F11) strcpy(currentMacro, macros[10]);
-    if (key == KY_F12) strcpy(currentMacro, macros[11]);
+    if (key == 161) strcpy(currentMacro, macros[0]);
+    if (key == 162) strcpy(currentMacro, macros[1]);
+    if (key == 163) strcpy(currentMacro, macros[2]);
+    if (key == 164) strcpy(currentMacro, macros[3]);
+    if (key == 165) strcpy(currentMacro, macros[4]);
+    if (key == 166) strcpy(currentMacro, macros[5]);
+    if (key == 167) strcpy(currentMacro, macros[6]);
+    if (key == 168) strcpy(currentMacro, macros[7]);
+    if (key == 169) strcpy(currentMacro, macros[8]);
+    if (key == 160) strcpy(currentMacro, macros[9]);
     if (key > 31 && key < 127) {
       buffer[strlen(buffer) + 1] = 0;
       buffer[strlen(buffer)] = key;
@@ -978,7 +959,7 @@ void readln(char* buffer) {
   */
   }
 
-Int32 restoreTerm() {
+int restoreTerm() {
 #ifdef ASCII
 #ifdef MINGW
   show_cursor();

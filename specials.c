@@ -11,12 +11,12 @@
 
 #include "header.h"
 
-Int32 gacha[2500];
-Int32 num_gacha;
+int gacha[2500];
+int num_gacha;
 
 void display_scroll() {
 #ifdef ASCII
-  Int32 i;
+  int i;
   gotoxy(12,5); textcolor(14);
   txt_write("+------+                                      +------+");
   gotoxy(12,6); textcolor(14);
@@ -66,11 +66,11 @@ void display_scroll() {
 #endif
   }
 
-void display_msg(Int32 msg,char ext) {
-  Int32 i;
-  Int32 x,y;
-//  Int32 space;
-  Int32 size;
+void display_msg(int msg,char ext) {
+  int i;
+  int x,y;
+//  int space;
+  int size;
   char last;
   MESSAGE general;
   general = (ext == 'L') ? lore[msg] : gen[msg];
@@ -101,7 +101,7 @@ void display_msg(Int32 msg,char ext) {
   }
 
 void special1() {
-  Int32 x,y;
+  int x,y;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)
       if (player.map[x][y] < 0) show_sprite(x-player.map_x,y-player.map_y,37);
@@ -110,8 +110,8 @@ void special1() {
   }
 
 void special2() {
-  Int32 x,y;
-  Int32 sx,sy,ex,ey;
+  int x,y;
+  int sx,sy,ex,ey;
   sx = player.x - 20;
   sy = player.y - 20;
   ex = player.x + 20;
@@ -127,23 +127,22 @@ void special2() {
         show_spot(x,y);
       }
   add_skill(SK_ORACLE,1);
-  show_screen();
   }
 
 void special3() {
-  Int32 i;
+  int i;
   i = player.diff * 5 + get_skill(8) * 5;
   player.effect[PE_HASTE] += u_random(i + i + 1) + 25;
   }
 
 void special4() {
-  Int32 i;
+  int i;
   i = player.diff * 5 + get_skill(8) * 5;
   player.effect[PE_GIANT] += u_random(i + i + 1) + 25;
   }
 
 void special5() {
-  Int32 i;
+  int i;
   i = player.diff * 3 + get_skill(8) * 3;
   player.effect[PE_ETHER] += u_random(i) + 10;
   if (player.effect[PE_ETHER] > 100) player.effect[PE_ETHER] = 100;
@@ -167,7 +166,7 @@ void special7() {
   }
 
 void special8() {
-  Int32 x,y;
+  int x,y;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)
         if (player.map[x][y] >=24 && player.map[x][y] <=25) {
@@ -179,7 +178,7 @@ void special8() {
   }
 
 void special9() {
-  Int32 x,y;
+  int x,y;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)
       if (player.map[x][y] < 0) {
@@ -191,10 +190,10 @@ void special9() {
   }
 
 void special10() {
-  Int32 i;
-//  Int32 x,y;
-//  Int32 space;
-//  Int32 size;
+  int i;
+//  int x,y;
+//  int space;
+//  int size;
   MESSAGE general;
   i = u_random(NO_OF_LORE) + 1;
   general = lore[i];
@@ -249,10 +248,10 @@ void special10() {
   }
 
 void special11() {
-  Int32 i;
-//  Int32 x,y;
-//  Int32 space;
-//  Int32 size;
+  int i;
+//  int x,y;
+//  int space;
+//  int size;
   MESSAGE general;
   i = u_random(NO_OF_GENS) + 1;
   general = gen[i];
@@ -310,7 +309,7 @@ void special12() {
   i = inventory(NULL);
   if (i != NULL) {
     if (i->control2 == E_MUTA) mutable_set_name(i);
-    i->flags |= OF_IDENT;
+    i->level = -1;
     stats.counts[STAT_ITEMS_IDENTED]++;
     gotoxy(25,inv_item+3);
     txt_write(get_name(i));
@@ -325,14 +324,14 @@ void special12() {
   }
 
 void special13() {
-  Int32 i;
+  int i;
   i = player.diff * 5 + get_skill(8) * 5;
   player.effect[PE_PROT] += u_random(i+i+1) + 25;
   player.effect[PE_APROT] = 10;
   }
 
 void special14() {
-  Int32 x,y;
+  int x,y;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)
       if (player.known[x][y] == 0) player.known[x][y] = 1;
@@ -367,10 +366,10 @@ void special19() {
   }
 
 void special20() {
-  Int32 i;
-//  Int32 x,y;
-//  Int32 space;
-//  Int32 size;
+  int i;
+//  int x,y;
+//  int space;
+//  int size;
   MESSAGE general;
   i = u_random(NO_OF_GENS) + 1;
   general = gen[i];
@@ -397,7 +396,7 @@ void special21() {
   }
 
 void special22() {
-  Int32 x,y;
+  int x,y;
   for (x=player.map_x; x<=player.map_x+15; x++)
     for (y=player.map_y; y<=player.map_y+15; y++)
       if (player.known[x][y] == 0) {
@@ -411,9 +410,9 @@ void special22() {
 
 void special23() {
   char mflag;
-  Int32  x,y;
-  Int32  xdir,ydir;
-  Int32  mon;
+  int  x,y;
+  int  xdir,ydir;
+  int  mon;
   get_dir(&xdir,&ydir);
   mflag = ' ';
   x = player.x;
@@ -451,48 +450,25 @@ void special26() {
   player.effect[PE_LIGHT] = -1;
   }
 
-void special27(Int32 level) {
-  Int32 slot;
-  Int32  x,y;
+void special27(int level) {
+  int slot;
+  int  i;
   char buffer[80];
   slot = 0;
-  if (player.party[slot].hp != 0) {
-    if (in_arena == 'Y') {
-      for (y=1; y<100; y++)
-        for (x=1; x<100; x++)
-          if (player.map[x][y] == 300) {
-            player.map[x][y] = player.party[slot].prev;
-            show_spot(x,y);
-            }
-      }
-    else {
-      x = player.party[slot].treasure & 0xff;
-      y = (player.party[slot].treasure >> 8) & 0xff;
-      player.map[x][y] = player.party[slot].prev;
-      show_spot(x,y);
-      }
-    }
-  player.party[slot] = monsters[u_random(NO_OF_MONSTERS)];
-  while (player.party[slot].level > level ||
-         player.party[slot].level < (level - 4)) {
+  for (i=1; i<=5; i++)
+    if (slot == 0 && player.party[i].hp == 0) slot = i;
+  if (slot != 0) {
     player.party[slot] = monsters[u_random(NO_OF_MONSTERS)];
-    }
-  player.party[slot].hp = u_random(player.party[slot].hp) + 1;
-  player.party[slot].time = (player.level * 10) + (get_skill(SK_MAGIC) * 25);
-  player.party[slot].exp = needed(player.party[slot].level) * 10;
-  clear_prompt();
-  if (find_empty(player.x,player.y,10,dungeon_floor,&x,&y)) {
-    player.party[slot].prev = player.map[x][y];
-    player.map[x][y] = 300 + slot;
-    show_spot(x,y);
-    player.party[slot].treasure = (y << 8) | x;
-    if (in_arena == 'Y') player.party[slot].treasure = 0;
+    while (player.party[slot].level > level ||
+           player.party[slot].level < (level - 4)) {
+      player.party[slot] = monsters[u_random(NO_OF_MONSTERS)];
+      }
+    player.party[slot].hp = u_random(player.party[slot].hp) + 1;
+    player.party[slot].time = (player.level * 10) + (get_skill(SK_MAGIC) * 25);
+    player.party[slot].exp = needed(player.party[slot].level) * 10;
+    clear_prompt();
     sprintf(buffer,"Called a %s",player.party[slot].name);
     prompt(buffer);
-    }
-  else {
-    msg("Fizzle", 12);
-    player.party[slot].hp = 0;
     }
   }
 
@@ -501,15 +477,15 @@ void special28() {
   }
 
 void special29() {
-  Int32 x,y;
+  int x,y;
   for (x=player.x-1; x<=player.x+1; x++)
     for (y=player.y-1; y<=player.y+1; y++)
       if (player.map[x][y] == 41) player.map[x][y] = currentFloor;
   }
 
 void special30() {
-  Int32 x,y;
-  Int32 xdir,ydir;
+  int x,y;
+  int xdir,ydir;
   get_dir(&xdir,&ydir);
   x = player.x + xdir;
   y = player.y + ydir;
@@ -524,9 +500,9 @@ void special30() {
     }
   }
 
-void special31(Int32 max) {
-  Int32 i;
-  Int32 n;
+void special31(int max) {
+  int i;
+  int n;
   clear_prompt();
   n = u_random(25);
   while (n > max) n = u_random(25);
@@ -566,9 +542,9 @@ void special31(Int32 max) {
   }
 
 void special34() {
-  Int32 x,y;
-  Int32 xdir,ydir;
-  Int32 mon;
+  int x,y;
+  int xdir,ydir;
+  int mon;
   get_dir(&xdir,&ydir);
   x = player.x + xdir;
   y = player.y + ydir;
@@ -588,7 +564,7 @@ void special36() {
   }
 
 void special37() {
-  Int32 x,y;
+  int x,y;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)
      if (player.map[x][y] >= 800 && player.map[x][y] < 900) {
@@ -615,65 +591,50 @@ void special40() {
   }
 
 void special41() {
-  Int32 x,y,i;
-  Int32 count;
+  int x,y,i;
+  int count;
   count = 2 + (get_skill(SK_MAGIC) / 10);
-  for (i=1; i<=count; i++) {
-    if (find_empty(player.x,player.y,10,dungeon_floor,&x,&y)) {
+  if (in_arena == 'Y')
+    for (i=1; i<=count; i++) {
+      x = u_random(15) + offset_x;
+      y = u_random(15) + offset_y;
+      while (player.map[x][y] > 30) {
+        x = u_random(15) + offset_x;
+        y = u_random(15) + offset_y;
+        }
       player.map[x][y] = 143;
       show_spot(x,y);
       snakes++;
       }
-    }
   }
 
-void special42(Int32 mon) {
-  Int32 slot;
-  Int32 x,y;
-  mon = get_linked_monster(mon);
-  if (mon < 0) {
-    msg("Fizzle", 12);
-    return;
-    }
+void special42(int mon) {
+  int slot;
+  int x,y;
+  int  i;
   slot = 0;
-  if (player.party[slot].hp != 0) {
+  for (i=1; i<=5; i++)
+    if (slot == 0 && player.party[i].hp == 0) slot = i;
+  if (slot != 0) {
+    player.party[slot] = monsters[mon];
+    player.party[slot].hp = u_random(player.party[slot].hp) + 1;
+    player.party[slot].time = (player.level * 10) + (get_skill(SK_MAGIC) * 25);
+    player.party[slot].exp = needed(player.party[slot].level) * 10;
+    clear_prompt();
     if (in_arena == 'Y') {
-      for (y=1; y<100; y++)
-        for (x=1; x<100; x++)
-          if (player.map[x][y] == 300) {
-            player.map[x][y] = player.party[slot].prev;
-            show_spot(x,y);
-            }
-      }
-    else {
-      x = player.party[slot].treasure & 0xff;
-      y = (player.party[slot].treasure >> 8) & 0xff;
-      player.map[x][y] = player.party[slot].prev;
+      x = 11 + u_random(14); y = 11 + u_random(14);
+      while (player.map[x][y] < 0 || player.map[x][y] > 200) {
+        x = 11 + u_random(14); y = 11 + u_random(14);
+        }
+      player.map[x][y] = 300 + slot;
       show_spot(x,y);
       }
     }
-  player.party[slot] = monsters[mon];
-  player.party[slot].hp = u_random(player.party[slot].hp) + 1;
-  player.party[slot].time = (player.level * 10) + (get_skill(SK_MAGIC) * 25);
-  player.party[slot].exp = needed(player.party[slot].level) * 10;
-  clear_prompt();
-  if (find_empty(player.x,player.y,10,dungeon_floor,&x,&y)) {
-    player.party[slot].prev = player.map[x][y];
-    player.map[x][y] = 300 + slot;
-    show_spot(x,y);
-    player.party[slot].treasure = (y << 8) | x;
-    if (in_arena == 'Y') player.party[slot].treasure = 0;
-    }
-  else {
-    msg("Fizzle", 12);
-    player.party[slot].hp = 0;
-    }
- 
   }
 
 void special43() {
-  Int32 l;
-  Int32 x,y;
+  int l;
+  int x,y;
   special37();
   for (l=0; l<10; l++) 
     for (x=1; x<=100; x++)
@@ -748,7 +709,7 @@ void special49() {
   char flag;
   char key;
   char search[33];
-  Int32  msg;
+  int  msg;
   flag = ' ';
   while (flag == ' ') {
     textmode(3);
@@ -817,10 +778,10 @@ void special50() {
   }
 
 void special51() {
-  Int32 i;
-  Int32 x,y;
-//  Int32 space;
-  Int32 size;
+  int i;
+  int x,y;
+//  int space;
+  int size;
   char last;
   MESSAGE general;
   i = u_random(NO_OF_LORE) + 1;
@@ -857,31 +818,30 @@ void special51() {
   }
 
 void special52() {
-  Int32 i;
-  Int32 x,y;
-//  Int32 m_file;
+  int i;
+  int x,y;
+  int m_file;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)
       player.known[x][y] = 1;
-//#ifdef MINGW
-//  m_file = open("temp01.$$$",O_WRONLY | O_BINARY);
-//#else
-//  m_file = open("temp01.$$$",O_WRONLY);
-//#endif
-//  if (m_file < 0) {
-//    printf("Fatal Error: Could not open temp file\n");
-//    exit(1);
-//    }
-  for (i = 0; i<NO_OF_MAPS; i++) {
-//    lseek(m_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
-//    write(m_file,player.known,sizeof(KNOW_TYPE));
-    memcpy(&(known_maps[i]), &(player.known), sizeof(KNOW_TYPE));
+#ifdef MINGW
+  m_file = open("temp01.$$$",O_WRONLY | O_BINARY);
+#else
+  m_file = open("temp01.$$$",O_WRONLY);
+#endif
+  if (m_file < 0) {
+    printf("Fatal Error: Could not open temp file\n");
+    exit(1);
     }
-//  close(m_file);
+  for (i = 0; i<NO_OF_MAPS; i++) {
+    lseek(m_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
+    write(m_file,player.known,sizeof(KNOW_TYPE));
+    }
+  close(m_file);
   }
 
 void special53() {
-  Int32 i;
+  int i;
   for (i=1; i<=NO_OF_GENS; i++) player.gen[i] = -1;
   for (i=1; i<=NO_OF_LORE; i++) player.lore[i] = -1;
   msg("You feel enlightened",15);
@@ -930,7 +890,7 @@ void special59() {
   }
 
 void special60(OBJECT_REC* item) {
-  Int32 amt;
+  int amt;
   if (has_intrinsic(A_NOSL) == 0) {
     if (item == NULL) {
       amt =  player.diff + (player.d_level / 3);
@@ -944,7 +904,7 @@ void special60(OBJECT_REC* item) {
   }
 
 void special61(OBJECT_REC* item) {
-  Int32 amt;
+  int amt;
   if (has_intrinsic(A_NOFR) == 0) {
     if (item == NULL) {
       amt =  player.diff + (player.d_level / 3);
@@ -959,7 +919,7 @@ void special61(OBJECT_REC* item) {
   }
 
 void special62(OBJECT_REC* item) {
-  Int32 amt;
+  int amt;
   if (item == NULL) {
     amt =  u_random((player.diff * 5) + (player.d_level / 3));
     } else {
@@ -970,7 +930,7 @@ void special62(OBJECT_REC* item) {
   }
 
 void special63(OBJECT_REC* item) {
-  Int32 amt;
+  int amt;
   if (item == NULL) {
     amt =  u_random((player.diff * 5) + (player.d_level / 3));
     } else {
@@ -1055,7 +1015,7 @@ void special72() {
   }
 
 void special73() {
-  Int32 i;
+  int i;
   OBJECT_REC* o;
   o = inventory(NULL);
   if (o != NULL) {
@@ -1072,7 +1032,7 @@ void special73() {
   }
 
 void special74() {
-  Int32 i;
+  int i;
   for (i=1; i<=19; i++)
     if (player.invent[i].otype != O_NONE &&
         player.invent[i].plus < 0) player.invent[i].plus = 0;
@@ -1088,7 +1048,7 @@ void special75() {
   }
 
 void special76() {
-  Int32 i;
+  int i;
   i = player.diff * 5 + get_skill(8) * 5;
   player.effect[PE_LEV] += u_random(i + i + 1) + 25;
   }
@@ -1112,7 +1072,7 @@ void special78() {
   }
 
 void special79() {
-  Int32 i;
+  int i;
   char buffer[1000];
   i = u_random(recipe_count);
   recipe_string(i,buffer);
@@ -1213,8 +1173,8 @@ void special82() {
   }
 
 void special83() {
-  Int32 i;
-  Int32 o;
+  int i;
+  int o;
   OBJECT_REC item;
   OBJECT_REC* pItem;
   o = -1;
@@ -1231,8 +1191,8 @@ void special83() {
   }
 
 void special84() {
-  Int32 i;
-  Int32 o;
+  int i;
+  int o;
   OBJECT_REC item;
   OBJECT_REC* pItem;
   o = -1;
@@ -1250,7 +1210,7 @@ void special84() {
 
 void special85() {
   OBJECT_REC item;
-  Int32 j;
+  int j;
   j = u_random(NO_OF_OBJECTS) + 1;
   while ( objects[j].level == 0 ||
           objects[j].control2 < 0 ||
@@ -1259,7 +1219,7 @@ void special85() {
      j = u_random(NO_OF_OBJECTS) + 1;
      }
   item = objects[j];
-  item.flags |= OF_IDENT;
+  item.level = -1;
   inventory(&item);
   show_screen();
   }
@@ -1273,7 +1233,7 @@ void special87() {
   }
 
 void special88() {
-  Int32 i;
+  int i;
   char buffer[20];
   i = get_skill(SK_HEAL);
   if (i < 1) i = 1;
@@ -1286,8 +1246,8 @@ void special88() {
   msg(buffer,15);
   }
 
-void special89(Int32 control) {
-  Int32 i;
+void special89(int control) {
+  int i;
   char buffer[64];
   i = 0;
   if (player.effect[PE_POLYTIME] > 0) {
@@ -1309,9 +1269,9 @@ void special89(Int32 control) {
   msg("Fizzle...",15);
   }
 
-void special90(Int32 mtype) {
-  Int32 x,y;
-  Int32 r;
+void special90(int mtype) {
+  int x,y;
+  int r;
   NPC_REC* monster;
   r = 1;
   r += (get_skill(SK_MAGIC) / 15);
@@ -1320,14 +1280,13 @@ void special90(Int32 mtype) {
       monster = get_monster(x,y);
       if (monster != NULL && (mtype == 0 || monster->mtype == mtype)) {
         monster->special2 |= M2_PACIFIED;
-        msg("Pacified", 15);
         }
       }
   }
 
-void special91(Int32 range) {
-  Int32 x,y;
-  Int32 lx,ly;
+void special91(int range) {
+  int x,y;
+  int lx,ly;
   target(100,1,-1);
   x = target_x;
   y = target_y;
@@ -1352,7 +1311,7 @@ void special94() {
   player.effect[PE_ARCN] += u_random(player.diff * 5 + player.d_level / 3);
   }
 
-void special95(Int32 amount) {
+void special95(int amount) {
   player.mhp += amount;
   player.chp += amount;
   }
@@ -1389,11 +1348,11 @@ void special98() {               /* orb */
     prompt("The Triad is Incomplete");
   }
 
-void attempt_move(Int32 x,Int32 y,Int32 xdir,Int32 ydir) {
-  Int32 i;
-  Int32 can_move;
-  Int32 mx[2];
-  Int32 my[2];
+void attempt_move(int x,int y,int xdir,int ydir) {
+  int i;
+  int can_move;
+  int mx[2];
+  int my[2];
   can_move = 0;
   if (player.map[x][y] < 0) can_move = -1;
   if (player.map[x][y] >= 1000) can_move = -1;
@@ -1434,8 +1393,8 @@ msg("Move base",15);
   }
 
 void special99() {
-  Int32 x,y;
-  Int32 str;
+  int x,y;
+  int str;
   str = (player.level * 4);
   if (str > 90) str = 90;
   for (y=player.y-1; y<=player.y+1; y++)
@@ -1449,9 +1408,9 @@ void special99() {
   }
 
 void special100() {
-  Int32 cores;
-  Int32 shards;
-  Int32 i;
+  int cores;
+  int shards;
+  int i;
   OBJECT_REC item;
   OBJECT_REC* pItem;
   cores = 0;
@@ -1490,7 +1449,7 @@ void special100() {
   pItem = find_linked_item(ITEM_SUNSTONE);
   if (pItem != NULL) {
     item = *pItem;
-    item.flags |= OF_IDENT;
+    item.level = -1;
     inventory(&item);
     }
   show_screen();
@@ -1517,8 +1476,8 @@ void special101() {
   }
 
 void special102() {
-  Int32  x,y;
-  Int32  xdir,ydir;
+  int  x,y;
+  int  xdir,ydir;
   if (player.in_city != 'N') return;
   if (player.gateway == '*') return;
   get_dir(&xdir,&ydir);
@@ -1532,12 +1491,12 @@ void special102() {
   }
 
 void generic_gacha() {
-  Int32 i;
-  Int32 flag;
+  int i;
+  int flag;
   i = 0;
   while (objects[i].link != 999) {
     flag = -1;
-    if ((objects[i].flags & OF_NO_GACHA) != 0) flag = 0;
+    if ((objects[i].align & 0x20000000) != 0) flag = 0;
     if (objects[i].otype == O_JEWL) flag = 0;
     if (objects[i].effect == E_SPCL &&
         objects[i].control >= 89000 &&
@@ -1550,7 +1509,7 @@ void generic_gacha() {
   }
 
 void jewel_gacha() {
-  Int32 i;
+  int i;
   i = 0;
   while (objects[i].link != 999) {
     if (objects[i].otype == O_JEWL) {
@@ -1561,7 +1520,7 @@ void jewel_gacha() {
   }
 
 void figurine_gacha() {
-  Int32 i;
+  int i;
   i = 0;
   while (objects[i].link != 999) {
     if (objects[i].effect == E_SPCL &&
@@ -1574,7 +1533,7 @@ void figurine_gacha() {
   }
 
 void card_gacha() {
-  Int32 i;
+  int i;
   i = 0;
   while (objects[i].link != 999) {
     if (objects[i].otype == O_CARD) {
@@ -1584,10 +1543,10 @@ void card_gacha() {
     }
   }
 
-void special103(Int32 whichone) {
-  Int32 i;
+void special103(int whichone) {
+  int i;
   OBJECT_REC item;
-  Int32 flag;
+  int flag;
   num_gacha = 0;
   switch (whichone) {
     case 1:generic_gacha(); break;
@@ -1602,15 +1561,15 @@ void special103(Int32 whichone) {
     if (u_random(10000) <= objects[gacha[i]].rarity) flag = -1;
     }
   item = objects[gacha[i]];
-  item.flags |= OF_IDENT;
+  if (item.level > 0) item.level = -item.level; else item.level = -1;
   inventory(&item);
   show_screen();
   }
 
 /* armor deck */
 void special104() {
-  Int32 p;
-  Int32 i;
+  int p;
+  int i;
   OBJECT_REC item;
   i = 0;
   p = -1;
@@ -1624,7 +1583,8 @@ void special104() {
     }
   if (p > 0) {
     item = objects[p];
-    item.flags |= OF_IDENT;
+    if (item.level > 0) item.level = -item.level;
+    if (item.level == 0) item.level = -1;
     inventory(&item);
     show_screen();
     }
@@ -1632,7 +1592,7 @@ void special104() {
 
 /* item deck */
 void special105() {
-  Int32 i;
+  int i;
   char flag;
   OBJECT_REC item;
   flag = ' ';
@@ -1650,15 +1610,16 @@ void special105() {
     if (objects[i].control2 < 0) flag = ' ';
     }
   item = objects[i];
-  item.flags |= OF_IDENT;
+  if (item.level > 0) item.level = -item.level;
+  if (item.level == 0) item.level = -1;
   inventory(&item);
   show_screen();
   }
 
 /* weapon deck */
 void special106() {
-  Int32 p;
-  Int32 i;
+  int p;
+  int i;
   OBJECT_REC item;
   i = 0;
   p = -1;
@@ -1672,7 +1633,8 @@ void special106() {
     }
   if (p > 0) {
     item = objects[p];
-    item.flags |= OF_IDENT;
+    if (item.level > 0) item.level = -item.level;
+    if (item.level == 0) item.level = -1;
     inventory(&item);
     show_screen();
     }
@@ -1680,7 +1642,7 @@ void special106() {
 
 /* class deck */
 void special107() {
-  Int32 i;
+  int i;
   for (i=0; i<5; i++) {
     if (player.level < 95) {
       player.exp = player.exp_next;
@@ -1699,7 +1661,7 @@ void showCard(char* title,char* message) {
   msg(message,14);
   }
 
-void socketItem(OBJECT_REC* item,Int32 dir) {
+void socketItem(OBJECT_REC* item,int dir) {
   if (dir > 0) {
     if (item->num_sockets == 3) return;
     item->num_sockets++;
@@ -1714,10 +1676,10 @@ void socketItem(OBJECT_REC* item,Int32 dir) {
 
 /* deck of many things */
 void special109(OBJECT_REC* item) {
-  Int32 i;
-  Int32 j;
-  Int32 max;
-  Int32 card;
+  int i;
+  int j;
+  int max;
+  int card;
   if (item == NULL) return;
   if (item->control2 == 0) return;
   card = u_random(30);
@@ -1945,7 +1907,7 @@ void special109(OBJECT_REC* item) {
   }
 
 void special110(OBJECT_REC* item) {
-  Int32 i;
+  int i;
   char buffer[1000];
   if (item == NULL) return;
   i = item->control2;
@@ -1956,28 +1918,11 @@ void special110(OBJECT_REC* item) {
   player.lore[RECIPE_BASE+i] = 1;
   inkey();
   restoreScreen();
+
   }
 
-void special111() {
-  mech_merchant();
-  graphmode();
-  show_map();
-  show_sm_map();
-  show_side();
-  show_player();
-  }
-
-void special112() {
-  hole_inventory();
-  graphmode();
-  show_map();
-  show_sm_map();
-  show_side();
-  show_player();
-  }
-
-void special(Int32 whichone,OBJECT_REC* item) {
-  Int32 control;
+void special(int whichone,OBJECT_REC* item) {
+  int control;
   control = 0;
   if (whichone > 1000) {
     control = whichone % 1000;
@@ -2022,7 +1967,7 @@ void special(Int32 whichone,OBJECT_REC* item) {
     case 38:special38(); break;
     case 39:special42(78); break;
     case 40:special40(); break;
-    case 41:special41(); break;
+    case 41: if (in_arena == 'Y') special41(); break;
     case 42:special42(1); break;
     case 43: if (in_arena != 'Y') special43(); break;
     case 44:special42(11); break;
@@ -2092,13 +2037,11 @@ void special(Int32 whichone,OBJECT_REC* item) {
     case 108:special108(); break;
     case 109:special109(item); break;
     case 110:special110(item); break;
-    case 111:special111(); break;
-    case 112:special112(); break;
     }
   }
 
 void socket_item(OBJECT_REC* obj) {
-  Int32 slot;
+  int slot;
   OBJECT_REC* item;
   item = inventory(NULL);
   slot = -1;
@@ -2115,7 +2058,7 @@ void socket_item(OBJECT_REC* obj) {
     }
   }
 
-void enchant(Int32 ench,Int32 limit) {
+void enchant(int ench,int limit) {
   OBJECT_REC* i;
   char success;
   success = ' ';
@@ -2152,11 +2095,11 @@ void enchant(Int32 ench,Int32 limit) {
   }
 
 void perform_effect(OBJECT_REC* obj) {
-  Int32 i;
-  Int32 d;
+  int i;
+  int d;
   char buffer[40];
   OBJECT_REC* item;
-  Int32 amt;
+  int amt;
   i = 0;
   while (trophies[i].criteria_type < 999) {
     if (trophies[i].criteria_type == TC_TYPE) {
@@ -2233,7 +2176,6 @@ void perform_effect(OBJECT_REC* obj) {
   if (obj->effect == E_SLEP) do_sleep();
   if (obj->effect == E_TELE) teleport();
   if (obj->effect == E_SPCL) special(obj->control,obj);
-  if (obj->effect == E_SUMN) special42(obj->control);
   if (obj->effect == E_POSN) {
     amt = u_random(player.diff*5+player.d_level /3);
     if (has_intrinsic(A_NOPS)) amt = 0;
@@ -2284,7 +2226,6 @@ void perform_effect(OBJECT_REC* obj) {
       case 12:drain(spells[obj->control].control,spells[obj->control].special); break;
       case 13:area49(spells[obj->control].control,spells[obj->control].special,player.x,player.y); break;
       case 14:super(spells[obj->control].control,spells[obj->control].special); break;
-      case 26:special42(spells[obj->control].control); break;
       case SP_ENCH:
            if (player.level < 15) enchant(spells[obj->control].control,1);
            else if (player.level < 20) enchant(spells[obj->control].control,2);
@@ -2295,8 +2236,8 @@ void perform_effect(OBJECT_REC* obj) {
     }
   }
 
-Int32 triad_equipped() {
-  Int32 count;
+int triad_equipped() {
+  int count;
   count = 0;
   if (player.invent[I_LHND].effect == E_SPCL && player.invent[I_LHND].control >= 96 && player.invent[I_LHND].control <= 98)  {
     if (is_weapon(&(player.invent[I_LHND]))) count++;
@@ -2324,7 +2265,7 @@ Int32 triad_equipped() {
   return (count >= 3) ? -1 : 0;
   }
 
-Int32 fighting_final_boss(NPC_REC* mon) {
+int fighting_final_boss(NPC_REC* mon) {
   if (strcmp(mon->name,FINAL_BOSS) == 0) return -1;
   return 0;
   }

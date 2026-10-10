@@ -10,11 +10,11 @@
 
 #include "header.h"
 
-void missile9(Int32 damage,Int32 elem) {
-  Int32  x,y;
-  Int32  x1,y1;
-  Int32  mon;
-  Int32  i;
+void missile9(int damage,int elem) {
+  int  x,y;
+  int  x1,y1;
+  int  mon;
+  int  i;
   target(80,0,-1);
   x = target_x;
   y = target_y;

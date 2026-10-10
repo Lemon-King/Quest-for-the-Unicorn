@@ -12,10 +12,10 @@
 
 void blind() {
   char mflag;
-  Int32  x,y;
-  Int32  xdir,ydir;
-  Int32  mon;
-  Int32  i;
+  int  x,y;
+  int  xdir,ydir;
+  int  mon;
+  int  i;
   get_dir(&xdir,&ydir);
   x = player.x;
   y = player.y;

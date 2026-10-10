@@ -11,14 +11,13 @@
 #include "header.h"
 
 char inkey() {
-  Int32 i;
   char key;
   if (strlen(currentMacro) > 0) {
     key = currentMacro[0];
-    for (i=0; i<=strlen(currentMacro); i++) currentMacro[i] = currentMacro[i+1];
+    strcpy(currentMacro, currentMacro+1);
     if (key == '$' && strlen(currentMacro) > 0) {
       key = currentMacro[0];
-      for (i=0; i<=strlen(currentMacro); i++) currentMacro[i] = currentMacro[i+1];
+      strcpy(currentMacro, currentMacro+1);
       if (key == 'E') return 13;
       if (key == 'e') return 27;
       }

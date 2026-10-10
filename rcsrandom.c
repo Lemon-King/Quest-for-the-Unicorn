@@ -11,12 +11,12 @@
 #include "header.h"
 #include <sys/types.h>
 
-UInt32 taps;
-UInt32 reg;
+u_int32_t taps;
+u_int32_t reg;
 
-void Shift(Int32 count) {
-  Int32 i;
-  UInt32 tmp;
+void Shift(int count) {
+  int i;
+  u_int32_t tmp;
   for (i = 0; i < count; i++) {
     tmp = (reg & taps);
     tmp = (tmp & 0xffff) ^ ((tmp >> 16) & 0xffff);
@@ -32,7 +32,7 @@ void Shift(Int32 count) {
     }
   }
 
-void Rcs_Seed(UInt32 s) {
+void Rcs_Seed(u_int32_t s) {
   reg = s;
 /*
 #ifdef DEBUG
@@ -44,8 +44,8 @@ void Rcs_Seed(UInt32 s) {
   Shift(32);
   }
 
-Int32 Rcs_Random(Int32 range) {
-  Int32 ret;
+int Rcs_Random(int range) {
+  int ret;
   ret = (reg & 0x7fffffff) % range;
   Shift(33);
 /*

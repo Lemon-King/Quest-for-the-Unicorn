@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-void initial_inventory(Int32 slot,Int32 itemnum) {
+void initial_inventory(int slot,int itemnum) {
   player.invent[slot] = *(find_linked_item(itemnum));
-  player.invent[slot].flags |= OF_IDENT;
+  player.invent[slot].level = -1;
   if (player.invent[slot].otype == O_ARMR) player.armour += player.invent[slot].damage;
   if (player.invent[slot].otype == O_HELM) player.armour += player.invent[slot].damage;
   if (player.invent[slot].otype == O_BOOT) player.armour += player.invent[slot].damage;
@@ -24,9 +24,9 @@ void initial_inventory(Int32 slot,Int32 itemnum) {
   if (player.invent[slot].otype == O_BOW) player.weapon += player.invent[slot].damage;
   }
 
-void remove_from_inventory(Int32 link) {
-  Int32 i;
-  Int32 j;
+void remove_from_inventory(int link) {
+  int i;
+  int j;
   for (i=0; i<20; i++) if (player.invent[i].link == link) player.invent[i].otype = O_NONE;
   for (i=0; i<33; i++) if (player.pack[i].link == link) player.pack[i].otype = O_NONE;
   for (i=0; i<1000; i++) if (player.hole[i].link == link) player.hole[i].otype = O_NONE;
@@ -35,21 +35,21 @@ void remove_from_inventory(Int32 link) {
       if (player.houses[i].inventory[j].link == link) player.houses[i].inventory[j].otype = O_NONE;
   }
 
-Int32 get_con_hp() {
+int get_con_hp() {
   if (get_con() < 15) return 0;
   return ((get_con() - 10) / 3);
   }
 
-void make_char(Int32 rebirth) {
-  Int32 base_hp;
-  Int32 con_hp;
-  Int32 pool;
-  Int32 i,j;
-  Int32 x,y;
-//  Int32 m_file;
+void make_char(int rebirth) {
+  int base_hp;
+  int con_hp;
+  int pool;
+  int i,j;
+  int x,y;
+  int m_file;
   char buffer[80];
-  Int32  starts[NUM_CLASSES];
-  Int32  numStarts;
+  int  starts[NUM_CLASSES];
+  int  numStarts;
   char key;
   struct timeval tim;
   clrscr();
@@ -167,7 +167,7 @@ void make_char(Int32 rebirth) {
     sprintf(buffer,"%2d",player.stat[i]);
     txt_write(buffer);
     }
-  for (i=0; i<=5; i++) player.party[i].hp = 0;
+  for (i=1; i<=5; i++) player.party[i].hp = 0;
   for (i=1; i<=30; i++) player.skill[i] = 0;
   con_hp = get_con_hp();
   base_hp = classes[player.class-1].hitdie + u_random(classes[player.class-1].hitdie);
@@ -252,8 +252,8 @@ void make_char(Int32 rebirth) {
       stats.num_trophies = 0;
       }
     }
-#ifdef MHR
-#include "./Mhr/makechar.c"
+#ifdef ANNIV
+#include "./Anniv25/makechar.c"
 #endif
   player.cmana = get_mmana();
   if (classes[player.class-1].flags & CF_MONK) check_monk_weapon();
@@ -278,7 +278,7 @@ void make_char(Int32 rebirth) {
                  gotoxy(46,i); txt_write("     ");
                  i = i-1;
                  gotoxy(46,i);
-                 sprintf(buffer,"<-%2d ",pool);
+                 sprintf(buffer,"<-%2d",pool);
                  txt_write(buffer);
                  }
                break;
@@ -286,7 +286,7 @@ void make_char(Int32 rebirth) {
                  gotoxy(46,i); txt_write("     ");
                  i = i+1;
                  gotoxy(46,i);
-                 sprintf(buffer,"<-%2d ",pool);
+                 sprintf(buffer,"<-%2d",pool);
                  txt_write(buffer);
                  }
                break;
@@ -308,7 +308,7 @@ void make_char(Int32 rebirth) {
                  char_sheet_data();
                  textcolor(14);
                  gotoxy(46,i);
-                 sprintf(buffer,"<-%2d ",pool);
+                 sprintf(buffer,"<-%2d",pool);
                  txt_write(buffer);
                  }
                break;
@@ -330,7 +330,7 @@ void make_char(Int32 rebirth) {
                  char_sheet_data();
                  textcolor(14);
                  gotoxy(46,i);
-                 sprintf(buffer,"<-%2d ",pool);
+                 sprintf(buffer,"<-%2d",pool);
                  txt_write(buffer);
                  }
         }
@@ -340,7 +340,7 @@ void make_char(Int32 rebirth) {
   gotoxy(46,i); txt_write("     ");
   for (i=1; i<=6; i++) {
     gotoxy(40,i);
-    sprintf(buffer,"%2d ",player.stat[i]);
+    sprintf(buffer,"%2d",player.stat[i]);
     txt_write(buffer);
     }
 
@@ -426,22 +426,22 @@ void make_char(Int32 rebirth) {
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)
       player.known[x][y] = 0;
-//#ifdef MINGW
-//  m_file = open("temp01.$$$",O_WRONLY | O_CREAT | O_TRUNC | O_BINARY,0660);
-//#else
-//  m_file = open("temp01.$$$",O_WRONLY | O_CREAT | O_TRUNC,0660);
-//#endif
-//  if (m_file < 0) {
-//    printf("Fatal Error: Could not open temp01.$$$\n");
-//    exit(1);
-//    }
-  for (i=1; i<=NO_OF_MAPS; i++) {
-//    lseek(m_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
-//    write(m_file,&(player.known),sizeof(KNOW_TYPE));
-    memcpy(&(known_maps[i]), &(player.known), sizeof(KNOW_TYPE));
+#ifdef MINGW
+  m_file = open("temp01.$$$",O_WRONLY | O_CREAT | O_TRUNC | O_BINARY,0660);
+#else
+  m_file = open("temp01.$$$",O_WRONLY | O_CREAT | O_TRUNC,0660);
+#endif
+  if (m_file < 0) {
+    printf("Fatal Error: Could not open temp01.$$$\n");
+    exit(1);
     }
-//  close(m_file);
+  for (i=1; i<=NO_OF_MAPS; i++) {
+    lseek(m_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
+    write(m_file,&(player.known),sizeof(KNOW_TYPE));
+    }
+  close(m_file);
   player.day = 1; player.month = 1; player.hour = 8; player.min = 1;
+  for (i=1; i<=255; i++) player.xxxxx[i] = 0;
   for (i=0; i<1000; i++) spellbook[i] = 0;
   if (rebirth == 0) {
     for (i=1; i<=32; i++) player.pack[i].otype = O_NONE;
@@ -451,9 +451,12 @@ void make_char(Int32 rebirth) {
       for (j=0; j<500; j++) player.houses[i].inventory[j].otype = O_NONE;
       }
     }
+  for (i=1; i<=8; i++) player.potion[i] = 0;
+  for (i=1; i<=8; i++) player.ring[i] = 0;
+  for (i=1; i<=12; i++) player.staff[i] = 0;
   for (i=1; i<5000; i++) player.gen[i] = 0;
   for (i=1; i<5000; i++) player.lore[i] = 0;
-  for (i=1; i<=12; i++) strcpy(player.fspell[i],"");
+  for (i=1; i<=10; i++) strcpy(player.fspell[i],"");
   for (i=0; i<1000; i++) player.quests[i] = 'N';
   for (i=1; i<=10; i++) {
     player.tardis_x[i] = 0;
@@ -475,6 +478,23 @@ void make_char(Int32 rebirth) {
     strcpy(gear_manager[i].cloak,"");
     strcpy(gear_manager[i].boots,"");
     strcpy(gear_manager[i].helm,"");
+    }
+  for (i=1; i<=8; i++) {
+    j = u_random(8)+1;
+    while (player.potion[j] != 0) {
+      j = u_random(8)+1;
+      }
+    player.potion[j] = i;
+    }
+  for (i=1; i<=8; i++) {
+    j = u_random(8)+1;
+    while (player.ring[j] != 0) j = u_random(8)+1;
+    player.ring[j] = i;
+    }
+  for (i=1; i<=12; i++) {
+    j = u_random(12)+1;
+    while (player.staff[j] != 0) j = u_random(12)+1;
+    player.staff[j] = i;
     }
   if (classes[player.class-1].flags & CF_CASTER) {
     j = 1;

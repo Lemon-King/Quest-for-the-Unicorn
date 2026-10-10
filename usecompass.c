@@ -10,13 +10,13 @@
 
 #include "header.h"
 
-Int32 targets[256];
-Int32 target_count;
+int targets[256];
+int target_count;
 
 void sort_targets() {
-  Int32 i;
+  int i;
   char flag;
-  Int32 tmp;
+  int tmp;
   flag = 'N';
   while (flag != 'Y') {
     flag = 'Y';
@@ -31,11 +31,11 @@ void sort_targets() {
   }
 
 void use_compass() {
-  Int32  i;
-  Int32  row;
-  Int32  col;
-  Int32  dungeon;
-  Int32  msg;
+  int  i;
+  int  row;
+  int  col;
+  int  dungeon;
+  int  msg;
   char key;
   saveScreen();
   textmode(3);

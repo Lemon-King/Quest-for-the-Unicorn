@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void noise(Int32 f,Int32 d) {
+void noise(int f,int d) {
 /*
   if (soundon != 'N') {
     printf("%c",7);

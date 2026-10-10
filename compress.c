@@ -11,7 +11,7 @@
 #include "header.h"
 
 void compress() {
-  Int32 i,j;
+  int i,j;
   char flag;
   for (i=32; i>=2; i--)
     if (player.pack_q[i] != 0) {

@@ -21,8 +21,8 @@ void show_time() {
 void show_side() {
   char buffer[80];
 /*
-  Int32 statusLine;
-  Int32 statusCol;
+  int statusLine;
+  int statusCol;
 #ifdef ASCII
   statusLine = 280;
   statusCol = 1450;
@@ -106,7 +106,7 @@ void show_side() {
   if (has_intrinsic(A_RCLD))         outtext_xy(TEXT_GRID_WIDTH - 10,8,"C"); else outtext_xy(TEXT_GRID_WIDTH - 10,8," ");
   if (has_intrinsic(A_RELC))         outtext_xy(TEXT_GRID_WIDTH -  8,8,"Z"); else outtext_xy(TEXT_GRID_WIDTH -  8,8," ");
   if (has_intrinsic(A_RDRK))         outtext_xy(TEXT_GRID_WIDTH -  6,8,"A"); else outtext_xy(TEXT_GRID_WIDTH -  6,8," ");
-  if (has_intrinsic(A_RPSI))         outtext_xy(TEXT_GRID_WIDTH -  4,8,"M"); else outtext_xy(TEXT_GRID_WIDTH -  4,8," ");
+  if (player.effect[PE_MIND] != 0)   outtext_xy(TEXT_GRID_WIDTH -  4,8,"M"); else outtext_xy(TEXT_GRID_WIDTH -  4,8," ");
   if (player.effect[PE_ETHER] > 0) {
     if (player.effect[PE_ETHER] > 10) outtext_xy(TEXT_GRID_WIDTH - 2,8,"E"); else outtext_xy(TEXT_GRID_WIDTH - 2,8,"e");
     } else outtext_xy(TEXT_GRID_WIDTH - 2,8," ");
@@ -126,7 +126,7 @@ void show_side() {
   putimage(tile_width*7,screen_height-tile_height,select_sprite((has_intrinsic(A_RCLD)) ? 354 : 10),0);
   putimage(tile_width*8,screen_height-tile_height,select_sprite((has_intrinsic(A_RELC)) ? 355 : 10),0);
   putimage(tile_width*9,screen_height-tile_height,select_sprite((has_intrinsic(A_RDRK)) ? 356 : 10),0);
-  putimage(tile_width*10,screen_height-tile_height,select_sprite((has_intrinsic(A_RPSI)) ? 357 : 10),0);
+  putimage(tile_width*10,screen_height-tile_height,select_sprite((player.effect[PE_MIND] != 0) ? 357 : 10),0);
   if (player.effect[PE_ETHER] > 0) {
     if (player.effect[PE_ETHER] > 10)  putimage(tile_width*11,screen_height-tile_height,select_sprite(48),0);
     else if (player.effect[PE_ETHER] > 0)  putimage(tile_width*11,screen_height-tile_height,select_sprite(49),0);

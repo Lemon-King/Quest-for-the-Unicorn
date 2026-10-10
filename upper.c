@@ -11,7 +11,7 @@
 #include "header.h"
 
 void upper(char* buffer) {
-  Int32 i;
+  int i;
   for (i=0; i<strlen(buffer); i++)
     if (buffer[i] >= 'a' && buffer[i] <= 'z') buffer[i] -= 32;
   }

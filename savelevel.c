@@ -11,12 +11,7 @@
 #include "header.h"
 
 void save_level() {
-  Int32 x,y,i;
-  if (player.party[0].hp > 0) {
-    x = player.party[0].treasure & 0xff;
-    y = (player.party[0].treasure >> 8) & 0xff;
-    player.map[x][y] = player.party[0].prev;
-    }
+  int x,y,i;
   for (x=0; x<101; x++)
     for (y=0; y<101; y++) {
       current_dungeon.level[player.d_level-1].map[x][y] = player.map[x][y];

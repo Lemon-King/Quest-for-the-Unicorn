@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 damage_reduction(Int32 n) {
+int damage_reduction(int n) {
   double armor;
   double dmg;
   dmg = n;
@@ -19,6 +19,6 @@ Int32 damage_reduction(Int32 n) {
   armor *= 3;
   if (armor > 0.7) armor = 0.7;
   dmg -= (dmg * armor);
-  return (Int32)dmg;
+  return (int)dmg;
   }
 

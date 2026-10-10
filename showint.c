@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char* show_int(Int32 n) {
+char* show_int(int n) {
   static STRING32 ret;
   sprintf(ret,"%d",n);
   return ret;

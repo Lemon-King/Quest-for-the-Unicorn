@@ -11,7 +11,7 @@
 #include "header.h"
 
 void do_blink() {
-  Int32 x,y;
+  int x,y;
   char flag;
   flag = ' ';
   while (flag == ' ') {

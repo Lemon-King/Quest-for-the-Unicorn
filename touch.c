@@ -10,12 +10,11 @@
 
 #include "header.h"
 
-void touch(Int32 damage,Int32 elem) {
-  Int32  x,y;
-  Int32  xdir,ydir;
-  Int32  mon;
-  Int32  i;
-  char crit = 0; /* Added by Brian Stovall */
+void touch(int damage,int elem) {
+  int  x,y;
+  int  xdir,ydir;
+  int  mon;
+  int  i;
   get_dir(&xdir,&ydir);
   x = player.x + xdir;
   y = player.y + ydir;
@@ -46,14 +45,12 @@ void touch(Int32 damage,Int32 elem) {
       if (u_random(100) < get_crit()) {
         i *= 2;
         stats.counts[STAT_CRITS]++; 
-        crit = -1; /* Added by Brian Stovall */
         }
       if (in_arena == 'Y') i = figure_damage(i,elem,&(player.monster[mon][a_mon]));
         else  i = figure_damage(i,elem,&(player.monster[1][mon]));
       if (in_arena == 'Y' && (player.monster[mon][a_mon].special & MS_AMAGIC) == MS_AMAGIC) i = 0;
       if (in_arena != 'Y' && (player.monster[1][mon].special & MS_AMAGIC) == MS_AMAGIC) i = 0;
-      if (crit) sprintf(buffer,"Crit hit for %d",i); /* Added by Brian Stovall */
-        else sprintf(buffer,"Hit for %d",i);
+      sprintf(buffer,"Hit for %d",i);
       prompt(buffer);
       stats_do_damage(i);
       if (in_arena == 'Y') player.monster[mon][a_mon].hp -= i;

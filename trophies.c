@@ -40,16 +40,16 @@ void draw_trophy() {
   gotoxy(22,22); textcolor(14); txt_write("+----------------------------------+");
   }
 
-Int32 has_trophy(Int32 num) {
-  Int32 i;
+int has_trophy(int num) {
+  int i;
   for (i=0; i<stats.num_trophies; i++)
     if (stats.trophies[i] == num) return -1;
   return 0;
   }
 
-void new_trophy(Int32 num) {
-  Int32 key;
-  Int32 i;
+void new_trophy(int num) {
+  int key;
+  int i;
   if (has_trophy(num) != 0) return;
   stats.num_trophies++;
   for (i=stats.num_trophies - 1; i > 0; i--) stats.trophies[i] = stats.trophies[i-1];
@@ -66,8 +66,8 @@ void new_trophy(Int32 num) {
   }
 
 void check_trophies() {
-  Int32 i,c,j;
-  Int32 mask;
+  int i,c,j;
+  int mask;
   OBJECT_REC* item;
   i = 0;
   while (trophies[i].criteria_type < 999) {
@@ -330,10 +330,10 @@ void check_trophies() {
 */
   }
 
-Int32 show_trophy_group(Int32 top) {
-  Int32 i;
-  Int32 count;
-  Int32 bottom;
+int show_trophy_group(int top) {
+  int i;
+  int count;
+  int bottom;
   count = 0;
   bottom = top + 20;
   if (bottom > stats.num_trophies) bottom = stats.num_trophies;
@@ -352,9 +352,9 @@ Int32 show_trophy_group(Int32 top) {
   }
 
 void show_trophies() {
-  Int32 key;
-  Int32 top;
-  Int32 count;
+  int key;
+  int top;
+  int count;
   top = 0;
   count = show_trophy_group(top);
   key = 0;

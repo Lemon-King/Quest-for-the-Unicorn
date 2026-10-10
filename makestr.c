@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char* make_str(Int32 value) {
+char* make_str(int value) {
   static char ret[32];
   sprintf(ret,"%d",value);
   return ret;

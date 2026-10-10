@@ -14,7 +14,7 @@
 void process(char* fname) {
   FILE*    in_file;
   char     buffer[200];
-  Int32      x,y;
+  int      x,y;
 
   in_file = fopen(fname,"r");
   if (in_file == NULL) {
@@ -85,7 +85,7 @@ void process(char* fname) {
   printf("    },\n");
   }
 
-Int32 main(Int32 argc,char** argv) {
+int main(int argc,char** argv) {
   printf("#ifdef MAIN\n");
   printf("MAP_TYPE maps[] ={\n");
   process("map11.map");    /* place the null map */

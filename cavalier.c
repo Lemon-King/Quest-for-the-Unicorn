@@ -14,9 +14,9 @@ void cavalier(char* name) {
   char flag;
   char key;
   char buffer[80];
-  Int32  class;
+  int  class;
   char allowed;
-  Int32  i;
+  int  i;
   double paid;
 
   textmode(3); gotoxy(40 - (5 + strlen(name) / 2),1); textcolor(11);

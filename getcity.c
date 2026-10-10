@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 get_city() {
-  Int32 i;
+int get_city() {
+  int i;
   i = 0;
   while (cities[i].citynum < 999) {
     if (player.region == cities[i].region &&

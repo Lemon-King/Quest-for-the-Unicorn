@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void fkey_pressed(Int32 n) {
+void fkey_pressed(int n) {
   if (fkey_mode == 'S') cast_spell(n);
   if (fkey_mode == 'W') {
     if (n == 10) n = 0;
@@ -23,7 +23,7 @@ void fkey_pressed(Int32 n) {
   if (fkey_mode == 'M') strcpy(currentMacro, macros[n-1]);
   }
 
-void shift_fkey_pressed(Int32 n) {
+void shift_fkey_pressed(int n) {
   if (fkey_mode == 'W') {
     if (n == 10) n = 0;
     save_gear('Y',n);
@@ -42,7 +42,7 @@ void shift_fkey_pressed(Int32 n) {
     }
   }
 
-void alt_fkey_pressed(Int32 n) {
+void alt_fkey_pressed(int n) {
   if (fkey_mode == 'W' || fkey_mode == 'G') cast_spell(n);
   if (fkey_mode == 'S') {
     if (n == 10) n = 0;
@@ -54,7 +54,7 @@ void alt_fkey_pressed(Int32 n) {
     }
   }
 
-void ctrl_fkey_pressed(Int32 n) {
+void ctrl_fkey_pressed(int n) {
   if (fkey_mode != 'M') strcpy(currentMacro, macros[n-1]);
   if (fkey_mode == 'M') cast_spell(n);
   }

@@ -10,17 +10,17 @@
 
 #include "header.h"
 
-void arena_move_party(Int32 x,Int32 y) {
-  Int32 xdir,ydir;
-  Int32 ox,oy;
-  Int32 monster;
-  Int32 targetx;
-  Int32 targety;
-  Int32 dist;
-  Int32 spd;
+void arena_move_party(int x,int y) {
+  int xdir,ydir;
+  int ox,oy;
+  int monster;
+  int targetx;
+  int targety;
+  int dist;
+  int spd;
 
-  char valid(Int32 x,Int32 y) {
-    Int32 i;
+  char valid(int x,int y) {
+    int i;
     char flag;
     flag = '*';
     if (player.map[x][y] < 0) flag = ' ';
@@ -52,7 +52,7 @@ void arena_move_party(Int32 x,Int32 y) {
     }
 
   void find_target() {
-    Int32 x1,y1;
+    int x1,y1;
     dist = 32767;
     targetx = player.x;
     targety = player.y;

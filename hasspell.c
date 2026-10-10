@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-byte has_spell(Int32 check) {
-  Int32 i;
+byte has_spell(int check) {
+  int i;
   byte ret;
   ret = 0;
   for (i=1; i<1000; i++)

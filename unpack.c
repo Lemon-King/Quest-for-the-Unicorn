@@ -11,7 +11,7 @@
 #include "header.h"
 
 void unpack_top(OBJECT_REC in_air) {
-  Int32 i;
+  int i;
   char buffer[80];
   textmode(3);
   textcolor(15); gotoxy(33,1); txt_write("Pack Inventory");
@@ -62,19 +62,19 @@ void unpack_top(OBJECT_REC in_air) {
     }
   }
 
-OBJECT_REC* unpack(Int32 slot) {
+OBJECT_REC* unpack(int slot) {
   char flag;
   char key;
-  Int32  row;
-  Int32  col;
-  Int32  i;
+  int  row;
+  int  col;
+  int  i;
   textmode(3);
   row = 0;
   col = 0;
   OBJECT_REC temp;
   OBJECT_REC inair;
-  Int32 item1;
-  Int32 item2;
+  int item1;
+  int item2;
 /*
   textcolor(15); gotoxy(33,1); txt_write("Pack Inventory");
   gotoxy(17,3);

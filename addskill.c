@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-void add_skill(Int32 skill,Int32 num) {
-  Int32 amount;
-  Int32 start;
+void add_skill(int skill,int num) {
+  int amount;
+  int start;
   double scale;
   double n;
   start = player.skill[skill] / 100000;

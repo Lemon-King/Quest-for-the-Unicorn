@@ -10,12 +10,12 @@
 
 #include "header.h"
 
-void super(Int32 damage,Int32 elem) { 
+void super(int damage,int elem) { 
   char buffer[32];
-  Int32  x,y;
-  Int32  x1,y1;
-  Int32  mon;
-  Int32  i;
+  int  x,y;
+  int  x1,y1;
+  int  mon;
+  int  i;
   x1 = player.x; y1 = player.y;
   if (x1<10) x1=10; else if (x1>90) x1 = 90;
   if (y1<10) y1=10; else if (y1>90) y1 = 90;

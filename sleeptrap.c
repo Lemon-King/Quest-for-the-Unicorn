@@ -11,7 +11,7 @@
 #include "header.h"
 
 void sleep_trap() {
-  Int32 amt;
+  int amt;
   char flag;
   flag = ' ';
   if (has_intrinsic(A_NOSL)) flag = '*';
@@ -26,7 +26,5 @@ void sleep_trap() {
       prompt("Slept!!");
       show_player();
     }
-  run_x = 0;
-  run_y = 0;
   }
 

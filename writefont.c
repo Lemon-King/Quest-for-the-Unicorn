@@ -10,13 +10,13 @@
 
 #include "header.h"
 
-void write_font(Int32 x,Int32 y,Int32 color,char* line) {
+void write_font(int x,int y,int color,char* line) {
 #ifndef ASCII
   byte letter;
-  Int32  i;
+  int  i;
 #endif
 
-  void small_a(Int32 x,Int32 y,Int32 color) {
+  void small_a(int x,int y,int color) {
     draw(x+2,y+6,x+5,y+6,color);
     draw(x+1,y+7,x+2,y+7,color);
     draw(x+5,y+7,x+6,y+7,color);
@@ -28,7 +28,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void small_b(Int32 x,Int32 y,Int32 color) {
+  void small_b(int x,int y,int color) {
     draw(x+2,y+2,x+3,y+2,color);
     draw(x+0,y+3,x+2,y+3,color);
     draw(x+1,y+4,x+2,y+4,color);
@@ -43,7 +43,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+10,x+4,y+10,color);
   }
 
-  void small_c(Int32 x,Int32 y,Int32 color) {
+  void small_c(int x,int y,int color) {
     draw(x+2,y+6,x+5,y+6,color);
     draw(x+0,y+7,x+2,y+7,color);
     draw(x+5,y+7,x+7,y+7,color);
@@ -53,7 +53,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+10,x+5,y+10,color);
   }
 
-  void small_d(Int32 x,Int32 y,Int32 color) {
+  void small_d(int x,int y,int color) {
     draw(x+0,y+2,x+2,y+2,color);
     draw(x+2,y+3,x+3,y+3,color);
     draw(x+3,y+4,x+4,y+4,color);
@@ -69,7 +69,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void small_e(Int32 x,Int32 y,Int32 color) {
+  void small_e(int x,int y,int color) {
     draw(x+2,y+6,x+5,y+6,color);
     draw(x+0,y+7,x+2,y+7,color);
     draw(x+4,y+7,x+6,y+7,color);
@@ -79,7 +79,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+1,y+10,x+5,y+10,color);
   }
 
-  void small_f(Int32 x,Int32 y,Int32 color) {
+  void small_f(int x,int y,int color) {
     draw(x+3,y+2,x+5,y+2,color);
     plot(x+7,y+2,color);
     draw(x+1,y+3,x+3,y+3,color);
@@ -93,7 +93,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+4,y+10,color);
   }
 
-  void small_g(Int32 x,Int32 y,Int32 color) {
+  void small_g(int x,int y,int color) {
     draw(x+2,y+6,x+5,y+6,color);
     draw(x+0,y+7,x+2,y+7,color);
     draw(x+5,y+7,x+7,y+7,color);
@@ -108,7 +108,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+13,x+5,y+13,color);
   }
 
-  void small_h(Int32 x,Int32 y,Int32 color) {
+  void small_h(int x,int y,int color) {
     draw(x+2,y+2,x+3,y+2,color);
     draw(x+0,y+3,x+2,y+3,color);
     draw(x+1,y+4,x+2,y+4,color);
@@ -128,7 +128,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+3,y+13,color);
   }
 
-  void small_i(Int32 x,Int32 y,Int32 color) {
+  void small_i(int x,int y,int color) {
     draw(x+3,y+3,x+5,y+3,color);
     draw(x+2,y+4,x+4,y+4,color);
     draw(x+3,y+6,x+5,y+6,color);
@@ -138,7 +138,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+5,y+10,color);
   }
 
-  void small_j(Int32 x,Int32 y,Int32 color) {
+  void small_j(int x,int y,int color) {
     draw(x+4,y+2,x+6,y+2,color);
     draw(x+3,y+3,x+5,y+3,color);
     draw(x+4,y+5,x+5,y+5,color);
@@ -152,7 +152,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+13,x+3,y+13,color);
   }
 
-  void small_k(Int32 x,Int32 y,Int32 color) {
+  void small_k(int x,int y,int color) {
     draw(x+2,y+2,x+3,y+2,color);
     draw(x+0,y+3,x+2,y+3,color);
     draw(x+1,y+4,x+2,y+4,color);
@@ -170,7 +170,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+6,y+10,color);
   }
 
-  void small_l(Int32 x,Int32 y,Int32 color) {
+  void small_l(int x,int y,int color) {
     draw(x+4,y+2,x+5,y+2,color);
     draw(x+2,y+3,x+5,y+3,color);
     draw(x+3,y+4,x+4,y+4,color);
@@ -182,7 +182,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+5,y+10,color);
   }
 
-  void small_m(Int32 x,Int32 y,Int32 color) {
+  void small_m(int x,int y,int color) {
     draw(x+0,y+6,x+1,y+6,color);
     draw(x+5,y+6,x+6,y+6,color);
     plot(x+3,y+6,color);
@@ -198,7 +198,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void small_n(Int32 x,Int32 y,Int32 color) {
+  void small_n(int x,int y,int color) {
     draw(x+0,y+6,x+1,y+6,color);
     draw(x+4,y+6,x+6,y+6,color);
     draw(x+0,y+7,x+3,y+7,color);
@@ -211,7 +211,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+5,y+10,x+6,y+10,color);
   }
 
-  void small_o(Int32 x,Int32 y,Int32 color) {
+  void small_o(int x,int y,int color) {
     draw(x+3,y+6,x+5,y+6,color);
     draw(x+0,y+7,x+2,y+7,color);
     draw(x+5,y+7,x+7,y+7,color);
@@ -222,7 +222,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+10,x+4,y+10,color);
   }
 
-  void small_p(Int32 x,Int32 y,Int32 color) {
+  void small_p(int x,int y,int color) {
     draw(x+1,y+6,x+2,y+6,color);
     draw(x+4,y+6,x+6,y+6,color);
     draw(x+0,y+7,x+3,y+7,color);
@@ -237,7 +237,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+0,y+13,x+1,y+13,color);
   }
 
-  void small_q(Int32 x,Int32 y,Int32 color) {
+  void small_q(int x,int y,int color) {
     draw(x+3,y+6,x+5,y+6,color);
     draw(x+0,y+7,x+2,y+7,color);
     draw(x+5,y+7,x+7,y+7,color);
@@ -251,7 +251,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+13,x+6,y+13,color);
   }
 
-  void small_r(Int32 x,Int32 y,Int32 color) {
+  void small_r(int x,int y,int color) {
     draw(x+1,y+6,x+2,y+6,color);
     draw(x+4,y+6,x+5,y+6,color);
     draw(x+0,y+7,x+7,y+7,color);
@@ -261,7 +261,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+0,y+10,x+2,y+10,color);
   }
 
-  void small_s(Int32 x,Int32 y,Int32 color) {
+  void small_s(int x,int y,int color) {
     draw(x+2,y+6,x+6,y+6,color);
     draw(x+1,y+7,x+3,y+7,color);
     plot(x+5,y+7,color);
@@ -271,7 +271,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+0,y+10,x+5,y+10,color);
   }
 
-  void small_t(Int32 x,Int32 y,Int32 color) {
+  void small_t(int x,int y,int color) {
     draw(x+4,y+3,x+5,y+3,color);
     draw(x+3,y+4,x+4,y+4,color);
     draw(x+1,y+5,x+6,y+5,color);
@@ -282,7 +282,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+6,y+10,color);
   }
 
-  void small_u(Int32 x,Int32 y,Int32 color) {
+  void small_u(int x,int y,int color) {
     draw(x+1,y+6,x+2,y+6,color);
     draw(x+4,y+6,x+6,y+6,color);
     draw(x+0,y+7,x+2,y+7,color);
@@ -294,7 +294,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+5,y+10,x+6,y+10,color);
   }
 
-  void small_v(Int32 x,Int32 y,Int32 color) {
+  void small_v(int x,int y,int color) {
     draw(x+1,y+6,x+2,y+6,color);
     draw(x+5,y+6,x+6,y+6,color);
     draw(x+0,y+7,x+2,y+7,color);
@@ -305,7 +305,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+4,y+10,color);
   }
 
-  void small_w(Int32 x,Int32 y,Int32 color) {
+  void small_w(int x,int y,int color) {
     draw(x+0,y+6,x+1,y+6,color);
     draw(x+3,y+6,x+4,y+6,color);
     draw(x+6,y+6,x+7,y+6,color);
@@ -318,7 +318,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+5,y+10,color);
   }
 
-  void small_x(Int32 x,Int32 y,Int32 color) {
+  void small_x(int x,int y,int color) {
     draw(x+1,y+6,x+2,y+6,color);
     draw(x+6,y+6,x+7,y+6,color);
     draw(x+0,y+7,x+3,y+7,color);
@@ -330,7 +330,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+5,y+10,x+6,y+10,color);
   }
 
-  void small_y(Int32 x,Int32 y,Int32 color) {
+  void small_y(int x,int y,int color) {
     draw(x+1,y+6,x+2,y+6,color);
     draw(x+5,y+6,x+6,y+6,color);
     draw(x+0,y+7,x+2,y+7,color);
@@ -346,7 +346,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+0,y+13,color);
   }
 
-  void small_z(Int32 x,Int32 y,Int32 color) {
+  void small_z(int x,int y,int color) {
     draw(x+1,y+6,x+3,y+6,color);
     draw(x+5,y+6,x+6,y+6,color);
     draw(x+0,y+7,x+1,y+7,color);
@@ -358,7 +358,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+5,y+10,color);
   }
 
-  void big_a(Int32 x,Int32 y,Int32 color) {
+  void big_a(int x,int y,int color) {
     draw(x+1,y+2,x+4,y+2,color);
     draw(x+0,y+3,x+1,y+3,color);
     draw(x+3,y+3,x+5,y+3,color);
@@ -377,7 +377,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+0,y+10,color);
   }
 
-  void big_b(Int32 x,Int32 y,Int32 color) {
+  void big_b(int x,int y,int color) {
     draw(x+1,y+2,x+2,y+2,color);
     plot(x+4,y+2,color);
     draw(x+3,y+3,x+6,y+3,color);
@@ -400,8 +400,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+6,y+10,color);
   }
 
-  void big_c(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_c(int x,int y,int color) {
+    int i;
     draw(x+5,y+2,x+6,y+2,color);
     plot(x+2,y+2,color);
     plot(x+1,y+3,color);
@@ -423,7 +423,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+5,y+10,color);
   }
 
-  void big_d(Int32 x,Int32 y,Int32 color) {
+  void big_d(int x,int y,int color) {
     draw(x+0,y+1,x+1,y+1,color);
     draw(x+1,y+2,x+6,y+2,color);
     draw(x+3,y+3,x+7,y+3,color);
@@ -442,7 +442,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+6,y+10,color);
   }
 
-  void big_e(Int32 x,Int32 y,Int32 color) {
+  void big_e(int x,int y,int color) {
     draw(x+0,y+2,x+2,y+2,color);
     draw(x+5,y+2,x+7,y+2,color);
     draw(x+2,y+3,x+6,y+3,color);
@@ -460,7 +460,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+5,y+10,x+7,y+10,color);
   }
 
-  void big_f(Int32 x,Int32 y,Int32 color) {
+  void big_f(int x,int y,int color) {
     draw(x+0,y+2,x+2,y+2,color);
     draw(x+5,y+2,x+7,y+2,color);
     draw(x+3,y+3,x+7,y+3,color);
@@ -478,7 +478,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+10,x+3,y+10,color);
   }
 
-  void big_g(Int32 x,Int32 y,Int32 color) {
+  void big_g(int x,int y,int color) {
     draw(x+5,y+2,x+6,y+2,color);
     plot(x+2,y+2,color);
     draw(x+4,y+3,x+7,y+3,color);
@@ -503,8 +503,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+5,y+10,color);
   }
 
-  void big_h(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_h(int x,int y,int color) {
+    int i;
     draw(x+0,y+2,x+2,y+2,color);
     draw(x+5,y+2,x+6,y+2,color);
     draw(x+3,y+3,x+4,y+3,color);
@@ -527,8 +527,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+5,y+13,x+6,y+13,color);
   }
 
-  void big_i(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_i(int x,int y,int color) {
+    int i;
     draw(x+1,y+2,x+3,y+2,color);
     draw(x+5,y+2,x+7,y+2,color);
     for (i=3; i<=9; i++)
@@ -541,8 +541,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+5,y+10,x+7,y+10,color);
   }
 
-  void big_j(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_j(int x,int y,int color) {
+    int i;
     draw(x+1,y+2,x+2,y+2,color);
     plot(x+4,y+2,color);
     plot(x+7,y+2,color);
@@ -556,7 +556,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+1,y+10,x+4,y+10,color);
   }
 
-  void big_k(Int32 x,Int32 y,Int32 color) {
+  void big_k(int x,int y,int color) {
     draw(x+0,y+2,x+3,y+2,color);
     draw(x+5,y+2,x+7,y+2,color);
     draw(x+5,y+3,x+7,y+3,color);
@@ -578,7 +578,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void big_l(Int32 x,Int32 y,Int32 color) {
+  void big_l(int x,int y,int color) {
     draw(x+0,y+2,x+2,y+2,color);
     draw(x+5,y+2,x+6,y+2,color);
     plot(x+4,y+3,color);
@@ -597,8 +597,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+6,y+10,color);
   }
 
-  void big_m(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_m(int x,int y,int color) {
+    int i;
     plot(x+2,y+2,color);
     draw(x+4,y+2,x+5,y+2,color);
     plot(x+7,y+2,color);
@@ -612,8 +612,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+7,y+10,color);
   }
 
-  void big_n(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_n(int x,int y,int color) {
+    int i;
     draw(x+1,y+2,x+2,y+2,color);
     draw(x+5,y+2,x+7,y+2,color);
     plot(x+0,y+3,color);
@@ -626,8 +626,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void big_o(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_o(int x,int y,int color) {
+    int i;
     plot(x+2,y+2,color);
     plot(x+4,y+2,color);
     plot(x+6,y+2,color);
@@ -647,8 +647,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+10,x+5,y+10,color);
   }
 
-  void big_p(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_p(int x,int y,int color) {
+    int i;
     for (i=2; i<=12; i++) draw(x+1,y+i,x+2,y+i,color);
     for (i=3; i<=8; i++) draw(x+5,y+i,x+6,y+i,color);
     draw(x+1,y+3,x+7,y+3,color);
@@ -661,8 +661,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+0,y+12,color);
   }
 
-  void big_q(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_q(int x,int y,int color) {
+    int i;
     plot(x+2,y+2,color);
     plot(x+4,y+2,color);
     plot(x+6,y+2,color);
@@ -686,7 +686,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+5,y+11,x+7,y+11,color);
   }
 
-  void big_r(Int32 x,Int32 y,Int32 color) {
+  void big_r(int x,int y,int color) {
     draw(x+0,y+2,x+3,y+2,color);
     plot(x+6,y+2,color);
     plot(x+2,y+3,color);
@@ -709,7 +709,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void big_s(Int32 x,Int32 y,Int32 color) {
+  void big_s(int x,int y,int color) {
     draw(x+2,y+2,x+4,y+2,color);
     plot(x+6,y+2,color);
     draw(x+0,y+3,x+1,y+3,color);
@@ -730,8 +730,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+5,y+10,color);
   }
 
-  void big_t(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_t(int x,int y,int color) {
+    int i;
     for (i=2; i<=7; i++) draw(x+3,y+i,x+4,y+i,color);
     for (i=2; i<=9; i++) plot(x+6,y+i,color);
     draw(x+1,y+2,x+2,y+2,color);
@@ -749,8 +749,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+10,x+5,y+10,color);
   }
 
-  void big_u(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_u(int x,int y,int color) {
+    int i;
     for (i=3; i<=10; i++) draw(x+1,y+i,x+2,y+i,color);
     for (i=2; i<=9; i++) draw(x+5,y+i,x+6,y+i,color);
     draw(x+0,y+2,x+1,y+2,color);
@@ -763,8 +763,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+1,y+10,x+3,y+10,color);
   }
 
-  void big_v(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_v(int x,int y,int color) {
+    int i;
     for (i=2; i<=9; i++) draw(x+1,y+i,x+2,y+i,color);
     for (i=2; i<=9; i++) draw(x+5,y+i,x+6,y+i,color);
     draw(x+0,y+9,x+3,y+9,color);
@@ -777,8 +777,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+7,y+3,color);
   }
 
-  void big_w(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_w(int x,int y,int color) {
+    int i;
     for (i=1; i<=10; i++) plot(x+1,y+i,color);
     for (i=2; i<=9; i++) draw(x+3,y+i,x+4,y+i,color);
     for (i=2; i<=9; i++) plot(x+6,y+i,color);
@@ -791,7 +791,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+5,y+10,color);
   }
 
-  void big_x(Int32 x,Int32 y,Int32 color) {
+  void big_x(int x,int y,int color) {
     draw(x+1,y+2,x+2,y+2,color);
     draw(x+6,y+2,x+7,y+2,color);
     plot(x+0,y+3,color);
@@ -810,8 +810,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void big_y(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void big_y(int x,int y,int color) {
+    int i;
     for (i=3; i<=8; i++) draw(x+1,y+i,x+2,y+i,color);
     for (i=2; i<=8; i++) draw(x+5,y+i,x+6,y+i,color);
     draw(x+0,y+2,x+1,y+2,color);
@@ -824,7 +824,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+7,y+12,color);
   }
 
-  void big_z(Int32 x,Int32 y,Int32 color) {
+  void big_z(int x,int y,int color) {
     draw(x+1,y+2,x+7,y+2,color);
     draw(x+1,y+3,x+2,y+3,color);
     plot(x+6,y+3,color);
@@ -841,19 +841,19 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+5,y+10,x+6,y+10,color);
   }
 
-  void period(Int32 x,Int32 y,Int32 color) {
+  void period(int x,int y,int color) {
     draw(x+3,y+9,x+5,y+9,color);
     draw(x+2,y+10,x+4,y+10,color);
   }
 
-  void comma(Int32 x,Int32 y,Int32 color) {
+  void comma(int x,int y,int color) {
     draw(x+3,y+9,x+4,y+9,color);
     draw(x+3,y+10,x+5,y+10,color);
     plot(x+5,y+11,color);
     plot(x+4,y+12,color);
   }
 
-  void question(Int32 x,Int32 y,Int32 color) {
+  void question(int x,int y,int color) {
     draw(x+2,y+2,x+6,y+2,color);
     draw(x+6,y+3,x+7,y+3,color);
     plot(x+1,y+3,color);
@@ -866,8 +866,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+4,y+10,color);
   }
 
-  void rune_a(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_a(int x,int y,int color) {
+    int i;
     for (i=3; i<=9; i++) plot(x+1,y+i,color);
     for (i=7; i<=9; i++) plot(x+5,y+i,color);
     plot(x+2,y+4,color);
@@ -877,8 +877,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+6,y+10,color);
   }
 
-  void rune_b(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_b(int x,int y,int color) {
+    int i;
     for (i=2; i<=9; i++) plot(x+1,y+i,color);
     plot(x+2,y+2,color);
     plot(x+3,y+3,color);
@@ -891,8 +891,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+0,y+10,x+2,y+10,color);
   }
 
-  void rune_c(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_c(int x,int y,int color) {
+    int i;
     for (i=4; i<=9; i++) plot(x+2,y+i,color);
     draw(x+1,y+2,x+2,y+2,color);
     draw(x+4,y+2,x+5,y+2,color);
@@ -903,8 +903,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+4,x+5,y+4,color);
   }
 
-  void rune_d(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_d(int x,int y,int color) {
+    int i;
     for (i=3; i<=9; i++) plot(x+1,y+i,color);
     plot(x+0,y+2,color);
     plot(x+2,y+3,color);
@@ -917,8 +917,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+0,y+10,x+1,y+10,color);
   }
 
-  void rune_e(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_e(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+1,y+i,color);
     for (i=2; i<=10; i++) plot(x+5,y+i,color);
     plot(x+0,y+10,color);
@@ -929,8 +929,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+4,y+5,color);
   }
 
-  void rune_f(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_f(int x,int y,int color) {
+    int i;
     for (i=2; i<=9; i++) plot(x+5,y+i,color);
     draw(x+4,y+10,x+6,y+10,color);
     plot(x+4,y+2,color);
@@ -940,8 +940,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+4,y+6,color);
   }
 
-  void rune_g(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_g(int x,int y,int color) {
+    int i;
     for (i=2; i<=9; i++) plot(x+1,y+i,color);
     draw(x+3,y+2,x+4,y+2,color);
     draw(x+6,y+2,x+7,y+2,color);
@@ -955,8 +955,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+5,y+5,color);
   }
 
-  void rune_h(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_h(int x,int y,int color) {
+    int i;
     for (i=2; i<=6; i++) plot(x+3,y+i,color);
     plot(x+4,y+2,color);
     plot(x+2,y+8,color);
@@ -968,16 +968,16 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void rune_i(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_i(int x,int y,int color) {
+    int i;
     for (i=4; i<=10; i++) plot(x+4,y+i,color);
     draw(x+4,y+2,x+5,y+2,color);
     draw(x+3,y+4,x+4,y+4,color);
     draw(x+3,y+10,x+5,y+10,color);
   }
 
-  void rune_j(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_j(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+1,y+i,color);
     for (i=8; i<=10; i++) plot(x+i-6,y+i,color);
     for (i=5; i<=10; i++) plot(x+i-3,y+i,color);
@@ -986,8 +986,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void rune_l(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_l(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+3,y+i,color);
     draw(x+2,y+2,x+4,y+2,color);
     draw(x+2,y+10,x+4,y+10,color);
@@ -1000,8 +1000,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+0,y+9,color);
   }
 
-  void rune_m(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_m(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+1,y+i,color);
     draw(x+0,y+2,x+2,y+2,color);
     draw(x+0,y+10,x+2,y+10,color);
@@ -1015,8 +1015,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+2,y+10,color);
   }
 
-  void rune_n(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_n(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+3,y+i,color);
     draw(x+2,y+3,x+4,y+3,color);
     draw(x+2,y+4,x+4,y+4,color);
@@ -1027,8 +1027,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+6,y+6,color);
   }
 
-  void rune_o(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_o(int x,int y,int color) {
+    int i;
     for (i=4; i<=10; i++) plot(x+i-4,y+i,color);
     for (i=4; i<=10; i++) plot(x+11-i,y+i,color);
     draw(x+0,y+4,x+2,y+4,color);
@@ -1037,8 +1037,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+10,x+7,y+10,color);
   }
 
-  void rune_p(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_p(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+1,y+i,color);
     draw(x+0,y+2,x+2,y+2,color);
     draw(x+0,y+10,x+1,y+10,color);
@@ -1048,8 +1048,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+2,y+6,color);
   }
 
-  void rune_q(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_q(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+6,y+i,color);
     draw(x+6,y+2,x+7,y+2,color);
     draw(x+6,y+10,x+7,y+10,color);
@@ -1061,8 +1061,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+0,y+4,color);
   }
 
-  void rune_r(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_r(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+1,y+i,color);
     for (i=2; i<=4; i++) plot(x+5,y+i,color);
     for (i=8; i<=10; i++) plot(x+5,y+i,color);
@@ -1075,8 +1075,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+0,y+10,color);
   }
 
-  void rune_s(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_s(int x,int y,int color) {
+    int i;
     for (i=2; i<=6; i++) plot(x+i-1,y+i,color);
     for (i=6; i<=10; i++) plot(x+11-i,y+i,color);
     draw(x+1,y+0,x+2,y+0,color);
@@ -1085,8 +1085,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+0,y+10,color);
   }
 
-  void rune_t(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_t(int x,int y,int color) {
+    int i;
     for (i=4; i<=10; i++) plot(x+1,y+i,color);
     draw(x+1,y+2,x+2,y+2,color);
     draw(x+5,y+2,x+6,y+2,color);
@@ -1096,8 +1096,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+0,y+10,color);
   }
 
-  void rune_u(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_u(int x,int y,int color) {
+    int i;
     for (i=4; i<=6; i++) plot(x+i-1,y+i,color);
     for (i=4; i<=6; i++) plot(x+7-i,y+i,color);
     for (i=6; i<=10; i++) plot(x+i-5,y+i,color);
@@ -1106,8 +1106,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+6,y+10,color);
   }
 
-  void rune_v(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_v(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+6,y+i,color);
     draw(x+2,y+9,x+3,y+9,color);
     draw(x+5,y+10,x+7,y+10,color);
@@ -1120,8 +1120,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+4,y+8,color);
   }
 
-  void rune_w(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_w(int x,int y,int color) {
+    int i;
     for (i=8; i<=10; i++) plot(x+3,y+i,color);
     draw(x+2,y+10,x+4,y+10,color);
     plot(x+3,y+4,color);
@@ -1133,8 +1133,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+2,y+7,color);
   }
 
-  void rune_x(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_x(int x,int y,int color) {
+    int i;
     for (i=5; i<=10; i++) plot(x+3,y+i,color);
     for (i=7; i<=10; i++) plot(x+i-4,y+i,color);
     for (i=7; i<=10; i++) plot(x+10-i,y+i,color);
@@ -1143,8 +1143,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+10,x+4,y+10,color);
   }
 
-  void rune_y(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_y(int x,int y,int color) {
+    int i;
     for (i=2; i<=8; i++) plot(x+0,y+i,color);
     for (i=2; i<=10; i++) plot(x+6,y+i,color);
     for (i=2; i<=8; i++) plot(x+8-i,y+i,color);
@@ -1152,8 +1152,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+7,y+10,color);
   }
 
-  void rune_z(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void rune_z(int x,int y,int color) {
+    int i;
     for (i=2; i<=10; i++) plot(x+6,y+i,color);
     draw(x+2,y+6,x+3,y+6,color);
     draw(x+2,y+9,x+3,y+9,color);
@@ -1167,7 +1167,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+5,y+7,color);
   }
 
-  void draw_0(Int32 x,Int32 y,Int32 color) {
+  void draw_0(int x,int y,int color) {
     draw(x+1,y+3,x+1,y+9,color);
     draw(x+2,y+3,x+2,y+9,color);
     draw(x+5,y+3,x+5,y+9,color);
@@ -1180,7 +1180,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+3,y+8,color);
   }
 
-  void draw_1(Int32 x,Int32 y,Int32 color) {
+  void draw_1(int x,int y,int color) {
     draw(x+4,y+3,x+4,y+10,color);
     draw(x+5,y+4,x+5,y+10,color);
     draw(x+2,y+9,x+7,y+9,color);
@@ -1188,7 +1188,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+3,y+3,color);
   }
 
-  void draw_2(Int32 x,Int32 y,Int32 color) {
+  void draw_2(int x,int y,int color) {
     draw(x+1,y+3,x+5,y+3,color);
     draw(x+0,y+4,x+2,y+4,color);
     plot(x+0,y+5,color);
@@ -1204,7 +1204,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+4,y+10,x+6,y+10,color);
   }
 
-  void draw_3(Int32 x,Int32 y,Int32 color) {
+  void draw_3(int x,int y,int color) {
     draw(x+2,y+2,x+3,y+2,color);
     draw(x+1,y+3,x+7,y+3,color);
     draw(x+0,y+4,x+1,y+4,color);
@@ -1219,7 +1219,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+1,y+10,x+3,y+10,color);
   }
 
-  void draw_4(Int32 x,Int32 y,Int32 color) {
+  void draw_4(int x,int y,int color) {
     draw(x+4,y+2,x+4,y+10,color);
     draw(x+5,y+2,x+5,y+10,color);
     draw(x+3,y+3,x+7,y+3,color);
@@ -1229,7 +1229,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+9,x+6,y+9,color);
   }
 
-  void draw_5(Int32 x,Int32 y,Int32 color) {
+  void draw_5(int x,int y,int color) {
     draw(x+1,y+2,x+6,y+2,color);
     draw(x+1,y+3,x+5,y+3,color);
     plot(x+6,y+1,color); plot(x+1,y+4,color);
@@ -1243,7 +1243,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+2,y+10,x+4,y+10,color);
   }
 
-  void draw_6(Int32 x,Int32 y,Int32 color) {
+  void draw_6(int x,int y,int color) {
     draw(x+3,y+2,x+4,y+2,color);
     draw(x+0,y+3,x+7,y+3,color);
     draw(x+4,y+4,x+6,y+4,color);
@@ -1257,7 +1257,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+7,y+9,color); plot(x+3,y+7,color);
   }
 
-  void draw_7(Int32 x,Int32 y,Int32 color) {
+  void draw_7(int x,int y,int color) {
     draw(x+2,y+2,x+3,y+2,color);
     draw(x+1,y+3,x+7,y+3,color);
     draw(x+3,y+6,x+4,y+6,color);
@@ -1268,8 +1268,8 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+6,y+4,color); plot(x+5,y+5,color);
   }
 
-  void draw_8(Int32 x,Int32 y,Int32 color) {
-    Int32 i;
+  void draw_8(int x,int y,int color) {
+    int i;
     i = 3;
     while (i<10) {
         draw(x+0,y+i,x+2,y+i,color);
@@ -1286,7 +1286,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     plot(x+3,y+5,color);
   }
 
-  void draw_9(Int32 x,Int32 y,Int32 color) {
+  void draw_9(int x,int y,int color) {
     draw(x+3,y+2,x+4,y+2,color);
     draw(x+0,y+3,x+2,y+3,color);
     draw(x+0,y+5,x+3,y+5,color);
@@ -1300,14 +1300,14 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+4,y+10,color);
   }
 
-  void colon(Int32 x,Int32 y,Int32 color) {
+  void colon(int x,int y,int color) {
     draw(x+3,y+4,x+4,y+4,color);
     draw(x+2,y+5,x+3,y+5,color);
     draw(x+3,y+8,x+4,y+8,color);
     draw(x+2,y+9,x+3,y+9,color);
   }
 
-  void dollar(Int32 x,Int32 y,Int32 color) {
+  void dollar(int x,int y,int color) {
     draw(x+4,y+1,x+4,y+11,color);
     draw(x+2,y+2,x+6,y+2,color);
     draw(x+1,y+3,x+2,y+3,color);
@@ -1324,7 +1324,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+3,y+10,x+6,y+10,color);
   }
 
-  void left(Int32 x,Int32 y,Int32 color) {
+  void left(int x,int y,int color) {
     draw(x+6,y+2,x+7,y+2,color);
     draw(x+4,y+3,x+5,y+3,color);
     draw(x+3,y+4,x+3,y+9,color);
@@ -1335,7 +1335,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+6,y+11,x+7,y+11,color);
   }
 
-  void right(Int32 x,Int32 y,Int32 color) {
+  void right(int x,int y,int color) {
     draw(x+1,y+2,x+2,y+2,color);
     draw(x+3,y+3,x+4,y+3,color);
     draw(x+5,y+4,x+5,y+9,color);
@@ -1346,7 +1346,7 @@ void write_font(Int32 x,Int32 y,Int32 color,char* line) {
     draw(x+1,y+11,x+2,y+11,color);
   }
 
-  void number(Int32 x,Int32 y,Int32 color) {
+  void number(int x,int y,int color) {
     draw(x+0,y+4,x+7,y+4,color);
     draw(x+0,y+8,x+6,y+8,color);
     draw(x+0,y+9,x+0,y+10,color);

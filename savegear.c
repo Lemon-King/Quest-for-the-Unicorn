@@ -10,9 +10,8 @@
 
 #include "header.h"
 
-void save_gear(char weapons_only,Int32 slot) {
+void save_gear(char weapons_only,int slot) {
   char key;
-  if (slot > 10) return;
   if (slot < 0) {
     msg("Save set (0-9)?",15);
     key = inkey();
@@ -21,7 +20,6 @@ void save_gear(char weapons_only,Int32 slot) {
       }
     if (key == 27) {
       msg("Cancelled",15);
-      takes_time = 'N';
       return;
       }
     slot = key - '0';

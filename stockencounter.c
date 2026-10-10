@@ -11,13 +11,13 @@
 #include "header.h"
 
 void stock_encounter() {
-  Int32 j;
+  int j;
   byte x;
-  Int32 min;
-  Int32 max;
+  int min;
+  int max;
   char flag;
-  Int32 number;
-  Int32 scale;
+  int number;
+  int scale;
   scale = get_monster_level_plus();
   max = player.level / 3;
   min = max-6;

@@ -11,7 +11,7 @@
 #include "header.h"
 
 void show_inventory(OBJECT_REC* item) {
-  Int32 i;
+  int i;
   char buffer[256];
   textcolor(3);
     gotoxy(25,3);

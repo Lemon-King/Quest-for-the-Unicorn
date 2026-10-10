@@ -11,8 +11,8 @@
 #include "header.h"
 
 void remove_land_player() {
-  Int32 x,y;
-  Int32 color;
+  int x,y;
+  int color;
   x = player.x; y = player.y;
   show_sprite(player.x-player.map_x,player.y-player.map_y,
               player.map[player.x][player.y]);

@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 is_magic_weapon(OBJECT_REC* weapon,NPC_REC* target) {
-  Int32 min_plus;
+int is_magic_weapon(OBJECT_REC* weapon,NPC_REC* target) {
+  int min_plus;
   min_plus = ((target->level - 1) / 5) + 1;
   if (weapon == NULL) return 0;
   if (!is_weapon(weapon)) return 0;
@@ -25,12 +25,12 @@ Int32 is_magic_weapon(OBJECT_REC* weapon,NPC_REC* target) {
   return 0;
   }
 
-Int32 max_damage(OBJECT_REC* weapon,NPC_REC* target,Int32 base) {
-  Int32 physical;
-  Int32 fire;
-  Int32 cold;
-  Int32 elec;
-  Int32 arcn;
+int max_damage(OBJECT_REC* weapon,NPC_REC* target,int base) {
+  int physical;
+  int fire;
+  int cold;
+  int elec;
+  int arcn;
   physical = 0;
   fire = 0;
   cold = 0;

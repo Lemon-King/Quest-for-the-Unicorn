@@ -10,39 +10,39 @@
 
 #include "header.h"
 
-void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
+void arena(int monster,int floor,int barriers,int srcx,int srcy) {
   KNOW_TYPE tmp_known;
   MAP_TYPE  tmp_map;
   byte key;
-  Int32  hold_x;
-  Int32  hold_y;
-  Int32  hold_mapx;
-  Int32  hold_mapy;
-  Int32  i,j;
+  int  hold_x;
+  int  hold_y;
+  int  hold_mapx;
+  int  hold_mapy;
+  int  i,j;
   char flag;
   char haste_flag;
   byte sfloor;
   byte ofloor;
-  Int32  x,y;
-  Int32 dmg;
+  int  x,y;
+  int dmg;
   char buffer[20];
-  Int32 all_dead;
-  Int32 arena_x;
-  Int32 arena_y;
+  int all_dead;
+  int arena_x;
+  int arena_y;
 
 
-  void enemy_attack(Int32 x,Int32 y) {
+  void enemy_attack(int x,int y) {
     char flag;
-    Int32  ex = 0,ey = 0;
-    Int32  i,j;
-    Int32  mon;
-    Int32  target;
-    Int32  hit;
+    int  ex = 0,ey = 0;
+    int  i,j;
+    int  mon;
+    int  target;
+    int  hit;
     flag = ' ';
     for (i=x-1; i<=x+1; i++)
       for (j=y-1; j<=y+1; j++)
         if (flag == ' ') {
-          if (player.map[i][j]>=300 && player.map[i][j]<400) {
+          if (player.map[i][j]>300 && player.map[i][j]<400) {
             flag = '*';
             ex = i;
             ey = j;
@@ -104,12 +104,12 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
       }
     }
 
-  void party_attack(Int32 x,Int32 y) {
+  void party_attack(int x,int y) {
     char flag;
-    Int32  ex = 0,ey = 0;
-    Int32  i,j;
-    Int32  mon;
-    Int32  target;
+    int  ex = 0,ey = 0;
+    int  i,j;
+    int  mon;
+    int  target;
     flag = ' ';
     for (i=x-1; i<=x+1; i++)
       for (j=y-1; j<=y+1; j++)
@@ -155,20 +155,20 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
       }
     }
 
-  void arena_party_missile(Int32 ex,Int32 ey) {
+  void arena_party_missile(int ex,int ey) {
     char flag;
-    Int32  x,y;
-    Int32  mon;
-    Int32  dist;
-    Int32  targetx;
-    Int32  targety;
-    Int32  target;
-    Int32  i;
+    int  x,y;
+    int  mon;
+    int  dist;
+    int  targetx;
+    int  targety;
+    int  target;
+    int  i;
     double fx,fy;
     double xdir,ydir;
 
     void find_target() {
-      Int32 x1,y1;
+      int x1,y1;
       dist = 32000;
       targetx = player.x;
       targety = player.y;
@@ -258,28 +258,28 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
       }
     }
 
-  void arena_enemy_missile(Int32 ex,Int32 ey) {
+  void arena_enemy_missile(int ex,int ey) {
     char flag = ' ';
-    Int32  x,y;
-    Int32  mon;
-    Int32  dist;
-    Int32  targetx;
-    Int32  targety;
-    Int32  target;
-    Int32  i,j;
-    Int32  ring;
+    int  x,y;
+    int  mon;
+    int  dist;
+    int  targetx;
+    int  targety;
+    int  target;
+    int  i,j;
+    int  ring;
     double  fx,fy;
     double  xdir,ydir;
     char elem[20];
     char buffer[60];
 
     void find_target() {
-      Int32 x1,y1;
+      int x1,y1;
       dist = (sqr(player.x-ex) + sqr(player.y-ey));
       targetx = player.x; targety = player.y;
       for (x1=offset_x; x1<=offset_x+16; x1++)
         for (y1=offset_y; y1<=offset_y+16; y1++)
-          if (player.map[x1][y1]>=300 && player.map[x1][y1]<400)
+          if (player.map[x1][y1]>300 && player.map[x1][y1]<400)
             if ((sqr(x1-ex) + sqr(y1-ey)) < dist) {
               targetx = x1;
               targety = y1;
@@ -326,7 +326,7 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
             player.map[x][y] == 178) flag = '*';
         }
       if (player.map[x][y] >= 600 && player.map[x][y] < 700) flag = '*';
-      if (player.map[x][y] >= 300 && player.map[x][y] < 400) flag = '#';
+      if (player.map[x][y] > 300 && player.map[x][y] < 400) flag = '#';
       if (x == player.x && y == player.y) flag = '*'; 
       }
     if (x == player.x && y == player.y) {
@@ -417,7 +417,7 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
         show_player();
         }
       }
-    if (player.map[x][y] >= 300 && player.map[x][y] < 400) {
+    if (player.map[x][y] > 300 && player.map[x][y] < 400) {
       target = player.map[x][y] - 300;
       i = 90;
       if (u_random(100) < i) {
@@ -456,8 +456,8 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
       meleehit(0,&(player.invent[I_LHND]),offhand_weapon() / 2,monster,'L');
     }
 
-  void move(Int32 xdir,Int32 ydir) {
-    Int32 x,y;
+  void move(int xdir,int ydir) {
+    int x,y;
     last_target_x = 0;
     last_target_y = 0;
     remove_player();
@@ -488,7 +488,7 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
       player.x -= xdir;
       player.y -= ydir;
       }
-    if (player.map[player.x][player.y]>=300 &&
+    if (player.map[player.x][player.y]>300 &&
         player.map[player.x][player.y]<400) {
       player.x -= xdir;
       player.y -= ydir;
@@ -506,7 +506,7 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
     restoreScreen();
     }
 
-  void pick_spot(Int32* x,Int32* y,Int32 what) {
+  void pick_spot(int* x,int* y,int what) {
     *x = u_random(ARENA_SIZE_X) + offset_x;
     *y = u_random(ARENA_SIZE_Y) + offset_y;
     if (player.map[*x][*y] != what) {
@@ -516,9 +516,9 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
     }
 
   void find_closest_mob() {
-    Int32 dist;
-    Int32 closestX;
-    Int32 closestY;
+    int dist;
+    int closestX;
+    int closestY;
     dist = 50000;
     closestX = 0;
     closestY = 0;
@@ -556,9 +556,6 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
   offset_y = 50 - ARENA_SIZE_Y / 2;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++) {
-      if (player.map[x][y] == 300) {
-        player.map[x][y] = player.party[0].prev;
-        }
       tmp_known[x][y] = player.known[x][y];
       tmp_map[x][y] = player.map[x][y];
       player.map[x][y] = sfloor;
@@ -580,7 +577,6 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
   player.y = offset_x + 11;
   player.map_x = offset_x - (TILES_X / 2 - ARENA_SIZE_X / 2);
   player.map_y = offset_y - (TILES_Y / 2 - ARENA_SIZE_Y / 2);
-  if (player.party[0].hp != 0) player.map[offset_x+8][offset_y+12] = 300;
   if (player.party[1].hp != 0) player.map[offset_x+6][offset_y+12] = 301;
   if (player.party[2].hp != 0) player.map[offset_x+10][offset_y+12] = 302;
   if (player.party[3].hp != 0) player.map[offset_x+3][offset_y+13] = 303;
@@ -693,7 +689,6 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
   show_player();
   exitf = 0;
   while (exitf == 0) {
-    takes_time = 'Y';
     show_time();
     if (player.effect[PE_SLEEP] != 0) key = ' ';
       else key = inkey();
@@ -737,252 +732,231 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
       case 'u': use_item(); break;
       case 'f': fire_weapon(); break;
       case 'm': cast_spell(0); break;
-      case KY_F1:fkey_pressed(1); break;
-      case KY_F2:fkey_pressed(2); break;
-      case KY_F3:fkey_pressed(3); break;
-      case KY_F4:fkey_pressed(4); break;
-      case KY_F5:fkey_pressed(5); break;
-      case KY_F6:fkey_pressed(6); break;
-      case KY_F7:fkey_pressed(7); break;
-      case KY_F8:fkey_pressed(8); break;
-      case KY_F9:fkey_pressed(9); break;
-      case KY_F10:fkey_pressed(10); break;
-      case KY_F11:fkey_pressed(11); break;
-      case KY_F12:fkey_pressed(12); break;
-      case KY_S_F1:shift_fkey_pressed(1); break;
-      case KY_S_F2:shift_fkey_pressed(2); break;
-      case KY_S_F3:shift_fkey_pressed(3); break;
-      case KY_S_F4:shift_fkey_pressed(4); break;
-      case KY_S_F5:shift_fkey_pressed(5); break;
-      case KY_S_F6:shift_fkey_pressed(6); break;
-      case KY_S_F7:shift_fkey_pressed(7); break;
-      case KY_S_F8:shift_fkey_pressed(8); break;
-      case KY_S_F9:shift_fkey_pressed(9); break;
-      case KY_S_F10:shift_fkey_pressed(10); break;
-      case KY_S_F11:shift_fkey_pressed(11); break;
-      case KY_S_F12:shift_fkey_pressed(12); break;
-      case KY_A_F1:alt_fkey_pressed(1); break;
-      case KY_A_F2:alt_fkey_pressed(2); break;
-      case KY_A_F3:alt_fkey_pressed(3); break;
-      case KY_A_F4:alt_fkey_pressed(4); break;
-      case KY_A_F5:alt_fkey_pressed(5); break;
-      case KY_A_F6:alt_fkey_pressed(6); break;
-      case KY_A_F7:alt_fkey_pressed(7); break;
-      case KY_A_F8:alt_fkey_pressed(8); break;
-      case KY_A_F9:alt_fkey_pressed(9); break;
-      case KY_A_F10:alt_fkey_pressed(10); break;
-      case KY_A_F11:alt_fkey_pressed(11); break;
-      case KY_A_F12:alt_fkey_pressed(12); break;
-      case KY_C_F1:ctrl_fkey_pressed(1); break;
-      case KY_C_F2:ctrl_fkey_pressed(2); break;
-      case KY_C_F3:ctrl_fkey_pressed(3); break;
-      case KY_C_F4:ctrl_fkey_pressed(4); break;
-      case KY_C_F5:ctrl_fkey_pressed(5); break;
-      case KY_C_F6:ctrl_fkey_pressed(6); break;
-      case KY_C_F7:ctrl_fkey_pressed(7); break;
-      case KY_C_F8:ctrl_fkey_pressed(8); break;
-      case KY_C_F9:ctrl_fkey_pressed(9); break;
-      case KY_C_F10:ctrl_fkey_pressed(10); break;
-      case KY_C_F11:ctrl_fkey_pressed(11); break;
-      case KY_C_F12:ctrl_fkey_pressed(12); break;
+      case 161:fkey_pressed(1); break;
+      case 162:fkey_pressed(2); break;
+      case 163:fkey_pressed(3); break;
+      case 164:fkey_pressed(4); break;
+      case 165:fkey_pressed(5); break;
+      case 166:fkey_pressed(6); break;
+      case 167:fkey_pressed(7); break;
+      case 168:fkey_pressed(8); break;
+      case 169:fkey_pressed(9); break;
+      case 160:fkey_pressed(10); break;
+      case 201:shift_fkey_pressed(1); break;
+      case 202:shift_fkey_pressed(2); break;
+      case 203:shift_fkey_pressed(3); break;
+      case 204:shift_fkey_pressed(4); break;
+      case 205:shift_fkey_pressed(5); break;
+      case 206:shift_fkey_pressed(6); break;
+      case 207:shift_fkey_pressed(7); break;
+      case 208:shift_fkey_pressed(8); break;
+      case 209:shift_fkey_pressed(9); break;
+      case 210:shift_fkey_pressed(10); break;
+      case 211:alt_fkey_pressed(1); break;
+      case 212:alt_fkey_pressed(2); break;
+      case 213:alt_fkey_pressed(3); break;
+      case 214:alt_fkey_pressed(4); break;
+      case 215:alt_fkey_pressed(5); break;
+      case 216:alt_fkey_pressed(6); break;
+      case 217:alt_fkey_pressed(7); break;
+      case 218:alt_fkey_pressed(8); break;
+      case 219:alt_fkey_pressed(9); break;
+      case 220:alt_fkey_pressed(10); break;
+      case 221:ctrl_fkey_pressed(1); break;
+      case 222:ctrl_fkey_pressed(2); break;
+      case 223:ctrl_fkey_pressed(3); break;
+      case 224:ctrl_fkey_pressed(4); break;
+      case 225:ctrl_fkey_pressed(5); break;
+      case 226:ctrl_fkey_pressed(6); break;
+      case 227:ctrl_fkey_pressed(7); break;
+      case 228:ctrl_fkey_pressed(8); break;
+      case 229:ctrl_fkey_pressed(9); break;
+      case 230:ctrl_fkey_pressed(10); break;
       case 'h': healing(); break;
       case 'T': throw(' '); break;
       case '-':throw('L'); break;
       case '=':throw('R'); break;
       case '+':throw('R'); break;
-      case 'p': party();
-               takes_time = 'N';
-               break;
+      case 'p': party(); break;
       case 'P':if (player.map[player.x][player.y] > 999) pack_it(floor);
                break;
       case 'v': view(floor); break;
       case 'V': soundon = (soundon == 'Y') ? 'N' : 'Y';
                 break;
-      case '?': combat_help();
-                takes_time = 'N';
-                break;
-      case 'H': show_icons();
-                takes_time = 'N';
-                break;
+      case '?': combat_help(); break;
+      case 'H': show_icons(); break;
       case ':': special(54,NULL); break;
       case 'R': disp_char();
                 show_screen();
-                takes_time = 'N';
                 break;
       case 13 : if (all_dead) exitf = 1; break;
       case 27 : if (all_dead) exitf = 1; break;
       }
-    if (takes_time == 'Y') {
-      if (has_intrinsic(A_IDNT)) {
-        if (player.map[player.x][player.y] >= 1000 && player.map[player.x][player.y] < 2000) {
-          if ((player.map_objects[player.map[player.x][player.y]-1000].flags & OF_IDENT) == 0) {
-            player.map_objects[player.map[player.x][player.y]-1000].flags |= OF_IDENT;
-            msg(get_name(&(player.map_objects[player.map[player.x][player.y]-1000])),14);
-            stats.counts[STAT_ITEMS_IDENTED]++;
+    if (has_intrinsic(A_IDNT)) {
+      if (player.map[player.x][player.y] >= 1000 && player.map[player.x][player.y] < 2000) {
+        if (player.map_objects[player.map[player.x][player.y]-1000].level >= 0) {
+          player.map_objects[player.map[player.x][player.y]-1000].level = -1;
+          msg(get_name(&(player.map_objects[player.map[player.x][player.y]-1000])),14);
+          stats.counts[STAT_ITEMS_IDENTED]++;
+          }
+        }
+      }
+    if (player.align <= 0 && player.class != 7) make_assassin();
+    if (player.align <= 0 && !(classes[player.class-1].flags & CF_ROGUE)) make_assassin();
+    while (player.exp >= player.exp_next) {
+      advancement();
+      show_side();
+      }
+    if (haste_flag == ' ') {
+      for (x=player.x-15; x<=player.x+15; x++)
+        for (y=player.y-15; y<=player.y+15; y++)
+          if (x>0 && x<100 && y>0 && y<100 &&
+              player.map[x][y]>400 && player.map[x][y]<500 &&
+              (player.monster[player.map[x][y]-400][a_mon].special & MS_MOVED) == 0 &&
+              player.monster[player.map[x][y]-400][a_mon].sleep == 0) {
+            if (player.monster[player.map[x][y]-400][a_mon].mana != 0 &&
+                (player.monster[player.map[x][y]-400][a_mon].special & MS_FRIENDLY) == 0 &&
+                u_random(100) < 40) arena_enemy_missile(x,y);
+                arena_move_enemy(x,y);
             }
-          }
+      for (x=player.x-15; x<=player.x+15; x++)
+        for (y=player.y-15; y<=player.y+15; y++)
+          if (x>0 && x<100 && y>0 && y<100 &&
+              player.map[x][y]>300 && player.map[x][y]<400 &&
+              (player.party[player.map[x][y]-300].special & MS_MOVED) == 0 &&
+              player.party[player.map[x][y]-300].sleep == 0) {
+            if (player.party[player.map[x][y]-300].mana != 0 &&
+                (player.party[player.map[x][y]-300].special & MS_EVADE) == 0  &&
+                u_random(100) < 40) arena_party_missile(x,y);
+            if (player.party[player.map[x][y]-300].mana != 0 &&
+                (player.party[player.map[x][y]-300].special & MS_HEALER) == MS_HEALER  &&
+                u_random(100) < 25) arena_party_heal(player.map[x][y]-300);
+            arena_move_party(x,y);
+            }
+      for (x=player.x-15; x<=player.x+15; x++)
+        for (y=player.y-15; y<=player.y+15; y++)
+          if (x>0 && x<100 && y>0 && y<100 &&
+              player.map[x][y]>300 && player.map[x][y]<400 &&
+              player.party[player.map[x][y]-300].sleep == 0) party_attack(x,y);
+      for (x=player.x-15; x<=player.x+15; x++)
+        for (y=player.y-15; y<=player.y+15; y++)
+          if (x>0 && x<100 && y>0 && y<100 &&
+              player.map[x][y]>400 && player.map[x][y]<500 &&
+              player.monster[player.map[x][y]-400][a_mon].sleep == 0)
+            enemy_attack(x,y);
+      for (x=1; x<=5; x++) {
+        if ((player.monster[x][a_mon].special & MS_MOVED) == MS_MOVED)
+          player.monster[x][a_mon].special -= MS_MOVED;
         }
-      if (player.align <= 0 && player.class != 7) make_assassin();
-      if (player.align <= 0 && !(classes[player.class-1].flags & CF_ROGUE)) make_assassin();
-      while (player.exp >= player.exp_next) {
-        advancement();
-        show_side();
+      for (x=1; x<=5; x++) {
+        if ((player.party[x].special & MS_MOVED) == MS_MOVED)
+          player.party[x].special -= MS_MOVED;
         }
-      if (haste_flag == ' ') {
-  
-        for (x=player.x-15; x<=player.x+15; x++)
-          for (y=player.y-15; y<=player.y+15; y++)
-            if (x>0 && x<100 && y>0 && y<100 &&
-                player.map[x][y]>400 && player.map[x][y]<500 &&
-                player.monster[player.map[x][y]-400][a_mon].sleep == 0)
-              enemy_attack(x,y);
-  
-        for (x=player.x-15; x<=player.x+15; x++)
-          for (y=player.y-15; y<=player.y+15; y++)
-            if (x>0 && x<100 && y>0 && y<100 &&
-                player.map[x][y]>400 && player.map[x][y]<500 &&
-                (player.monster[player.map[x][y]-400][a_mon].special & MS_MOVED) == 0 &&
-                player.monster[player.map[x][y]-400][a_mon].sleep == 0) {
-              if (player.monster[player.map[x][y]-400][a_mon].mana != 0 &&
-                  (player.monster[player.map[x][y]-400][a_mon].special & MS_FRIENDLY) == 0 &&
-                  u_random(100) < 40) arena_enemy_missile(x,y);
-                  arena_move_enemy(x,y);
-              }
-  
-        for (x=player.x-15; x<=player.x+15; x++)
-          for (y=player.y-15; y<=player.y+15; y++)
-            if (x>0 && x<100 && y>0 && y<100 &&
-                player.map[x][y]>=300 && player.map[x][y]<400 &&
-                player.party[player.map[x][y]-300].sleep == 0) party_attack(x,y);
-  
-        for (x=player.x-15; x<=player.x+15; x++)
-          for (y=player.y-15; y<=player.y+15; y++)
-            if (x>0 && x<100 && y>0 && y<100 &&
-                player.map[x][y]>=300 && player.map[x][y]<400 &&
-                (player.party[player.map[x][y]-300].special & MS_MOVED) == 0 &&
-                player.party[player.map[x][y]-300].sleep == 0) {
-              if (player.party[player.map[x][y]-300].mana != 0 &&
-                  (player.party[player.map[x][y]-300].special & MS_EVADE) == 0  &&
-                  u_random(100) < 40) arena_party_missile(x,y);
-              if (player.party[player.map[x][y]-300].mana != 0 &&
-                  (player.party[player.map[x][y]-300].special & MS_HEALER) == MS_HEALER  &&
-                  u_random(100) < 25) arena_party_heal(player.map[x][y]-300);
-              arena_move_party(x,y);
-              }
-        for (x=1; x<=5; x++) {
-          if ((player.monster[x][a_mon].special & MS_MOVED) == MS_MOVED)
-            player.monster[x][a_mon].special -= MS_MOVED;
-          }
-        for (x=0; x<=5; x++) {
-          if ((player.party[x].special & MS_MOVED) == MS_MOVED)
-            player.party[x].special -= MS_MOVED;
-          }
-        if (snakes != 0) {
-          for (x=offset_x; x<=offset_x+16; x++)
-            for (y=offset_y; y<=offset_y+16; y++)
-              if (player.map[x][y] == 143) arena_move_snake(x,y,floor);
-          }
+      if (snakes != 0) {
         for (x=offset_x; x<=offset_x+16; x++)
           for (y=offset_y; y<=offset_y+16; y++)
-            if (player.map[x][y] == 144) player.map[x][y] = 143;
-        for (x=0; x<=5; x++) {
-          if (player.party[x].sleep > 0) player.party[x].sleep--;
-          if (player.party[x].fear > 0) player.party[x].fear--;
+            if (player.map[x][y] == 143) move_snake(x,y,floor);
+        }
+      for (x=offset_x; x<=offset_x+16; x++)
+        for (y=offset_y; y<=offset_y+16; y++)
+          if (player.map[x][y] == 144) player.map[x][y] = 143;
+      for (x=1; x<=5; x++) {
+        if (player.party[x].sleep > 0) player.party[x].sleep--;
+        if (player.party[x].fear > 0) player.party[x].fear--;
+        }
+      for (x=1; x<=5; x++) {
+        if (player.monster[x][a_mon].sleep > 0) player.monster[x][a_mon].sleep--;
+        if (player.monster[x][a_mon].fear > 0) player.monster[x][a_mon].fear--;
+        if (player.monster[x][a_mon].blind > 0) player.monster[x][a_mon].blind--;
+        if (player.monster[x][a_mon].confused > 0) player.monster[x][a_mon].confused--;
+        if (player.monster[x][a_mon].poison > 0) {
+          player.monster[x][a_mon].poison--;
+          player.monster[x][a_mon].hp -= 2;
+          dead_monster(&(player.monster[x][a_mon]),'Y',player.x,player.y);
           }
-        for (x=1; x<=5; x++) {
-          if (player.monster[x][a_mon].sleep > 0) player.monster[x][a_mon].sleep--;
-          if (player.monster[x][a_mon].fear > 0) player.monster[x][a_mon].fear--;
-          if (player.monster[x][a_mon].blind > 0) player.monster[x][a_mon].blind--;
-          if (player.monster[x][a_mon].confused > 0) player.monster[x][a_mon].confused--;
-          if (player.monster[x][a_mon].poison > 0) {
-            player.monster[x][a_mon].poison--;
-            player.monster[x][a_mon].hp -= 2;
-            dead_monster(&(player.monster[x][a_mon]),'Y',player.x,player.y);
-            }
-          }
-        } /* if (haste_flag == ' ') */
-      if (classes[player.class-1].flags & CF_MONK) {
-        if (player.level >= 23) player.effect[PE_HASTE] = 10;
-        if (player.level >= 17) player.effect[PE_SLEEP] = 0;
-        if (player.level >= 29) player.effect[PE_POISON] = 0;
-        if (player.level >= 14) player.effect[PE_FEAR] = 0;
-        check_monk_weapon();
         }
-      if (haste_flag == '*') haste_flag = ' ';
-      else {
-        if (has_intrinsic(A_SPD)) haste_flag = '*';
-        }
-      dc--;
-      if (dc == 0) {
-        if (player.effect[PE_PROT] > 0) {
-          player.effect[PE_PROT]--;
-          if (player.effect[PE_PROT] == 0) show_side();
-          }
-        if (player.effect[PE_FIRE] > 0) {
-          player.effect[PE_FIRE]--;
-          if (player.effect[PE_FIRE] == 0) show_side();
-          }
-        if (player.effect[PE_HASTE] > 0) {
-          player.effect[PE_HASTE]--;
-          if (player.effect[PE_HASTE] == 0) show_side();
-          }
-        if (player.effect[PE_GIANT] > 0) {
-          player.effect[PE_GIANT]--;
-          if (player.effect[PE_GIANT] == 0) show_side();
-          }
-        dc = 1 + rcs_trunc(player.level / 6.0);
-        } /* if (dc == 0) */
-      if (player.effect[PE_ETHER] > 0) {
-        player.effect[PE_ETHER]--;
-        if (player.effect[PE_ETHER] == 0) show_side();
-        if (player.effect[PE_ETHER] == 10) show_side();
-        }
-      if (player.effect[PE_POISON] > 0) {
-        dmg = player.effect[PE_POISON] / 10;
-        if (dmg < 1) dmg = 1;
-        player.effect[PE_POISON] -= dmg;
-        sprintf(buffer,"%d poison damage",dmg);
-        msg(buffer,13);
-        stats_take_damage(dmg);
-        player.chp -= dmg;
-        show_side();
-        }
-      if (player.effect[PE_DOT]>0) {
-          dmg = player.effect[PE_DOT] / 10;
-          if (dmg < 1) dmg = 1;
-          player.effect[PE_DOT] -= dmg;
-          sprintf(buffer,"%d DOT damage",dmg);
-          msg(buffer,12);
-          stats_take_damage(dmg);
-          player.chp -= dmg; show_side();
-        }
-      if (player.effect[PE_CONFUSED] > 0) player.effect[PE_CONFUSED]--;
-      if (player.effect[PE_HCOUNT] > 0) player.effect[PE_HCOUNT]--;
-      if (player.effect[PE_READLORE] > 0) player.effect[PE_READLORE]--;
-      if (player.effect[PE_READLANG] > 0) player.effect[PE_READLANG]--;
-      if (player.effect[PE_FEAR] > 0) {
-         player.effect[PE_FEAR]--;
-         if (player.effect[PE_FEAR] == 0) msg("No longer afraid",14);
-         }
-      if (player.effect[PE_SLEEP] > 0) player.effect[PE_SLEEP]--;
-      if (player.effect[PE_LEV] > 0) player.effect[PE_LEV]--;
-      if (player.effect[PE_ROOT] > 0) player.effect[PE_ROOT]--;
-      player.hp_count -= get_hpr();
-      if (player.hp_count < 1) {
-        player.hp_count = 20;
-        if (player.chp < get_mhp()) player.chp++;
-        show_side();
-        }
-      player.mana_count -= get_manar();
-      if (player.mana_count < 1) {
-        player.mana_count = 100;
-        if (player.cmana < get_mmana()) player.cmana++;
-        show_side();
-        }
-      if (player.chp < 1) exitf = 6;
-      if (player.x <= offset_x || player.y <= offset_y ||
-          player.x >= offset_x + ARENA_SIZE_X || player.y >= offset_y + ARENA_SIZE_Y) exitf = 1;
+      } /* if (haste_flag == ' ') */
+    if (classes[player.class-1].flags & CF_MONK) {
+      if (player.level >= 23) player.effect[PE_HASTE] = 10;
+      if (player.level >= 17) player.effect[PE_SLEEP] = 0;
+      if (player.level >= 29) player.effect[PE_POISON] = 0;
+      if (player.level >= 14) player.effect[PE_FEAR] = 0;
+      check_monk_weapon();
       }
+    if (haste_flag == '*') haste_flag = ' ';
+    else {
+      if (has_intrinsic(A_SPD)) haste_flag = '*';
+      }
+    dc--;
+    if (dc == 0) {
+      if (player.effect[PE_PROT] > 0) {
+        player.effect[PE_PROT]--;
+        if (player.effect[PE_PROT] == 0) show_side();
+        }
+      if (player.effect[PE_FIRE] > 0) {
+        player.effect[PE_FIRE]--;
+        if (player.effect[PE_FIRE] == 0) show_side();
+        }
+      if (player.effect[PE_HASTE] > 0) {
+        player.effect[PE_HASTE]--;
+        if (player.effect[PE_HASTE] == 0) show_side();
+        }
+      if (player.effect[PE_GIANT] > 0) {
+        player.effect[PE_GIANT]--;
+        if (player.effect[PE_GIANT] == 0) show_side();
+        }
+      dc = 1 + rcs_trunc(player.level / 6.0);
+      } /* if (dc == 0) */
+    if (player.effect[PE_ETHER] > 0) {
+      player.effect[PE_ETHER]--;
+      if (player.effect[PE_ETHER] == 0) show_side();
+      if (player.effect[PE_ETHER] == 10) show_side();
+      }
+    if (player.effect[PE_POISON] > 0) {
+      dmg = player.effect[PE_POISON] / 10;
+      if (dmg < 1) dmg = 1;
+      player.effect[PE_POISON] -= dmg;
+      sprintf(buffer,"%d poison damage",dmg);
+      msg(buffer,13);
+      stats_take_damage(dmg);
+      player.chp -= dmg;
+      show_side();
+      }
+    if (player.effect[PE_DOT]>0) {
+        dmg = player.effect[PE_DOT] / 10;
+        if (dmg < 1) dmg = 1;
+        player.effect[PE_DOT] -= dmg;
+        sprintf(buffer,"%d DOT damage",dmg);
+        msg(buffer,12);
+        stats_take_damage(dmg);
+        player.chp -= dmg; show_side();
+      }
+    if (player.effect[PE_CONFUSED] > 0) player.effect[PE_CONFUSED]--;
+    if (player.effect[PE_HCOUNT] > 0) player.effect[PE_HCOUNT]--;
+    if (player.effect[PE_READLORE] > 0) player.effect[PE_READLORE]--;
+    if (player.effect[PE_READLANG] > 0) player.effect[PE_READLANG]--;
+    if (player.effect[PE_FEAR] > 0) {
+       player.effect[PE_FEAR]--;
+       if (player.effect[PE_FEAR] == 0) msg("No longer afraid",14);
+       }
+    if (player.effect[PE_SLEEP] > 0) player.effect[PE_SLEEP]--;
+    if (player.effect[PE_LEV] > 0) player.effect[PE_LEV]--;
+    if (player.effect[PE_ROOT] > 0) player.effect[PE_ROOT]--;
+    player.hp_count -= get_hpr();
+    if (player.hp_count < 1) {
+      player.hp_count = 20;
+      if (player.chp < get_mhp()) player.chp++;
+      show_side();
+      }
+    player.mana_count -= get_manar();
+    if (player.mana_count < 1) {
+      player.mana_count = 100;
+      if (player.cmana < get_mmana()) player.cmana++;
+      show_side();
+      }
+    if (player.chp < 1) exitf = 6;
+    if (player.x <= offset_x || player.y <= offset_y ||
+        player.x >= offset_x + ARENA_SIZE_X || player.y >= offset_y + ARENA_SIZE_Y) exitf = 1;
     } /* while (exitf == 0) */
   exitf = 0;
   for (x=1; x<=100; x++)
@@ -1031,16 +1005,6 @@ void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy) {
   check_mount();
   currentFloor = lastFloor;
   in_arena = 'N';
-  if (player.party[0].hp > 0) {
-    if (find_empty(player.x,player.y,10,dungeon_floor,&x,&y)) {
-      player.party[0].prev = player.map[x][y];
-      player.map[x][y] = 300;
-      player.party[0].treasure = (y << 8) | x;
-      }
-    else {
-      player.party[0].hp = 0;
-      }
-    }
   show_map();
   show_sm_map();
   show_side();

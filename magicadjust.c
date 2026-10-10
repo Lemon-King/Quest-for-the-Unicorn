@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 magic_adjust(Int32 n) {
+int magic_adjust(int n) {
   double armor;
   double dmg;
   dmg = n;
@@ -19,6 +19,6 @@ Int32 magic_adjust(Int32 n) {
   armor += get_magic_resistance();
   if (armor > 0.7) armor = 0.7;
   dmg -= (dmg * armor);
-  return (Int32)dmg;
+  return (int)dmg;
   }
 

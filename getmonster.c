@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-NPC_REC* get_monster(Int32 x,Int32 y) {
+NPC_REC* get_monster(int x,int y) {
   NPC_REC* ret;
   ret = NULL;
   if (x < 1 || y < 1 || x > 100 || y > 100) return ret;

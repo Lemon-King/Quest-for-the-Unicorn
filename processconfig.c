@@ -11,7 +11,7 @@
 #include "header.h"
 
 void process_config(char* name) {
-  Int32 i;
+  int i;
   FILE *file;
   char filename[1024];
   char *pChar;

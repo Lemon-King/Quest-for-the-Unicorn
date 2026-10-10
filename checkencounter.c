@@ -11,7 +11,7 @@
 #include "header.h"
 
 void check_encounter() {
-  Int32 chance;
+  int chance;
   chance = 3;
   switch (player.map[player.x][player.y]) {
     case 2:chance = 7; break;

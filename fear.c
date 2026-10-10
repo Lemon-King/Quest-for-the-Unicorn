@@ -10,10 +10,10 @@
 
 #include "header.h"
 
-void fear(Int32 radius) {
-  Int32  x,y;
-  Int32  tx,ty;
-  Int32  i;
+void fear(int radius) {
+  int  x,y;
+  int  tx,ty;
+  int  i;
   NPC_REC* monster;
   if (radius == 0) {
     target(80,-1,-1);

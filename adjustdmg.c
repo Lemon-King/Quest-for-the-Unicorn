@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 adjustdmg(OBJECT_REC* weapon) {
+int adjustdmg(OBJECT_REC* weapon) {
   double dmg;
   if (weapon == NULL) return 0;
   if (!is_weapon(weapon)) return weapon->w

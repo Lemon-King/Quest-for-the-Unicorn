@@ -10,12 +10,12 @@
 
 #include "header.h"
 
-void drain(Int32 damage,Int32 elem) {
+void drain(int damage,int elem) {
   char buffer[32];
-  Int32  x,y;
-  Int32  xdir,ydir;
-  Int32  mon;
-  Int32  i;
+  int  x,y;
+  int  xdir,ydir;
+  int  mon;
+  int  i;
   get_dir(&xdir,&ydir);
   x = player.x + xdir;
   y = player.y + ydir;

@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char* fix_ability(Int32 ability) {
+char* fix_ability(int ability) {
   static STRING32 ret;
   if (player.ability[ability] >= -99 && player.ability[ability] <= -5)
     strcpy(ret," Pathetic");

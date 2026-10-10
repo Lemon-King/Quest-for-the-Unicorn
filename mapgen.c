@@ -13,22 +13,22 @@
 #define SECRET_CHANCE  10
 
 typedef struct {
-  Int32 x;
-  Int32 y;
-  Int32 width;
-  Int32 height;
-  Int32 hits;
+  int x;
+  int y;
+  int width;
+  int height;
+  int hits;
   } ROOM;
 
 ROOM rooms[20];
-Int32 walls;
-Int32 floors;
-Int32 doors;
-Int32 secrets;
-Int32 roomlinks;
+int walls;
+int floors;
+int doors;
+int secrets;
+int roomlinks;
 
 void clearMap(MAP_TYPE* map) {
-  Int32 x,y;
+  int x,y;
 #ifdef DEBUG
   sprintf(debugbuffer,"%*sclearMap begin\n",debug_tab,"");
   debug_tab += 2;
@@ -44,9 +44,9 @@ void clearMap(MAP_TYPE* map) {
 #endif
   }
 
-void addRoom(Int32 n,Int32 rx,Int32 ry,Int32 mx,Int32 my,MAP_TYPE* map) {
-  Int32 x,y;
-  Int32 px,py;
+void addRoom(int n,int rx,int ry,int mx,int my,MAP_TYPE* map) {
+  int x,y;
+  int px,py;
 #ifdef DEBUG
   sprintf(debugbuffer,"%*saddRoom begin n=%d,rx=%d,ry=%d,mx=%d,my=%d\n",debug_tab,"",n,rx,ry,mx,my);
   debug_tab += 2;
@@ -69,22 +69,22 @@ void addRoom(Int32 n,Int32 rx,Int32 ry,Int32 mx,Int32 my,MAP_TYPE* map) {
 #endif
   }
 
-Int32 tooCloseVertical(Int32 x,Int32 y,MAP_TYPE* map) {
+int tooCloseVertical(int x,int y,MAP_TYPE* map) {
   if (x < 4 || y < 4 || x > 95 || y > 95) return -1;
   if ((*map)[x][y-1] != walls || (*map)[x][y-2] != walls) return -1;
   if ((*map)[x][y+1] != walls || (*map)[x][y+2] != walls) return -1;
   return 0;
   }
 
-Int32 tooCloseHorizontal(Int32 x,Int32 y,MAP_TYPE* map) {
+int tooCloseHorizontal(int x,int y,MAP_TYPE* map) {
   if (x < 4 || y < 4 || x > 95 || y > 95) return -1;
   if ((*map)[x-1][y] != walls || (*map)[x-2][y] != walls) return -1;
   if ((*map)[x+1][y] != walls || (*map)[x+2][y] != walls) return -1;
   return 0;
   }
 
-Int32 checkPath(Int32 sx,Int32 sy,Int32 dx,Int32 dy,MAP_TYPE* map) {
-  Int32 x,y;
+int checkPath(int sx,int sy,int dx,int dy,MAP_TYPE* map) {
+  int x,y;
   if (sx == dx) {
     if (dy < sy) { y = sy; sy = dy; dy = y; }
     for (y=sy; y<=dy; y++)
@@ -97,8 +97,8 @@ Int32 checkPath(Int32 sx,Int32 sy,Int32 dx,Int32 dy,MAP_TYPE* map) {
   return -1;
   }
 
-Int32 digTunnel(Int32 sx,Int32 sy,Int32 dx,Int32 dy,Int32 check,MAP_TYPE* map) {
-  Int32 i;
+int digTunnel(int sx,int sy,int dx,int dy,int check,MAP_TYPE* map) {
+  int i;
   if (check)
     if (checkPath(sx,sy,dx,dy,map) == 0) return 0;
   if (sy == dy) {
@@ -117,7 +117,7 @@ Int32 digTunnel(Int32 sx,Int32 sy,Int32 dx,Int32 dy,Int32 check,MAP_TYPE* map) {
   return -1;
   }
 
-Int32 digLTunnel(Int32 sx,Int32 sy,Int32 mx,Int32 my,Int32 dx,Int32 dy,MAP_TYPE* map) {
+int digLTunnel(int sx,int sy,int mx,int my,int dx,int dy,MAP_TYPE* map) {
   if (checkPath(sx,sy,mx,my,map) == 0 || checkPath(mx,my,dx,dy,map) == 0) return 0;
   digTunnel(sx,sy,mx,my,0,map);
   digTunnel(mx,my,dx,dy,0,map);
@@ -128,7 +128,7 @@ Int32 digLTunnel(Int32 sx,Int32 sy,Int32 mx,Int32 my,Int32 dx,Int32 dy,MAP_TYPE*
   return -1;
   }
 
-Int32 digUTunnel(Int32 sx,Int32 sy,Int32 mx,Int32 my,Int32 nx,Int32 ny,Int32 dx,Int32 dy,MAP_TYPE* map) {
+int digUTunnel(int sx,int sy,int mx,int my,int nx,int ny,int dx,int dy,MAP_TYPE* map) {
   if (checkPath(sx,sy,mx,my,map) == 0) return 0;
   if (checkPath(mx,my,nx,ny,map) == 0) return 0;
   if (checkPath(nx,ny,dx,dy,map) == 0) return 0;
@@ -142,12 +142,12 @@ Int32 digUTunnel(Int32 sx,Int32 sy,Int32 mx,Int32 my,Int32 nx,Int32 ny,Int32 dx,
   return -1;
   }
 
-Int32 horizontal(Int32 room1,Int32 room2,MAP_TYPE* map) {
-  Int32 y;
-  Int32 x;
-  Int32 retries;
-  Int32 sx,sy,mx,my,dx,dy;
-  Int32 flag;
+int horizontal(int room1,int room2,MAP_TYPE* map) {
+  int y;
+  int x;
+  int retries;
+  int sx,sy,mx,my,dx,dy;
+  int flag;
 #ifdef DEBUG
   sprintf(debugbuffer,"%*shorizontal begin room1=%d, room2=%d\n",debug_tab,"",room1,room2);
   debug_tab += 2;
@@ -263,11 +263,11 @@ Int32 horizontal(Int32 room1,Int32 room2,MAP_TYPE* map) {
   }
 
 
-Int32 vertical(Int32 room1,Int32 room2,MAP_TYPE* map) {
-  Int32 x;
-  Int32 retries;
-  Int32 sx,sy,mx,my,dx,dy;
-  Int32 flag;
+int vertical(int room1,int room2,MAP_TYPE* map) {
+  int x;
+  int retries;
+  int sx,sy,mx,my,dx,dy;
+  int flag;
 #ifdef DEBUG
   sprintf(debugbuffer,"%*svertical begin room1=%d, room2=%d\n",debug_tab,"",room1,room2);
   debug_tab += 2;
@@ -381,10 +381,10 @@ Int32 vertical(Int32 room1,Int32 room2,MAP_TYPE* map) {
   return 0;
   }
 
-Int32 connectRoom(Int32 num,MAP_TYPE* map) {
-  Int32 x,y;
-  Int32 dx,dy;
-  Int32 dnum;
+int connectRoom(int num,MAP_TYPE* map) {
+  int x,y;
+  int dx,dy;
+  int dnum;
 #ifdef DEBUG
   sprintf(debugbuffer,"%*sconnectRoom begin num=%d\n",debug_tab,"",num);
   debug_tab += 2;
@@ -421,8 +421,8 @@ Int32 connectRoom(Int32 num,MAP_TYPE* map) {
   return 0;
   }
 
-void checkLinks(Int32 n) {
-  Int32 i;
+void checkLinks(int n) {
+  int i;
   roomlinks |= (1 << n);
   for (i=0; i<16; i++) {
     if ((roomlinks & (1 << i)) == 0) {
@@ -431,9 +431,9 @@ void checkLinks(Int32 n) {
     }
   }
 
-void attemptRemainingLinks(Int32 room,MAP_TYPE* map) {
-  Int32 i;
-  Int32 j;
+void attemptRemainingLinks(int room,MAP_TYPE* map) {
+  int i;
+  int j;
   char flag;
 #ifdef DEBUG
   sprintf(debugbuffer,"%*sattemptRemainingLinks begin room=%d\n",debug_tab,"",room);
@@ -473,10 +473,10 @@ void attemptRemainingLinks(Int32 room,MAP_TYPE* map) {
 #endif
   }
 
-Int32 generateMap(MAP_TYPE* map) {
-  Int32 i;
-  Int32 rx,ry;
-  Int32 retries;
+int generateMap(MAP_TYPE* map) {
+  int i;
+  int rx,ry;
+  int retries;
 #ifdef DEBUG
   sprintf(debugbuffer,"%*sgenerateMap begin\n",debug_tab,"");
   debug_tab += 2;
@@ -510,11 +510,11 @@ Int32 generateMap(MAP_TYPE* map) {
 
 
 
-void mapgen(Int32 depth,Int32 floor,Int32* treasurex,Int32* treasurey,
-            Int32 *upx, Int32 *upy, Int32 *downx, Int32 *downy,
+void mapgen(int depth,int floor,int* treasurex,int* treasurey,
+            int *upx, int *upy, int *downx, int *downy,
             MAP_TYPE* map,KNOW_TYPE* known) {
-  Int32 i;
-  Int32 x,y;
+  int i;
+  int x,y;
   char flag;
 #ifdef DEBUG
   sprintf(debugbuffer,"%*smapgen begin: floor=%d\n",debug_tab,"",floor);

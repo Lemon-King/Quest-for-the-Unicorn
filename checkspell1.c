@@ -10,11 +10,11 @@
 
 #include "header.h"
 
-Int32 check_spell_1(char* spell_name,Int32 level,Int32 allign,Int32 first) {
-  Int32 i;
-  Int32 count;
-  Int32 found = 0;
-  Int32 newone;
+int check_spell_1(char* spell_name,int level,int allign,int first) {
+  int i;
+  int count;
+  int found = 0;
+  int newone;
   byte key;
   count = 0;
   newone = 0;
@@ -35,18 +35,16 @@ Int32 check_spell_1(char* spell_name,Int32 level,Int32 allign,Int32 first) {
       gotoxy(first,1); txt_write(spell_name); txt_write("_");
       }
     if (key == 13) newone = found;
-    if (key == KY_F1) strcpy(player.fspell[1],spells[found].name);
-    if (key == KY_F2) strcpy(player.fspell[2],spells[found].name);
-    if (key == KY_F3) strcpy(player.fspell[3],spells[found].name);
-    if (key == KY_F4) strcpy(player.fspell[4],spells[found].name);
-    if (key == KY_F5) strcpy(player.fspell[5],spells[found].name);
-    if (key == KY_F6) strcpy(player.fspell[6],spells[found].name);
-    if (key == KY_F7) strcpy(player.fspell[7],spells[found].name);
-    if (key == KY_F8) strcpy(player.fspell[8],spells[found].name);
-    if (key == KY_F9) strcpy(player.fspell[9],spells[found].name);
-    if (key == KY_F10) strcpy(player.fspell[10],spells[found].name);
-    if (key == KY_F11) strcpy(player.fspell[11],spells[found].name);
-    if (key == KY_F12) strcpy(player.fspell[12],spells[found].name);
+    if (key == 161) strcpy(player.fspell[1],spells[found].name);
+    if (key == 162) strcpy(player.fspell[2],spells[found].name);
+    if (key == 163) strcpy(player.fspell[3],spells[found].name);
+    if (key == 164) strcpy(player.fspell[4],spells[found].name);
+    if (key == 165) strcpy(player.fspell[5],spells[found].name);
+    if (key == 166) strcpy(player.fspell[6],spells[found].name);
+    if (key == 167) strcpy(player.fspell[7],spells[found].name);
+    if (key == 168) strcpy(player.fspell[8],spells[found].name);
+    if (key == 169) strcpy(player.fspell[9],spells[found].name);
+    if (key == 160) strcpy(player.fspell[10],spells[found].name);
     }
   return newone;
   }

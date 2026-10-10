@@ -49,11 +49,6 @@ typedef unsigned char byte;
 typedef unsigned short word;
 #endif
 
-typedef u_int32_t UInt32;
-typedef int32_t   Int32;
-
-#include "terminal.h"
-
 #define PATH_MAX             10
 #define NUM_CLASSES          13
 #define NO_OF_MAPS           50
@@ -72,7 +67,7 @@ int     NO_OF_MONSTERS;
 #define NO_OF_SPELLS        215
 */
 #define GAME          "UNICORN"
-#define VERSION        "v7.0.0"
+#define VERSION        "v6.3.0"
 #define RECIPE_BASE        4000
 #define NPC_DIV              10
 
@@ -80,23 +75,15 @@ int     NO_OF_MONSTERS;
 #define MAX_FINAL_SCORES  10000
 #define HEAL_TIME           500
 
-#define OF_FOR_SALE  (1 << 0)
-#define OF_NO_GACHA  (1 << 1)
-#define OF_UNIQUE    (1 << 2)
-#define OF_QUEST     (1 << 3)
-#define OF_OBJECT    (1 << 4)      /* must have item in flag2 for item to drop */
-#define OF_COUNTED   (1 << 5)      /* Object counted already for stats purposes */
-#define OF_IDENT     (1 << 6)      /* Object has been identified */
-
-#define CF_MONK         (1 << 0)   /*     1  must check monk_weapon() for armor and weapons */
-#define CF_CASTER       (1 << 1)   /*     2  Class selects a spell when character is created */
-#define CF_NOBLE        (1 << 2)   /*     4  Gains 10,000 gp per level */
-#define CF_ROGUE        (1 << 3)   /*     8  Class character becomes if they turn evil */
-#define CF_CAVALIER     (1 << 4)   /*    16  Receives cavalier pay of 1,000 gp per level per year */
-#define CF_PALADIN      (1 << 5)   /*    32  Palidin attributes, improved Heal command */
-#define CF_HIER         (1 << 9)   /*   512  Hierophant druid */
-#define CF_DRUID        (1 << 10)  /*  1024  For interactions with the druidic temple */
-#define CF_INITIAL      (1 << 11)  /*  2048  Available as an initial class */
+#define CF_MONK         (1 << 0)                 /*     1  must check monk_weapon() for armor and weapons levels */
+#define CF_CASTER       (1 << 1)                 /*     2  Class selects a spell when character is created */
+#define CF_NOBLE        (1 << 2)                 /*     4  Gains 10,000 gp per level */
+#define CF_ROGUE        (1 << 3)                 /*     8  Class character becomes if they turn evil */
+#define CF_CAVALIER     (1 << 4)                 /*    16  Receives cavalier pay of 1,000 gp per level per year */
+#define CF_PALADIN      (1 << 5)                 /*    32  Palidin attributes, improved Heal command */
+#define CF_HIER         (1 << 9)                 /*   512  Hierophant druid */
+#define CF_DRUID        (1 << 10)                /*  1024  For interactions with the druidic temple */
+#define CF_INITIAL      (1 << 11)                /*  2048  Available as an initial class */
 
 #define MS_AMAGIC             (1 << 0)
 #define MS_SLEEP              (1 << 1)
@@ -165,7 +152,6 @@ int     NO_OF_MONSTERS;
 #define SP_AR49              13
 #define SP_VLA               14
 #define SP_ENCH              15
-#define SP_SUMN              26
 
 #define SK_BOW                1
 #define SK_1HSWORD            2
@@ -285,7 +271,6 @@ int     NO_OF_MONSTERS;
 #define E_RSPL               23              /* Random spell scroll, ct1=min spell level, ct2=max spell level */
 #define E_SPEL               24              /* Specific spell scroll, ct1=spell, ct2=spell control */
 #define E_LGND               25              /* Mutable legendary */
-#define E_SUMN               26              /* Summon */
 
 /* Socket effects */
 #define S_STR               100
@@ -520,10 +505,6 @@ int     NO_OF_MONSTERS;
 #define STAT_ITEM_CARDS       68
 #define STAT_USE_DECK         69
 #define STAT_GET_DECK         70
-#define STAT_EQUIP_MYTHIC     71
-#define STAT_SUNSTONE         72
-#define STAT_PORTABLE_HOLE    73
-#define STAT_MECH_MERCHANT    74
 */
 
 #define M_NONE                 0
@@ -558,64 +539,64 @@ typedef byte KNOW_TYPE[101][101];
 typedef int  SPELLBOOK[1000];
 
 typedef struct {
-  Int32  item;
-  Int32  percent;
+  int    item;
+  int    percent;
   } HUNTING_ITEMS;
 
 typedef struct {
-  Int32  class;
-  Int32  level;
-  Int32  trait;
+  int    class;
+  int    level;
+  int    trait;
   } TRAITS;
 
 typedef struct {
   char* name;
-  Int32 stat_adjust[6];
-  Int32  fixed_skill[4];
-  Int32  fixed_skill_range[4];
-  Int32  flags;
-  Int32  aging;
+  int   stat_adjust[6];
+  int    fixed_skill[4];
+  int    fixed_skill_range[4];
+  int    flags;
+  int    aging;
   } RACE_REC;
 
 typedef struct {
   char*  name;
-  Int32  stat_adjust[6];
+  int    stat_adjust[6];
   double first_exp;
   double next_exp;
-  Int32  initial_inv_slot[4];
-  Int32  initial_inv_item[4];
-  Int32  hitdie;
-  Int32  mana;
-  Int32  becomes_caster;
-  Int32  random_skill[3];
-  Int32  random_skill_range;
-  Int32  fixed_skill[4];
-  Int32  fixed_skill_range[4];
-  Int32  flags;
-  Int32  skill_table;
-  Int32  level_skills[4];
-  Int32  spell_group;
-  Int32  hp_regen;
-  Int32  weapon_affinity;
+  int    initial_inv_slot[4];
+  int    initial_inv_item[4];
+  int    hitdie;
+  int    mana;
+  int    becomes_caster;
+  int    random_skill[3];
+  int    random_skill_range;
+  int    fixed_skill[4];
+  int    fixed_skill_range[4];
+  int    flags;
+  int    skill_table;
+  int    level_skills[4];
+  int    spell_group;
+  int    hp_regen;
+  int    weapon_affinity;
   } CLASS_REC;
 
 typedef struct {
-  Int32  from;
-  Int32  level;
-  Int32  to;
+  int    from;
+  int    level;
+  int    to;
   } CLASS_CHANGE_REC;
 
 typedef struct {
-  Int32  class;
-  Int32  level;
+  int    class;
+  int    level;
   char*  male;
   char*  female;
   } TITLE_REC;
 
 typedef struct {
-  Int32 counts[255];
-  Int32 trophies[255];
-  Int32 num_trophies;
+  int32_t counts[255];
+  int  trophies[255];
+  int  num_trophies;
   } STATS_REC;
 
 typedef struct {
@@ -644,10 +625,10 @@ typedef struct {
 typedef struct {
   char   name[33];
   double exp;
-  Int32  level;
+  int    level;
   char   cause;
   byte   class;
-  Int32  time_played;
+  int32_t   time_played;
   char   mode;
   } SCORE_ENTRY;
 
@@ -658,55 +639,55 @@ typedef struct {
   } DEFAULT_SCORE_REC;
 
 typedef struct {
-  Int32 link;
-  byte  region;
-  char  message[256];
+  int  link;
+  byte region;
+  char message[256];
   } MESSAGE;
 
 typedef struct {
-  Int32  shoptype;
-  Int32  region;
-  Int32  rx;
-  Int32  ry;
-  Int32  cx;
-  Int32  cy;
+  int  shoptype;
+  int  region;
+  int  rx;
+  int  ry;
+  int  cx;
+  int  cy;
   char name[40];
   } SHOP_REC;
 
 typedef struct {
-  Int32 region;
-  Int32 x;
-  Int32 y;
-  Int32 level;
-  Int32 map;
+  int region;
+  int x;
+  int y;
+  int level;
+  int map;
   } PREDEF_MAP;
 
 typedef struct {
-  Int32 quest;
-  Int32 message;
+  int quest;
+  int message;
   } COMPASS;
 
 typedef struct {
-  Int32 map;
-  Int32 x;
-  Int32 y;
+  int map;
+  int x;
+  int y;
   } TR_SHIP_REC;
 
 typedef struct {
-  Int32  quest;
-  Int32  region;
-  Int32  x;
-  Int32  y;
-  Int32  typ;
-  Int32  diff;
+  int  quest;
+  int  region;
+  int  x;
+  int  y;
+  int  typ;
+  int  diff;
   char name[33];
-  Int32  treasure;
-  Int32  premium;
-  Int32  sx;
-  Int32  sy;
-  Int32  boss;
-  Int32  adds;
-  Int32  numadds;
+  int  treasure;
+  int  premium;
+  int  sx;
+  int  sy;
+  int  boss;
+  int  adds;
+  int  numadds;
   } LINK_REC;
 
 typedef struct {
@@ -714,68 +695,66 @@ typedef struct {
   } REGION_REC;
 
 typedef struct {
-  Int32    speed;
-  Int32    number;
-  Int32    hp;
-  Int32    max_hp;
-  Int32    mana;
-  Int32    level;
-  Int32    attack;
-  Int32    defense;
+  int    speed;
+  int    number;
+  int    hp;
+  int    max_hp;
+  int    mana;
+  int    level;
+  int    attack;
+  int    defense;
   double exp;
   double exp_hp;
-  UInt32    special;
-  UInt32    special2;
-  Int32    sprite;
-  Int32    mtype;
+  unsigned int    special;
+  unsigned int    special2;
+  int    sprite;
+  int    mtype;
   char   name[16];
-  Int32    time;
-  Int32    sleep;         /* -sleep is rooted, +sleep is sleeping */
-  Int32    fear;
-  Int32    blind;
-  Int32    confused;
-  Int32    poison;
-  Int32    prev;
-  Int32    treasure;
+  int    time;
+  int    sleep;         /* -sleep is rooted, +sleep is sleeping */
+  int    fear;
+  int    blind;
+  int    confused;
+  int    poison;
+  int    prev;
+  int    treasure;
   } NPC_REC;
 
 typedef struct {       /* this is used for setting character stats with transformations */
-  Int32    number;
-  Int32    strength;
-  Int32    dexterity;
-  Int32    intelligence;
-  Int32    wisdom;
-  Int32    constitution;
-  Int32    charisma;
+  int    number;
+  int    strength;
+  int    dexterity;
+  int    intelligence;
+  int    wisdom;
+  int    constitution;
+  int    charisma;
   } NPC_STATS;
 
 typedef struct {
-  Int32  link;
-  Int32  otype;
-  Int32  user_hp;
-  Int32  user_health;
+  int  link;
+  int  otype;
+  int  user_hp;
+  int  user_health;
   byte effect;
-  Int32  control;
-  Int32  control2;
+  int  control;
+  int  control2;
   byte weight;
   double cost;
-  Int32    level;
-  Int32    damage;
-  Int32    sprite;
-  Int32    rarity;
-  Int32    plus;
-  Int32    charges;
+  int    level;
+  int    damage;
+  int    sprite;
+  int    rarity;
+  int    plus;
+  int    charges;
   double costp;
-  Int32    align;
-  Int32    skill;                  /* controlling skill */
-  Int32    min_skill;              /* minimum skill to use */
+  int    align;
+  int    skill;                  /* controlling skill */
+  int    min_skill;              /* minimum skill to use */
   char name[60];
-  Int32    num_enchantments;
-  Int32    enchantments[3];
-  Int32    num_sockets;
-  Int32    sockets[3];
-  UInt32   flags;
-  Int32    flags2;
+  int    num_enchantments;
+  int    enchantments[3];
+  int    num_sockets;
+  int    sockets[3];
   } OBJECT_REC;
 
 typedef struct {
@@ -797,40 +776,40 @@ typedef struct {
 typedef GEAR_SET GEAR_MANAGER[10];
 
 typedef struct {
-  Int32 object;
-  Int32 craft_item;
-  Int32 object1;
-  Int32 object2;
-  Int32 object3;
-  Int32 object4;
-  Int32 object5;
-  Int32 object6;
-  Int32 object7;
-  Int32 object8;
-  Int32 object9;
-  Int32 object10;
+  int object;
+  int craft_item;
+  int object1;
+  int object2;
+  int object3;
+  int object4;
+  int object5;
+  int object6;
+  int object7;
+  int object8;
+  int object9;
+  int object10;
   } RECIPE;
 
 typedef struct {
   byte user_hp;
   byte user_health;
-  Int32  effect;
-  Int32  control;
+  int  effect;
+  int  control;
   byte allign;
-  Int32 number;
+  int number;
   byte level;
   byte mana;
-  UInt32  special;
+  unsigned int  special;
   byte for_sale;
   char name[26];
   } SPELL_REC;
 
 typedef struct {
-  Int32        region;
-  Int32        rx;
-  Int32        ry;
-  Int32        cx;
-  Int32        cy;
+  int        region;
+  int        rx;
+  int        ry;
+  int        cx;
+  int        cy;
   double     mortgage;
   double     payment;
   double     interest;
@@ -838,19 +817,19 @@ typedef struct {
   } HOUSE;
 
 typedef struct {
-  Int32        region;
-  Int32        rx;
-  Int32        ry;
-  Int32        cx;
-  Int32        cy;
+  int        region;
+  int        rx;
+  int        ry;
+  int        cx;
+  int        cy;
   double     price;
   } FORSALE;
 
 typedef struct {
-  Int32        citynum;
-  Int32        region;
-  Int32        rx;
-  Int32        ry;
+  int        citynum;
+  int        region;
+  int        rx;
+  int        ry;
   } CITY_NUMBER;
 
 typedef NPC_REC DUNGEON_MONSTERS[6][61];
@@ -861,19 +840,19 @@ typedef struct {
   KNOW_TYPE        known;
   DUNGEON_MONSTERS monsters;
   DUNGEON_OBJECTS  objects;
-  Int32              upx;
-  Int32              upy;
-  Int32              downx;
-  Int32              downy;
-  Int32              cleared;
+  int              upx;
+  int              upy;
+  int              downx;
+  int              downy;
+  int              cleared;
   } DUNGEON_LEVEL;
 
 typedef struct {
-  Int32          num_levels;
-  Int32          dungeon_number;
+  int          num_levels;
+  int          dungeon_number;
   DUNGEON_LEVEL level[10];
-  Int32          treasurex;
-  Int32          treasurey;
+  int          treasurex;
+  int          treasurey;
   } DUNGEON;
 
 typedef struct {
@@ -886,32 +865,32 @@ typedef struct {
   byte      class;
   char      title[26];
   byte      race;
-  Int32       stat[7];
-  Int32       mhp;
-  Int32       chp;
+  int       stat[7];
+  int       mhp;
+  int       chp;
   byte      health;
-  Int32       mmana;
-  Int32       cmana;
-  Int32       ability[11];
-  Int32       x;
-  Int32       y;
-  Int32       map_x;
-  Int32       map_y;
+  int       mmana;
+  int       cmana;
+  int       ability[11];
+  int       x;
+  int       y;
+  int       map_x;
+  int       map_y;
   MAP_TYPE  map;
   KNOW_TYPE known;
-  Int32       region;
-  Int32       skill[31];
-  Int32       torch;
-  Int32       food;
-  Int32       armour;
-  Int32       weapon;
-  Int32       mount;
-  Int32       peg;
-  Int32      gold_coins;
-  Int32      mithril_coins;
-  Int32      adamantite_coins;
-  Int32      bank;
-  Int32      interest;
+  int       region;
+  int       skill[31];
+  int       torch;
+  int       food;
+  int       armour;
+  int       weapon;
+  int       mount;
+  int       peg;
+  int32_t      gold_coins;
+  int32_t      mithril_coins;
+  int32_t      adamantite_coins;
+  int32_t      bank;
+  int32_t      interest;
   byte      d_level;
   byte      diff;
   byte      land_x;
@@ -923,23 +902,27 @@ typedef struct {
   byte      hour;
   OBJECT_REC invent[20];
   OBJECT_REC pack[33];
-  Int32       effect[255];
+  byte      potion[9];
+  byte      ring[9];
+  byte      staff[13];
+  int       effect[255];
   DUNGEON_MONSTERS monster;
 /*  NPC_REC   monster[6][61]; */
   NPC_REC   party[6];
-  Int32       align;
+  int       align;
   char      in_city;
   byte      city;
-  Int32       hp_count;
-  Int32       mana_count;
-  Int32       phase;
+  int       hp_count;
+  int       mana_count;
+  byte      xxxxx[256];
+  int       phase;
   byte      gen[5000];
   byte      lore[5000];
   OBJECT_REC pawn[10][11];
-  STRING32  fspell[13];
-  Int32       ship_x;
-  Int32       ship_y;
-  Int32       ship_r;
+  STRING32  fspell[11];
+  int       ship_x;
+  int       ship_y;
+  int       ship_r;
   char      inship;
   char      gateway;
   byte      tardis_x[11];
@@ -951,9 +934,9 @@ typedef struct {
 /*  OBJECT_REC map_objects[1000]; */
   OBJECT_REC hole[1000];
   HOUSE      houses[5];
-  Int32        dungeon_number;
+  int        dungeon_number;
   char       quests[1000];
-  Int32       time_played;
+  int32_t       time_played;
   } PLAYER_REC;
 
 LINK PLAYER_REC         player;
@@ -975,18 +958,18 @@ LINK PLAYER_REC         player;
 LINK DUNGEON            current_dungeon;
 LINK GEAR_MANAGER       gear_manager;
 LINK SPELLBOOK          spellbook;
-LINK Int32                a_mon;
+LINK int                a_mon;
 LINK char               soundon;
-LINK Int32                bottom;
-LINK Int32                word_counter;
+LINK int                bottom;
+LINK int                word_counter;
 LINK char               clair;
-LINK Int32                snakes;
-LINK Int32                inv_item;
+LINK int                snakes;
+LINK int                inv_item;
 LINK char               napping;
-LINK Int32                exitf;
+LINK int                exitf;
 LINK byte               dc;
 LINK char               combat_mode;
-LINK Int32                mod_exit;
+LINK int                mod_exit;
 LINK byte               score1;
 LINK byte               score2;
 LINK char              exit_flag;
@@ -995,50 +978,50 @@ LINK char               loadname[80];
 LINK char               backupname[80];
 LINK char               graphics;
 LINK char               messages[60][80];
-LINK Int32                msg_clr[60];
+LINK int                msg_clr[60];
 LINK STATS_REC          stats;
-LINK Int32                recipe_start;
-LINK Int32                heroicMode;
+LINK int                recipe_start;
+LINK int                heroicMode;
 LINK char               in_arena;
 LINK byte               pixel;
 LINK OBJECT_REC         shop_items[1000];
-LINK Int32                n_shop_items;
+LINK int                n_shop_items;
 LINK char               wizardmode;
-LINK Int32                NO_OF_OBJECTS;
-LINK Int32                TOTAL_OBJECTS;
-LINK Int32                NO_OF_GENS;
-LINK Int32                NO_OF_LORE;
-LINK Int32                recipe_count;
-LINK Int32                num_spells;
+LINK int                NO_OF_OBJECTS;
+LINK int                TOTAL_OBJECTS;
+LINK int                NO_OF_GENS;
+LINK int                NO_OF_LORE;
+LINK int                recipe_count;
+LINK int                num_spells;
 LINK SCORE_ENTRY        hall_of_fame[MAX_HALL_OF_FAME];
 LINK SCORE_ENTRY        final_scores[MAX_FINAL_SCORES];
 LINK SCORE_REC_600      scores_600;
 LINK SCORE_VER          score_version;
 LINK SCORE_RECORD       high_scores[NUM_CLASSES];
 LINK SCORE_RECORD       legend_scores[NUM_CLASSES];
-LINK Int32                num_hall_of_fame;
-LINK Int32                num_final_scores;
+LINK int                num_hall_of_fame;
+LINK int                num_final_scores;
 LINK char               debugMSG[256];
-LINK Int32                hall_position;
-LINK Int32                death_position;
+LINK int                hall_position;
+LINK int                death_position;
 LINK char               no_color;
-LINK Int32                target_x;
-LINK Int32                target_y;
+LINK int                target_x;
+LINK int                target_y;
 LINK double             dir_x;
 LINK double             dir_y;
-LINK Int32                currentFloor;
-LINK Int32                lastFloor;
-LINK Int32                offset_x,offset_y;
-LINK Int32                trophy_count;
-LINK Int32               start_time;
-LINK Int32               end_time;
+LINK int                currentFloor;
+LINK int                lastFloor;
+LINK int                offset_x,offset_y;
+LINK int                trophy_count;
+LINK int32_t               start_time;
+LINK int32_t               end_time;
 LINK struct tm          date;
-LINK Int32                score_position;
-LINK Int32                path_x[PATH_MAX];
-LINK Int32                path_y[PATH_MAX];
-LINK Int32                best_path;
-LINK Int32                dungeon_floor;
-LINK Int32                dungeon_wall;
+LINK int                score_position;
+LINK int                path_x[PATH_MAX];
+LINK int                path_y[PATH_MAX];
+LINK int                best_path;
+LINK int                dungeon_floor;
+LINK int                dungeon_wall;
 LINK OBJECT_REC         in_air;
 LINK char               buffer[64];
 LINK char               debugbuffer[255];
@@ -1050,51 +1033,48 @@ LINK char               auto_pickup_gold;
 LINK char               auto_pickup_torch;
 LINK char               auto_open_doors;
 LINK char               auto_bump_walls;
-LINK Int32                drop_x;
-LINK Int32                drop_y;
+LINK int                drop_x;
+LINK int                drop_y;
 LINK char               use_from_ground;
 LINK char               no_arena;
-LINK Int32                downgrade_depth;
+LINK int                downgrade_depth;
 LINK char               downgrade_arena;
-LINK Int32                run_x;
-LINK Int32                run_y;
+LINK int                run_x;
+LINK int                run_y;
 LINK char               dungeon_scaling;
-LINK Int32                monster_count;
+LINK int                monster_count;
 LINK char               party_combat_mode;
-LINK Int32                delay_ranged;
-LINK Int32                delay_hit;
-LINK Int32                delay_trap;
-LINK Int32                last_target_x;
-LINK Int32                last_target_y;
+LINK int                delay_ranged;
+LINK int                delay_hit;
+LINK int                delay_trap;
+LINK int                last_target_x;
+LINK int                last_target_y;
 LINK char               used_sunstone;
-LINK Int32                col;
-LINK Int32                row;
+LINK int                col;
+LINK int                row;
 LINK char               auto_target;
-LINK Int32                levelCleared;
-LINK Int32                screen_width;
-LINK Int32                screen_height;
-LINK Int32                TEXT_GRID_WIDTH;
-LINK Int32                TEXT_GRID_HEIGHT;
-LINK Int32                smap_offset_x;
-LINK Int32                smap_offset_y;
-LINK Int32                tile_width;
-LINK Int32                tile_height;
-LINK Int32                TILES_X;
-LINK Int32                TILES_Y;
-LINK Int32                NUM_MSG;
-LINK Int32                text_offset_x;
-LINK Int32                text_offset_y;
-LINK Int32                showStats;
+LINK int                levelCleared;
+LINK int                screen_width;
+LINK int                screen_height;
+LINK int                TEXT_GRID_WIDTH;
+LINK int                TEXT_GRID_HEIGHT;
+LINK int                smap_offset_x;
+LINK int                smap_offset_y;
+LINK int                tile_width;
+LINK int                tile_height;
+LINK int                TILES_X;
+LINK int                TILES_Y;
+LINK int                NUM_MSG;
+LINK int                text_offset_x;
+LINK int                text_offset_y;
+LINK int                showStats;
 LINK char               fkey_mode;
-LINK char               macros[12][1024];
+LINK char               macros[10][1024];
 LINK char               currentMacro[1024];
-LINK char               takes_time;
-LINK KNOW_TYPE          known_maps[51];
-LINK char               encrypt_save_file;
 
 
 #ifdef DEBUG
-LINK Int32                debug_tab;
+LINK int                debug_tab;
 #endif
 
 
@@ -1113,7 +1093,7 @@ extern void skills7();
 extern void cave();
 
 /* combat.c */
-extern void arena(Int32 monster,Int32 floor,Int32 barriers,Int32 srcx,Int32 srcy);
+extern void arena(int monster,int floor,int barriers,int srcx,int srcy);
 
 /* help.c */
 extern void combat_help();
@@ -1122,20 +1102,19 @@ extern void show_icons();
 extern void upland_help();
 
 /* mapmaint.c */
-extern void arena_move_enemy(Int32 x,Int32 y);
-extern void arena_move_party(Int32 x,Int32 y);
+extern void arena_move_enemy(int x,int y);
+extern void arena_move_party(int x,int y);
 extern void make_map(char dir);
-extern void move_enemy(Int32 x,Int32 y);
-extern void arena_move_snake(Int32 x,Int32 y,Int32 floor);
-extern void move_snake(Int32 x,Int32 y,Int32 floor);
-extern void stock_monsters(Int32 depth,Int32 treasurex,Int32 treasurey,MAP_TYPE* map,DUNGEON_MONSTERS* monsters);
+extern void move_enemy(int x,int y);
+extern void move_snake(int x,int y,int floor);
+extern void stock_monsters(int depth,int treasurex,int treasurey,MAP_TYPE* map,DUNGEON_MONSTERS* monsters);
 extern void stock_town(byte town);
 extern void stock_treasure();
 
 /* shops.c */
 extern void dragon_dice();
 extern void gamble();
-extern Int32 haggle(double price,OBJECT_REC item);
+extern int haggle(double price,OBJECT_REC item);
 extern void cavalier(char* name);
 extern void library(char* name);
 extern void mounts(char* name);
@@ -1151,13 +1130,12 @@ extern void bank(char* name);
 /* specials.c */
 extern void display_scroll();
 extern void perform_effect(OBJECT_REC* obj);
-extern void special(Int32 whichone,OBJECT_REC* item);
+extern void special(int whichone,OBJECT_REC* item);
 extern void special8();
 extern void special9();
 extern void special14();
 extern void special22();
-extern void special31(Int32 max);
-extern void special42(Int32 mon);
+extern void special31(int max);
 extern void special43();
 extern void special53();
 extern void special55();
@@ -1173,64 +1151,64 @@ extern void special80();
 extern void special81();
 
 /* terminal.c */
-extern void bar(Int32 x1,Int32 y1,Int32 x2,Int32 y2);
+extern void bar(int x1,int y1,int x2,int y2);
 extern void clrscr();
-extern void delay(Int32 time);
-extern void draw(Int32 x1,Int32 y1,Int32 x2,Int32 y2,Int32 clr);
-extern void gotoxy(Int32 x,Int32 y);
+extern void delay(int time);
+extern void draw(int x1,int y1,int x2,int y2,int clr);
+extern void gotoxy(int x,int y);
 extern void graphmode();
 extern void init_graph();
-extern Int32 keypressed();
-extern void outtextxy(Int32 x,Int32 y,char* buffer);
-extern void outtextxyclr(Int32 x,Int32 y,char* buffer);
-extern void outtext_xy(Int32 x,Int32 y,char* buffer);
-extern void putimage(Int32 x,Int32 y,char** img,Int32 typ);
-extern void putpixel(Int32 x,Int32 y,Int32 clr);
-extern Int32 readkey();
+extern int keypressed();
+extern void outtextxy(int x,int y,char* buffer);
+extern void outtextxyclr(int x,int y,char* buffer);
+extern void outtext_xy(int x,int y,char* buffer);
+extern void putimage(int x,int y,char** img,int typ);
+extern void putpixel(int x,int y,int clr);
+extern int readkey();
 extern void readln(char* buffer);
-extern Int32 p_read(char* buffer);
+extern int p_read(char* buffer);
 extern void restoreScreen();
 extern void saveScreen();
-extern void setcolor(Int32 clr);
-extern void setfillstyle(Int32 st,Int32 clr);
-extern void settextstyle(Int32 a,Int32 b,Int32 c);
-extern void textmode(Int32 mode);
-extern void textcolor(Int32 color);
+extern void setcolor(int clr);
+extern void setfillstyle(int st,int clr);
+extern void settextstyle(int a,int b,int c);
+extern void textmode(int mode);
+extern void textcolor(int color);
 extern void txt_write(char* buffer);
 extern void txt_writeln(char* buffer);
-extern Int32 restoreTerm();
+extern int restoreTerm();
 extern void open_display();
 extern void close_display();
-extern void plot(Int32 x,Int32 y,Int32 clr);
+extern void plot(int x,int y,int clr);
 extern void flush();
 
 /* uchar.c */
 extern char* fix_name(STRING32 name);
-extern char* fix_ability(Int32 ability);
+extern char* fix_ability(int ability);
 extern char* get_sex();
 extern char* get_race();
 extern char* get_class();
 extern char* get_health();
 extern char* get_align();
-extern char* yes_no(Int32 input);
+extern char* yes_no(int input);
 extern char* show_health();
 extern char* show_align();
-extern char* show_int(Int32 n);
+extern char* show_int(int n);
 extern char* show_flt(double n);
 extern void disp_char();
-extern void make_char(Int32 rebirth);
+extern void make_char(int rebirth);
 extern void print_rec();
 
 /* uinvent.c */
 extern char* get_name(OBJECT_REC* item);
 extern OBJECT_REC* inventory(OBJECT_REC* item);
-extern char inv_valid(OBJECT_REC* item,Int32 line);
+extern char inv_valid(OBJECT_REC* item,int line);
 extern void show_inventory(OBJECT_REC* item);
 extern void compress();
-extern void show_lore(Int32 item);
-extern OBJECT_REC* unpack(Int32 slot);
-extern void do_exchange(OBJECT_REC* item,Int32 line);
-extern void pack_item(OBJECT_REC* item,Int32 line);
+extern void show_lore(int item);
+extern OBJECT_REC* unpack(int slot);
+extern void do_exchange(OBJECT_REC* item,int line);
+extern void pack_item(OBJECT_REC* item,int line);
 
 
 /* upland.c */
@@ -1240,15 +1218,15 @@ extern void check_encounter();
 extern void take_time();
 
 /* usprites.c */
-extern void show_sprite(Int32 x,Int32 y,Int32 sprt);
+extern void show_sprite(int x,int y,int sprt);
 extern void read_sprites();
-extern char** select_sprite(Int32 n);
+extern char** select_sprite(int n);
 
 /* uspells.c */
-extern byte has_spell(Int32 check);
-extern Int32 check_spell_1(char* spell_name,Int32 level,Int32 allign,Int32 first);
-extern Int32 get_spell_name(Int32 column,Int32 search,Int32 level,Int32 allign);
-extern Int32 castspell(Int32 spell_num);
+extern byte has_spell(int check);
+extern int check_spell_1(char* spell_name,int level,int allign,int first);
+extern int get_spell_name(int column,int search,int level,int allign);
+extern int castspell(int spell_num);
 extern void new_spell();
 
 /* unisubs.c */
@@ -1256,54 +1234,56 @@ extern void upper(char* buffer);
 extern void check_monk_weapon();
 extern void check_noble();
 extern void check_scores();
-extern void copyMap(MAP_TYPE* dest,Int32 num);
+extern void copyMap(MAP_TYPE* dest,int num);
 extern void decode(char* buffer);
 extern void winner();
-extern Int32 exist(char* filename);
-extern Int32 find_gen(char* search);
-extern Int32 find_lore(char* search);
+extern int exist(char* filename);
+extern int find_gen(char* search);
+extern int find_lore(char* search);
 extern char inkey();
 extern void load();
+extern void load57();
 extern void make_c();
 extern void make_h();
 extern void make_n();
-extern char* make_str(Int32 value);
-extern Int32 mana_cost(Int32 mana);
-extern Int32 mval(STRING13 instr);
-extern double needed(Int32 x);
+extern char* make_str(int value);
+extern int mana_cost(int mana);
+extern int mval(STRING13 instr);
+extern double needed(int x);
 extern void new_pawn();
 extern byte reverseByte(byte in);
+extern void save();
 extern void show_number();
 extern void save_scores();
 extern void load_scores();
 extern void show_scores();
 extern void show_final_scores();
 extern void final_score(char cause);
-extern Int32 sqr(Int32 n);
+extern int sqr(int n);
 extern void teleport();
-extern Int32 rcs_trunc(double x);
-extern Int32 u_random(Int32 range);
+extern int rcs_trunc(double x);
+extern int u_random(int range);
 extern void u_randomize();
 
 /* unisubs2.c */
 extern void adjust_abilities();
-extern void area9(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y);
-extern void area25(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y);
-extern void area49(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y);
+extern void area9(int damage,int elem,int center_x,int center_y);
+extern void area25(int damage,int elem,int center_x,int center_y);
+extern void area49(int damage,int elem,int center_x,int center_y);
 extern void blind();
 extern void clear_prompt();
 extern void display_abilities();
 extern void do_blink();
 extern void do_sleep();
-extern void drain(Int32 damage,Int32 elem);
-extern void fear(Int32 radius);
-extern char get_dir(Int32* xdir,Int32* ydir);
-extern char in_sight(Int32 x,Int32 y);
-extern void missile(Int32 damage,Int32 elem,Int32 radius);
-extern void noise(Int32 f,Int32 d);
+extern void drain(int damage,int elem);
+extern void fear(int radius);
+extern char get_dir(int* xdir,int* ydir);
+extern char in_sight(int x,int y);
+extern void missile(int damage,int elem,int radius);
+extern void noise(int f,int d);
 extern void prompt(char* display);
 extern void promptNS(char* display);
-extern void r_missile(Int32 damage);
+extern void r_missile(int damage);
 extern void remove_land_player();
 extern void remove_player();
 extern void show_headings();
@@ -1315,17 +1295,17 @@ extern void show_screen();
 extern void show_side();
 extern void show_sm_land();
 extern void show_sm_map();
-extern void show_spot(Int32 x,Int32 y);
+extern void show_spot(int x,int y);
 extern void title();
-extern void touch(Int32 damage,Int32 elem);
+extern void touch(int damage,int elem);
 
 /* unisubs3.c */
 extern void close_door();
 extern void dart_trap();
 extern void fire_trap();
 extern void discover();
-extern void enemy_missile(Int32 ex,Int32 ey);
-extern void fire(Int32 damage,OBJECT_REC* weapon);
+extern void enemy_missile(int ex,int ey);
+extern void fire(int damage,OBJECT_REC* weapon);
 extern void go_bottom();
 extern void go_down();
 extern void go_ship();
@@ -1334,217 +1314,206 @@ extern void healing();
 extern void lock_door();
 extern void nap();
 extern void open_door();
-extern void pack_it(Int32 floor);
+extern void pack_it(int floor);
 extern void party();
 extern void poison_trap();
 extern void say_word();
 extern void show_log();
 extern void sleep_trap();
-extern void super(Int32 damage,Int32 elem);
+extern void super(int damage,int elem);
 extern void teleport_trap();
-extern void view(Int32 floor);
+extern void view(int floor);
 
 /* writefont.c */
-extern void write_font(Int32 x,Int32 y,Int32 color,char* line);
+extern void write_font(int x,int y,int color,char* line);
 
-extern Int32 check_intrinsic(OBJECT_REC obj,Int32 intr);
-extern Int32 find_item_slot();
-extern Int32 has_intrinsic(Int32 intr);
-extern Int32 intrinsic_count(Int32 intr);
-extern void get_shop_items(Int32 otype1,Int32 otype2,Int32 otype3,Int32 otype4,Int32 otype5,Int32 otyp6,Int32 rarity);
+extern int check_intrinsic(OBJECT_REC obj,int intr);
+extern int find_item_slot();
+extern int has_intrinsic(int intr);
+extern int intrinsic_count(int intr);
+extern void get_shop_items(int otype1,int otype2,int otype3,int otype4,int otype5,int otyp6,int rarity);
 extern double item_cost(OBJECT_REC* item);
-extern void shop(char* name,Int32 shop_type);
-extern Int32 place_object(Int32 level);
-extern OBJECT_REC* find_linked_item(Int32 lnk);
-extern void dead_monster(NPC_REC* mon,char tr,Int32 x,Int32 y);
+extern void shop(char* name,int shop_type);
+extern int place_object(int level);
+extern OBJECT_REC* find_linked_item(int lnk);
+extern void dead_monster(NPC_REC* mon,char tr,int x,int y);
 extern void show_messages();
-extern void msg(char* message,Int32 color);
+extern void msg(char* message,int color);
 extern void crafting();
 extern void wizard();
-extern void show_gen(Int32 item);
+extern void show_gen(int item);
 extern void show_message(char* message);
-extern void buy_house(Int32 hnum);
+extern void buy_house(int hnum);
 extern void new_month();
 extern void auto_detect();
-extern void house_inventory(Int32 hnum);
-extern void gain_exp(double amt,Int32 who);
+extern void house_inventory(int hnum);
+extern void gain_exp(double amt,int who);
 extern void show_quest();
 extern void new_game();
-extern void convert_time(Int32 t,char* buffer);
+extern void convert_time(int32_t t,char* buffer);
 extern void debugLog(char* msg);
 extern void show_stats();
 
 extern void check_trophies();
 extern void show_trophies();
 
-extern void recipe_string(Int32 num,char* buffer);
+extern void recipe_string(int num,char* buffer);
 
 /* charattributes.c */
-extern Int32 get_base_str();
-extern Int32 get_base_dex();
-extern Int32 get_base_con();
-extern Int32 get_base_int();
-extern Int32 get_base_wis();
-extern Int32 get_base_chr();
-extern Int32 get_base_mmana();
-extern Int32 get_base_mhp();
-extern Int32 get_base_weapon();
-extern Int32 get_base_armour();
-extern Int32 get_str();
-extern Int32 get_dex();
-extern Int32 get_con();
-extern Int32 get_int();
-extern Int32 get_wis();
-extern Int32 get_chr();
-extern Int32 get_mmana();
-extern Int32 get_mhp();
-extern Int32 get_weapon();
-extern Int32 get_armour();
-extern Int32 get_hpr();
-extern Int32 get_manar();
-extern Int32 get_hit();
+extern int get_base_str();
+extern int get_base_dex();
+extern int get_base_con();
+extern int get_base_int();
+extern int get_base_wis();
+extern int get_base_chr();
+extern int get_base_mmana();
+extern int get_base_mhp();
+extern int get_base_weapon();
+extern int get_base_armour();
+extern int get_str();
+extern int get_dex();
+extern int get_con();
+extern int get_int();
+extern int get_wis();
+extern int get_chr();
+extern int get_mmana();
+extern int get_mhp();
+extern int get_weapon();
+extern int get_armour();
+extern int get_hpr();
+extern int get_manar();
+extern int get_hit();
 extern double get_exp_multiplier();
-extern Int32 get_magic_find();
+extern int get_magic_find();
 extern double get_magic_resistance();
-extern Int32 get_monster_level_plus();
-extern Int32 get_crit();
+extern int get_monster_level_plus();
+extern int get_crit();
 
-extern void stats_do_damage(Int32 dam);
-extern void stats_take_damage(Int32 dam);
-extern void scale_monster(NPC_REC* monster, Int32 scale);
+extern void stats_do_damage(int dam);
+extern void stats_take_damage(int dam);
+extern void scale_monster(NPC_REC* monster, int scale);
 extern void charmmonster();
 extern void set_title();
 extern void make_assassin();
-extern Int32 check_class_change(Int32 class);
+extern int check_class_change(int class);
 
 extern void data_card(OBJECT_REC* it);
 extern char* base_name(char* buffer,OBJECT_REC* item);
 
-extern Int32 get_skill(Int32 num);
-extern void add_skill(Int32 skill,Int32 num);
-extern void show_gain(Int32 g);
-extern Int32 get_bonus(Int32 typ);
-extern void fire_wand(Int32 damage);
-extern void enchant(Int32 ench,Int32 limit);
+extern int get_skill(int num);
+extern void add_skill(int skill,int num);
+extern void show_gain(int g);
+extern int get_bonus(int typ);
+extern void fire_wand(int damage);
+extern void enchant(int ench,int limit);
 extern void show_legends();
 extern void mutable(OBJECT_REC* it);
 extern void itemColor(OBJECT_REC* item);
-extern Int32 passable(Int32 x,Int32 y,char monstPass,char doorPass);
-extern Int32 los(Int32 x1,Int32 y1,Int32 x2,Int32 y2,char monstPass);
-extern void activate(Int32 x,Int32 y);
+extern int passable(int x,int y,char monstPass);
+extern int los(int x1,int y1,int x2,int y2,char monstPass);
+extern void activate(int x,int y);
 extern char adjust_map();
-extern Int32 compass(Int32 suggest);
+extern int compass(int suggest);
 extern void level_legacy(OBJECT_REC* item);
-extern Int32 mutable_enchant();
+extern int mutable_enchant();
 extern void check_level_legacy();
 extern void player_attack_defense();
-extern Int32 max_damage(OBJECT_REC* weapon,NPC_REC* target,Int32 base);
-extern Int32 has_socket(Int32 intr);
-extern Int32 figure_damage(Int32 damage,Int32 elem,NPC_REC* monster);
-extern Int32 get_weight();
-extern Int32 get_max_weight();
+extern int max_damage(OBJECT_REC* weapon,NPC_REC* target,int base);
+extern int has_socket(int intr);
+extern int figure_damage(int damage,int elem,NPC_REC* monster);
+extern int get_weight();
+extern int get_max_weight();
 extern void blind_trap();
 extern void root_trap();
-extern void multiply_monster(NPC_REC* monster, Int32 scale);
-extern Int32 can_see();
-extern void target(Int32 sprt,Int32 stop_st_target,Int32 show_path);
-char find_path(Int32 startx,Int32 starty,Int32 endx,Int32 endy,char ignoreMonst);
-extern char fear_dir(Int32 start_x,Int32 start_y,Int32 end_x,Int32 end_y);
-extern Int32 set_trap(Int32 n);
-extern void arena_party_heal(Int32 healer);
-extern void trigger_trap(Int32 x,Int32 y,Int32 trap_type);
-extern NPC_REC* get_monster(Int32 x,Int32 y);
-extern void do_heal(Int32 amount,Int32 who);
-extern Int32 is_weapon(OBJECT_REC* item);
-extern Int32 meleehit(Int32 who,OBJECT_REC* weapon,Int32 dmg,NPC_REC* target,char hand);
-extern OBJECT_REC* get_item(Int32 x,Int32 y);
-extern void thrown_potion(OBJECT_REC* item,Int32 x,Int32 y);
-extern void aoe(Int32 cx,Int32 cy,Int32 effect,Int32 control,Int32 damage,Int32 element,Int32 range,Int32 mtype,Int32 toHit);
+extern void multiply_monster(NPC_REC* monster, int scale);
+extern int can_see();
+extern void target(int sprt,int stop_st_target,int show_path);
+extern int find_path(int start_x,int start_y,int end_x,int end_y,int count);
+extern char fear_dir(int start_x,int start_y,int end_x,int end_y);
+extern int set_trap(int n);
+extern void arena_party_heal(int healer);
+extern void trigger_trap(int x,int y,int trap_type);
+extern NPC_REC* get_monster(int x,int y);
+extern void do_heal(int amount,int who);
+extern int is_weapon(OBJECT_REC* item);
+extern int meleehit(int who,OBJECT_REC* weapon,int dmg,NPC_REC* target,char hand);
+extern OBJECT_REC* get_item(int x,int y);
+extern void thrown_potion(OBJECT_REC* item,int x,int y);
+extern void aoe(int cx,int cy,int effect,int control,int damage,int element,int range,int mtype,int toHit);
 extern void use_item();
-extern char valid_move(Int32 x,Int32 y);
+extern char valid_move(int x,int y);
 extern void fire_weapon();
 extern void do_get();
 extern void throw(char hnd);
-extern void cast_spell(Int32 number);
-extern Int32 get_spell_power();
-extern Int32 get_attack_power();
-extern char* effect(Int32 e,Int32 c,char* buffer);
-extern void get_attribute_name(char* buffer,Int32 ench);
-extern Int32 has_trophy(Int32 num);
-extern Int32 get_dodge();
+extern void cast_spell(int number);
+extern int get_spell_power();
+extern int get_attack_power();
+extern char* effect(int e,int c,char* buffer);
+extern void get_attribute_name(char* buffer,int ench);
+extern int has_trophy(int num);
+extern int get_dodge();
 extern void show_f_keys();
-extern void get_shop_spells(Int32 level);
-extern void show_spell(Int32 num,Int32 ox,Int32 oy,Int32 line);
+extern void get_shop_spells(int level);
+extern void show_spell(int num,int ox,int oy,int line);
 extern void transcribe();
 extern void mutable_set_name(OBJECT_REC* it);
-extern Int32 get_gold();
-extern Int32 get_coins();
-extern void add_gold(Int32 g);
-extern void sub_gold(Int32 g);
-extern Int32 can_be_seen();
-extern void enemy_hit(Int32 x,Int32 y);
+extern int32_t get_gold();
+extern int32_t get_coins();
+extern void add_gold(int32_t g);
+extern void sub_gold(int32_t g);
+extern int can_be_seen();
+extern void enemy_hit(int x,int y);
 extern void mutable_legendary(OBJECT_REC* item);
-extern Int32 get_dungeon(Int32 n);
-extern Int32 get_linked_msg(Int32 n);
+extern int get_dungeon(int n);
+extern int get_linked_msg(int n);
 extern void use_compass();
-extern Int32 get_linked_monster(Int32 n);
-extern void mapgen_old(Int32 floor);
-extern void mapgen(Int32 depth,Int32 floor,Int32* treasurex,Int32* treasurey,
-                   Int32 *upx, Int32 *upy, Int32 *downx, Int32 *downy,
+extern int get_linked_monster(int n);
+extern void mapgen_old(int floor);
+extern void mapgen(int depth,int floor,int* treasurex,int* treasurey,
+                   int *upx, int *upy, int *downx, int *downy,
                    MAP_TYPE* map,KNOW_TYPE* known);
-extern Int32 damage_reduction(Int32 n);
-extern Int32 magic_adjust(Int32 n);
+extern int damage_reduction(int n);
+extern int magic_adjust(int n);
 extern void check_mount();
-extern Int32 reduce_damage(Int32 damage,Int32 element);
-extern Int32 get_city();
+extern int reduce_damage(int damage,int element);
+extern int get_city();
 extern double buy_price(double price);
-extern Int32 triad_equipped();
-extern Int32 fighting_final_boss(NPC_REC* mon);
-extern Int32 offhand_weapon();
+extern int triad_equipped();
+extern int fighting_final_boss(NPC_REC* mon);
+extern int offhand_weapon();
 extern void show_time();
 extern void process_config(char* name);
-extern Int32 process_option(char* pChar);
-extern Int32 can_drop(Int32 destx,Int32 desty,char check_inair);
-extern Int32 in_room(Int32 x,Int32 y);
+extern int process_option(char* pChar);
+extern int can_drop(int destx,int desty,char check_inair);
+extern int in_room(int x,int y);
 extern void light_room();
 extern void char_sheet_labels(char showall);
 extern void char_sheet_data();
 extern void show_skills();
 extern void check_autos();
-extern void Rcs_Seed(UInt32 s);
-extern void Shift(Int32 count);
-extern Int32 Rcs_Random(Int32 range);
-extern void build_dungeon(Int32 floor,Int32 dn);
+extern void Rcs_Seed(u_int32_t s);
+extern void Shift(int count);
+extern int Rcs_Random(int range);
+extern void build_dungeon(int floor,int dn);
 extern void save_level();
 extern void load_level();
-extern void save_gear(char weapons_only,Int32 slot);
-extern void load_gear(char weapons_only,Int32 slot);
-extern char item_dir(Int32 item);
-extern void help_item(char* msg,Int32 col_width,Int32 num_rows,Int32 indent);
+extern void save_gear(char weapons_only,int slot);
+extern void load_gear(char weapons_only,int slot);
+extern char item_dir(int item);
+extern void help_item(char* msg,int col_width,int num_rows,int indent);
 extern void convert_recipe(OBJECT_REC* item);
 extern void sort_shop_items();
 extern void get_shop_recipes();
-extern Int32 check_level_cleared();
+extern int check_level_cleared();
 extern void pit_trap();
 extern void miniMap();
-extern void fkey_pressed(Int32 n);
-extern void shift_fkey_pressed(Int32 n);
-extern void alt_fkey_pressed(Int32 n);
-extern void ctrl_fkey_pressed(Int32 n);
-extern Int32 unbuffer();
-extern Int32 find_empty(Int32 cx,Int32 cy,Int32 range,Int32 floor,Int32* dx,Int32 * dy);
-extern void move_summoned();
-extern Int32 find_target(Int32 x,Int32 y,Int32* tx,Int32* ty);
-extern void save_new();
-extern void clear_game_data();
-extern char* next_word(char* buffer);
-extern byte match(char* buffer, char* test);
-extern Int32 possesses(Int32 link);
-extern void hole_inventory();
-extern void mech_merchant();
-
+extern void fkey_pressed(int n);
+extern void shift_fkey_pressed(int n);
+extern void alt_fkey_pressed(int n);
+extern void ctrl_fkey_pressed(int n);
+extern int unbuffer();
 
 #ifdef ANNIV
-extern unsigned short crc(unsigned char *s, Int32 len, unsigned short crcval);
+extern unsigned short crc(unsigned char *s, int len, unsigned short crcval);
 #endif
 

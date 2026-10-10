@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 get_linked_monster(Int32 n) {
-  Int32 i;
+int get_linked_monster(int n) {
+  int i;
   i = 0;
   while (monsters[i].number < 999) {
     if (monsters[i].number == n) return i;

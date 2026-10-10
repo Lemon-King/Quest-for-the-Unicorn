@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-void fire_wand(Int32 damage) {
-  Int32  x,y;
-  Int32  i;
+void fire_wand(int damage) {
+  int  x,y;
+  int  i;
   char buffer[20];
   NPC_REC* monster;
   OBJECT_REC* weapon;
@@ -29,11 +29,11 @@ void fire_wand(Int32 damage) {
     if (weapon != NULL) {
       if (is_weapon(weapon) && get_skill(weapon->skill) >= 5) i += get_skill(weapon->skill) / 2;
       if (is_weapon(weapon) && get_skill(weapon->skill) < 5) {
-        if (get_skill(weapon->skill) == 0) i = (Int32)(i * 0.16);
-        if (get_skill(weapon->skill) == 1) i = (Int32)(i * 0.32);
-        if (get_skill(weapon->skill) == 2) i = (Int32)(i * 0.48);
-        if (get_skill(weapon->skill) == 3) i = (Int32)(i * 0.64);
-        if (get_skill(weapon->skill) == 4) i = (Int32)(i * 0.80);
+        if (get_skill(weapon->skill) == 0) i = (int)(i * 0.16);
+        if (get_skill(weapon->skill) == 1) i = (int)(i * 0.32);
+        if (get_skill(weapon->skill) == 2) i = (int)(i * 0.48);
+        if (get_skill(weapon->skill) == 3) i = (int)(i * 0.64);
+        if (get_skill(weapon->skill) == 4) i = (int)(i * 0.80);
         }
       }
     if (monster->fear > 0) i += 10;

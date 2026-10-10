@@ -11,8 +11,7 @@
 #include "header.h"
 
 void pit_trap() {
-  Int32 i,j;
-  Int32 x,y;
+  int i,j;
   if (player.d_level >= bottom) return;
   save_level();
   if (current_dungeon.level[player.d_level-1].cleared == 0) {
@@ -42,21 +41,6 @@ void pit_trap() {
 /*      activeDelay = 2; */
   if (in_room(player.x,player.y) && can_see()) light_room();
   msg("Fell down a pit",11);
-  if (player.party[0].hp > 0) {
-    x = player.party[0].treasure & 0xff;
-    y = (player.party[0].treasure >> 8) & 0xff;
-    player.map[x][y] = player.party[0].prev;
-    if (find_empty(player.x,player.y,10,dungeon_floor,&x,&y)) {
-      player.party[0].prev = player.map[x][y];
-      player.map[x][y] = 300;
-      player.party[0].treasure = (y << 8) | x;
-      }
-    else {
-      player.party[0].hp = 0;
-      }
-    }
   show_screen();
-  run_x = 0;
-  run_y = 0;
   }
 

@@ -1069,37 +1069,4 @@ static char * sprite_356[] = {
 /* XPM */
 static char * sprite_357[] = {
 "M"};
-/* XPM */
-static char * sprite_358[] = {
-"/"};
-/* XPM */
-static char * sprite_359[] = {
-"#N"};
-/* XPM */
-static char * sprite_360[] = {
-"*P"};
-/* XPM */
-static char * sprite_361[] = {
-"*P"};
-/* XPM */
-static char * sprite_362[] = {
-"*P"};
-/* XPM */
-static char * sprite_363[] = {
-"*P"};
-/* XPM */
-static char * sprite_364[] = {
-"*P"};
-/* XPM */
-static char * sprite_365[] = {
-"MP"};
-/* XPM */
-static char * sprite_366[] = {
-"*I"};
-/* XPM */
-static char * sprite_367[] = {
-"*I"};
-/* XPM */
-static char * sprite_368[] = {
-"OI"};
 

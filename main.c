@@ -12,20 +12,20 @@
 
 #include "header.h"
 
-Int32 main2(Int32 argc,char** argv) {
-  Int32 i;
-  Int32 loadgame;
+int main2(int argc,char** argv) {
+  int i;
+  int loadgame;
   struct timeval tim;
   time_t         date_time;
-  Int32 loot_commons;
-  Int32 loot_uncommons;
-  Int32 loot_rares;
-  Int32 loot_very_rares;
-  Int32 loot_ultra_rares;
+  int loot_commons;
+  int loot_uncommons;
+  int loot_rares;
+  int loot_very_rares;
+  int loot_ultra_rares;
 
 #ifdef ASCII
   char k;
-  Int32  tw,th;
+  int  tw,th;
   tw = 0;
   th = 0;
   unbuffer();
@@ -60,7 +60,7 @@ Int32 main2(Int32 argc,char** argv) {
   TEXT_GRID_WIDTH = 80;
   TEXT_GRID_HEIGHT = 25;
   NUM_MSG = 10;
-  for (i=0; i<12; i++) strcpy(macros[i],"");
+  for (i=0; i<10; i++) strcpy(macros[i],"");
 #ifdef ASCII
   TILES_X = 55;
   TILES_Y = 23;
@@ -107,7 +107,6 @@ Int32 main2(Int32 argc,char** argv) {
   delay_trap = 100;
   last_target_x = 0;
   last_target_y = 0;
-  encrypt_save_file = 'Y';
   gettimeofday(&tim,NULL);
   start_time = tim.tv_sec;
   for (i=0; i<60; i++) {
@@ -227,7 +226,7 @@ Int32 main2(Int32 argc,char** argv) {
     if (fkey_mode == 'G') printf("  Fkeys: Gear\n");
     printf("  Screen Size: %d x %d\n", screen_width, screen_height);
     printf("Macros:\n");
-    for (i=0; i<12; i++)
+    for (i=0; i<10; i++)
       printf("  F%d = %s\n",i+1,macros[i]);
     }
   if (showStats != 0) return(0);
@@ -246,7 +245,6 @@ Int32 main2(Int32 argc,char** argv) {
 /*
   show_final_scores();
 */
-  clear_game_data();
   if (loadgame == 1) {
     i = strlen(loadname);
     if (i > 4 && loadname[i-4] == '.') loadname[i-4] = 0;
@@ -277,9 +275,7 @@ Int32 main2(Int32 argc,char** argv) {
   gettimeofday(&tim,NULL);
   end_time = tim.tv_sec;
   player.time_played += (end_time - start_time);
-  if (exit_flag == 'S') {
-    save_new();
-    }
+  if (exit_flag == 'S') save();
   textmode(3);
   unlink(backupname);
   score_position = 0;
@@ -313,6 +309,7 @@ Int32 main2(Int32 argc,char** argv) {
   check_scores();
   if (score1>0 || score2>0) show_scores();
   textmode(3);
+  unlink("temp01.$$$");
 #ifdef ASCII
   if (no_color != 'Y') printf("\e[0;30m");
   clrscr();
@@ -335,8 +332,8 @@ extern void rcs_initWin32(HINSTANCE hInstance);
 int APIENTRY WinMain(HINSTANCE hInstance,
                                          HINSTANCE hPrevInstance,
                                          LPSTR     lpCmdLine,
-                                         Int32     nCmdShow) {
-        Int32 argc;
+                                         int       nCmdShow) {
+        int argc;
                 char **argv;
                 char buffer[1024];
                 char *pBuffer;

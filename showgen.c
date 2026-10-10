@@ -10,11 +10,11 @@
 
 #include "header.h"
 
-void show_gen(Int32 item) {
-  Int32 i;
-//  Int32 x,y;
-//  Int32 space;
-//  Int32 size;
+void show_gen(int item) {
+  int i;
+//  int x,y;
+//  int space;
+//  int size;
   MESSAGE general;
   i = item;
   general = gen[i];

@@ -12,12 +12,12 @@
 
 void up_land() {
   byte key;
-  Int32  x = 0,y = 0;
-  Int32  i;
-//  Int32  m_file;
-  Int32  suggest;
-  Int32  sug_level;
-  Int32  see_dist;
+  int  x = 0,y = 0;
+  int  i;
+  int  m_file;
+  int  suggest;
+  int  sug_level;
+  int  see_dist;
 
   void light_distance() {
     see_dist = 1;
@@ -29,7 +29,7 @@ void up_land() {
     }
 
   void discover() {
-    Int32 i,j,color = 0;
+    int i,j,color = 0;
     light_distance();
     open_display();
     for (i=player.x-see_dist; i<=player.x+see_dist; i++)
@@ -63,26 +63,24 @@ void up_land() {
 
   void check_region() {
     char flag;
-//    Int32  m_file;
+    int  m_file;
     flag = ' ';
     if (player.y == 0 && player.region>4) {
-//#ifdef MINGW
-//      m_file = open("temp01.$$$",O_RDWR | O_BINARY);
-//#else
-//      m_file = open("temp01.$$$",O_RDWR);
-//#endif
-//      if (m_file < 0) {
-//        printf("Fatal Error: Could not open temp01.$$$\n");
-//        exit(1);
-//        }
-//      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//      write(m_file,&(player.known),sizeof(KNOW_TYPE));
-      memcpy(&(known_maps[player.region]), &(player.known), sizeof(KNOW_TYPE));
+#ifdef MINGW
+      m_file = open("temp01.$$$",O_RDWR | O_BINARY);
+#else
+      m_file = open("temp01.$$$",O_RDWR);
+#endif
+      if (m_file < 0) {
+        printf("Fatal Error: Could not open temp01.$$$\n");
+        exit(1);
+        }
+      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+      write(m_file,&(player.known),sizeof(KNOW_TYPE));
       player.region = player.region-4;
-//      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//      read(m_file,&(player.known),sizeof(KNOW_TYPE));
-//      close(m_file);
-      memcpy(&(player.known), &(known_maps[player.region]), sizeof(KNOW_TYPE));
+      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+      read(m_file,&(player.known),sizeof(KNOW_TYPE));
+      close(m_file);
       copyMap(&player.map,player.region);
       player.y = 100;
       player.map_x = player.x-8;
@@ -91,23 +89,21 @@ void up_land() {
       flag = '*';
       }
     if (player.y == 101 && player.region<9) {
-//#ifdef MINGW
-//      m_file = open("temp01.$$$",O_RDWR | O_BINARY);
-//#else
-//      m_file = open("temp01.$$$",O_RDWR);
-//#endif
-//      if (m_file < 0) {
-//        printf("Fatal Error: Could not open temp01.$$$\n");
-//        exit(1);
-//        }
-//      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//      write(m_file,&(player.known),sizeof(KNOW_TYPE));
-      memcpy(&(known_maps[player.region]), &(player.known), sizeof(KNOW_TYPE));
+#ifdef MINGW
+      m_file = open("temp01.$$$",O_RDWR | O_BINARY);
+#else
+      m_file = open("temp01.$$$",O_RDWR);
+#endif
+      if (m_file < 0) {
+        printf("Fatal Error: Could not open temp01.$$$\n");
+        exit(1);
+        }
+      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+      write(m_file,&(player.known),sizeof(KNOW_TYPE));
       player.region = player.region+4;
-//      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//      read(m_file,&(player.known),sizeof(KNOW_TYPE));
-//      close(m_file);
-      memcpy(&(player.known), &(known_maps[player.region]), sizeof(KNOW_TYPE));
+      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+      read(m_file,&(player.known),sizeof(KNOW_TYPE));
+      close(m_file);
       copyMap(&player.map,player.region);
       player.y = 1;
       player.map_x = player.x-8;
@@ -117,23 +113,21 @@ void up_land() {
       }
     if (player.x == 101 && player.region != 4 && player.region != 8 && 
         player.region != 12) {
-//#ifdef MINGW
-//      m_file = open("temp01.$$$",O_RDWR | O_BINARY);
-//#else
-//      m_file = open("temp01.$$$",O_RDWR);
-//#endif
-//      if (m_file < 0) {
-//        printf("Fatal Error: Could not open temp01.$$$\n");
-//        exit(1);
-//        }
-//      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//      write(m_file,&(player.known),sizeof(KNOW_TYPE));
-      memcpy(&(known_maps[player.region]), &(player.known), sizeof(KNOW_TYPE));
+#ifdef MINGW
+      m_file = open("temp01.$$$",O_RDWR | O_BINARY);
+#else
+      m_file = open("temp01.$$$",O_RDWR);
+#endif
+      if (m_file < 0) {
+        printf("Fatal Error: Could not open temp01.$$$\n");
+        exit(1);
+        }
+      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+      write(m_file,&(player.known),sizeof(KNOW_TYPE));
       player.region = player.region+1;
-//      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//      read(m_file,&(player.known),sizeof(KNOW_TYPE));
-//      close(m_file);
-      memcpy(&(player.known), &(known_maps[player.region]), sizeof(KNOW_TYPE));
+      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+      read(m_file,&(player.known),sizeof(KNOW_TYPE));
+      close(m_file);
       copyMap(&player.map,player.region);
       player.x = 1;
       player.map_x = player.x-8;
@@ -143,23 +137,21 @@ void up_land() {
       }
     if (player.x == 0 && player.region != 1 && player.region != 5 &&
         player.region != 9) {
-//#ifdef MINGW
-//      m_file = open("temp01.$$$",O_RDWR | O_BINARY);
-//#else
-//      m_file = open("temp01.$$$",O_RDWR);
-//#endif
-//      if (m_file < 0) {
-//        printf("Fatal Error: Could not open temp01.$$$\n");
-//        exit(1);
-//        }
-//      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//      write(m_file,&(player.known),sizeof(KNOW_TYPE));
-      memcpy(&(known_maps[player.region]), &(player.known), sizeof(KNOW_TYPE));
+#ifdef MINGW
+      m_file = open("temp01.$$$",O_RDWR | O_BINARY);
+#else
+      m_file = open("temp01.$$$",O_RDWR);
+#endif
+      if (m_file < 0) {
+        printf("Fatal Error: Could not open temp01.$$$\n");
+        exit(1);
+        }
+      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+      write(m_file,&(player.known),sizeof(KNOW_TYPE));
       player.region = player.region-1;
-//      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//      read(m_file,&(player.known),sizeof(KNOW_TYPE));
-//      close(m_file);
-      memcpy(&(player.known), &(known_maps[player.region]), sizeof(KNOW_TYPE));
+      lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+      read(m_file,&(player.known),sizeof(KNOW_TYPE));
+      close(m_file);
       copyMap(&player.map,player.region);
       player.x = 100;
       player.map_x = player.x-15;
@@ -185,7 +177,7 @@ void up_land() {
       { show_land(); show_sm_land(); show_land_player(); }
     } /* void check_region() */
 
-  char valid(Int32 x,Int32 y) {
+  char valid(int x,int y) {
     char flag;
     flag = '*';
     if (player.inship == ' ') {
@@ -207,7 +199,7 @@ void up_land() {
     if (has_intrinsic(A_WATER) && player.map[x][y] == 4) flag = '*';
     if (has_intrinsic(A_FLY)) flag = '*';
     return flag;
-    } /* char valid(Int32 x,Int32 y) */
+    } /* char valid(int x,int y) */
 
 /*
   void adjust_player_map() {
@@ -331,7 +323,7 @@ void up_land() {
 
   void enter_dungeon() {
     char flag;
-    Int32  x;
+    int  x;
     LINK_REC link;
     if (player.map[player.x][player.y] == 31) {
       strcpy(player.d_name,"The Gateway");
@@ -400,7 +392,7 @@ void up_land() {
 
   void eat() {
     OBJECT_REC* item;
-    Int32 i;
+    int i;
     if (player.health > 100) {
       clear_prompt();
       prompt("Too full to eat any more");
@@ -490,10 +482,10 @@ void up_land() {
     } /* void use_item() */
 
   void hunt() {
-    Int32 chance;
-    Int32 item_count;
-    Int32 item;
-    Int32 i;
+    int chance;
+    int item_count;
+    int item;
+    int i;
     chance = 10;
     switch (player.map[player.x][player.y]) {
       case 2:chance = 25; break;
@@ -539,7 +531,7 @@ void up_land() {
     show_land_player();
   } /* void go_ship() */
 
-  void new_tardis(Int32 i) {
+  void new_tardis(int i) {
     char invoke[33];
     char key;
     char buffer[80];
@@ -570,29 +562,27 @@ void up_land() {
       clear_prompt();
       prompt("Tardis Programmed");
       }
-  } /* void new_tardis(Int32 i) */
+  } /* void new_tardis(int i) */
 
-  void tardis(Int32 i) {
-//    Int32 m_file;
+  void tardis(int i) {
+    int m_file;
     if (has_intrinsic(A_TARD))
       if (player.tardis_r[i] != 0) {
-//#ifdef MINGW
-//        m_file = open("temp01.$$$",O_RDWR | O_BINARY); 
-//#else
-//        m_file = open("temp01.$$$",O_RDWR); 
-//#endif
-//        if (m_file < 0) {
-//          printf("Fatal Error: Could not open temp01.$$$\n");
-//          exit(1); 
-//          }
-//        lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//        write(m_file,&(player.known),sizeof(KNOW_TYPE));
-        memcpy(&(known_maps[player.region]), &(player.known), sizeof(KNOW_TYPE));
+#ifdef MINGW
+        m_file = open("temp01.$$$",O_RDWR | O_BINARY); 
+#else
+        m_file = open("temp01.$$$",O_RDWR); 
+#endif
+        if (m_file < 0) {
+          printf("Fatal Error: Could not open temp01.$$$\n");
+          exit(1); 
+          }
+        lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+        write(m_file,&(player.known),sizeof(KNOW_TYPE));
         player.region = player.tardis_r[i];
-//        lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//        read(m_file,&(player.known),sizeof(KNOW_TYPE));
-//        close(m_file);
-        memcpy(&(player.known), &(known_maps[player.region]), sizeof(KNOW_TYPE));
+        lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+        read(m_file,&(player.known),sizeof(KNOW_TYPE));
+        close(m_file);
         copyMap(&player.map,player.region);
         player.x = player.tardis_x[i];
         player.y = player.tardis_y[i];
@@ -617,10 +607,10 @@ void up_land() {
         show_side();
         show_land_player();
         }
-    } /* void tardis(Int32 i) */
+    } /* void tardis(int i) */
 
   void tardis_log() {
-    Int32 i;
+    int i;
     char buffer[80];
     textmode(3);
     textcolor(2); gotoxy(29,1);
@@ -667,19 +657,18 @@ void up_land() {
   in_upland = 'Y';
   player.d_level = 0;
   copyMap(&player.map,player.region);
-//#ifdef MINGW
-//  m_file = open("temp01.$$$",O_RDONLY | O_BINARY);
-//#else
-//  m_file = open("temp01.$$$",O_RDONLY);
-//#endif
-//  if (m_file < 0) {
-//    printf("Fatal Error: Could not open temp01.$$$\n");
-//    exit(1);
-//    }
-//  lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//  read(m_file,&(player.known),sizeof(KNOW_TYPE));
-//  close(m_file);
-  memcpy(&(player.known), &(known_maps[player.region]), sizeof(KNOW_TYPE));
+#ifdef MINGW
+  m_file = open("temp01.$$$",O_RDONLY | O_BINARY);
+#else
+  m_file = open("temp01.$$$",O_RDONLY);
+#endif
+  if (m_file < 0) {
+    printf("Fatal Error: Could not open temp01.$$$\n");
+    exit(1);
+    }
+  lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+  read(m_file,&(player.known),sizeof(KNOW_TYPE));
+  close(m_file);
   player.x = player.land_x;
   player.y = player.land_y;
   player.map_x = player.x-8;
@@ -732,7 +721,7 @@ void up_land() {
           player.land_y = player.y;
           if (player.effect[PE_HEROIC] >= 0) exitf = 4;
           else {
-            save_new();
+            save();
             graphmode();
             show_land();
             show_sm_land();
@@ -752,26 +741,26 @@ void up_land() {
           show_side();
           break;
       case '~':gps(); break;
-      case KY_F1:tardis(1); break;
-      case KY_F2:tardis(2); break;
-      case KY_F3:tardis(3); break;
-      case KY_F4:tardis(4); break;
-      case KY_F5:tardis(5); break;
-      case KY_F6:tardis(6); break;
-      case KY_F7:tardis(7); break;
-      case KY_F8:tardis(8); break;
-      case KY_F9:tardis(9); break;
-      case KY_F10:tardis(10); break;
-      case KY_S_F1:new_tardis(1); break;
-      case KY_S_F2:new_tardis(2); break;
-      case KY_S_F3:new_tardis(3); break;
-      case KY_S_F4:new_tardis(4); break;
-      case KY_S_F5:new_tardis(5); break;
-      case KY_S_F6:new_tardis(6); break;
-      case KY_S_F7:new_tardis(7); break;
-      case KY_S_F8:new_tardis(8); break;
-      case KY_S_F9:new_tardis(9); break;
-      case KY_S_F10:new_tardis(10); break;
+      case 161:tardis(1); break;
+      case 162:tardis(2); break;
+      case 163:tardis(3); break;
+      case 164:tardis(4); break;
+      case 165:tardis(5); break;
+      case 166:tardis(6); break;
+      case 167:tardis(7); break;
+      case 168:tardis(8); break;
+      case 169:tardis(9); break;
+      case 160:tardis(10); break;
+      case 201:new_tardis(1); break;
+      case 202:new_tardis(2); break;
+      case 203:new_tardis(3); break;
+      case 204:new_tardis(4); break;
+      case 205:new_tardis(5); break;
+      case 206:new_tardis(6); break;
+      case 207:new_tardis(7); break;
+      case 208:new_tardis(8); break;
+      case 209:new_tardis(9); break;
+      case 210:new_tardis(10); break;
       case 'T':if (has_intrinsic(A_TARD)) tardis_log();
       }
     discover();
@@ -899,19 +888,18 @@ void up_land() {
   if (exitf == 5) mod_exit = 5;
   if (exitf == 6) mod_exit = 6;
   if (exitf == 9) mod_exit = 9;
-//#ifdef MINGW
-//  m_file = open("temp01.$$$",O_WRONLY | O_BINARY);
-//#else
-//  m_file = open("temp01.$$$",O_WRONLY);
-//#endif
-//  if (m_file < 0) {
-//    printf("Fatal Error: Could not open temp01.$$$\n");
-//    exit(1);
-//    }
-//  lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
-//  write(m_file,&(player.known),sizeof(KNOW_TYPE));
-//  close(m_file);
-  memcpy(&(known_maps[player.region]), &(player.known), sizeof(KNOW_TYPE));
+#ifdef MINGW
+  m_file = open("temp01.$$$",O_WRONLY | O_BINARY);
+#else
+  m_file = open("temp01.$$$",O_WRONLY);
+#endif
+  if (m_file < 0) {
+    printf("Fatal Error: Could not open temp01.$$$\n");
+    exit(1);
+    }
+  lseek(m_file,sizeof(KNOW_TYPE) * player.region,SEEK_SET);
+  write(m_file,&(player.known),sizeof(KNOW_TYPE));
+  close(m_file);
   player.land_x = player.x;
   player.land_y = player.y;
   in_upland = 'N';

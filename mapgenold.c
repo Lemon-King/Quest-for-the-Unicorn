@@ -10,16 +10,16 @@
 
 #include "header.h"
 
-void mapgen_old(Int32 floor) {
+void mapgen_old(int floor) {
   byte basex,basey;
   byte rooms;
-  Int32  roomx,roomy;
-  Int32  x1,x2,y1,y2;
+  int  roomx,roomy;
+  int  x1,x2,y1,y2;
   byte exits,segs;
   byte lng;
   byte length;
   byte dir;
-  Int32  i,j,x,y;
+  int  i,j,x,y;
   char inter;
   char exit_flag;
   char door;

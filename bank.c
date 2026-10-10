@@ -15,8 +15,8 @@ void bank(char* name) {
   char   buffer[80];
   char   key;
 
-  char* find_name(Int32 r,Int32 x,Int32 y) {
-    Int32 i;
+  char* find_name(int r,int x,int y) {
+    int i;
     i = 0;
     while (i >= 0) {
       if (links[i].region == r &&
@@ -29,8 +29,8 @@ void bank(char* name) {
     }
 
   void show_top() {
-    Int32 i;
-    Int32 l;
+    int i;
+    int l;
     textmode(3); gotoxy(27,1); textcolor(11);
     sprintf(buffer,"Welcome to %s",name);
     txt_write(buffer);

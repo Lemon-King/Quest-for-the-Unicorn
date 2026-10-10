@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-OBJECT_REC* find_linked_item(Int32 lnk) {
-  Int32 i;
+OBJECT_REC* find_linked_item(int lnk) {
+  int i;
   i = 0;
   while (objects[i].otype <100) {
     if (objects[i].link == lnk) return &(objects[i]);

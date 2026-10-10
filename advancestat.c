@@ -11,7 +11,7 @@
 #include "header.h"
 
 void advance_stat() {
-  Int32 i;
+  int i;
   i = 1 + u_random(6);
   if (u_random(100) < 40) {
     player.stat[i] ++;

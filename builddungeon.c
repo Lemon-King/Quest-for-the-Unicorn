@@ -10,14 +10,14 @@
 
 #include "header.h"
 
-void build_dungeon(Int32 floor,Int32 dn) {
-  Int32 i;
-  Int32 j;
-  Int32 tx;
-  Int32 ty;
-  Int32 upx,upy;
-  Int32 downx,downy;
-  UInt32 seed;
+void build_dungeon(int floor,int dn) {
+  int i;
+  int j;
+  int tx;
+  int ty;
+  int upx,upy;
+  int downx,downy;
+  u_int32_t seed;
   currentFloor = floor;
   if (current_dungeon.dungeon_number == dn) return;
   current_dungeon.dungeon_number = dn;

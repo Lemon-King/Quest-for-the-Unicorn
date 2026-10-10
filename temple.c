@@ -36,12 +36,12 @@ void temple(char* name) {
   char   buffer[80];
   char   key;
   OBJECT_REC* item;
-  Int32    hier;
-  Int32    i;
+  int    hier;
+  int    i;
   char   allowed;
 
   void show_top() {
-    Int32 line;
+    int line;
     textmode(3); gotoxy(27,1); textcolor(11);
     sprintf(buffer,"Welcome to %s",name);
     txt_write(buffer);

@@ -10,23 +10,23 @@
 
 #include "header.h"
 
-Int32 castspell(Int32 spell_num) {
-  Int32 col,row;
+int castspell(int spell_num) {
+  int col,row;
   char flag;
-  Int32  newone;
-//  Int32  allign;
-//  Int32  level;
+  int  newone;
+//  int  allign;
+//  int  level;
 
-  Int32 get_spell_name(Int32 column,Int32 search) {
+  int get_spell_name(int column,int search) {
     byte key;
     char buffer[80];
     char spell_name[33];
-//    Int32 first;
+//    int first;
 
     void check_spell_1() {
-      Int32 i;
-      Int32 count;
-      Int32 found = 0;
+      int i;
+      int count;
+      int found = 0;
       byte key;
       char buffer[80];
       count = 0;
@@ -54,23 +54,21 @@ Int32 castspell(Int32 spell_num) {
           sprintf(buffer,"Spell ? %s ",spells[found].name);
           promptNS(buffer);
 	  }
-        if (key == KY_F1) strcpy(player.fspell[1],spells[found].name);
-        if (key == KY_F2) strcpy(player.fspell[2],spells[found].name);
-        if (key == KY_F3) strcpy(player.fspell[3],spells[found].name);
-        if (key == KY_F4) strcpy(player.fspell[4],spells[found].name);
-        if (key == KY_F5) strcpy(player.fspell[5],spells[found].name);
-        if (key == KY_F6) strcpy(player.fspell[6],spells[found].name);
-        if (key == KY_F7) strcpy(player.fspell[7],spells[found].name);
-        if (key == KY_F8) strcpy(player.fspell[8],spells[found].name);
-        if (key == KY_F9) strcpy(player.fspell[9],spells[found].name);
-        if (key == KY_F10) strcpy(player.fspell[10],spells[found].name);
-        if (key == KY_F11) strcpy(player.fspell[11],spells[found].name);
-        if (key == KY_F12) strcpy(player.fspell[12],spells[found].name);
+        if (key == 161) strcpy(player.fspell[1],spells[found].name);
+        if (key == 162) strcpy(player.fspell[2],spells[found].name);
+        if (key == 163) strcpy(player.fspell[3],spells[found].name);
+        if (key == 164) strcpy(player.fspell[4],spells[found].name);
+        if (key == 165) strcpy(player.fspell[5],spells[found].name);
+        if (key == 166) strcpy(player.fspell[6],spells[found].name);
+        if (key == 167) strcpy(player.fspell[7],spells[found].name);
+        if (key == 168) strcpy(player.fspell[8],spells[found].name);
+        if (key == 169) strcpy(player.fspell[9],spells[found].name);
+        if (key == 170) strcpy(player.fspell[10],spells[found].name);
         }
       }
 
     void show_list() {
-      Int32  i;
+      int  i;
       char buffer[80];
       textmode(3);
       col = 1;
@@ -124,18 +122,16 @@ Int32 castspell(Int32 spell_num) {
         promptNS(buffer);
         }
       if (key > 31) {
-        if (key == KY_F1) strcpy(spell_name,player.fspell[1]);
-        if (key == KY_F2) strcpy(spell_name,player.fspell[2]);
-        if (key == KY_F3) strcpy(spell_name,player.fspell[3]);
-        if (key == KY_F4) strcpy(spell_name,player.fspell[4]);
-        if (key == KY_F5) strcpy(spell_name,player.fspell[5]);
-        if (key == KY_F6) strcpy(spell_name,player.fspell[6]);
-        if (key == KY_F7) strcpy(spell_name,player.fspell[7]);
-        if (key == KY_F8) strcpy(spell_name,player.fspell[8]);
-        if (key == KY_F9) strcpy(spell_name,player.fspell[9]);
-        if (key == KY_F10) strcpy(spell_name,player.fspell[10]);
-        if (key == KY_F11) strcpy(spell_name,player.fspell[11]);
-        if (key == KY_F12) strcpy(spell_name,player.fspell[12]);
+        if (key == 161) strcpy(spell_name,player.fspell[1]);
+        if (key == 162) strcpy(spell_name,player.fspell[2]);
+        if (key == 163) strcpy(spell_name,player.fspell[3]);
+        if (key == 164) strcpy(spell_name,player.fspell[4]);
+        if (key == 165) strcpy(spell_name,player.fspell[5]);
+        if (key == 166) strcpy(spell_name,player.fspell[6]);
+        if (key == 167) strcpy(spell_name,player.fspell[7]);
+        if (key == 168) strcpy(spell_name,player.fspell[8]);
+        if (key == 169) strcpy(spell_name,player.fspell[9]);
+        if (key == 160) strcpy(spell_name,player.fspell[10]);
         if (key < 127) {
           spell_name[strlen(spell_name) + 1] = 0;
           spell_name[strlen(spell_name)] = key;

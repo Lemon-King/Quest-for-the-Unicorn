@@ -12,9 +12,9 @@
 
 void mounts(char* name) {
   double cost = 0;
-  Int32 item = 0;
-  Int32 slot;
-  Int32 i,j;
+  int item = 0;
+  int slot;
+  int i,j;
   char key =' ';
   char buffer[80];
 

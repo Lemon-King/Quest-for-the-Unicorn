@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-Int32 sqr(Int32 n) {
+int sqr(int n) {
   return n*n;
   }
 

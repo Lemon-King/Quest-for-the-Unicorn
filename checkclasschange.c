@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-Int32 check_class_change(Int32 class) {
-  Int32 i;
-  Int32 flag;
+int check_class_change(int class) {
+  int i;
+  int flag;
   flag = -1;
   i = 0;
   while (class_changes[i].from != 99) {

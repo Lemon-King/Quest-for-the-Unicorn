@@ -11,14 +11,12 @@
 #include "header.h"
 
 void fire_trap() {
-  Int32 i;
+  int i;
   i = (player.diff+player.d_level) * 5;
   i += u_random((player.diff+player.d_level) * 5);
   player.effect[PE_DOT] += i;
   clear_prompt();
   msg("Burning!",11);
   show_side();
-  run_x = 0;
-  run_y = 0;
   }
 

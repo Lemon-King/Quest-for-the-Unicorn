@@ -38,8 +38,6 @@ typedef GC      rcs_GC;
 #define KEY_SHIFT_F8  (XK_F8 + 0x10000)
 #define KEY_SHIFT_F9  (XK_F9 + 0x10000)
 #define KEY_SHIFT_F10 (XK_F10 + 0x10000)
-#define KEY_SHIFT_F11 (XK_F11 + 0x10000)
-#define KEY_SHIFT_F12 (XK_F12 + 0x10000)
 #define KEY_ALT_F1    (XK_F1 + 0x20000)
 #define KEY_ALT_F2    (XK_F2 + 0x20000)
 #define KEY_ALT_F3    (XK_F3 + 0x20000)
@@ -50,8 +48,6 @@ typedef GC      rcs_GC;
 #define KEY_ALT_F8    (XK_F8 + 0x20000)
 #define KEY_ALT_F9    (XK_F9 + 0x20000)
 #define KEY_ALT_F10   (XK_F10 + 0x20000)
-#define KEY_ALT_F11   (XK_F11 + 0x20000)
-#define KEY_ALT_F12   (XK_F12 + 0x20000)
 #define KEY_CTRL_F1   (XK_F1 + 0x40000)
 #define KEY_CTRL_F2   (XK_F2 + 0x40000)
 #define KEY_CTRL_F3   (XK_F3 + 0x40000)
@@ -62,8 +58,6 @@ typedef GC      rcs_GC;
 #define KEY_CTRL_F8   (XK_F8 + 0x40000)
 #define KEY_CTRL_F9   (XK_F9 + 0x40000)
 #define KEY_CTRL_F10  (XK_F10 + 0x40000)
-#define KEY_CTRL_F11  (XK_F11 + 0x40000)
-#define KEY_CTRL_F12  (XK_F12 + 0x40000)
 #define KEY_LEFT      XK_Left
 #define KEY_RIGHT     XK_Right
 #define KEY_UP        XK_Up

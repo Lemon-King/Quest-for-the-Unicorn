@@ -11,8 +11,8 @@
 #include "header.h"
 
 OBJECT_REC* find_gear(char* name) {
-  Int32 i;
-  for (i=2; i<=19; i++) {
+  int i;
+  for (i=1; i<=19; i++) {
     if (player.invent[i].otype != O_NONE && strcmp(name,player.invent[i].name) == 0)
       return &(player.invent[i]);
     }
@@ -24,7 +24,7 @@ OBJECT_REC* find_gear(char* name) {
   }
 
 OBJECT_REC* find_empty_slot() {
-  Int32 i;
+  int i;
   for (i=3; i<=10; i++) {
     if (player.invent[i].otype == O_NONE)
       if (i==3 || i==4 || (i>=7 && i<=10)) return &(player.invent[i]);
@@ -35,11 +35,10 @@ OBJECT_REC* find_empty_slot() {
   return NULL;
   }
 
-void load_gear(char weapons_only,Int32 slot) {
+void load_gear(char weapons_only,int slot) {
   char key;
   OBJECT_REC* item;
   OBJECT_REC  temp;
-  if (slot > 10) return;
   if (slot < 0) {
     msg("Equip set (0-9)?",15);
     key = inkey();
@@ -48,7 +47,6 @@ void load_gear(char weapons_only,Int32 slot) {
       }
     if (key == 27) {
       msg("Cancelled",15);
-      takes_time = 'N';
       return;
       }
     slot = key - '0';

@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-void activate(Int32 x,Int32 y) {
-  Int32 i;
-  Int32 effect;
+void activate(int x,int y) {
+  int i;
+  int effect;
   if (player.map[x][y] == 901) {
     msg("Activating Altar",14);
     effect = u_random(90);
@@ -46,10 +46,10 @@ void activate(Int32 x,Int32 y) {
     else if (effect < 90) {
       for (i=0;i<20;i++)
         if (player.invent[i].otype != 0) 
-          player.invent[i].flags |= OF_IDENT;
+          player.invent[i].level = -1;
       for (i=0;i<33;i++)
         if (player.pack[i].otype != 0) 
-          player.pack[i].flags |= OF_IDENT;
+          player.pack[i].level = -1;
       msg("Everything glows briefly",15);
       }
     player.map[x][y] = 902;

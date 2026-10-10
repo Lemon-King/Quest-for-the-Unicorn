@@ -10,12 +10,12 @@
 
 #include "header.h"
 
-void area49(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y) { 
+void area49(int damage,int elem,int center_x,int center_y) { 
   char buffer[32];
-  Int32  x,y;
-  Int32  x1,y1;
-  Int32  mon;
-  Int32  i;
+  int  x,y;
+  int  x1,y1;
+  int  mon;
+  int  i;
   x1 = center_x; y1 = center_y;
   if (x1<3) x1=3; else if (x1>97) x1 = 97;
   if (y1<3) y1=3; else if (y1>97) y1 = 97;

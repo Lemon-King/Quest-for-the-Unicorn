@@ -10,12 +10,12 @@
 
 #include "header.h"
 
-  void enemy_hit(Int32 x,Int32 y) {
-    Int32 i;
-    Int32 hit;
+  void enemy_hit(int x,int y) {
+    int i;
+    int hit;
     char buffer[20];
     char elem[20];
-    Int32 amt;
+    int amt;
     NPC_REC* monster;
     monster = get_monster(x,y);
     if ((monster->special2 & M2_PACIFIED) != 0) return;
@@ -188,5 +188,5 @@
       if (u_random(10) <= 5) add_skill(SK_COMBAT,1);
       noise(100,100);
       }
-    } /* void enemy_hit(Int32 x,Int32 y) */
+    } /* void enemy_hit(int x,int y) */
 

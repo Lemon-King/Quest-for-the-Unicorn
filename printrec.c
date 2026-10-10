@@ -12,10 +12,10 @@
 
 void print_rec() {
   char pack1[33],pack2[33];
-  Int32  spel1,spel2;
-  Int32  mana1,mana2;
-  Int32  lvl1,lvl2;
-  Int32  i;
+  int  spel1,spel2;
+  int  mana1,mana2;
+  int  lvl1,lvl2;
+  int  i;
   printf("Name   : %s    STR: %2d          Attack : %10s\n",fix_name(player.name),player.stat[1],fix_ability(1));
   printf("Age    : %3d                      DEX: %2d          Defense: %10s\n",player.age,player.stat[2],fix_ability(2));
   printf("Sex    : %s    CON: %2d          Damage : %10s\n",fix_name(get_sex()),player.stat[3],fix_ability(3));
@@ -89,8 +89,6 @@ void print_rec() {
   printf("       F8  - %s\n",fix_name(player.fspell[8]));
   printf("F9 - %s",fix_name(player.fspell[9]));
   printf("       F10 - %s\n",fix_name(player.fspell[10]));
-  printf("F11- %s",fix_name(player.fspell[11]));
-  printf("       F12 - %s\n",fix_name(player.fspell[12]));
   printf("\n");
   printf("SPELLS:\n");
   printf("   Lvl Mana Name                           Lvl Mana Name\n");

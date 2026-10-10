@@ -14,14 +14,14 @@
 void library(char* name) {
   char flag;
   char search[33];
-  Int32 msg;
+  int msg;
   char key;
 
-  void display_msg(Int32 msg, char ext) {
-    Int32 i;
-    Int32 x,y;
-//    Int32 space;
-    Int32 size;
+  void display_msg(int msg, char ext) {
+    int i;
+    int x,y;
+//    int space;
+    int size;
     byte last;
     MESSAGE general;
     general = (ext == 'L') ? lore[msg] : gen[msg];
@@ -48,7 +48,7 @@ void library(char* name) {
        }
      }
     inkey();
-  } /* void display_msg(Int32 msg, char* ext) */
+  } /* void display_msg(int msg, char* ext) */
 
   void show_top() {
     char buffer[80];

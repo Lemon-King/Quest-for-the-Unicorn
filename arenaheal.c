@@ -10,11 +10,11 @@
 
 #include "header.h"
 
-void arena_party_heal(Int32 healer) {
-  Int32 ch;
-  Int32 diff;
-  Int32 i;
-  Int32 n;
+void arena_party_heal(int healer) {
+  int ch;
+  int diff;
+  int i;
+  int n;
   char buffer[128];
   n = player.party[healer].mana;
   n /= 20;

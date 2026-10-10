@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-void trigger_trap(Int32 x,Int32 y,Int32 trap_type) {
-  Int32 dmg;
-  Int32 rx,ry;
+void trigger_trap(int x,int y,int trap_type) {
+  int dmg;
+  int rx,ry;
   NPC_REC* monster;
   monster = get_monster(x,y);
   if (monster != NULL) monster->prev = 7;

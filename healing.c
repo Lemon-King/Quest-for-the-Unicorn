@@ -11,9 +11,9 @@
 #include "header.h"
 
 void healing() {
-  Int32 amount;
-  Int32 i;
-  Int32 a,j;
+  int amount;
+  int i;
+  int a,j;
   OBJECT_REC* item;
   if (player.effect[PE_HCOUNT] <= 0) {
     amount = get_skill(SK_HEAL) * 2;

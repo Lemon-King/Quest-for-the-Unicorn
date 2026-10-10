@@ -11,7 +11,7 @@
 #include "header.h"
 
 void decode(char* buffer) {
-  Int32 i;
+  int i;
   char *code = "ZYXWVUTSRQPONMLKJIHGFEDCBA      zyxwvutsrqponmlkjihgfedcba";
   for (i=0; i<strlen(buffer); i++) {
     if (buffer[i] >= 'A')

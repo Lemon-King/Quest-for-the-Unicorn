@@ -11,8 +11,8 @@
 #include "header.h"
 
 void show_sm_map() {
-  Int32 x,y;
-  Int32 color;
+  int x,y;
+  int color;
   pixel = 0;
   setfillstyle(1,0);
   bar(smap_offset_x,smap_offset_y,smap_offset_x+99,smap_offset_y+99);
@@ -32,8 +32,8 @@ void show_sm_map() {
           case 21:color = 4; break;
           case 22:color = 14; break;
           case 23:color = 14; break;
-          case 24:color = 12; break;
-          case 25:color = 10; break;
+          case 24:color = 3; break;
+          case 25:color = 11; break;
           case 38:color = 12; break;
           case 39:color = 1; break;
           case 41:color = 9; break;

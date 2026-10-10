@@ -16,7 +16,5 @@ void root_trap() {
   clear_prompt();
   prompt("Cannot move!!");
   show_player();
-  run_x = 0;
-  run_y = 0;
   }
 

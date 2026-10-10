@@ -368,7 +368,7 @@ void load57() {
   int x;
   int y;
   int save_file;
-//  int temp_file;
+  int temp_file;
   int change_set;
   char buffer[20];
   char filename[64];
@@ -412,29 +412,27 @@ void load57() {
     }
   read(save_file,&old,sizeof(PLAYER_REC_OLD));
   convertPlayer();
-//#ifdef MINGW
-//  temp_file = open("temp01.$$$",O_WRONLY | O_CREAT | O_TRUNC | O_BINARY,0660);
-//#else
-//  temp_file = open("temp01.$$$",O_WRONLY | O_CREAT | O_TRUNC,0660);
-//#endif
-//  if (temp_file < 0) {
-//    printf("Fatal Error: Could not open temp01.$$$\n");
-//#ifdef ASCII
-//    restoreTerm();
-//#endif
-//    exit(1);
-//    }
+#ifdef MINGW
+  temp_file = open("temp01.$$$",O_WRONLY | O_CREAT | O_TRUNC | O_BINARY,0660);
+#else
+  temp_file = open("temp01.$$$",O_WRONLY | O_CREAT | O_TRUNC,0660);
+#endif
+  if (temp_file < 0) {
+    printf("Fatal Error: Could not open temp01.$$$\n");
+#ifdef ASCII
+    restoreTerm();
+#endif
+    exit(1);
+    }
   for (i=1; i<=NO_OF_MAPS_OLD; i++) {
-//    read(save_file,&known,sizeof(KNOW_TYPE));
-//    lseek(temp_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
-//    write(temp_file,&known,sizeof(KNOW_TYPE));
-    read(save_file, &(known_maps[i]), sizeof(KNOW_TYPE));
+    read(save_file,&known,sizeof(KNOW_TYPE));
+    lseek(temp_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
+    write(temp_file,&known,sizeof(KNOW_TYPE));
     }
   for (x=0; x<101; x++) for (y=0; y<101; y++) known[x][y] = 0;
   for (i=NO_OF_MAPS_OLD+1; i<=NO_OF_MAPS; i++) {
-//    lseek(temp_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
-//    write(temp_file,&known,sizeof(KNOW_TYPE));
-    memcpy(&(known_maps[i]), &known, sizeof(KNOW_TYPE));
+    lseek(temp_file,sizeof(KNOW_TYPE) * i,SEEK_SET);
+    write(temp_file,&known,sizeof(KNOW_TYPE));
     }
 
   if (change_set > 0 && change_set <= 1) {
@@ -445,7 +443,7 @@ void load57() {
   else
     read(save_file,&stats,sizeof(STATS_REC));
   close(save_file);
-//  close(temp_file);
+  close(temp_file);
   for (i=1; i<20; i++)
     if (player.invent[i].otype != O_NONE) {
       j=0;

@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 get_skill(Int32 num) {
-  Int32 ret;
+int get_skill(int num) {
+  int ret;
   ret = player.skill[num] / 100000;
   ret += get_bonus((num + 30) * 100);
   if (ret > 99) ret = 99;

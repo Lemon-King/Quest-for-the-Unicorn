@@ -17,7 +17,7 @@ void convert_recipe(OBJECT_REC* item) {
   if (item->control != 79) return;
   item->control = 110;
   item->control2 = u_random(recipe_count);
-  item->flags |= OF_IDENT;
+  item->level = -1;
   strcpy(item->name,"Recipe:");
   dest = find_linked_item(recipes[item->control2].object);
   if (dest == NULL) return;

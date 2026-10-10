@@ -17,8 +17,8 @@
 /* *****         attack                                    ***** */
 /* ************************************************************* */
 
-Int32 meleehit(Int32 who,OBJECT_REC* weapon,Int32 dmg,NPC_REC* target,char hand) {
-  Int32 i;
+int meleehit(int who,OBJECT_REC* weapon,int dmg,NPC_REC* target,char hand) {
+  int i;
   if (target != NULL && target->speed < 0) { target->speed = -target->speed; };
   if (target != NULL && (target->special2 & M2_PACIFIED) != 0) target->special2 -= M2_PACIFIED;
   if (who == 0) {
@@ -34,11 +34,11 @@ Int32 meleehit(Int32 who,OBJECT_REC* weapon,Int32 dmg,NPC_REC* target,char hand)
     if (weapon != NULL) {
       if (is_weapon(weapon) && weapon->otype != O_WAND && get_skill(weapon->skill) >= 5) i += get_skill(weapon->skill) / 2;
       if (is_weapon(weapon) && weapon->otype != O_WAND && get_skill(weapon->skill) < 5) {
-        if (get_skill(weapon->skill) == 0) i = (Int32)(i * 0.16);
-        if (get_skill(weapon->skill) == 1) i = (Int32)(i * 0.32);
-        if (get_skill(weapon->skill) == 2) i = (Int32)(i * 0.48);
-        if (get_skill(weapon->skill) == 3) i = (Int32)(i * 0.64);
-        if (get_skill(weapon->skill) == 4) i = (Int32)(i * 0.80);
+        if (get_skill(weapon->skill) == 0) i = (int)(i * 0.16);
+        if (get_skill(weapon->skill) == 1) i = (int)(i * 0.32);
+        if (get_skill(weapon->skill) == 2) i = (int)(i * 0.48);
+        if (get_skill(weapon->skill) == 3) i = (int)(i * 0.64);
+        if (get_skill(weapon->skill) == 4) i = (int)(i * 0.80);
         }
       }
     if (target->fear > 0) i += 10;

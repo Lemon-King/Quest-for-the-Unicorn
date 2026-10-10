@@ -11,7 +11,7 @@
 #include "header.h"
 
   void check_autos() {
-    Int32 i;
+    int i;
     if (auto_pickup_torch == 'Y') {
       if (player.map[player.x][player.y] == 84) {
         player.torch++;

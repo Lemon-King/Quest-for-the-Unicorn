@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 get_dungeon(Int32 n) {
-  Int32 i;
+int get_dungeon(int n) {
+  int i;
   i = 0;
   while (links[i].region < 90) {
     if (links[i].quest == n) return i;

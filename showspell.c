@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void show_spell(Int32 num,Int32 ox,Int32 oy,Int32 line) {
+void show_spell(int num,int ox,int oy,int line) {
   char buffer[128];
     gotoxy(ox+2,line++);
     if (spells[num].user_hp != 0) {

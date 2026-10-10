@@ -29,7 +29,7 @@ LIBS = -lX11
 #LIBS = -s -lgdi32 -lcomctl32 -Wl,--subsystem,windows
 
 #HEADERS = header.h maps.h objects.h world.h gen.h lore.h monsters.h recipe.h spells.h races.h classes.h trophies.h Makefile
-HEADERS = header.h maps.h objects.h world.h gen.h lore.h monsters.h recipe.h spells.h races.h classes.h trophies.h terminal.h
+HEADERS = header.h maps.h objects.h world.h gen.h lore.h monsters.h recipe.h spells.h races.h classes.h trophies.h
 OBJS = \
 	activate.o \
 	addskill.o \
@@ -45,7 +45,6 @@ OBJS = \
 	arenaheal.o \
 	arenamoveenemy.o \
 	arenamoveparty.o \
-	arenamovesnake.o \
 	autodetect.o \
 	bank.o \
 	blind.o \
@@ -70,7 +69,6 @@ OBJS = \
 	checknoble.o \
 	checkscores.o \
 	checkspell1.o \
-	cleargamedata.o \
 	clearprompt.o \
 	closedoor.o \
 	combathelp.o \
@@ -102,13 +100,11 @@ OBJS = \
 	fear.o \
 	feardir.o \
 	figuredamage.o \
-	findempty.o \
 	findgen.o \
 	finditemslot.o \
 	findlinkeditem.o \
 	findlore.o \
 	findpath.o \
-	findtarget.o \
 	fire.o \
 	firetrap.o \
 	firewand.o \
@@ -147,7 +143,6 @@ OBJS = \
 	hassocket.o \
 	hasspell.o \
 	healing.o \
-	holeinventory.o \
 	houseinventory.o \
 	inkey.o \
 	inroom.o \
@@ -163,6 +158,7 @@ OBJS = \
 	library.o \
 	lightroom.o \
 	load.o \
+	load57.o \
 	loadgear.o \
 	loadlevel.o \
 	log.o \
@@ -181,14 +177,12 @@ OBJS = \
 	mapgen.o \
 	mapgenold.o \
 	maxdamage.o \
-	mechmerchant.o \
 	meleehit.o \
 	minimap.o \
 	missile.o \
 	mounts.o \
 	moveenemy.o \
 	movesnake.o \
-	movesummoned.o \
 	msg.o \
 	mutable.o \
 	mutalegend.o \
@@ -209,7 +203,6 @@ OBJS = \
 	pittrap.o \
 	placeobject.o \
 	poisontrap.o \
-	possesses.o \
 	printrec.o \
 	processconfig.o \
 	processoption.o \
@@ -223,7 +216,7 @@ OBJS = \
 	removelandplayer.o \
 	reversebyte.o \
 	roottrap.o \
-	savenew.o \
+	save.o \
 	savegear.o \
 	savelevel.o \
 	sayword.o \
@@ -325,7 +318,6 @@ dist:
 	-mkdir dist
 	-mkdir dist/unicorn
 	-mkdir dist/unicorn/src
-	-mkdir dist/unicorn/src/SaveConvert
 	cp *.c dist/unicorn/src
 	cp *.h dist/unicorn/src
 	cp *.map dist/unicorn/src
@@ -335,9 +327,6 @@ dist:
 	cp unicorn.cfg dist/unicorn/src
 	cat Makefile | sed -e 's///' > dist/unicorn/src/Makefile
 	-rm dist/unicorn/src/makedoc.c
-	cp ./SaveConvert/*.c dist/unicorn/src/SaveConvert
-	cp ./SaveConvert/*.h dist/unicorn/src/SaveConvert
-	cp ./SaveConvert/Makefile dist/unicorn/src/SaveConvert
 	cd dist; \
 	   tar cvfz unicorn_src.tgz ./unicorn/src/*
 	
@@ -364,7 +353,6 @@ arena.o:            $(HEADERS) arena.c
 arenaheal.o:        $(HEADERS) arenaheal.c
 arenamoveenemy.o:   $(HEADERS) arenamoveenemy.c
 arenamoveparty.o:   $(HEADERS) arenamoveparty.c
-arenamovesnake.o:   $(HEADERS) arenamovesnake.c
 autodetect.o:       $(HEADERS) autodetect.c
 bank.o:             $(HEADERS) bank.c
 blind.o:            $(HEADERS) blind.c
@@ -389,7 +377,6 @@ checkmount.o:       $(HEADERS) checkmount.c
 checknoble.o:       $(HEADERS) checknoble.c
 checkscores.o:      $(HEADERS) checkscores.c
 checkspell1.o:      $(HEADERS) checkspell1.c
-cleargamedata.o:    $(HEADERS) cleargamedata.c
 clearprompt.o:      $(HEADERS) clearprompt.c
 closedoor.o:        $(HEADERS) closedoor.c
 combathelp.o:       $(HEADERS) combathelp.c
@@ -421,13 +408,11 @@ exist.o:            $(HEADERS) exist.c
 fear.o:             $(HEADERS) fear.c
 feardir.o:          $(HEADERS) feardir.c
 figuredamage.o:     $(HEADERS) figuredamage.c
-findempty.o:        $(HEADERS) findempty.c
 findgen.o:          $(HEADERS) findgen.c
 finditemslot.o:     $(HEADERS) finditemslot.c
 findlinkeditem.o:   $(HEADERS) findlinkeditem.c
 findlore.o:         $(HEADERS) findlore.c
 findpath.o:         $(HEADERS) findpath.c
-findtarget.o:       $(HEADERS) findtarget.c
 fire.o:             $(HEADERS) fire.c
 firetrap.o:         $(HEADERS) firetrap.c
 firewand.o:         $(HEADERS) firewand.c
@@ -466,7 +451,6 @@ hasintrinsic.o:     $(HEADERS) hasintrinsic.c
 hassocket.o:        $(HEADERS) hassocket.c
 hasspell.o:         $(HEADERS) hasspell.c
 healing.o:          $(HEADERS) healing.c
-holeinventory.o:    $(HEADERS) holeinventory.c
 houseinventory.o:   $(HEADERS) houseinventory.c
 inkey.o:            $(HEADERS) inkey.c
 inroom.o:           $(HEADERS) inroom.c
@@ -482,6 +466,7 @@ levellegacy.o:      $(HEADERS) levellegacy.c
 library.o:          $(HEADERS) library.c
 lightroom.o:        $(HEADERS) lightroom.c
 load.o:             $(HEADERS) load.c
+load57.o:           $(HEADERS) load57.c
 loadgear.o:         $(HEADERS) loadgear.c
 loadlevel.o:        $(HEADERS) loadlevel.c
 log.o:              $(HEADERS) log.c
@@ -500,14 +485,12 @@ manacost.o:         $(HEADERS) manacost.c
 mapgen.o:           $(HEADERS) mapgen.c
 mapgenold.o:        $(HEADERS) mapgenold.c
 maxdamage.o:        $(HEADERS) maxdamage.c
-mechmerchant.o:     $(HEADERS) mechmerchant.c
 meleehit.o:         $(HEADERS) meleehit.c
 minimap.o:          $(HEADERS) minimap.c
 missile.o:          $(HEADERS) missile.c
 mounts.o:           $(HEADERS) mounts.c
 moveenemy.o:        $(HEADERS) moveenemy.c
 movesnake.o:        $(HEADERS) movesnake.c
-movesummoned.o:     $(HEADERS) movesummoned.c
 msg.o:              $(HEADERS) msg.c
 mutable.o:          $(HEADERS) mutable.c
 mutalegend.o:       $(HEADERS) mutalegend.c
@@ -528,7 +511,6 @@ pawn.o:             $(HEADERS) pawn.c
 pittrap.o:          $(HEADERS) pittrap.c
 placeobject.o:      $(HEADERS) placeobject.c
 poisontrap.o:       $(HEADERS) poisontrap.c
-possesses.o:        $(HEADERS) possesses.c
 printrec.o:         $(HEADERS) printrec.c
 processconfig.o:    $(HEADERS) processconfig.c
 processoption.o:    $(HEADERS) processoption.c
@@ -542,7 +524,7 @@ removelandplayer.o: $(HEADERS) removelandplayer.c
 removeplayer.o:     $(HEADERS) removeplayer.c
 reversebyte.o:      $(HEADERS) reversebyte.c
 roottrap.o:         $(HEADERS) roottrap.c
-savenew.o:          $(HEADERS) savenew.c
+save.o:             $(HEADERS) save.c
 savegear.o:         $(HEADERS) savegear.c
 savelevel.o:        $(HEADERS) savelevel.c
 sayword.o:          $(HEADERS) sayword.c

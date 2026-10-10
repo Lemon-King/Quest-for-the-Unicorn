@@ -10,8 +10,8 @@
 
 #include "header.h"
 
-Int32 spell_adjust(Int32 base_damage) {
-  Int32 sp;
+int spell_adjust(int base_damage) {
+  int sp;
   double tmp;
   sp = get_spell_power();
   tmp = base_damage;
@@ -21,13 +21,12 @@ Int32 spell_adjust(Int32 base_damage) {
   return tmp;
   }
 
-void cast_spell(Int32 number) {
-  Int32 spell;
-  Int32 am,mn;
+void cast_spell(int number) {
+  int spell;
+  int am,mn;
   spell = castspell(number);
   if (spell == 0) {
     msg("Cast cancelled",7);
-    takes_time = 'N';
     return;
     }
   if (spell != 0 && player.cmana >= mana_cost(spells[spell].mana)) {
@@ -59,7 +58,6 @@ void cast_spell(Int32 number) {
       case 12:drain(spell_adjust(spells[spell].control),spells[spell].special); break;
       case 13:area49(spell_adjust(spells[spell].control),spells[spell].special,player.x,player.y); break;
       case 14:super(spells[spell].control,spells[spell].special); break;
-      case 26:special42(spells[spell].control); break;
       case SP_ENCH:
            if (player.level < 12) enchant(spells[spell].control,1);
            else if (player.level < 18) enchant(spells[spell].control,2);
@@ -72,5 +70,5 @@ void cast_spell(Int32 number) {
     msg("Not enough Mana!!",14);
     }
   show_side();
-  } /* void cast_spell(Int32 number) */
+  } /* void cast_spell(int number) */
 

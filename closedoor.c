@@ -11,9 +11,9 @@
 #include "header.h"
 
 void close_door() {
-//  Int32 xdir,ydir;
+//  int xdir,ydir;
 //  get_dir(&xdir,&ydir);
-  Int32 xdir,ydir;
+  int xdir,ydir;
   char dir;
   dir = item_dir(23);
   if (dir != ' ') {

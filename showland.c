@@ -11,7 +11,7 @@
 #include "header.h"
 
 void show_land() {
-  Int32 x,y;
+  int x,y;
   setfillstyle(1,12);
   bar(0,0,screen_width-220,10); bar(0,screen_height-37,screen_width-220,screen_height-27);       /* Top/bottom frame */
   bar(0,0,10,screen_height-27); bar(screen_width-230,0,screen_width-220,screen_height-27);       /* Left/Right frame */

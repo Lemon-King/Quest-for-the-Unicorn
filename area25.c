@@ -10,11 +10,11 @@
 
 #include "header.h"
 
-void area25(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y) {
-  Int32  x,y;
-  Int32  x1,y1;
-  Int32  mon;
-  Int32  i;
+void area25(int damage,int elem,int center_x,int center_y) {
+  int  x,y;
+  int  x1,y1;
+  int  mon;
+  int  i;
   x1 = center_x; y1 = center_y;
   if (x1<2) x1=2; else if (x1>98) x1 = 98;
   if (y1<2) y1=2; else if (y1>98) y1 = 98;

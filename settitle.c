@@ -11,8 +11,8 @@
 #include "header.h"
 
 void set_title() {
-  Int32 i;
-  Int32 flag;
+  int i;
+  int flag;
   i=0;
   flag = -1;
   while (titles[i].class != 99) {

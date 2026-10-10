@@ -13,8 +13,8 @@
 /* ************************************************************* */
 /* ***** Returns direction key if only 1 found, else space ***** */
 /* ************************************************************* */
-char item_dir(Int32 item) {
-  Int32 count;
+char item_dir(int item) {
+  int count;
   char dir;
   dir = ' ';
   count = 0;

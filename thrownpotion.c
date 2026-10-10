@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void thrown_potion(OBJECT_REC* item,Int32 x,Int32 y) {
+void thrown_potion(OBJECT_REC* item,int x,int y) {
   NPC_REC* monster;
   if (item == NULL) return;
   if (item->otype != O_POTN) return;

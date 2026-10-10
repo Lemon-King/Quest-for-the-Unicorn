@@ -10,14 +10,14 @@
 
 #include "header.h"
 
-Int32 passable(Int32 x,Int32 y,char monstPass,char doorPass) {
-  Int32 flag;
+int passable(int x,int y,char monstPass) {
+  int flag;
   flag = -1;
   if (x<1 || x>99 || y<1 || y>99) return 0;
   if (player.map[x][y] == 21) flag = 0;
-  if (player.map[x][y] == 22 && doorPass != 'Y') flag = 0;
+  if (player.map[x][y] == 22) flag = 0;
   if (player.map[x][y] == 30) flag = 0;
-  if (player.map[x][y] == 33 && doorPass != 'Y') flag = 0;
+  if (player.map[x][y] == 33) flag = 0;
   if (player.map[x][y] == 3) flag = 0;
   if (player.map[x][y] == 4) flag = 0;
   if (player.map[x][y] < 0 && monstPass != 'Y') flag = 0;

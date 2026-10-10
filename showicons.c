@@ -10,14 +10,14 @@
 
 #include "header.h"
 
-Int32 helpcol;
-Int32 helprow;
-Int32 maxcol;
-Int32 maxrow;
+int helpcol;
+int helprow;
+int maxcol;
+int maxrow;
 
-void show_icon_help(Int32 tileNumber, char* desc) {
+void show_icon_help(int tileNumber, char* desc) {
 #ifdef ASCII
-  Int32 offset,toffset;
+  int offset,toffset;
   offset = 60;
   toffset = 30;
   switch (helpcol) {

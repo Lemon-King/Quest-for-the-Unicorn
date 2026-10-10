@@ -10,14 +10,14 @@
 
 #include "header.h"
 
-Int32 mana_cost(Int32 mana) {
+int mana_cost(int mana) {
   double scale;
-  Int32    cast;
+  int    cast;
   scale = get_skill(SK_MAGIC);
   scale /= (has_intrinsic(A_MANA)) ? 2.0 : 3.0;
   scale /= 100.0;
   if (scale > 0.80) scale = 0.80;
-  cast = (Int32)(mana - (mana * scale));
+  cast = (int)(mana - (mana * scale));
 /* trio of might */
 /*
   if (player.found[11] != 0 && player.found[12] !=0 && player.found[13] != 0)

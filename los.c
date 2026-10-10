@@ -10,13 +10,13 @@
 
 #include "header.h"
 
-Int32 los(Int32 x1,Int32 y1,Int32 x2,Int32 y2,char monstPass) {
-  Int32 x,y;
-  Int32 ret;
-  Int32 difx;
-  Int32 dify;
-  Int32 count;
-  Int32 dir;
+int los(int x1,int y1,int x2,int y2,char monstPass) {
+  int x,y;
+  int ret;
+  int difx;
+  int dify;
+  int count;
+  int dir;
   ret = -1;
   if (abs(x1-x2) < 2 && abs(y1-y2) < 2) ret = -1;
   else if (x1 == x2) {
@@ -24,14 +24,14 @@ Int32 los(Int32 x1,Int32 y1,Int32 x2,Int32 y2,char monstPass) {
     y1++;
     y2--;
     for (y=y1; y<=y2; y++)
-      if (passable(x1,y,monstPass,'N') == 0) return 0;
+      if (passable(x1,y,monstPass) == 0) return 0;
     }
   else if (y1 == y2) {
     if (x1 > x2) { x = x1; x1 = x2; x2 = x; }
     x1++;
     x2--;
     for (x=x1; x<=x2; x++)
-      if (passable(x,y1,monstPass,'N') == 0) return 0;
+      if (passable(x,y1,monstPass) == 0) return 0;
     }
   else {
     difx = abs(x1 - x2);
@@ -53,7 +53,7 @@ Int32 los(Int32 x1,Int32 y1,Int32 x2,Int32 y2,char monstPass) {
           count -= difx;
           y += dir;
           }
-        if (passable(x,y,monstPass,'N') == 0) return 0;
+        if (passable(x,y,monstPass) == 0) return 0;
         }
       } else {
       if (y1 > y2) {
@@ -71,7 +71,7 @@ Int32 los(Int32 x1,Int32 y1,Int32 x2,Int32 y2,char monstPass) {
           count -= dify;
           x += dir;
           }
-        if (passable(x,y,monstPass,'N') == 0) return 0;
+        if (passable(x,y,monstPass) == 0) return 0;
         }
       }
     }

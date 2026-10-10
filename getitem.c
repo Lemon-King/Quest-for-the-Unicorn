@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-OBJECT_REC* get_item(Int32 x,Int32 y) {
+OBJECT_REC* get_item(int x,int y) {
   OBJECT_REC* ret;
   ret = NULL;
   if (x < 1 || y < 1 || x > 100 || y > 100) return ret;

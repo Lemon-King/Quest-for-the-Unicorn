@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char get_dir(Int32* xdir,Int32* ydir) {
+char get_dir(int* xdir,int* ydir) {
   char key;
   char flag;
   msg("Dir ?",14);

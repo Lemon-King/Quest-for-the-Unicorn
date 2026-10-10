@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-void do_heal(Int32 amount,Int32 who) {
+void do_heal(int amount,int who) {
   char buffer[64];
   if (who == 0) {                                   /* player */
     player.chp += amount;
