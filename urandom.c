@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,13 +10,12 @@
 
 #include "header.h"
 
-Int32 u_random(Int32 range) {
+int u_random(int range) {
   float r;
-  if (range < 0) range = 0;
   r=(float)rand();
   r/=RAND_MAX;
-  r-=(Int32)r;
+  r-=(int)r;
   r*=range;
-  return (Int32)r;
+  return (int)r;
   }
 

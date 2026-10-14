@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,7 +11,7 @@
 #include "header.h"
 #include "math.h"
 
-void buy_house(Int32 hnum) {
+void buy_house(int hnum) {
   double down;
   double ccost;
   double p;
@@ -19,8 +19,8 @@ void buy_house(Int32 hnum) {
   double i;
   char   buffer[80];
   char   key;
-  Int32    flag;
-  Int32    j;
+  int    flag;
+  int    j;
 
   void show_top() {
     textmode(3); gotoxy(33,1); textcolor(11);
@@ -41,10 +41,10 @@ void buy_house(Int32 hnum) {
 
     gotoxy(27,10); txt_write("1> Change Down Payment");
     gotoxy(27,11); txt_write("2> Purchase House");
-    gotoxy(27,12); txt_write("<ESC> Leave");
+    gotoxy(27,12); txt_write("0> Leave");
     gotoxy(30,13); txt_write("Option ?");
     textcolor(15); gotoxy(35,24);
-    sprintf(buffer,"Gold = %d",get_gold());
+    sprintf(buffer,"Gold = %.0f",player.gold);
     txt_write(buffer);
     }
 
@@ -57,17 +57,15 @@ void buy_house(Int32 hnum) {
   key = ' ';
   while (key != '0') {
     key = inkey();
-    if (key == 27) key = '0';
     if (key == '1') {
       gotoxy(27,15); textcolor(2); txt_write("New Down Payment: ");
       textcolor(15);
-      if (p_read(buffer) == 0) {
-        sscanf(buffer,"%lf",&down);
-        } else down = 0;
+      p_read(buffer);
+      sscanf(buffer,"%lf",&down);
       a = (p-down)*((i*pow(1+i,360))/(pow(1+i,360)-1));
       }
     if (key == '2') {
-      if (ccost+down > get_gold()) {
+      if (ccost+down > player.gold) {
         gotoxy(27,15); textcolor(4); txt_write("You do not have enough gold ");
         delay(5000);
         }
@@ -89,7 +87,7 @@ void buy_house(Int32 hnum) {
           player.houses[flag].interest = 0;
           player.houses[flag].payment = a;
           for (j=0; j<500; j++) player.houses[flag].inventory[j].otype = O_NONE;
-          sub_gold(down+ccost);
+          player.gold -= (down+ccost);
           player.map[forsale[hnum].cx][forsale[hnum].cy] = S_SOLD;
           key = '0';
           restoreScreen();

@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,7 +11,7 @@
 #include "header.h"
 
 void auto_detect() {
-  Int32 x,y;
+  int x,y;
   OBJECT_REC* item;
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)

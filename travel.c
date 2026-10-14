@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -12,34 +12,29 @@
 
 void travel(char* name) {
   char dest[9][33];
-  Int32 cost[9];
-  Int32 where[9];
+  int cost[9];
+  int where[9];
   char flag;
-  Int32  option;
+  int  option;
   char buffer[80];
-  Int32  i;
+  int  i;
   char key;
-  Int32  px,py;
-  Int32  dx,dy;
-  Int32  city;
-  Int32  shipx,shipy;
-  Int32  ndest;
+  int  px,py;
+  int  dx,dy;
+  int  city;
+  int  shipx,shipy;
+  int  ndest;
 
-  void new_town(Int32 where) {
-//    Int32 m_file;
-//#ifdef MINGW
-//    m_file = open("temp01.$$$",O_WRONLY | O_BINARY);
-//#else
-//    m_file = open("temp01.$$$",O_WRONLY);
-//#endif
-//    if (m_file < 0) {
-//      printf("Fatal Error: Could not open temp01.$$$\n");
-//      exit(1);
-//      }
-//    lseek(m_file,sizeof(KNOW_TYPE) * player.city,SEEK_SET);
-//    write(m_file,&(player.known),sizeof(KNOW_TYPE));
-//    close(m_file);
-    memcpy(&(known_maps[player.city]), &(player.known), sizeof(KNOW_TYPE));
+  void new_town(int where) {
+    int m_file;
+    m_file = open("temp01.$$$",O_WRONLY);
+    if (m_file < 0) {
+      printf("Fatal Error: Could not open temp01.$$$\n");
+      exit(1);
+      }
+    lseek(m_file,sizeof(KNOW_TYPE) * player.city,SEEK_SET);
+    write(m_file,&(player.known),sizeof(KNOW_TYPE));
+    close(m_file);
 
     player.region = links[where].region;
     player.city = links[where].diff;
@@ -49,19 +44,20 @@ void travel(char* name) {
     player.y = links[where].sy;
     strcpy(player.d_name,links[where].name);
     copyMap(&player.map,player.city);
-//#ifdef MINGW
-//    m_file = open("temp01.$$$",O_RDONLY | O_BINARY);
-//#else
-//    m_file = open("temp01.$$$",O_RDONLY);
-//#endif
-//    if (m_file < 0) {
-//      printf("Fatal Error: Could not open temp01.$$$\n");
-//      exit(1);
-//      }
-//    lseek(m_file,sizeof(KNOW_TYPE) * player.city,SEEK_SET);
-//    read(m_file,&(player.known),sizeof(KNOW_TYPE));
-//    close(m_file);
-    memcpy(&(player.known), &(known_maps[player.city]), sizeof(KNOW_TYPE));
+    m_file = open("temp01.$$$",O_RDONLY);
+    if (m_file < 0) {
+      printf("Fatal Error: Could not open temp01.$$$\n");
+      exit(1);
+      }
+    lseek(m_file,sizeof(KNOW_TYPE) * player.city,SEEK_SET);
+    read(m_file,&(player.known),sizeof(KNOW_TYPE));
+    close(m_file);
+    player.map_x = player.x-8;
+    player.map_y = player.y-8;
+    if (player.map_x<1) player.map_x = 1;
+    if (player.map_y<1) player.map_y = 1;
+    if (player.map_x>84) player.map_x = 84;
+    if (player.map_y>84) player.map_y = 84;
     i = 0;
     while (i >= 0) {
       if (shops[i].shoptype != 999) {
@@ -74,39 +70,13 @@ void travel(char* name) {
       }
 
     stock_town(player.city);
-    player.map_x = player.x-TILES_X/2;
-    player.map_y = player.y-TILES_Y/2;
-    if (player.map_x<1) player.map_x = 1;
-    if (player.map_y<1) player.map_y = 1;
-    if (player.map_x>100-TILES_X) player.map_x = 100-TILES_X;
-    if (player.map_y>100-TILES_Y) player.map_y = 100-TILES_Y;
-    i = 0;
-    while (i >= 0) {
-      if (forsale[i].region != 999) {
-        if (forsale[i].region == player.region &&
-            forsale[i].rx == player.land_x &&
-            forsale[i].ry == player.land_y)
-          player.map[forsale[i].cx][forsale[i].cy] = S_SALE;
-        i++;
-        } else i = -1;
-      }
-    for (i=0; i<5; i++)
-      if (player.houses[i].region == player.region &&
-          player.houses[i].rx == player.land_x &&
-          player.houses[i].ry == player.land_y)
-        player.map[player.houses[i].cx][player.houses[i].cy] = S_SOLD;
-    clrscr();
-    show_map();
-    show_side();
-    show_player();
-    saveScreen();
-    } /* void new_town(Int32 where) */
+    } /* void new_town(int where) */
 
-  Int32 getPX(Int32 r,Int32 x) {
+  int getPX(int r,int x) {
     return (((r - 1) % 4) * 100) + x;
     }
 
-  Int32 getPY(Int32 r,Int32 y) {
+  int getPY(int r,int y) {
     return (((r - 1) / 4) * 100) + y;
     }
 
@@ -173,17 +143,15 @@ void travel(char* name) {
       gotoxy(49,11); txt_write("2500");
     }
   textcolor(14); gotoxy(35,24); 
-  sprintf(buffer,"Gold = %d",get_gold());
+  sprintf(buffer,"Gold = %.0f",player.gold);
   txt_write(buffer);
   flag = ' ';
   while (flag == ' ') {
     textcolor(10); gotoxy(20,ndest+4);
-    txt_write("Where would you like to travel to (<ESC> to leave) ?      ");
-    gotoxy(73,ndest+4);
-    strcpy(buffer,"");
-    if (p_read(buffer) == 0) {
-      sscanf(buffer,"%d",&option);
-      } else option = 0;
+    txt_write("Where would you like to travel to ? (0 to leave)        ");
+    gotoxy(71,ndest+4);
+    p_read(buffer);
+    sscanf(buffer,"%d",&option);
     gotoxy(20,16);
     txt_write("                                           ");
     if (option == 0) flag = '*';
@@ -194,18 +162,18 @@ void travel(char* name) {
         delay(1000);
         }
       else {
-        if (get_gold()<2500) {
+        if (player.gold<2500) {
           gotoxy(20,ndest+6); textcolor(14);
           txt_write("You can not afford a ship!!");
           delay(1000);
           }
         else {
-          sub_gold(2500);
+          player.gold -= 2500;
           player.map[shipx][shipy] = 12;
           gotoxy(20,ndest+6); textcolor(14);
           txt_write("You will find you new ship in the harbor");
           textcolor(14); gotoxy(35,24); 
-          sprintf(buffer,"Gold = %d             ",get_gold());
+          sprintf(buffer,"Gold = %.0f             ",player.gold);
           txt_write(buffer);
           delay(1000);
           }
@@ -223,7 +191,7 @@ void travel(char* name) {
         gotoxy(20,ndest+7); txt_write("                   ");
         }
       if (key == 'Y' || key == 'y') {
-        if (cost[option]>get_gold()) {
+        if (cost[option]>player.gold) {
           gotoxy(20,ndest+8); textcolor(12);
           txt_write("You do not have enough gold for that trip!!");
           gotoxy(20,ndest+6); textcolor(14);
@@ -231,11 +199,11 @@ void travel(char* name) {
           gotoxy(20,ndest+7); txt_write("                   ");
           }
         else {
-          sub_gold(cost[option]);
+          player.gold -= cost[option];
           flag = '#';
           }
         }
       }
     }
   if (flag == '#' && option>0) new_town(where[option]);
-} /* void travel(char* name,Int32 city) */
+} /* void travel(char* name,int city) */

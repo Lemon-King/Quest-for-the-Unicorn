@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,12 +10,12 @@
 
 #include "header.h"
 
-byte has_spell(Int32 check) {
-  Int32 i;
+byte has_spell(int check) {
+  int i;
   byte ret;
   ret = 0;
-  for (i=1; i<1000; i++)
-    if (spellbook[i] == check) ret = i;
+  for (i=1; i<=55; i++)
+    if (player.spell[i] == check) ret = i;
   return ret;
   }
 

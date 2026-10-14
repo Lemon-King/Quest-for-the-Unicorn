@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,18 +10,19 @@
 
 #include "header.h"
 
-void show_gen(Int32 item) {
-  Int32 i;
-//  Int32 x,y;
-//  Int32 space;
-//  Int32 size;
+void show_gen(int item) {
+  int i;
+  int x,y;
+  int space;
+  int size;
+  char key;
   MESSAGE general;
   i = item;
   general = gen[i];
   player.gen[i] = -1;
   graphmode();
   display_scroll();
-//  x = 120; y = 160; space = 25; size = 30;
+  x = 120; y = 160; space = 25; size = 30;
   setcolor(0);
   show_message(general.message);
 /*
@@ -43,6 +44,6 @@ void show_gen(Int32 item) {
       }
     }
 */
-  inkey();
+  key = inkey();
   }
 

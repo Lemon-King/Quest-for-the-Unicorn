@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -12,25 +12,16 @@
 
 void show_headings() {
   char buffer[80];
-#ifdef ASCII
-  setcolor(7);
-  outtext_xy(22,23,"                              ");
-  outtext_xy(22,23,player.d_name);
-  sprintf(buffer,"Diff:%d",player.diff);
-  outtext_xy(2,23,buffer);
-#else
   setcolor(0);
   settextstyle(0,0,1);
-  outtextxy(148,screen_height-28,"                              ");
-  outtextxy(148,screen_height-28,player.d_name);
+  outtextxy(148,452,player.d_name);
   sprintf(buffer,"%d",player.diff);
-  outtextxy(10,screen_height-28,buffer);
-#endif
+  outtextxy(10,452,buffer);
   setcolor(14);
-  outtext_xy(TEXT_GRID_WIDTH - 24,1,"Depth  :");
-  outtext_xy(TEXT_GRID_WIDTH - 24,2,"Date   :");
-  outtext_xy(TEXT_GRID_WIDTH - 24,3,"HP     :");
-  outtext_xy(TEXT_GRID_WIDTH - 24,4,"Mana   :");
-  outtext_xy(TEXT_GRID_WIDTH - 24,5,"Level  :");
+  outtextxy(450,10,"Level  :");
+  outtextxy(450,20,"Date   :");
+  outtextxy(450,30,"HP     :");
+  outtextxy(450,40,"Mana   :");
+  outtextxy(450,50,"Level  :");
   }
 

@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,11 +11,12 @@
 #include "header.h"
 
 void show_quest() {
-  Int32  i;
-  Int32  row;
-  Int32  col;
-  Int32  suggest;
-  Int32  sug_level;
+  char key;
+  int  i;
+  int  row;
+  int  col;
+  int  suggest;
+  int  sug_level;
   saveScreen();
   textmode(3);
   textcolor(15);
@@ -54,7 +55,7 @@ void show_quest() {
     }
   gotoxy(28,25); textcolor(14);
   txt_write("Press any key to continue");
-  inkey();
+  key = inkey();
   restoreScreen();
   }
 

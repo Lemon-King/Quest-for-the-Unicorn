@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,270 +10,87 @@
 
 #include "header.h"
 
-void shop(char* name,Int32 shop_type) {
+void shop(char* name,int shop_type) {
+  double mul;
+  int option;
   double price;
   OBJECT_REC item;
-  Int32 i;
-  Int32 offset;
-  Int32 page_size;
+  int i;
   char buffer[80];
-  char key;
-  Int32  line;
-
-  void show_spells() {
-    Int32 j;
-    Int32 line,col;
-    char buffer2[80];
-    Int32 count;
-    line = 3;
-    col = 12;
-    textcolor(14);
-    count = n_shop_items - offset;
-    if (count > page_size) count = page_size;
-    for (i=0; i<count; i++) {
-      gotoxy(18,line);
-      txt_write("                                                  ");
-      sprintf(buffer,"%c)",i+'a');
-      gotoxy(5,line); txt_write(buffer);
-      strcpy(buffer2,shop_items[i+offset].name);
-      for (j=0; j<strlen(buffer2); j++)
-        if (buffer2[j] == '_') buffer2[j] = ' ';
-      gotoxy(col,line);
-      sprintf(buffer,"%3d",i+1+offset);
-      txt_write(buffer);
-      gotoxy(col+5,line);
-      sprintf(buffer,"%s:%d",classes[spells[shop_items[i+offset].control].allign-1].name,spells[shop_items[i+offset].control].level);
-      txt_write(buffer);
-      gotoxy(col+20,line);
-      txt_write(buffer2);
-      gotoxy(col+50,line);
-      sprintf(buffer,"%6.0f",buy_price(item_cost(&(shop_items[i+offset]))));
-      txt_write(buffer);
-      line++;
-      }
-    }
-
-  void show_items() {
-    Int32 count;
-    Int32 i;
-    Int32 j;
-    Int32 line;
-    char buffer[80];
-    char buffer2[80];
-    if (shop_type == SHOP_SPEL) {
-      show_spells();
-      return;
-      }
-    line = 3;
-    textcolor(14);
-    count = n_shop_items - offset;
-    if (count > page_size) count = page_size;
-    for (i=0; i<count; i++) {
-      gotoxy(18,line);
-      txt_write("                                                  ");
-      sprintf(buffer,"%c)",i+'a');
-      gotoxy(11,line); txt_write(buffer);
-      gotoxy(18,line);
-      strcpy(buffer2,shop_items[i+offset].name);
-      if (shop_items[i+offset].charges > 0) {
-        sprintf(buffer," [%d]",shop_items[i+offset].charges);
-        strcat(buffer2,buffer);
-        }
-      for (j=0; j<strlen(buffer2); j++)
-        if (buffer2[j] == '_') buffer2[j] = ' ';
-      sprintf(buffer,"%s",buffer2);
-      txt_write(buffer);
-      gotoxy(55,line);
-      sprintf(buffer,"%6.0f",buy_price(item_cost(&(shop_items[i+offset]))));
-      txt_write(buffer);
-      line++;
-      }
-    }
-
-  void show_top_spell() {
-    Int32 j;
-    Int32 line,col;
-    char buffer2[80];
-    Int32 count;
-    line = 3;
-    col = 12;
-    textmode(3); gotoxy(27,1); textcolor(11);
-    sprintf(buffer,"Welcome to %s",name);
-    txt_write(buffer);
-    textcolor(14);
-    count = n_shop_items - offset;
-    if (count > page_size) count = page_size;
-    for (i=0; i<count; i++) {
-      strcpy(buffer2,shop_items[i+offset].name);
-      for (j=0; j<strlen(buffer2); j++)
-        if (buffer2[j] == '_') buffer2[j] = ' ';
-      gotoxy(col,line);
-      sprintf(buffer,"%3d",i+1+offset);
-      txt_write(buffer);
-      gotoxy(col+5,line);
-      sprintf(buffer,"%s:%d",classes[spells[shop_items[i+offset].control].allign-1].name,spells[shop_items[i+offset].control].level);
-      txt_write(buffer);
-      gotoxy(col+20,line);
-      txt_write(buffer2);
-      gotoxy(col+50,line);
-      sprintf(buffer,"%6.0f",buy_price(item_cost(&(shop_items[i+offset]))));
-      txt_write(buffer);
-      line++;
-      }
-    textcolor(14); gotoxy(35,25);
-    sprintf(buffer,"Gold = %d",get_gold());
-    txt_write(buffer);
-    }
 
   void show_top() {
-/*
-    if (shop_type == SHOP_SPEL) {
-      show_top_spell();
-      return;
-      }
-*/
+    int j;
+    int line,col;
+    char buffer2[80];
+    line = 3;
+    col = 2;
+    if (n_shop_items < 17) col = 22;
     textmode(3); gotoxy(27,1); textcolor(11);
     sprintf(buffer,"Welcome to %s",name);
     txt_write(buffer);
-    show_items();
-    textcolor(14); gotoxy(35,25);
-    sprintf(buffer,"Gold = %d",get_gold());
-    txt_write(buffer);
-    }
-
-  void show_arrows() {
     textcolor(14);
-    if (shop_type == SHOP_SPEL) {
-      gotoxy(8,line+3); txt_write("-->");
-      gotoxy(69,line+3); txt_write("<--");
-      } else {
-      gotoxy(14,line+3); txt_write("-->");
-      gotoxy(62,line+3); txt_write("<--");
+    for (i=0; i<n_shop_items; i++) {
+      gotoxy(col,line);
+      strcpy(buffer2,shop_items[i].name);
+      for (j=0; j<strlen(buffer2); j++)
+        if (buffer2[j] == '_') buffer2[j] = ' ';
+      sprintf(buffer,"%2d  %s",i+1,buffer2);
+      txt_write(buffer);
+      gotoxy(col+30,line);
+      sprintf(buffer,"%6.0f",item_cost(&(shop_items[i]))*mul);
+      txt_write(buffer);
+      line++;
+      if (line > 20) {
+        line = 3;
+        col = 42;
+        }
       }
-    }
-
-  void erase_arrows() {
-    if (shop_type == SHOP_SPEL) {
-      gotoxy(8,line+3); txt_write("   ");
-      gotoxy(69,line+3); txt_write("   ");
-      } else {
-      gotoxy(14,line+3); txt_write("   ");
-      gotoxy(62,line+3); txt_write("   ");
-      }
+    textcolor(14); gotoxy(35,25);
+    sprintf(buffer,"Gold = %.0f",player.gold);
+    txt_write(buffer);
     }
 
   switch (shop_type) {
-    case SHOP_ALCH: get_shop_items(O_POTN,0,0,0,0,0,1000); break;
-    case SHOP_ARMR: get_shop_items(O_ARMR,O_SHLD,O_HELM,0,0,0,5000); break;
-    case SHOP_BOOK: get_shop_items(O_SCRL,O_BOOK,0,0,0,0,1000); break;
-    case SHOP_ROBE: get_shop_items(O_ROBE,0,0,0,0,0,1000); break;
-    case SHOP_JEWL: get_shop_items(O_RING,O_NECK,O_JEWL,0,0,0,1000); break;
-    case SHOP_MAGC: get_shop_items(O_STFF,O_MISC,0,0,0,0,500); break;
-    case SHOP_WEAP: get_shop_items(O_EDGE,O_POLE,O_DAGR,O_BOW,O_BLNT,O_THRN,5000); break;
-    case SHOP_FOOD: get_shop_items(O_FOOD,O_CONS,0,0,0,0,1000); break;
-    case SHOP_CRFT: get_shop_items(O_CRFT,0,0,0,0,0,200); break;
-    case SHOP_SPEL: get_shop_spells(99); break;
-    case SHOP_RECP: get_shop_recipes(); break;
+    case SHOP_ALCH: get_shop_items(O_POTN,0,0,0,10); break;
+    case SHOP_ARMR: get_shop_items(O_ARMR,O_SHLD,O_HELM,0,100); break;
+    case SHOP_BOOK: get_shop_items(O_SCRL,O_BOOK,0,0,10); break;
+    case SHOP_ROBE: get_shop_items(O_ROBE,0,0,0,10); break;
+    case SHOP_JEWL: get_shop_items(O_RING,O_NECK,0,0,10); break;
+    case SHOP_MAGC: get_shop_items(O_WAND,O_MISC,0,0,10); break;
+    case SHOP_WEAP: get_shop_items(O_EDGE,O_POLE,O_DAGR,O_BOW,100); break;
+    case SHOP_FOOD: get_shop_items(O_FOOD,0,0,0,30); break;
     }
 
-  page_size = 18;
-  offset = 0;
+  mul = 1; 
+  if (player.sex == 'F') mul = mul-0.05;
+  mul = mul-(player.skill[14]/100);
+  if (player.stat[6] >= 0 && player.stat[6] <= 7) mul += .08;
+  if (player.stat[6] >= 8 && player.stat[6] <= 11) mul += .05;
+  if (player.stat[6] >= 12 && player.stat[6] <= 14) mul += .01;
+  if (player.stat[6] >= 17 && player.stat[6] <= 18) mul -= .02;
+  if (player.stat[6] >= 19 && player.stat[6] <= 20) mul -= .03;
+  if (player.stat[6] >= 21 && player.stat[6] <= 23) mul -= .05;
+  if (player.stat[6] >= 24 && player.stat[6] <= 99) mul -= .1;
+  if (player.class == 11) mul -= 0.2;
   show_top();
-  gotoxy(15,22); textcolor(10);
-  txt_write("Which item would you like (<ESC> to leave) ?");
-  key = ' ';
-  line = 0;
-  show_arrows();
-  while (key != 27 && key != '0') {
-    key = inkey();
-    if (key =='2') {
-      erase_arrows();
-      line++;
-      if (offset+line >= n_shop_items) line--;
-      if (line > 17) {
-        line--;
-        if (offset+18 < n_shop_items) {
-          offset++;
-          show_items();
-          }
-        }
-      show_arrows();
+  option = 1;
+  while (option != 0) {
+    gotoxy(15,22); textcolor(10);
+    txt_write("Which item would you like (0 to leave) ?        ");
+    gotoxy(56,22); textcolor(15);
+    p_read(buffer);
+    sscanf(buffer,"%d",&option);
+    for (i=20; i<=24; i++) {
+      gotoxy(10,i); txt_write("                                                ");
       }
-    if (key =='8') {
-      erase_arrows();
-      line--;
-      if (line < 0) {
-        line++;
-        if (offset > 0) {
-          offset--;
-          show_items();
-          }
-        }
-      show_arrows();
-      }
-    if (key == '9') {
-      erase_arrows();
-      offset -= 18;
-      if (offset < 0) offset = 0;
-      show_items();
-      show_arrows();
-      }
-    if (key == '3') {
-      erase_arrows();
-      offset += 18;
-      if (offset + 18 >= n_shop_items) {
-        offset = n_shop_items - 18;
-        if (offset < 0) offset = 0;
-        }
-      show_items();
-      if (offset+line >= n_shop_items) line = n_shop_items - offset - 1;
-      if (line < 0) line = 0;
-      show_arrows();
-      }
-    if (key == '7') {
-      erase_arrows();
-      offset = 0;
-      show_items();
-      show_arrows();
-      }
-    if (key == '1') {
-      erase_arrows();
-      offset = 9999;
-      if (offset + 18 >= n_shop_items) {
-        offset = n_shop_items - 18;
-        if (offset < 0) offset = 0;
-        }
-      show_items();
-      if (offset+line >= n_shop_items) line = n_shop_items - offset - 1;
-      if (line < 0) line = 0;
-      show_arrows();
-      }
-    if (key >= 'a' && key <= 'r') {
-      erase_arrows();
-      line = key - 'a';
-      if (offset+line >= n_shop_items) line = n_shop_items - offset - 1;
-      show_arrows();
-      }
-    if (key == 'I') {
-      shop_items[offset+line].flags |= OF_IDENT;
-      data_card(&(shop_items[offset + line]));
-      show_top();
-      show_arrows();
-      gotoxy(15,22); textcolor(10);
-      txt_write("Which item would you like (<ESC> to leave) ?");
-      }
-    if (key == 13) {
-      item = shop_items[offset+line];
-      gotoxy(15,22); txt_write("                                                  ");
+    if (option>0) {
+      item = shop_items[option-1];
       gotoxy(15,22); textcolor(12);
       sprintf(buffer,"Ah, a %s A fine selection!",item.name);
       txt_write(buffer);
-      price = buy_price(item_cost(&item));
+      price = item_cost(&item)*mul;
       haggle(price,item);
       show_top();
-      show_arrows();
-      gotoxy(15,22); textcolor(10);
-      txt_write("Which item would you like (<ESC> to leave) ?");
       }
     }
   } /* void shop(char* name) */

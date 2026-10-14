@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -12,9 +12,9 @@
 
 void mounts(char* name) {
   double cost = 0;
-  Int32 item = 0;
-  Int32 slot;
-  Int32 i,j;
+  int item = 0;
+  int slot;
+  int i;
   char key =' ';
   char buffer[80];
 
@@ -32,7 +32,7 @@ void mounts(char* name) {
     gotoxy(27,10); txt_write("0> Leave");
     gotoxy(30,12); txt_write("Option ?");
     textcolor(14); gotoxy(35,24);
-    sprintf(buffer,"Gold = %d",get_gold());
+    sprintf(buffer,"Gold = %.0f",player.gold);
     txt_write(buffer);
     }
 
@@ -42,14 +42,14 @@ void mounts(char* name) {
     key = inkey();
     if (key>='1' && key<='6') {
       switch (key) {
-        case '1':item = 101; cost = 1000; break;
-        case '2':item = 102;  cost = 75000; break;
-        case '3':item = 20;  cost = 125000; break;
-        case '4':item = 103;  cost = 160000; break;
-        case '5':item = 62; cost = 450000; break;
-        case '6':item = 34; cost = 750000; break;
+        case '1':item = 121; cost = 1000; break;
+        case '2':item = 95;  cost = 75000; break;
+        case '3':item = 72;  cost = 125000; break;
+        case '4':item = 64;  cost = 160000; break;
+        case '5':item = 109; cost = 450000; break;
+        case '6':item = 113; cost = 750000; break;
         }
-      if (cost>get_gold()) {
+      if (cost>player.gold) {
         gotoxy(30,14); textcolor(4);
         txt_write("You do not have enough gold!!!!");
         delay(1500);
@@ -59,12 +59,11 @@ void mounts(char* name) {
        for (i=1; i<=5; i++)
          if (slot == 0 && player.party[i].hp == 0) slot = i;
        if (slot != 0) {
-         j = (player.effect[PE_HEROIC] > 0) ? player.effect[PE_HEROIC] : 1;
-         player.party[slot] = monsters[get_linked_monster(item)];
-         player.party[slot].hp = player.party[slot].level * (9 * j);
-         player.party[slot].time = -1;
-         player.party[slot].exp = needed(player.party[slot].level);
-         sub_gold(cost);
+         player.party[slot] = monsters[item];
+         player.party[slot].hp = u_random(player.party[slot].hp)+1;
+         player.party[slot].time = 255;
+         player.party[slot].exp = needed(player.party[slot].level)*10;
+         player.gold = player.gold-cost;
          gotoxy(30,14); textcolor(11);
          txt_write("Mount Obtained.");
          delay(1500);
@@ -78,5 +77,16 @@ void mounts(char* name) {
       }
       show_top();
     }
-  check_mount();
+  player.mount = 0; player.peg = 0;
+  for (i=1; i<=5; i++)
+    if (player.party[i].hp>0) {
+      if (player.party[i].sprite == 133) player.peg = 1;
+      if (player.party[i].sprite == 148) player.mount = 1;
+      if (player.party[i].sprite == 131) player.mount = 1;
+      if (player.party[i].sprite == 132) player.mount = 1;
+      if (player.party[i].sprite == 138) player.mount = 1;
+      if (player.party[i].sprite == 155) player.peg = 1;
+      if (player.party[i].sprite == 159) player.peg = 1;
+      if (player.peg == 1) player.mount = 1;
+    }
   }

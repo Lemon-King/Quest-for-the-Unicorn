@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-void pack_item(OBJECT_REC* item,Int32 line) {
+void pack_item(OBJECT_REC* item,int line) {
   char flag;
-  Int32  slot;
+  int  slot;
   OBJECT_REC  pitem;
   slot = 1;
   if (line > 3) pitem = player.invent[line - 3];

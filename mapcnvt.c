@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -14,7 +14,7 @@
 void process(char* fname) {
   FILE*    in_file;
   char     buffer[200];
-  Int32      x,y;
+  int      x,y;
 
   in_file = fopen(fname,"r");
   if (in_file == NULL) {
@@ -72,7 +72,6 @@ void process(char* fname) {
         case 'O':printf("533"); break;
         case 'P':printf("534"); break;
         case 'Q':printf("535"); break;
-        case 'Z':printf("536"); break;
         default :printf("7"); break;
         }
       if (x<100) printf(",");
@@ -85,7 +84,7 @@ void process(char* fname) {
   printf("    },\n");
   }
 
-Int32 main(Int32 argc,char** argv) {
+int main(int argc,char** argv) {
   printf("#ifdef MAIN\n");
   printf("MAP_TYPE maps[] ={\n");
   process("map11.map");    /* place the null map */

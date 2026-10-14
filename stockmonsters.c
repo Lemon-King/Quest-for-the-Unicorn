@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,29 +10,25 @@
 
 #include "header.h"
 
-void stock_monsters(Int32 depth,Int32 treasurex,Int32 treasurey,MAP_TYPE* map,DUNGEON_MONSTERS* dmonsters) {
-  Int32 i,j;
+void stock_monsters() {
+  int i,j;
   byte x,y;
-  Int32  min,max;
+  int  min,max;
   char flag;
-  Int32  number;
-  Int32  groupsize;
-  Int32  friend;
-  Int32  x1,y1;
+  int  number;
+  int  friend;
+  int  x1,y1;
   char mflag;
+  char n[80];
   double texp;
-  Int32    mnst;
-  Int32    scale;
-  Int32    retries;
-  Int32    bossscale;
-  scale = get_monster_level_plus();
+  int    mnst;
+  prompt("Stocking Monsters...");
   texp = 0;
   friend = 5;
   min = (player.diff + player.d_level / 4) - 5;
-  min = player.diff;
   if (min < 1) min = 1;
   if (min > 20) min = 20;
-  max = player.diff + depth / 4;
+  max = player.diff + player.d_level / 4;
   if (max < min) max = min;
   if (player.land_x == 16 && player.land_y == 28 &&
       player.d_level == bottom) {
@@ -42,111 +38,65 @@ void stock_monsters(Int32 depth,Int32 treasurex,Int32 treasurey,MAP_TYPE* map,DU
   number = player.diff / 4;
   if (number < 1) number = 1;
   if (number > 5) number = 5;
-  if (player.effect[PE_NOARENA]) number = 1;
-  for (i=1; i<=player.effect[PE_MCOUNT]; i++) {
-    for (x=1; x<=5; x++) (*dmonsters)[x][i].hp = 0;
+  for (i=1; i<=60; i++) {
+/*
+    sprintf(n,"Stocking Monsters...%d%%",(i*100)/60);
+    prompt(n);
+*/
+    for (x=1; x<=5; x++) player.monster[x][i].hp = 0;
     mflag = ' ';
-    retries = 200;
-    while (mflag == ' ' && retries > 0) {
-      x = u_random(96)+2; y = u_random(96)+2;
-      if (i == 1 && treasurex >= 0 && retries > 100) {
-        x = treasurex - 4 + u_random(9);
-        y = treasurey - 4 + u_random(9);
-        }
-      if (x > 1 && x < 100 && y > 1 && y < 100) {
-        if ((*map)[x][y] == currentFloor) mflag = '*';
-        if ((*map)[x][y] == 2) mflag = '*';
-        if ((*map)[x][y] == 9) mflag = '*';
-        if ((*map)[x][y] == 1) mflag = '*';
-        if (i == 1 && treasurex >= 0 && abs(treasurex-x) < 2 && abs(treasurey-y < 2)) mflag = ' ';
-        }
-      retries--;
+    while (mflag == ' ') {
+      x = u_random(100); y = u_random(100);
+      if (player.map[x][y] == 7) mflag = '*';
+      if (player.map[x][y] == 2) mflag = '*';
+      if (player.map[x][y] == 9) mflag = '*';
+      if (player.map[x][y] == 1) mflag = '*';
       }
-    (*map)[x][y] = 0-i;
-    groupsize = number;
-    if (i == 1 &&
-        player.gateway != '*' &&
-        treasurex >= 0 &&
-        links[player.dungeon_number].numadds > 0) {
-       groupsize = links[player.dungeon_number].numadds+1;
-       }
-    if (groupsize > 5) groupsize = 5;
-    for (j=1; j<=groupsize; j++) {
+    player.map[x][y] = 0-i;
+    for (j=1; j<=number; j++) {
       if (player.gateway == '*' && player.d_level == 5 && j == 1 && i == 1) {
-        for (x1=x-2; x1<=x+2; x1++)
-          for (y1=y-2; y1<=y+2; y1++)
-            (*map)[x1][y1] = 145;
-        (*map)[x][y] = 0-i;
+        for (x1=x-2; x1<=x+2; x++)
+          for (y1=y-2; y1<=y+2; y++)
+            player.map[x1][y1] = 41;
+        player.map[x][y] = 0-i;
         }
-      bossscale = 0;
       flag = ' ';
       while (flag == ' ') {
-        mnst = -1;
         if (player.gateway == '*' && player.d_level == 5 && j == 1 && i == 1) {
-          mnst = get_linked_monster(90); /* Eshter */
+          mnst = 184;
           flag = '*';
-          }
-        else if (player.gateway != '*' && treasurex >= 0 && links[player.dungeon_number].boss > 0 && j == 1 && i == 1) {
-          mnst = get_linked_monster(links[player.dungeon_number].boss);
-          flag = '*';
-          bossscale = 2;
-          if (mnst < 0) {
-            bossscale = 0;
-            mnst = -1;
-            flag = ' ';
-            }
-          }
-        else if (player.gateway != '*' && treasurex >= 0 && links[player.dungeon_number].adds > 0 && j != 1 && i == 1) {
-          mnst = get_linked_monster(links[player.dungeon_number].adds);
-          bossscale = 1;
-          flag = '*';
-          if (mnst < 0) {
-            flag = ' ';
-            bossscale = 0;
-            mnst = -1;
-            }
           }
         else if (player.land_x == 16 && player.land_y == 28 &&
                  player.d_level == bottom) {
-          mnst = get_linked_monster(91);   /* Dalek */
+          mnst = 183;
           flag = '*';
           }
-        while (mnst < 0) {
+        else
           mnst = u_random(NO_OF_MONSTERS);
-          if ((monsters[mnst].special2 & M2_NORND) != 0) mnst = -1;
-          }
-        (*dmonsters)[j][i] = monsters[mnst];
-        if ((*dmonsters)[j][i].level >= min &&
-            (*dmonsters)[j][i].level <= max) flag = '*';
-        if (bossscale == 0 && (monsters[mnst].special2 & M2_BOSS) != 0) flag = ' ';
+        player.monster[j][i] = monsters[mnst];
+        if (player.monster[j][i].level >= min &&
+            player.monster[j][i].level <= max) flag = '*';
         if (j > 1) {
-          if (((*dmonsters)[1][i].special & MS_FRIENDLY) == 0)
-            if (((*dmonsters)[j][i].special & MS_FRIENDLY) == MS_FRIENDLY) flag = ' ';
-          if (((*dmonsters)[1][i].special & MS_FRIENDLY) == MS_FRIENDLY)
-            if (((*dmonsters)[j][i].special & MS_FRIENDLY) == 0) flag = ' ';
+          if (player.monster[1][i].special < 10)
+            if (player.monster[j][i].special > 9) flag = ' ';
+          if (player.monster[1][i].special > 9)
+            if (player.monster[j][i].special < 10) flag = ' ';
           }
         if (j < 2) {
-          if (friend == 0 && ((*dmonsters)[1][i].special & MS_FRIENDLY) == MS_FRIENDLY && flag == '*')
+          if (friend == 0 && player.monster[1][i].special > 9 && flag == '*')
             flag = ' ';
-          if (friend > 0 && ((*dmonsters)[1][i].special & MS_FRIENDLY) == MS_FRIENDLY && flag == '*')
+          if (friend > 0 && player.monster[1][i].special > 9 && flag == '*')
             friend--;
           }
         }
-      if ((*dmonsters)[j][i].hp < 0) {
-        (*dmonsters)[j][i].hp = -(*dmonsters)[j][i].hp;
-        } else {
-        (*dmonsters)[j][i].hp = (*dmonsters)[j][i].hp / 2 + u_random((*dmonsters)[j][i].hp / 2) + 1;
-        }
-      (*dmonsters)[j][i].exp += (*dmonsters)[j][i].exp_hp * (*dmonsters)[j][i].hp;
-      if (((*dmonsters)[j][i].special & MS_FRIENDLY) == 0) texp += (*dmonsters)[j][i].exp;
-      if (scale != 0) scale_monster(&((*dmonsters)[j][i]),scale);
-      if (player.effect[PE_HEROIC] > 0) multiply_monster(&((*dmonsters)[j][i]),player.effect[PE_HEROIC]);
-      if (bossscale != 0) scale_monster(&((*dmonsters)[j][i]),bossscale);
-      if (dungeon_scaling == 'Y' && player.level > player.diff) scale_monster(&((*dmonsters)[j][i]),player.level - player.diff);
-      (*dmonsters)[j][i].speed = -(*dmonsters)[j][i].speed;
+      player.monster[j][i].hp = u_random(player.monster[j][i].hp) + 1;
+      player.monster[j][i].exp += player.monster[j][i].exp_hp * player.monster[j][i].hp;
+      texp += player.monster[j][i].exp;
       }
     }
   if (player.gateway == '*' && player.d_level == 5)
-    for (i=2; i<=5; i++) (*dmonsters)[i][1].hp = 0;
+    for (i=2; i<=5; i++) player.monster[i][1].hp = 0;
+  sprintf(n,"Total Experience=%.0f",texp);
+  prompt(n);
   }
 

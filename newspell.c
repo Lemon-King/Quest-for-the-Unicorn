@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,17 +11,39 @@
 #include "header.h"
 
 void new_spell() {
-  Int32 i;
-  Int32 col,row;
+  int i;
+  int col,row;
   char flag;
-  Int32  newone;
-  Int32  allign = 0;
-  Int32  level = 0;
-  Int32  no_spells;
+  int  newone;
+  int  allign = 0;
+  int  level = 0;
+  int  no_spells;
   char buffer[80];
   no_spells = 0;
-  allign = classes[player.class-1].spell_group;
-  level = (player.level - classes[player.class-1].becomes_caster) + 1;
+  if (player.class == 6) {
+    allign = 6;
+    level = player.level;
+    }  
+  if (player.class == 4) {
+    allign = 4;
+    level = player.level;
+    } 
+  if (player.class == 5) {
+    allign = 5;
+    level = player.level;
+    }
+  if (player.class == 8) {
+    allign = 5;
+    level = player.level;
+    }
+  if (player.class == 2) {
+    allign = 4;
+    level = player.level - 8;
+    }
+  if (player.class == 3) {
+    allign = 5; 
+    level = player.level - 7;
+    }
   textmode(3);
   col = 1;
   row = 3;
@@ -30,7 +52,7 @@ void new_spell() {
   gotoxy(40,2);
   txt_write("Lvl Mana Name"); 
   textcolor(14);
-  for (i=1; i<=num_spells; i++)
+  for (i=1; i<=NO_OF_SPELLS; i++)
     if (spells[i].level <= level && has_spell(i) == 0 &&
         spells[i].allign == allign) {
       no_spells++;
@@ -53,8 +75,8 @@ void new_spell() {
       if (newone != 0) flag = '*';
       }
     i = 1;
-    while (spellbook[i] != 0) i++;
-    spellbook[i] = newone;
+    while (player.spell[i] != 0) i++;
+    player.spell[i] = newone;
     }
   }
 

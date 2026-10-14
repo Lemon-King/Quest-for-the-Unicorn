@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,37 +10,29 @@
 
 #include "header.h"
 
-void dead_monster(NPC_REC* mon,char tr,Int32 x,Int32 y) {
-  Int32 i;
-  Int32 lvl;
-  Int32 drop;
+void dead_monster(NPC_REC* mon,char tr) {
+  int i;
+  int lvl;
   if (mon->hp <= 0) {
-    if (mon->level >= (player.level + 10)) stats.counts[STAT_HARD_MOB]++;
-    stats.counts[STAT_MOBS_KILLED]++;
-    if (strstr(mon->name,"Dragon") != NULL) stats.counts[STAT_DRAGONS]++;
-    if (strcmp(mon->name,FINAL_BOSS) == 0) winner();
-    mon->poison = 0;
-    gain_exp(mon->exp,0);
-    if (tr == 'Y') {
+    if (strcmp(mon->name,"Eshter") == 0) eshter();
+    gain_exp(mon->exp);
+/*    player.exp += mon->exp; */
+    if (tr == 'Y' && mon->prev == 7) {
       i = u_random(100);
       if (i >=0 && i<=60) {
         lvl = mon->level;
-        drop = place_object(lvl) + 1000;
+        mon->prev = place_object(lvl) + 1000;
         }
-      else if (i >=61 && i<=80) drop = 79;
-      else drop = 84;
-      if (mon->prev == currentFloor) mon->prev = drop;
-      else {
-        can_drop(x,y,'N');
-        if (drop_x > 0 && drop_y > 0) {
-          player.map[drop_x][drop_y] = drop;
-          show_spot(drop_x,drop_y);
-          }
-        }
+      if (i >=61 && i<=80) mon->prev = 79;
+      if (i >=81 && i<=99) mon->prev = 84;
       }
-    player.map[x][y] = mon->prev;
-    show_spot(x,y);
-    if ((mon->special & MS_FRIENDLY) == MS_FRIENDLY) {
+    player.map[player.x][player.y] = mon->prev;
+    show_spot(player.x,player.y);
+/*
+    sprintf(buffer,"Exp=%.0f",mon->exp);
+    msg(buffer,15);
+*/
+    if (mon->special > 9) {
       player.align -= 20;
       if (player.align < 0) player.align = 0;
       }
@@ -48,3 +40,34 @@ void dead_monster(NPC_REC* mon,char tr,Int32 x,Int32 y) {
     }
   }
 
+/*
+void dead_monster(int mon,char tr) {
+  int i;
+  int lvl;
+  char buffer[80];
+  if (player.monster[1][mon].hp <= 0) {
+    if (strcmp(player.monster[1][mon].name,"Eshter") == 0) eshter();
+    player.exp += player.monster[1][mon].exp;
+    if (tr == 'Y' && player.monster[1][mon].prev == 7) {
+      i = u_random(100);
+      if (i >=0 && i<=60) {
+
+        lvl = player.monster[1][mon].level;
+        player.monster[1][mon].prev = place_object(lvl) + 1000;
+        }
+      if (i >=61 && i<=80) player.monster[1][mon].prev = 79;
+      if (i >=81 && i<=99) player.monster[1][mon].prev = 84;
+      }
+    player.map[player.x][player.y] = player.monster[1][mon].prev;
+    show_spot(player.x,player.y);
+    clear_prompt();
+    sprintf(buffer,"Exp=%.0f",player.monster[1][mon].exp);
+    msg(buffer,15);
+    if (player.monster[1][mon].special > 9) {
+      player.align -= 20;
+      if (player.align < 0) player.align = 0;
+      }
+    show_side();
+    }
+  }
+*/

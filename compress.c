@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,7 +11,7 @@
 #include "header.h"
 
 void compress() {
-  Int32 i,j;
+  int i,j;
   char flag;
   for (i=32; i>=2; i--)
     if (player.pack_q[i] != 0) {

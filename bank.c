@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -15,8 +15,8 @@ void bank(char* name) {
   char   buffer[80];
   char   key;
 
-  char* find_name(Int32 r,Int32 x,Int32 y) {
-    Int32 i;
+  char* find_name(int r,int x,int y) {
+    int i;
     i = 0;
     while (i >= 0) {
       if (links[i].region == r &&
@@ -29,14 +29,14 @@ void bank(char* name) {
     }
 
   void show_top() {
-    Int32 i;
-    Int32 l;
+    int i;
+    int l;
     textmode(3); gotoxy(27,1); textcolor(11);
     sprintf(buffer,"Welcome to %s",name);
     txt_write(buffer);
-    sprintf(buffer,"Your account contains %d gold",player.bank);
+    sprintf(buffer,"Your account contains %.0f gold",player.bank);
     gotoxy(25,4); txt_write(buffer);
-    sprintf(buffer,"Interest paid last period: %d gold",player.interest);
+    sprintf(buffer,"Interest paid last period: %.0f gold",player.interest);
     gotoxy(25,5); txt_write(buffer);
     textcolor(11); gotoxy( 15,7);
     txt_write("House               Principle    Interest    Payment");
@@ -57,10 +57,10 @@ void bank(char* name) {
     textcolor(14);
     gotoxy(34,14); txt_write("1> Deposit");
     gotoxy(34,15); txt_write("2> Withdrawal");
-    gotoxy(34,16); txt_write("<ESC> Leave");
+    gotoxy(34,16); txt_write("0> Leave");
     gotoxy(37,17); txt_write("Option ?");
     textcolor(14); gotoxy(35,24);
-    sprintf(buffer,"Gold = %d",get_gold());
+    sprintf(buffer,"Gold = %.0f",player.gold);
     txt_write(buffer);
     }
 
@@ -68,17 +68,14 @@ void bank(char* name) {
   key = ' ';
   while (key != '0') {
     key = inkey();
-    if (key == 27) key = '0';
-    if (key == '1' && get_gold() > 0) {
+    if (key == '1' && player.gold > 0) {
       gotoxy(30,19); textcolor(14);
       txt_write("How much to deposit ?");
-      strcpy(buffer,"");
-      if (p_read(buffer) == 0) {
-        sscanf(buffer,"%lf",&amt);
-        } else amt = 0;
-      if (amt <= get_gold()) {
+      p_read(buffer);
+      sscanf(buffer,"%lf",&amt);
+      if (amt <= player.gold) {
         player.bank += amt;
-        sub_gold(amt);
+        player.gold -= amt;
         show_top();
         } else {
         gotoxy(30,20); textcolor(12);
@@ -90,13 +87,11 @@ void bank(char* name) {
     if (key == '2' && player.bank > 0) {
       gotoxy(30,19); textcolor(14);
       txt_write("How much to withdraw ?");
-      strcpy(buffer,"");
-      if (p_read(buffer) == 0) {
-        sscanf(buffer,"%lf",&amt);
-        } else amt = 0;
+      p_read(buffer);
+      sscanf(buffer,"%lf",&amt);
       if (amt <= player.bank) {
         player.bank -= amt;
-        add_gold(amt);
+        player.gold += amt;
         show_top();
         } else {
         gotoxy(25,20); textcolor(12);

@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,7 +10,7 @@
 
 #include "header.h"
 
-char* show_int(Int32 n) {
+char* show_int(int n) {
   static STRING32 ret;
   sprintf(ret,"%d",n);
   return ret;

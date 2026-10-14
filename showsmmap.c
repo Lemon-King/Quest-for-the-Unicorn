@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,12 +11,11 @@
 #include "header.h"
 
 void show_sm_map() {
-  Int32 x,y;
-  Int32 color;
+  int x,y;
+  int color;
   pixel = 0;
   setfillstyle(1,0);
-  bar(smap_offset_x,smap_offset_y,smap_offset_x+99,smap_offset_y+99);
-  open_display();
+  bar(421,241,620,442);
   for (x=1; x<=100; x++)
     for (y=1; y<=100; y++)
       if (player.known[x][y] != 0 && in_arena != 'Y') {
@@ -32,17 +31,28 @@ void show_sm_map() {
           case 21:color = 4; break;
           case 22:color = 14; break;
           case 23:color = 14; break;
-          case 24:color = 12; break;
-          case 25:color = 10; break;
+          case 24:color = 3; break;
+          case 25:color = 11; break;
           case 38:color = 12; break;
           case 39:color = 1; break;
           case 41:color = 9; break;
           }
-        plot(screen_width-221+x*2,screen_height-240+y*2,color);
-        plot(screen_width-220+x*2,screen_height-240+y*2,color);
-        plot(screen_width-221+x*2,screen_height-239+y*2,color);
-        plot(screen_width-220+x*2,screen_height-239+y*2,color);
+#ifdef USEX
+        XDrawPoint(display,window,colors[color],419+x*2,240+y*2);
+        XDrawPoint(display,window,colors[color],420+x*2,240+y*2);
+        XDrawPoint(display,window,colors[color],419+x*2,241+y*2);
+        XDrawPoint(display,window,colors[color],420+x*2,241+y*2);
+        XDrawPoint(display,screen,colors[color],419+x*2,240+y*2);
+        XDrawPoint(display,screen,colors[color],420+x*2,240+y*2);
+        XDrawPoint(display,screen,colors[color],419+x*2,241+y*2);
+        XDrawPoint(display,screen,colors[color],420+x*2,241+y*2);
+        XFlush(display);
+#else
+        putpixel(419+x*2,240+y*2,color);
+        putpixel(420+x*2,240+y*2,color);
+        putpixel(419+x*2,241+y*2,color);
+        putpixel(420+x*2,241+y*2,color);
+#endif
         }
-  close_display();
   }
 

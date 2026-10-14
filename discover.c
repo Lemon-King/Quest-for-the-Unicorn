@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,12 +11,13 @@
 #include "header.h"
 
 void discover() {
-  Int32 i,j,color;
-  Int32 xmax,xmin;
-  Int32 ymax,ymin;
+  int i,j,color;
+  int xmax,xmin;
+  int ymax,ymin;
   char show_flag;
   show_flag = ' ';
-  if (can_see() != 0) show_flag = '*';
+  if (player.in_city == 'Y') show_flag = '*';
+  if (player.effect[PE_LIGHT] != 0) show_flag = '*';
   if (player.gateway == '*' && player.d_level < 4) show_flag = ' ';
   if (player.gateway == '*' && has_intrinsic(A_GSEE)) show_flag = '*';
   xmax = player.x+1; xmin = player.x-1;
@@ -25,15 +26,14 @@ void discover() {
     xmax = player.x+2; xmin = player.x-2;
     ymax = player.y+2; ymin = player.y-2;
     }
-  xmax += get_skill(13) / 10;
-  ymax += get_skill(13) / 10;
-  xmin -= get_skill(13) / 10;
-  ymin -= get_skill(13) / 10;
-  if (xmax > player.map_x+TILES_X) xmax = player.map_x+TILES_X;
+  xmax += player.skill[13] / 10;
+  ymax += player.skill[13] / 10;
+  xmin -= player.skill[13] / 10;
+  ymin -= player.skill[13] / 10;
+  if (xmax > player.map_x+15) xmax = player.map_x+15;
   if (xmin < player.map_x) xmin = player.map_x;
-  if (ymax > player.map_y+TILES_Y) ymax = player.map_y+TILES_Y;
+  if (ymax > player.map_y+15) ymax = player.map_y+15;
   if (ymin < player.map_y) ymin = player.map_y;
-  open_display();
   for (i=xmin; i<=xmax; i++)
     for (j=ymin; j<=ymax; j++)
       if (i>0 && i<100 && j>0 && j<100 && player.known[i][j] == 0 &&
@@ -48,8 +48,8 @@ void discover() {
           case  23:color = 14; break;
           case   1:color = 10; break;
           case   4:color = 1; break;
-          case  24:color = 12; break;
-          case  25:color = 10; break;
+          case  24:color = 3; break;
+          case  25:color = 11; break;
           case  41:color = 9; break;
           case  38:color = 12; break;
           case  39:color = 1; break;
@@ -58,17 +58,11 @@ void discover() {
           case   9:color = 5; break;
           case   2:color = 2; break;
           }
-//        plot(419+i*2,240+j*2,color);
-//        plot(420+i*2,240+j*2,color);
-//        plot(419+i*2,241+j*2,color);
-//        plot(420+i*2,241+j*2,color);
-        plot(smap_offset_x-2+i*2,smap_offset_y-1+j*2,color);
-        plot(smap_offset_x-1+i*2,smap_offset_y-1+j*2,color);
-        plot(smap_offset_x-2+i*2,smap_offset_y-0+j*2,color);
-        plot(smap_offset_x-1+i*2,smap_offset_y-0+j*2,color);
-
+        putpixel(419+i*2,240+j*2,color);
+        putpixel(420+i*2,240+j*2,color);
+        putpixel(419+i*2,241+j*2,color);
+        putpixel(420+i*2,241+j*2,color);
         }
-  close_display();
 
   }
 

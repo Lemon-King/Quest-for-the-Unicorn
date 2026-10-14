@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -9,13 +9,17 @@
 */
 
 #include "header.h"
-#ifdef ASCII
-#include "unicorn.text"
-#else
 #include "unicorn.xpm"
-#endif
 
-char** select_sprite(Int32 n) {
+char** select_sprite(int n) {
+#ifdef DEBUG
+  printf("%*sEntering: select_sprite(%d)\n",debug_tab,"",n);
+  debug_tab += 2;
+#endif
+#ifdef DEBUG
+  printf("%*sExiting: select_sprite()\n",debug_tab,"");
+  debug_tab -= 2;
+#endif
   switch (n) {
     case 1:return sprite_1;                     /* Plains                */
     case 2:return sprite_2;                     /* Forest                */
@@ -300,91 +304,6 @@ char** select_sprite(Int32 n) {
     case 281:return sprite_281;                 /* Saphire Ring         */
     case 282:return sprite_282;                 /* Folding Boat         */
     case 283:return sprite_283;                 /* Broom                */
-    case 284:return sprite_284;                 /* Candy Heart          */
-    case 285:return sprite_285;                 /* Shamrock             */
-    case 286:return sprite_286;                 /* Easter Egg           */
-    case 287:return sprite_287;                 /* Pumpkin Bucket       */
-    case 288:return sprite_288;                 /* Firework             */
-    case 289:return sprite_289;                 /* Costume              */
-    case 290:return sprite_290;                 /* Candy                */
-    case 291:return sprite_291;                 /* Present              */
-    case 292:return sprite_292;                 /* Santa Hat            */
-    case 293:return sprite_293;                 /* Santa Suit           */
-    case 294:return sprite_294;                 /* Sants Boots          */
-    case 295:return sprite_295;                 /* Bridal Veil          */
-    case 296:return sprite_296;                 /* Bridal Dress         */
-    case 297:return sprite_297;                 /* Bridal Shoes         */
-    case 298:return sprite_298;                 /* Flower               */
-    case 299:return sprite_299;                 /* Top Hat              */
-    case 300:return sprite_300;                 /* Tuxedo               */
-    case 301:return sprite_301;                 /* Dress Shoes          */
-    case 302:return sprite_302;                 /* Santa Sack           */
-    case 303:return sprite_303;                 /* Sword of Elan        */
-    case 304:return sprite_304;                 /* Hammer of the Vale   */
-    case 305:return sprite_305;                 /* Mace of Gawaine      */
-    case 306:return sprite_306;                 /* Kesthler's Branch    */
-    case 307:return sprite_307;                 /* Nina's Rod           */
-    case 308:return sprite_308;                 /* Galter's Blade       */
-    case 309:return sprite_309;                 /* Rasper's Root        */
-    case 310:return sprite_310;                 /* Ramoon's Edge        */
-    case 311:return sprite_311;                 /* Marduk's Scepter     */
-    case 312:return sprite_312;                 /* Arslon's Amulet      */
-    case 313:return sprite_313;                 /* Syralia's Wand       */
-    case 314:return sprite_314;                 /* Four leaf clover     */
-    case 315:return sprite_315;                 /* Altar                */
-    case 316:return sprite_316;                 /* Used Altar           */
-    case 317:return sprite_317;                 /* Used Runestone       */
-    case 318:return sprite_318;                 /* Blue Runestone       */
-    case 319:return sprite_319;                 /* Red Runestone        */
-    case 320:return sprite_320;                 /* Purple Runestone     */
-    case 321:return sprite_321;                 /* White Runestone      */
-    case 322:return sprite_322;                 /* Yellow Runestone     */
-    case 323:return sprite_323;                 /* Green Runestone      */
-    case 324:return sprite_324;                 /* Cyan Runestone       */
-    case 325:return sprite_325;                 /* Levitation           */
-    case 326:return sprite_326;                 /* Bandage              */
-    case 327:return sprite_327;                 /* Trap trigger         */
-    case 328:return sprite_328;                 /* Flask of oil         */
-    case 329:return sprite_329;                 /* Unarmed trap         */
-    case 330:return sprite_330;                 /* Armed trap           */
-    case 331:return sprite_331;                 /* Sirine               */
-    case 332:return sprite_332;                 /* Figurine             */
-    case 333:return sprite_333;                 /* Orc Warchief         */
-    case 334:return sprite_334;                 /* Dragon Queen         */
-    case 335:return sprite_335;                 /* Count Tralin         */
-    case 336:return sprite_336;                 /* Forest Elemental     */
-    case 337:return sprite_337;                 /* Lamia Queen          */
-    case 338:return sprite_338;                 /* Kobold Lord          */
-    case 339:return sprite_339;                 /* Kobold               */
-    case 340:return sprite_340;                 /* Caldnar              */
-    case 341:return sprite_341;                 /* Elanther             */
-    case 342:return sprite_342;                 /* Summoned Snake       */
-    case 343:return sprite_343;                 /* Sun Core             */
-    case 344:return sprite_344;                 /* Sun Shard            */
-    case 345:return sprite_345;                 /* Sun Stone            */
-    case 346:return sprite_346;                 /* Silver Cross         */
-    case 347:return sprite_347;                 /* Vampire              */
-    case 348:return sprite_348;                 /* Bag of stuff         */
-    case 349:return sprite_349;                 /* Gacha Capsule        */
-    case 350:return sprite_350;                 /* Gacha Machine        */
-    case 351:return sprite_351;                 /* Monster card         */
-    case 352:return sprite_352;                 /* Herb                 */
-    case 353:return sprite_353;                 /* Flare                */
-    case 354:return sprite_354;                 /* Resist Cold          */
-    case 355:return sprite_355;                 /* Resist Electric      */
-    case 356:return sprite_356;                 /* Resist Arcane        */
-    case 357:return sprite_357;                 /* Resist Psionic       */
-    case 358:return sprite_358;                 /* Pickaxe              */
-    case 359:return sprite_359;                 /* Treasure forcefield  */
-    case 360:return sprite_360;                 /* Mech Head            */
-    case 361:return sprite_361;                 /* Mech Body            */
-    case 362:return sprite_362;                 /* Mech Arm             */
-    case 363:return sprite_363;                 /* Mech Leg             */
-    case 364:return sprite_364;                 /* Mech Heart           */
-    case 365:return sprite_365;                 /* Mech Merchant        */
-    case 366:return sprite_366;                 /* Nether Core          */
-    case 367:return sprite_367;                 /* Nether Shard         */
-    case 368:return sprite_368;                 /* Portable Hole        */
     }
   return sprite_200;
   }

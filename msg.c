@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,35 +10,17 @@
 
 #include "header.h"
 
-void scroll_msg() {
-  Int32 i;
-  for (i=0; i<NUM_MSG-1; i++) {
-    strcpy(messages[i],messages[i+1]);
-    msg_clr[i] = msg_clr[i+1];
-    }
-  }
-
-void msg(char* message,Int32 color) {
-  char buffer[256];
-  char *pChar;
-  char *next;
-  strcpy(buffer,message);
-  pChar = buffer;
+void msg(char* message,int color) {
+  int i;
   if (color >= 0) {
-    scroll_msg();
+    for (i=0; i<NUM_MSG-1; i++) {
+      strcpy(messages[i],messages[i+1]);
+      msg_clr[i] = msg_clr[i+1];
+      }
     }
   color = abs(color);
-  while (strlen(pChar) > 21) {
-    next = pChar + 21;
-    while (*next != ' ') next--;
-    *next = 0;
-    msg_clr[NUM_MSG-1] = color;
-    strcpy(messages[NUM_MSG-1],pChar);
-    pChar = next + 1;
-    if (color >= 0) scroll_msg();
-    }
   msg_clr[NUM_MSG-1] = color;
-  strcpy(messages[NUM_MSG-1],pChar);
+  strcpy(messages[NUM_MSG-1],message);
   show_messages();
   }
 

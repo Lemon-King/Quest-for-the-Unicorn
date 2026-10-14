@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,23 +11,9 @@
 #include "header.h"
 
 char inkey() {
-  Int32 i;
   char key;
-  if (strlen(currentMacro) > 0) {
-    key = currentMacro[0];
-    for (i=0; i<=strlen(currentMacro); i++) currentMacro[i] = currentMacro[i+1];
-    if (key == '$' && strlen(currentMacro) > 0) {
-      key = currentMacro[0];
-      for (i=0; i<=strlen(currentMacro); i++) currentMacro[i] = currentMacro[i+1];
-      if (key == 'E') return 13;
-      if (key == 'e') return 27;
-      }
-    return key;
-    }
-  while (keypressed()) key = readkey();
+/*  while (keypressed() == 0) ; */
   key = readkey();
-
-/*
   if (key == 0 && keypressed() != 0) {
       key = readkey();
       switch (key) {
@@ -61,7 +47,6 @@ char inkey() {
         case ']': key = 210; break;
         }
     }
-*/
   return key;
   }
 

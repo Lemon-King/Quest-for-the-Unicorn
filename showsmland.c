@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,16 +11,15 @@
 #include "header.h"
 
 void show_sm_land() {
-  Int32 x,y;
-  Int32 color;
+  int x,y;
+  int color;
   pixel = 0;
   setfillstyle(1,0);
-  bar(smap_offset_x,smap_offset_y,smap_offset_x+99,smap_offset_y+99);
-  open_display();
+  bar(421,241,620,442);
   for (x=1; x<=100; x++)
-    for (y=1; y<=100; y++) {
-      color = 0;
+    for (y=1; y<=100; y++)
       if (player.known[x][y] != 0) {
+        color = 0;
         switch (player.map[x][y]) {
           case 1:color = 10; break;
           case 2:color = 2; break;
@@ -35,12 +34,10 @@ void show_sm_land() {
           case 17:color = 4; break;
           case 19:color = 6; break;
           }
+        putpixel(419+x*2,240+y*2,color);
+        putpixel(420+x*2,240+y*2,color);
+        putpixel(419+x*2,241+y*2,color);
+        putpixel(420+x*2,241+y*2,color);
         }
-      plot(screen_width-221+x*2,screen_height-240+y*2,color);
-      plot(screen_width-220+x*2,screen_height-240+y*2,color);
-      plot(screen_width-221+x*2,screen_height-239+y*2,color);
-      plot(screen_width-220+x*2,screen_height-239+y*2,color);
-      }
-    close_display();
   }
 

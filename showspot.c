@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,10 +10,8 @@
 
 #include "header.h"
 
-void show_spot(Int32 x,Int32 y) {
-  if (x < 1 || y < 1 || x > 100 || y > 100) return;
-  if (in_sight(x,y) != '*') return;
-  if (can_see() == 0) {
+void show_spot(int x,int y) {
+  if (player.effect[PE_BLIND] > 0) {
     show_sprite(x-player.map_x,y-player.map_y,10);
     return;
     }
@@ -38,11 +36,10 @@ void show_spot(Int32 x,Int32 y) {
     else
       show_sprite(x-player.map_x,y-player.map_y,36);
     }
-  else if (player.map[x][y]>=300 && player.map[x][y]<400) {
-    if (player.party[player.map[x][y]-300].sleep == 0) {
-      show_sprite(x-player.map_x,y-player.map_y,7);
-      show_sprite(x-player.map_x,y-player.map_y,player.party[player.map[x][y]-300].sprite);
-      }
+  else if (player.map[x][y]>300 && player.map[x][y]<400) {
+    if (player.party[player.map[x][y]-300].sleep == 0)
+      show_sprite(x-player.map_x,y-player.map_y,
+                  player.party[player.map[x][y]-300].sprite);
     else
       show_sprite(x-player.map_x,y-player.map_y,36);
     }
@@ -71,34 +68,6 @@ void show_spot(Int32 x,Int32 y) {
   else if (player.map[x][y] == S_SOLD) {
     show_sprite(x-player.map_x,y-player.map_y,S_GRASS);
     show_sprite(x-player.map_x,y-player.map_y,S_SOLD);
-    }
-  else if (player.map[x][y] == 143) {
-    show_sprite(x-player.map_x,y-player.map_y,7);
-    show_sprite(x-player.map_x,y-player.map_y,342);
-    }
-  else if (player.map[x][y] == 145) {                                   // Treasure forece field
-    show_sprite(x-player.map_x,y-player.map_y,7);
-    show_sprite(x-player.map_x,y-player.map_y,359);
-    }
-  else if (player.map[x][y] == 901) {                 // Altar
-    show_sprite(x-player.map_x,y-player.map_y,7);
-    show_sprite(x-player.map_x,y-player.map_y,315);
-    }
-  else if (player.map[x][y] == 902) {                 // Used Altar
-    show_sprite(x-player.map_x,y-player.map_y,7);
-    show_sprite(x-player.map_x,y-player.map_y,316);
-    }
-  else if (player.map[x][y] >= 903 && player.map[x][y] <= 910) {                 // Runestones
-    show_sprite(x-player.map_x,y-player.map_y,7);
-    show_sprite(x-player.map_x,y-player.map_y,player.map[x][y]-586);
-    }
-  else if (player.map[x][y] >= 950 && player.map[x][y] <= 970) {                 // Traps
-    show_sprite(x-player.map_x,y-player.map_y,7);
-    show_sprite(x-player.map_x,y-player.map_y,330);
-    }
-  else if (player.map[x][y] == 536) {                                            // Gacha machine
-    show_sprite(x-player.map_x,y-player.map_y,7);
-    show_sprite(x-player.map_x,y-player.map_y,350);
     }
   else show_sprite(x-player.map_x,y-player.map_y,player.map[x][y]);
   }

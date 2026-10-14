@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,10 +10,11 @@
 
 #include "header.h"
 
-char get_dir(Int32* xdir,Int32* ydir) {
+char get_dir(int* xdir,int* ydir) {
   char key;
   char flag;
-  msg("Dir ?",14);
+  clear_prompt();
+  prompt("Dir ?");
   flag = ' ';
   while (flag == ' ') {
     flag = '*';

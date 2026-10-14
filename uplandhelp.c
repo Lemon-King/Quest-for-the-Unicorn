@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,6 +11,7 @@
 #include "header.h"
 
 void upland_help() {
+  char key;
   textmode(3);
   textcolor(12); gotoxy(31,1);
   txt_writeln("Upland Commands:");
@@ -36,12 +37,12 @@ void upland_help() {
   txt_writeln("                           ? - Show list of Commands");
   if (has_intrinsic(A_TARD)) {
       txt_writeln("                           T - Tardis Destination Log");
-      txt_writeln("                    F1 - F10 - Go to Tardis Destination");
-      txt_writeln("            <SHIFT> F1 - F10 - Program Tardis Destination");
+      txt_writeln("                    F1 - F10 - Program Tardis Destination");
+      txt_writeln("            <SHIFT> F1 - F10 - Go to Tardis Destination");
     }
   gotoxy(28,24); textcolor(10);
   txt_write("Press any key to continue");
-  inkey();
+  key = inkey();
   graphmode();
   show_land();
   show_sm_land();

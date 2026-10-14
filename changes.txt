@@ -1,0 +1,67 @@
+* - Multi-charge items have been added
+
+* - Many healing items have been changed from 1 to 3 charges
+
+* - Scrolls of Identification are easier to find and they have multple
+    charges
+
+* - Identification no longer identifies a whole class of objects, only
+    the single object being identified
+
+* - Identification at pawn shops has been made cheaper
+
+* - Pack slots no longer hold multple items
+
+* - Standard rations and Iron rations have been changed from 1 to 7
+    charges
+
+* - Weapon and Armour plusses are now done with an object attribute
+    rather than separate objects.
+
+* - Negative plus items are now possible.  These are considered cursed
+    and if equipped cannot be removed until uncursed.
+
+* - Charged items found in dungeons will have a random number of charges
+    Charged items found in stores will have their full charge compliment
+
+* - For Charged items, their value changes with the number of charges left
+
+* - Many new items and effect types have been added
+
+* - Monsters can now be blinded or confused
+
+* - Potions effect monsters when thrown at them
+
+* - New Message output section on screen
+
+* - Oracle skill now allows you to see further, even through walls
+
+* - New, easier to use pack inventory screen
+
+* - A bank has been added to store excess wealth, which pays interest
+
+* - Druidic temples can remove the curse from cursed items
+
+* - Craftable items have been added
+
+* - Up to 5 houses can be bought to store extra items
+
+* - Quest logging has been added.  This makes it easier to know which
+    quests have been finished, and which quest should be done next.
+
+* - All items are now used with the 'u' command, there are no longer
+    separate eat, quaff, zap, and read commands.
+
+* - Healing, mp and health items will have no effect if those stats are 
+    already at max.
+
+* - Healing, mp and health items can restore these stats to higher than
+    the maximum.
+
+Changes in Version 4:
+---------------------
+* - Code was converted from Turbo/Pascal to standard C.
+
+* - Added item rarity, some items are now much harder to find.
+
+

@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,18 +11,12 @@
 #include "header.h"
 
 void show_messages() {
-  Int32 i;
+  int i;
   setfillstyle(1,0);
-  bar(screen_width-220,94,screen_width,100 + NUM_MSG * MESSAGE_HEIGHT);
+  bar(420,94,640,230);
   for (i=0; i<NUM_MSG; i++) {
     setcolor(msg_clr[i]);
-    while (strlen(messages[i]) < 22) strcat(messages[i]," ");
-  if (strlen(messages[i]) > 22) messages[i][21] = 0;
-#ifdef ASCII
-    outtext_xy(TEXT_GRID_WIDTH - 24,11+i,messages[i]);
-#else
-    outtextxy(screen_width-215,110+i*12,messages[i]);
-#endif
+    outtextxy(425,110+i*12,messages[i]);
     }
   }
 

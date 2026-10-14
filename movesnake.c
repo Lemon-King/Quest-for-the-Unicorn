@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,51 +10,79 @@
 
 #include "header.h"
 
-void move_snake(Int32 x,Int32 y,Int32 floor) {
-  Int32 xdir,ydir;
-  Int32 targetx;
-  Int32 targety;
-  Int32 i;
-  char dir;
-  NPC_REC* target;
+void move_snake(int x,int y,int floor) {
+  int xdir,ydir;
+  int ox,oy;
+  int targetx;
+  int targety;
+  int dist;
+  int i;
+  int target;
 
-  dir = '5';
+  char valid(int x,int y) {
+    char flag;
+    flag = '*';
+    if (player.map[x][y] != floor) flag = ' ';
+    if (x == player.x && y == player.y) flag = ' ';
+    if (player.map[x][y]>399 && player.map[x][y]<500) flag = '*';
+    return flag;
+    }
+
+  void find_target() {
+    int x1,y1;
+    dist = 32767;
+    targetx = player.x;
+    targety = player.y;
+    for (x1=10; x1<=26; x++)
+      for (y1=10; y1<=26; y++)
+        if (player.map[x1][y1]>400 && player.map[x1][y1]<500 &&
+            (sqr(x1-x)+sqr(y1-y)) < dist) {
+          targetx = x1;
+          targety = y1;
+          dist = (sqr(x1-x)+sqr(y1-y));
+          }
+    }
+
+  find_target();
   xdir = 0;
   ydir = 0;
-  if (find_target(x,y,&targetx,&targety)) {
-    dir = find_path(x,y,targetx,targety,'N');
-    if (dir != '5') {
-      switch (dir) {
-        case '1': xdir = -1; ydir = +1; break;
-        case '2': ydir = +1; break;
-        case '3': xdir = +1; ydir = +1; break;
-        case '4': xdir = -1; break;
-        case '6': xdir = +1; break;
-        case '7': xdir = -1; ydir = -1; break;
-        case '8': ydir = -1; break;
-        case '9': xdir = +1; ydir = -1; break;
-        }
-      }
+  ox = x; oy = y;
+  if (x < targetx && y < targety) { xdir = 1; ydir = 1; }
+  if (x > targetx && y < targety) { xdir = -1; ydir = 1; }
+  if (x < targetx && y > targety) { xdir = 1; ydir = -1; }
+  if (x > targetx && y > targety) { xdir = -1; ydir = -1; }
+  if (x == targetx && y < targety) ydir = 1;
+  if (x == targetx && y > targety) ydir = -1;
+  if (x < targetx && y == targety) xdir = 1;
+  if (x > targetx && y == targety) xdir = -1;
+  if (dist == 32767) { xdir = 0; ydir = 0; }
+  if (valid(x+xdir,y+ydir) == '*') { x+=xdir; y+=ydir; }
+  else if (valid(x+xdir,y) == '*') x+=xdir;
+  else if (valid(x,y+ydir) == '*') y += ydir;
+  player.map[ox][oy] = floor;
+  if (in_sight(ox,oy) == '*') show_spot(ox,oy);
+  if (player.map[x][y] == floor) {
+    player.map[x][y] = 143;
+    if (in_sight(x,y) == '*') show_spot(x,y);
+    player.map[x][y] = 144;
     }
-  if (player.map[x+xdir][y+ydir] < 0) {
-    target = &(player.monster[1][0-player.map[x+xdir][y+ydir]]);
-    i = get_skill(SK_MAGIC);
+  if (player.map[x][y]>399 && player.map[x][y]<500) {
+    snakes--;
+    target = player.map[x][y] - 400;
+    i = u_random(2 * player.level);
     noise(1000,100);
     prompt("HIT !!!");
-    if (in_sight(x+xdir,y+ydir) == '*') {
-      show_sprite(x+xdir-player.map_x,y+ydir-player.map_y,100);
-      delay(delay_hit);
-      show_spot(x+xdir,y+ydir);
+    if (in_sight(x,y) == '*') {
+      show_sprite(x-player.map_x,y-player.map_y,100);
+      delay(250);
+      show_spot(x,y);
       }
-    target->hp -= i;
-    dead_monster(target,'Y',x+xdir,y+ydir);
-    player.map[x][y] = dungeon_floor;
-    show_spot(x,y);
-    }
-  else if (player.map[x+xdir][y+ydir] == floor) {
-    player.map[x][y] = floor;
-    show_spot(x,y);
-    player.map[x+xdir][y+ydir] = 143;
-    show_spot(x+xdir,y+ydir);
+    player.monster[target][a_mon].hp -= i;
+    if (player.monster[target][a_mon].hp <= 0) {
+      player.map[x][y] = floor;
+      player.monster[target][a_mon].hp = 0;
+      gain_exp(player.monster[target][a_mon].exp);
+      show_side();
+      }
     }
   }

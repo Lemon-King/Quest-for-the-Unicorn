@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,9 +11,9 @@
 #include "header.h"
 
 void tavern(char* name) {
-  Int32 option;
+  int option;
   double price;
-  Int32  i;
+  int  i;
   char buffer[80];
 
   void move_player() {
@@ -122,23 +122,20 @@ void tavern(char* name) {
     txt_writeln("    5> Mead                      2                                      ");
     txt_writeln("    6> Wine                      2                                      ");
     textcolor(14); gotoxy(35,24);
-    sprintf(buffer,"Gold = %d",get_gold());
+    sprintf(buffer,"Gold = %.0f",player.gold);
     txt_write(buffer);
   }
 
   show_top();
   option = 1;
-  price = 4;
   while (option != 0) {
     gotoxy(15,17); textcolor(10);
-    txt_write("Which item would you like (<ESC> to leave) ?        ");
-    gotoxy(60,17); textcolor(15);
-    strcpy(buffer,"");
-    if (p_read(buffer) == 0) {
-      sscanf(buffer,"%d",&option);
-      } else option = 0;
+    txt_write("Which item would you like (0 to leave) ?        ");
+    gotoxy(56,17); textcolor(15);
+    p_read(buffer);
+    sscanf(buffer,"%d",&option);
     for (i=17; i<=22; i++) {
-      gotoxy(10,i); txt_write("                                                                    ");
+      gotoxy(10,i); txt_write("                                                                ");
       }
     if (option == 10) { 
       gamble(); 
@@ -156,12 +153,12 @@ void tavern(char* name) {
         case 8:price = 120; break;
         case 9:price = 500; break;
         }
-      if (price>get_gold()) {
+      if (price>player.gold) {
         gotoxy(15,19); textcolor(12);
         txt_write("But you do not have enough gold!");
         }
       else {
-        sub_gold(price);
+        player.gold -= price;
         switch (option) {
           case 1:
                 if (player.health<100) player.health = player.health+10;

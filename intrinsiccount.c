@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,9 +10,9 @@
 
 #include "header.h"
 
-Int32 intrinsic_count(Int32 intr) {
-  Int32 ret;
-  Int32 i;
+int intrinsic_count(int intr) {
+  int ret;
+  int i;
   ret = 0;
   for (i=5; i<=6; i++)
     if (player.invent[i].otype != O_NONE &&

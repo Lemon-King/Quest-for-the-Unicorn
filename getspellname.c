@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,11 +10,11 @@
 
 #include "header.h"
 
-Int32 get_spell_name(Int32 column,Int32 search,Int32 level,Int32 allign) {
+int get_spell_name(int column,int search,int level,int allign) {
   char spell_name[33];
   char buffer[80];
-  Int32  first;
-  Int32  newone;
+  int  first;
+  int  newone;
   byte key;
   first = column;
   textcolor(15);
@@ -24,18 +24,16 @@ Int32 get_spell_name(Int32 column,Int32 search,Int32 level,Int32 allign) {
   while (key != 13) {
     key = inkey();
     if (key > 31) {
-      if (key == KY_F1) strcpy(spell_name,player.fspell[1]);
-      if (key == KY_F2) strcpy(spell_name,player.fspell[2]);
-      if (key == KY_F3) strcpy(spell_name,player.fspell[3]);
-      if (key == KY_F4) strcpy(spell_name,player.fspell[4]);
-      if (key == KY_F5) strcpy(spell_name,player.fspell[5]);
-      if (key == KY_F6) strcpy(spell_name,player.fspell[6]);
-      if (key == KY_F7) strcpy(spell_name,player.fspell[7]);
-      if (key == KY_F8) strcpy(spell_name,player.fspell[8]);
-      if (key == KY_F9) strcpy(spell_name,player.fspell[9]);
-      if (key == KY_F10) strcpy(spell_name,player.fspell[10]);
-      if (key == KY_F11) strcpy(spell_name,player.fspell[11]);
-      if (key == KY_F12) strcpy(spell_name,player.fspell[12]);
+      if (key == 161) strcpy(spell_name,player.fspell[1]);
+      if (key == 192) strcpy(spell_name,player.fspell[2]);
+      if (key == 163) strcpy(spell_name,player.fspell[3]);
+      if (key == 164) strcpy(spell_name,player.fspell[4]);
+      if (key == 165) strcpy(spell_name,player.fspell[5]);
+      if (key == 222) strcpy(spell_name,player.fspell[6]);
+      if (key == 166) strcpy(spell_name,player.fspell[7]);
+      if (key == 170) strcpy(spell_name,player.fspell[8]);
+      if (key == 168) strcpy(spell_name,player.fspell[9]);
+      if (key == 169) strcpy(spell_name,player.fspell[10]);
       if (key < 127) {
         buffer[0] = key;
         buffer[1] = 0;

@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,83 +10,36 @@
 
 #include "header.h"
 
-void help_item(char* msg,Int32 col_width,Int32 num_rows,Int32 indent) {
-  gotoxy(indent+col*col_width,row);
-  txt_write(msg);
-  row++;
-  if (row == num_rows) {
-    col++;
-    row = 3;
-    }
-  }
-
 void dungeon_help() {
+  char key;
   textmode(3);
   textcolor(12); gotoxy(32,1);
   txt_writeln("Dungeon Commands:");
   textcolor(14);
-  col = 0;
-  row = 3;
-  help_item("1 - Move down left",26,23,4);
-  help_item("2 - Move down",26,23,4);
-  help_item("3 - Move down right",26,23,4);
-  help_item("4 - Move left",26,23,4);
-  help_item("5 - Run",26,23,4);
-  help_item("6 - Move right",26,23,4);
-  help_item("7 - Move up left",26,23,4);
-  help_item("8 - Move up",26,23,4);
-  help_item("9 - Move up right",26,23,4);
-  help_item("a - Attack",26,23,4);
-  help_item("A - Activate",26,23,4);
-  help_item("b - Buy from merchant",26,23,4);
-  help_item("c - Close door",26,23,4);
-  help_item("C - Crafting",26,23,4);
-  help_item("E - Enter/exit ship",26,23,4);
-  help_item("f - Fire weapon",26,23,4);
-  help_item("g - Get item",26,23,4);
-  help_item("h - Healing",26,23,4);
-  help_item("H - Show icons",26,23,4);
-  help_item("i - inventory",26,23,4);
-  help_item("j - Join member",26,23,4);
-  help_item("J - Jam door closed",26,23,4);
-  help_item("l - Light torch",26,23,4);
-  help_item("L - Message log",26,23,4);
-  help_item("m - Cast magic spell",26,23,4);
-#ifdef ASCII
-  help_item("M - Mini map",26,23,4);
-#endif
-  help_item("n - Nap",26,23,4);
-  help_item("o - Open door",26,23,4);
-  help_item("p - Party commands",26,23,4);
-  help_item("P - Pick up and pack",26,23,4);
-  help_item("q - Quest log",26,23,4);
-  help_item("Q - Quit, NO SAVE",26,23,4);
-  help_item("R - Record sheet",26,23,4);
-  help_item("s - Search",26,23,4);
-  help_item("S - Save and resume",26,23,4);
-  help_item("t - Talk",26,23,4);
-  help_item("T - Throw",26,23,4);
-  help_item("u - Use item",26,23,4);
-  help_item("v - View mode",26,23,4);
-  help_item("w - Say word of power",26,23,4);
-  help_item("x - Transcribe spell",26,23,4);
-  help_item("X - Exit with save",26,23,4);
-  help_item("> - Down a level",26,23,4);
-  help_item("< - Up a level",26,23,4);
-  help_item("{ - Save weapon set",26,23,4);
-  help_item("[ - Load weapon set",26,23,4);
-  help_item("} - Save gear set",26,23,4);
-  help_item("] - Load gear set",26,23,4);
-  help_item("- - Throw left hand",26,23,4);
-  help_item("= - Throw right hand",26,23,4);
-  help_item("? - List of commands",26,23,4);
-  help_item("",26,23,4);
-  help_item("Any other key acts as",26,23,4);
-  help_item("rest 1 turn command",26,23,4);
-
+  txt_writeln("           8 - Move Up                        7 - Move Up Left");
+  txt_writeln("           2 - Move Down                      9 - Move Up Right");
+  txt_writeln("           4 - Move Left                      1 - Move Down Left");
+  txt_writeln("           6 - Move Right                     3 - Move Down Right");
+  txt_writeln("           b - Buy from a merchant            q - Quest Log");
+  txt_writeln("           c - Close Door                     Q - Quit, NO SAVE");
+  txt_writeln("           E - Enter/Exit a ship              R - Show Player Record");
+  txt_writeln("           f - Fire Weapon                    s - Search");
+  txt_writeln("           g - Get Item                       S - Save and Resume");
+  txt_writeln("           H - Show Icons                     t - Talk");
+  txt_writeln("           i - Inventory                      T - Throw item");
+  txt_writeln("           j - Join a new member              u - Use an item");
+  txt_writeln("           J - Jam a door closed              v - View a Direction");
+  txt_writeln("           l - Light a Torch                  V - Sound on/off");
+  txt_writeln("           L - Show Message Log               w - Say word of Power");
+  txt_writeln("           m - Cast a Magic Spell             X - Exit, with SAVE");
+  txt_writeln("           n - Take a Nap                                   ");
+  txt_writeln("           o - Open a door                    h - Healing");
+  txt_writeln("           p - Party commands                 > - Down a level");
+  txt_writeln("           P - Pick up and pack               < - Up a level");
+  txt_writeln("           a - Attack                         ? - Show list of commands");
   gotoxy(28,24); textcolor(10);
   txt_write("Press any key to continue");
-  inkey();
+  key = inkey();
   show_screen();
   }
 

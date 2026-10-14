@@ -1,0 +1,115 @@
+Object Effects:
+1 - Healing
+2 - defense
+3 - Attack
+    control:1 - Touch
+            2 - Missile
+            3 - Area 9
+            4 - Area 25
+            5 - Missile 9
+4 - Fear
+5 - Sleep
+6 - Teleport
+7 - Special
+8 - Poison
+9 - Bless (protection)
+
+Map Symbols:
+------------
+B - 520 - Weapons
+C - 521 - Armour
+D - 522 - Alchemest
+E - 523 - Jeweler
+F - 524 - Bookstore
+G - 525 - Clothing
+H - 526 - Magic Shop
+I - 527 - Library
+J - 528 - Tavern
+K - 529 - School
+L - 530 - Travel
+M - 531 - Provisions
+N - 532 - Pawn Shop
+O - 533 - Temple
+P - 534 - Cavalier's Guild
+Q - 535 - Mounts
+    536 - Bank
+
+Special Effects:
+----------------
+ 1 - Clairaudience
+ 2 - Clairvoyance
+ 3 - Haste
+ 4 - Giant Strength
+ 5 - Ethereal
+ 6 - Light
+ 7 - Effects: 8,9,22, 37
+ 8 - Object Location
+ 9 - Monster Location
+10 - Lore Scroll
+11 - Information Scroll
+12 - Identification
+13 - Protection
+14 - Magic Mapping
+15 - Return to surface
+16 - Increase Strength Stat
+17 - Increase Dexterity Stat
+18 - Increase Intelligence Stat
+19 - Double current Mana (even above max)
+20 - General Message (???)
+21 - Read Languages
+22 - Detect Magic (???)
+23 - Identify Monster (???)
+24 - Slow Poison
+25 - Cure Poison
+26 - Permanent Light (???)
+27 - Monster Summoning
+28 - Read Lore
+29 - Dispel Force Field
+30 - Force Field (???)
+31 - Increase stat/hp/mana/skill at random
+32 - Monster Summoning II
+33 - Monster Summining III
+34 - Phase Door
+35 - Permanancy (???)
+36 - Remove Fear
+37 - Find Traps
+38 - Fire Resistance
+39 - Summon Shadow (???)
+40 - Create Food
+41 - Sticks to Snakes
+42 - Summon Specific Monster
+43 - Enhanced Trap Location
+44 - Summon Air Elemental
+45 - Summon Water Elemental (???)
+46 - Talning Rod Functions
+47 - Tardis Functions
+48 - only shop map if bottom level of dungeon (???)
+49 - Library Function
+50 - Trio of Might
+51 - Lore Message
+52 - Enlightenment
+53 - Knowledge
+54 - Mana back to max
+55 - Douple mana
+56 - Player experience * 5%
+57 - Player experience * 7%
+58 - Player experience * 10%
+59 - Player experience * 15%
+60 - Causes Sleep
+61 - Causes Fear
+62 - Causes Blind
+63 - Causes Confusion
+64 - Cures Confusion
+65 - Cures Fear
+66 - Cures Blindness
+67 - Cures Confusion, Blindness, Fear, and Poisoned
+68 - Enchant Weapon
+69 - Enchant Armour
+70 - Corrode Weapon
+71 - Corrode Armour
+72 - Bless
+73 - Charging
+74 - Enhanced Bless
+75 - Summon torches (10)
+76 - Levitation
+

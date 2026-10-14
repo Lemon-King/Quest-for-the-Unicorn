@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -36,7 +36,6 @@ void nap() {
   msg(buffer,-11);
   player.effect[PE_SLEEP] = mval(invoke) * 60;
   if (player.effect[PE_SLEEP] > 0) napping = '*';
-  if (mval(invoke) > 0) stats.counts[STAT_HOURS_NAPPED] += mval(invoke);
   clear_prompt();
   show_player();
   }

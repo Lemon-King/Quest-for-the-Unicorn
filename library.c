@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -14,22 +14,22 @@
 void library(char* name) {
   char flag;
   char search[33];
-  Int32 msg;
+  int msg;
   char key;
 
-  void display_msg(Int32 msg, char ext) {
-    Int32 i;
-    Int32 x,y;
-//    Int32 space;
-    Int32 size;
+  void display_msg(int msg, char ext) {
+    int i;
+    int x,y;
+    int space;
+    int size;
     byte last;
+    char key;
     MESSAGE general;
     general = (ext == 'L') ? lore[msg] : gen[msg];
     decode(general.message);
     graphmode();
     display_scroll();
-    x = 60; y = 60; size = 30;
-//    space = 25;
+    x = 60; y = 60; space = 25; size = 30;
     setcolor(0);
     while (strlen(general.message) != 0) {
       if (strlen(general.message)<size) {
@@ -47,8 +47,8 @@ void library(char* name) {
        strcpy(general.message,general.message+i);
        }
      }
-    inkey();
-  } /* void display_msg(Int32 msg, char* ext) */
+    key = inkey();
+  } /* void display_msg(int msg, char* ext) */
 
   void show_top() {
     char buffer[80];
@@ -60,7 +60,7 @@ void library(char* name) {
     gotoxy(10,5);
     txt_write("Search for <L>ore, or <G>eneral Information ? (Q to quit)");
     textcolor(14); gotoxy(35,24);
-    sprintf(buffer,"Gold = %d",get_gold());
+    sprintf(buffer,"Gold = %.0f",player.gold);
     txt_write(buffer);
     } /* void show_top()() */
 
@@ -74,18 +74,17 @@ void library(char* name) {
       txt_write("Cost of Lore search is 500 Gold Pieces, Continue Search ?");
       key = inkey();
       if (key == 'Y' || key == 'y') {
-        if (get_gold()<500) {
+        if (player.gold<500) {
           gotoxy(10,9); textcolor(12);
           txt_write("You do not have enough gold!!");
           delay(1000);
           }
         else {
-          sub_gold(500);
+          player.gold -= 500;
           strcpy(search,"");
           while (strlen(search)<5) {
             gotoxy(10,9); textcolor(9);
             txt_write("Enter Search String (5 chars min.) ? ");
-            strcpy(search,"");
             readln(search);
             }
           msg = find_lore(search);
@@ -106,18 +105,17 @@ void library(char* name) {
       txt_write("Cost of General search is 100 Gold Pieces, Continue Search ?");
       key = inkey();
       if (key == 'Y' || key == 'y') {
-        if (get_gold()<100) {
+        if (player.gold<100) {
           gotoxy(10,9); textcolor(12);
           txt_write("You do not have enough gold!!");
           delay(1000);
           }
         else {
           strcpy(search,"");
-          sub_gold(100);
+          player.gold -= 100;
           while (strlen(search)<5) {
             gotoxy(10,9); textcolor(9);
             txt_write("Enter Search String (5 chars min.) ? ");
-            strcpy(search,"");
             readln(search);
             }
           msg = find_gen(search);

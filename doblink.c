@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,13 +11,13 @@
 #include "header.h"
 
 void do_blink() {
-  Int32 x,y;
+  int x,y;
   char flag;
   flag = ' ';
   while (flag == ' ') {
     x = player.x + u_random(12) - u_random(12);
     y = player.y + u_random(12) - u_random(12);
-    if (x>1 && x<99 && y>1 && y<99 && player.map[x][y] == currentFloor) flag = '*';
+    if (x>1 && x<99 && y>1 && y<99 && player.map[x][y] == 7) flag = '*';
     }
   player.x = x; player.y = y;
   player.map_x = player.x-8;

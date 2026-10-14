@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,16 +11,10 @@
 #include "header.h"
 
 void make_h() {
-  Int32 i;
-  Int32 flag;
-  flag = -1;
-  for (i=0; i<NUM_CLASSES; i++) if (classes[i].flags & CF_HIER) flag = i;
-  if (flag >= 0) {
-    player.class = flag+1;
-    player.exp = 0;
-    player.exp_next = classes[flag].first_exp;
-    player.level = 1;
-    set_title();
-    }
+  player.class = 8;
+  strcpy(player.title,"Hierophant Druid");
+  player.exp = 0;
+  player.exp_next = 5e5;
+  player.level = 1;
   }
 

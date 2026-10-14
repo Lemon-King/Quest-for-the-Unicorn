@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -12,10 +12,10 @@
 
 void print_rec() {
   char pack1[33],pack2[33];
-  Int32  spel1,spel2;
-  Int32  mana1,mana2;
-  Int32  lvl1,lvl2;
-  Int32  i;
+  int  spel1,spel2;
+  int  mana1,mana2;
+  int  lvl1,lvl2;
+  int  i;
   printf("Name   : %s    STR: %2d          Attack : %10s\n",fix_name(player.name),player.stat[1],fix_ability(1));
   printf("Age    : %3d                      DEX: %2d          Defense: %10s\n",player.age,player.stat[2],fix_ability(2));
   printf("Sex    : %s    CON: %2d          Damage : %10s\n",fix_name(get_sex()),player.stat[3],fix_ability(3));
@@ -27,47 +27,47 @@ void print_rec() {
   printf("Health : %s C Mana: %4d        Search : %10s\n",fix_name(get_health()),player.cmana,fix_ability(9));
   printf("Align. : %s M Mana: %4d        Magic  : %10s\n",fix_name(get_align()),player.mmana,fix_ability(10));
   printf("\n");
-  printf("Torches: %4d                     Mount  :%s          Armor  : %3d\n",player.torch,yes_no(player.mount),player.armour);
-  printf("Gold   : %9d                Winged :%s          Weapon : %3d\n",get_gold(),yes_no(player.peg),player.weapon);
+  printf("Torches: %4d                     Mount  :%s          Armour : %3d\n",player.torch,yes_no(player.mount),player.armour);
+  printf("Gold   : %9.0f                Winged :%s          Weapon : %3d\n",player.gold,yes_no(player.peg),player.weapon);
   printf("\n");
   printf("SKILLS:\n");
-  printf("%3d Arrow        ",get_skill(1));
-  printf("%3d Scouting     ",get_skill(5));
-  printf("%3d Healing      ",get_skill(9));
-  printf("%3d Oracle       \n",get_skill(13));
-  printf("%3d Edge Weapons ",get_skill(2));
-  printf("%3d Language     ",get_skill(6));
-  printf("%3d Medicine     ",get_skill(10));
-  printf("%3d Charm        \n",get_skill(14));
-  printf("%3d Pole Weapons ",get_skill(3));
-  printf("%3d Lore         ",get_skill(7));
-  printf("%3d Riding       ",get_skill(11));
-  printf("%3d Survival     \n",get_skill(15));
-  printf("%3d Hunting      ",get_skill(4));
-  printf("%3d Magic        ",get_skill(8));
-  printf("%3d Boats        ",get_skill(12));
-  printf("%3d Combat       \n",get_skill(16));
+  printf("%3d Arrow        ",player.skill[1]);
+  printf("%3d Scouting     ",player.skill[5]);
+  printf("%3d Healing      ",player.skill[9]);
+  printf("%3d Oracle       \n",player.skill[13]);
+  printf("%3d Edge Weapons ",player.skill[2]);
+  printf("%3d Language     ",player.skill[6]);
+  printf("%3d Medicine     ",player.skill[10]);
+  printf("%3d Charm        \n",player.skill[14]);
+  printf("%3d Pole Weapons ",player.skill[3]);
+  printf("%3d Lore         ",player.skill[7]);
+  printf("%3d Riding       ",player.skill[11]);
+  printf("%3d Survival     \n",player.skill[15]);
+  printf("%3d Hunting      ",player.skill[4]);
+  printf("%3d Magic        ",player.skill[8]);
+  printf("%3d Boats        ",player.skill[12]);
+  printf("%3d Combat       \n",player.skill[16]);
   printf("\n");
   printf("INVENTORY:\n");
-  printf("Left Hand      : %s",fix_name(get_name(&(player.invent[I_LHND]))));
-  printf("Shield : %s\n",fix_name(get_name(&(player.invent[I_SHLD]))));
-  printf("Right Hand     : %s",fix_name(get_name(&(player.invent[I_RHND]))));
-  printf("Armor  : %s\n",fix_name(get_name(&(player.invent[I_ARMR]))));
-  printf("Left Shoulder  : %s",fix_name(get_name(&(player.invent[I_LSHL]))));
-  printf("Ring   : %s\n",fix_name(get_name(&(player.invent[I_RNG1]))));
-  printf("Right Shoulder : %s",fix_name(get_name(&(player.invent[I_RSHL]))));
-  printf("Ring   : %s\n",fix_name(get_name(&(player.invent[I_RNG2]))));
-  printf("Neck           : %s",fix_name(get_name(&(player.invent[I_NCK1]))));
-  printf("Ring   : %s\n",fix_name(get_name(&(player.invent[I_RNG2]))));
-  printf("Neck           : %s",fix_name(get_name(&(player.invent[I_NCK2]))));
-  printf("Ring   : %s\n",fix_name(get_name(&(player.invent[I_RNG4]))));
-  printf("Belt Front     : %s",fix_name(get_name(&(player.invent[I_BLTL]))));
-  printf("Robe   : %s\n",fix_name(get_name(&(player.invent[I_ROBE]))));
-  printf("Belt Back      : %s",fix_name(get_name(&(player.invent[I_BLTR]))));
-  printf("Boots  : %s\n",fix_name(get_name(&(player.invent[I_BOOT]))));
-  printf("Belt Left      : %s",fix_name(get_name(&(player.invent[I_BLTF]))));
-  printf("Helm   : %s\n",fix_name(get_name(&(player.invent[I_HELM]))));
-  printf("Belt Right     : %s\n",fix_name(get_name(&(player.invent[I_BLTB]))));
+  printf("Left Hand      : %s",fix_name(get_name(&(player.invent[1]))));
+  printf("Shield : %s\n",fix_name(get_name(&(player.invent[11]))));
+  printf("Right Hand     : %s",fix_name(get_name(&(player.invent[2]))));
+  printf("Armour : %s\n",fix_name(get_name(&(player.invent[12]))));
+  printf("Left Shoulder  : %s",fix_name(get_name(&(player.invent[3]))));
+  printf("Ring   : %s\n",fix_name(get_name(&(player.invent[13]))));
+  printf("Right Shoulder : %s",fix_name(get_name(&(player.invent[4]))));
+  printf("Ring   : %s\n",fix_name(get_name(&(player.invent[14]))));
+  printf("Neck           : %s",fix_name(get_name(&(player.invent[5]))));
+  printf("Ring   : %s\n",fix_name(get_name(&(player.invent[15]))));
+  printf("Neck           : %s",fix_name(get_name(&(player.invent[6]))));
+  printf("Ring   : %s\n",fix_name(get_name(&(player.invent[16]))));
+  printf("Belt Front     : %s",fix_name(get_name(&(player.invent[7]))));
+  printf("Robe   : %s\n",fix_name(get_name(&(player.invent[17]))));
+  printf("Belt Back      : %s",fix_name(get_name(&(player.invent[8]))));
+  printf("Boots  : %s\n",fix_name(get_name(&(player.invent[18]))));
+  printf("Belt Left      : %s",fix_name(get_name(&(player.invent[9]))));
+  printf("Helm   : %s\n",fix_name(get_name(&(player.invent[19]))));
+  printf("Belt Right     : %s\n",fix_name(get_name(&(player.invent[10]))));
   printf("\n");
   printf("PACK:\n");
   for (i=1; i<=16; i++) {
@@ -89,14 +89,12 @@ void print_rec() {
   printf("       F8  - %s\n",fix_name(player.fspell[8]));
   printf("F9 - %s",fix_name(player.fspell[9]));
   printf("       F10 - %s\n",fix_name(player.fspell[10]));
-  printf("F11- %s",fix_name(player.fspell[11]));
-  printf("       F12 - %s\n",fix_name(player.fspell[12]));
   printf("\n");
   printf("SPELLS:\n");
   printf("   Lvl Mana Name                           Lvl Mana Name\n");
   for (i=1; i<=27; i++) {
-    if (spellbook[i] != 0) {
-      spel1 = spellbook[i];
+    if (player.spell[i] != 0) {
+      spel1 = player.spell[i];
       strcpy(pack1,fix_name(spells[spel1].name));
       lvl1 = spells[spel1].level;
       mana1 = mana_cost(spells[spel1].mana);
@@ -106,8 +104,8 @@ void print_rec() {
       lvl1 = 0;
       mana1 = 0;
       }
-    if (spellbook[i+27] != 0) {
-      spel2 = spellbook[i+27];
+    if (player.spell[i+27] != 0) {
+      spel2 = player.spell[i+27];
       strcpy(pack2,fix_name(spells[spel2].name));
       lvl2 = spells[spel2].level;
       mana2 = mana_cost(spells[spel2].mana);
@@ -131,7 +129,7 @@ void print_rec() {
              player.party[i].mana,player.party[i].attack,
              player.party[i].defense);
       }
-  if (player.quests[41] == 'Y') {
+  if (player.quests[41] != 'N') {
     printf("\n");
     printf("TARDIS DESTINATION LOG\n");
     printf("                Region   X   Y   Description\n");

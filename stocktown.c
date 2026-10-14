@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,24 +11,27 @@
 #include "header.h"
 
 void stock_town(byte town) {
-  Int32 i;
-  Int32 x,y;
+  int i;
+  int x,y;
   char flag;
+  int  base;
+  int  range;
   for (i=1; i<=60; i++) {
     for (x=1; x<=5; x++) player.monster[x][i].hp = 0;
     x = u_random(100) + 1;
     y = u_random(100) + 1;
-    while (x < 5 || x > 95 || y < 5 || y > 95 ||
-           (player.map[x][y] != 7 && player.map[x][y] != 15 &&
-           player.map[x][y] != 1)) {
+    while (player.map[x][y] != 7 && player.map[x][y] != 15 &&
+           player.map[x][y] != 1) {
       x = u_random(100) + 1;
       y = u_random(100) + 1;
       }
     flag = ' ';
     while (flag == ' ') {
-      player.monster[1][i] = monsters[u_random(NO_OF_MONSTERS)];
+      y = u_random(100);
+      if (y <= 70) { base = 163; range = 20; }
+      else {base = 127; range = 35; }
+      player.monster[1][i] = monsters[base+u_random(range)];
       flag = '*';
-      if ((player.monster[1][i].special2 & M2_CITY) == 0) flag = ' ';
       }
     player.monster[1][i].hp = u_random(player.monster[1][i].hp) + 1;
     player.monster[1][i].exp +=
@@ -94,10 +97,10 @@ void stock_town(byte town) {
         case 23:strcpy(player.monster[1][i].name,"Kenneth"); break;
         case 24:strcpy(player.monster[1][i].name,"Samuel"); break;
         }
-    if (classes[player.class-1].flags & CF_ROGUE) {
+    if (player.class == 7) {
       if (player.monster[1][i].sprite>162 && player.monster[1][i].sprite<176)
         if (u_random(100) < 80)
-          player.monster[1][i].special &= (~MS_FRIENDLY);
+          player.monster[1][i].special -= 10;
       }
     }
   }

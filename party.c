@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -13,7 +13,7 @@
 void party() {
 
   void party_show_top() {
-    Int32  i;
+    int  i;
     char buffer[80];
     gotoxy(24,1); textcolor(2);
     txt_write("  #  Name               Lvl     Hp");
@@ -45,8 +45,8 @@ void party() {
     txt_write("5");
     }
 
-  void show_member(Int32 member) {
-    Int32  i;
+  void show_member(int member) {
+    int  i;
     char key;
     char flag;
     char buffer[80];
@@ -79,10 +79,10 @@ void party() {
         sprintf(buffer,"%d",player.party[member].defense);
         gotoxy(28,21); txt_write(buffer);
         gotoxy(28,22);
-        if ((player.party[member].special & MS_EVADE) == 0)
+        if (player.party[member].special < 20)
           txt_write("Attack"); else txt_write("Evade ");
         gotoxy(51,17);
-        if (player.party[member].time < 0)
+        if (player.party[member].time == 255)
           txt_write("Perm");
         else {
           sprintf(buffer,"%d      ",player.party[member].time);
@@ -111,12 +111,12 @@ void party() {
         show_stats();
       if (player.in_city == 'Y') {
         cost = (needed(player.party[member].level + 1) - player.party[member].exp);
-        if (cost <= get_gold()) {
+        if (cost <= player.gold) {
           gotoxy(20,23);
           sprintf(buffer,"Training to next level will cost %.0f Gold",cost);
           txt_write(buffer);
           gotoxy(20,24); txt_write("Do you wish to train member ?");
-          sprintf(buffer,"Gold=%d",get_gold());
+          sprintf(buffer,"Gold=%.0f",player.gold);
           gotoxy(34,25); txt_write(buffer);
           key = ' ';
           while (key != 'Y' && key != 'N') {
@@ -131,7 +131,7 @@ void party() {
             player.party[member].defense += 2;
             if (player.party[member].mana != 0)
               player.party[member].mana += 25;
-            sub_gold(cost);
+            player.gold -= cost;
             player.party[member].hp = player.party[member].level * 9;
             party_show_top();
             show_stats();
@@ -146,7 +146,7 @@ void party() {
       }
     }
 
-  Int32 i=0,j=0;
+  int i=0,j=0;
   char temp;
   NPC_REC ptemp;
   char key;
@@ -157,7 +157,6 @@ void party() {
   key = ' ';
   while (key != 'q') {
     key = inkey();
-    if (key == 27) key = 'q';
     switch (key) {
       case '1':if (player.party[1].hp != 0) show_member(1); break;
       case '2':if (player.party[2].hp != 0) show_member(2); break;
@@ -202,10 +201,11 @@ void party() {
                  case '5':i = 5; break;
                  }
                switch (key) {
-                 case 'a':player.party[i].special &= (~MS_EVADE);
+                 case 'a':if (player.party[i].special > 19)
+                            player.party[i].special -= 10;
                           break;
-                 case 'e':player.party[i].special |= MS_EVADE;
-                          break;
+                 case 'e':if (player.party[i].special < 20)
+                            player.party[i].special += 10;
                  }
                gotoxy(20,14); textcolor(10);
                txt_write("                          ");
@@ -244,7 +244,19 @@ void party() {
                break;
       }
     }
-  check_mount();
+  player.mount = 0; player.peg = 0;
+  for (i=1; i<=5; i++) {
+    if (player.party[i].hp > 0) {
+      if (player.party[i].sprite == 133) player.peg = 1;
+      if (player.party[i].sprite == 148) player.mount = 1;
+      if (player.party[i].sprite == 131) player.mount = 1;
+      if (player.party[i].sprite == 132) player.mount = 1;
+      if (player.party[i].sprite == 138) player.mount = 1;
+      if (player.party[i].sprite == 155) player.peg = 1;
+      if (player.party[i].sprite == 159) player.peg = 1;
+      if (player.peg == 1) player.mount = 1;
+      }
+    }
   restoreScreen();
 /*  show_screen(); */
   }

@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,18 +11,13 @@
 #include "header.h"
 
 void show_message(char* message) {
-  Int32   i;
+  int   i;
   char* cr;
-  Int32 x,y;
-//  Int32 space;
-  Int32 size;
+  int x,y;
+  int space;
+  int size;
   char last;
-  x = 120; y = 100; size = 30;
-//  space = 25;
-#ifdef ASCII
-  y += 62;
-  x += 90;
-#endif
+  x = 120; y = 100; space = 25; size = 30;
   while (strlen(message) != 0) {
     cr = strchr(message,'\n');
     if (cr != NULL && cr-message < size) {
@@ -50,8 +45,9 @@ void show_message(char* message) {
     }
   }
 
-void show_lore(Int32 item) {
-  Int32 i;
+void show_lore(int item) {
+  int i;
+  char key;
   MESSAGE general;
   i = item;
   general = lore[i];
@@ -60,6 +56,6 @@ void show_lore(Int32 item) {
   display_scroll();
   setcolor(0);
   show_message(general.message);
-  inkey();
+  key = inkey();
   }
 

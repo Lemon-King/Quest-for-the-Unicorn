@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,11 +11,11 @@
 #include "header.h"
 
 void stock_treasure() {
-  Int32 i;
-  Int32 s;
-  Int32 lvl;
+  int i;
+  int s;
+  int lvl;
   byte x,y;
-  for (i=1; i<1000; i++) player.map_objects[i].otype = O_NONE;
+  for (i=1; i<1000; i++) player.map_objects[i].otype = 0;
   prompt("Stocking Treasure...");
   lvl = player.diff + player.d_level / 3;
   for (i=1; i<=25; i++) {

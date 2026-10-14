@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,7 +11,7 @@
 #include "header.h"
 
 void show_player() {
-  Int32 x,y;
+  int x,y;
   x = player.x;
   y = player.y;
   if (player.effect[PE_SLEEP] == 0) {
@@ -22,12 +22,10 @@ void show_player() {
     }
   else
     show_sprite(player.x-player.map_x,player.y-player.map_y,36);
-  open_display();
-  plot(smap_offset_x-2+x*2,smap_offset_y-1+y*2,15);
-  plot(smap_offset_x-1+x*2,smap_offset_y-1+y*2,15);
-  plot(smap_offset_x-2+x*2,smap_offset_y-0+y*2,15);
-  plot(smap_offset_x-1+x*2,smap_offset_y-0+y*2,15);
-  close_display();
+  putpixel(419+x*2,240+y*2,15);
+  putpixel(420+x*2,240+y*2,15);
+  putpixel(419+x*2,241+y*2,15);
+  putpixel(420+x*2,241+y*2,15);
   }
 
 

@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -12,8 +12,6 @@
 
 char* get_race() {
   static STRING32 ret;
-  strcpy(ret,races[player.race-1].name);
-/*
   switch (player.race) {
     case 1:strcpy(ret,"Human"); break;
     case 2:strcpy(ret,"Elf"); break;
@@ -21,7 +19,6 @@ char* get_race() {
     case 4:strcpy(ret,"Dwarf"); break;
     case 5:strcpy(ret,"Hobbit"); break;
     }
-*/
   return ret;
   }
 

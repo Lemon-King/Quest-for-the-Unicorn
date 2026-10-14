@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,8 +11,8 @@
 #include "header.h"
 
 void remove_land_player() {
-  Int32 x,y;
-  Int32 color;
+  int x,y;
+  int color;
   x = player.x; y = player.y;
   show_sprite(player.x-player.map_x,player.y-player.map_y,
               player.map[player.x][player.y]);
@@ -31,11 +31,9 @@ void remove_land_player() {
     case 17:color = 4; break;
     case 19:color = 6; break;
     }
-  open_display();
-  plot(smap_offset_x-2+x*2,smap_offset_y-1+y*2,color);
-  plot(smap_offset_x-1+x*2,smap_offset_y-1+y*2,color);
-  plot(smap_offset_x-2+x*2,smap_offset_y-0+y*2,color);
-  plot(smap_offset_x-1+x*2,smap_offset_y-0+y*2,color);
-  close_display();
+  putpixel(419+x*2,240+y*2,color);
+  putpixel(420+x*2,240+y*2,color);
+  putpixel(419+x*2,241+y*2,color);
+  putpixel(420+x*2,241+y*2,color);
   }
 

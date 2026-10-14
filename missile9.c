@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,14 +10,33 @@
 
 #include "header.h"
 
-void missile9(Int32 damage,Int32 elem) {
-  Int32  x,y;
-  Int32  x1,y1;
-  Int32  mon;
-  Int32  i;
-  target(80,0,-1);
-  x = target_x;
-  y = target_y;
+void missile9(int damage) {
+  char mflag;
+  char key;
+  int  x,y;
+  int  x1,y1;
+  int  xdir,ydir;
+  int  mon;
+  int  i;
+  key = get_dir(&xdir,&ydir);
+  x = player.x;
+  y = player.y;
+  mflag = ' ';
+  while (mflag == ' ') {
+    x += xdir;
+    y += ydir;
+    if (player.map[x][y] == 3) mflag = '*';
+    if (player.map[x][y] == 38) mflag = '*';
+    if (player.map[x][y] == 39) mflag = '*';
+    if (player.map[x][y] == 21) mflag = '*';
+    if (player.map[x][y] < 0) mflag = '*';
+    if (player.map[x][y]>400 && player.map[x][y]<500) mflag = '*';
+    if (in_sight(x,y) == '*') {
+      show_sprite(x-player.map_x,y-player.map_y,80);
+      delay(100);
+      show_spot(x,y);
+      }
+    }
   x1 = x; y1 = y;
   if (x1<1) x1=1; else if (x1>99) x1 = 99;
   if (y1<1) y1=1; else if (y1>99) y1 = 99;
@@ -25,38 +44,30 @@ void missile9(Int32 damage,Int32 elem) {
     for (y=y1-1; y<=y1+1; y++)
       if (player.map[x][y] < 0 || (player.map[x][y]>400 && player.map[x][y]<500)) {
         if (in_arena == 'Y') mon = player.map[x][y] - 400;
-          else mon = 0 - player.map[x][y];
+          else mon = player.map[x][y];
         i = 90;
-        if (in_arena == 'Y' && (player.monster[mon][a_mon].special & MS_AMAGIC) == MS_AMAGIC) i = 0;
-        if (in_arena != 'Y' && (player.monster[1][mon].special & MS_AMAGIC) == MS_AMAGIC) i = 0;
+        if (in_arena == 'Y' && player.monster[mon][a_mon].special == 1) i = 0;
+        if (in_arena != 'Y' && player.monster[1][mon].special == 1) i = 0;
         if (u_random(100) < i) {
           clear_prompt();
           noise(1000,100);
           prompt("HIT !!!");
-          add_skill(SK_MAGIC,1);
-          if (in_arena != 'Y' && (player.monster[1][mon].special & MS_FRIENDLY) == MS_FRIENDLY) {
+          if (in_arena != 'Y' && player.monster[1][mon].special > 9) {
             player.align -= 20;
-            player.monster[1][mon].special -= MS_FRIENDLY;
+            player.monster[1][mon].special -= 10;
             if (player.align < 0) player.align = 0;
             }
-          if (in_arena == 'Y' && (player.monster[mon][a_mon].special & MS_FRIENDLY) == MS_FRIENDLY) {
+          if (in_arena == 'Y' && player.monster[mon][a_mon].special > 9) {
             player.align -= 20;
-            player.monster[mon][a_mon].special -= MS_FRIENDLY;
+            player.monster[mon][a_mon].special -= 10;
             if (player.align < 0) player.align = 0;
             }
           if (in_sight(x,y) == '*') {
             show_sprite(x-player.map_x,y-player.map_y,80);
-            delay(delay_hit);
+            delay(250);
             show_spot(x,y);
             }
           i = u_random(damage) + 1;
-          if (u_random(100) < get_crit()) {
-            i *= 2;
-            stats.counts[STAT_CRITS]++;
-            }
-          if (in_arena == 'Y') i = figure_damage(i,elem,&(player.monster[mon][a_mon]));
-            else  i = figure_damage(i,elem,&(player.monster[1][mon]));
-          stats_do_damage(i);
           if (in_arena == 'Y') player.monster[mon][a_mon].hp -= i;
             else player.monster[1][mon].hp -= i;
           if (in_arena == 'Y') i=player.monster[mon][a_mon].hp;
@@ -64,18 +75,19 @@ void missile9(Int32 damage,Int32 elem) {
           if (i <= 0) {
             clear_prompt();
             if (in_arena != 'Y') {
-              dead_monster(&(player.monster[1][mon]),'Y',x,y);
+              gain_exp(player.monster[1][mon].exp);
+              player.map[x][y] = player.monster[1][mon].prev;
               }
             if (in_arena == 'Y') {
-              gain_exp(player.monster[mon][a_mon].exp,0);
+              gain_exp(player.monster[mon][a_mon].exp);
               player.map[x][y] = player.monster[mon][a_mon].prev;
               }
             show_spot(x,y);
-            if (in_arena != 'Y' && (player.monster[1][mon].special & MS_FRIENDLY) == MS_FRIENDLY) {
+            if (in_arena != 'Y' && player.monster[1][mon].special > 9) {
               player.align -= 20;
               if (player.align < 0) player.align = 0;
               }
-            if (in_arena == 'Y' && (player.monster[mon][a_mon].special & MS_FRIENDLY) == MS_FRIENDLY) {
+            if (in_arena == 'Y' && player.monster[mon][a_mon].special > 9) {
               player.align -= 20;
               if (player.align < 0) player.align = 0;
               }
@@ -86,7 +98,6 @@ void missile9(Int32 damage,Int32 elem) {
         else {
           clear_prompt();
           prompt("Fizzle. . .");
-          stats.counts[STAT_MISSES]++;
           }
         }
   }

@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,24 +11,16 @@
 #include "header.h"
 
 void poison_trap() {
-  Int32 i;
   char flag;
   flag = ' ';
-  if (classes[player.class-1].flags & CF_ROGUE) flag = '*';
+  if (player.class == 8) flag = '*';
   if (has_intrinsic(A_NOPS)) flag = '*';
-  if (has_intrinsic(A_RSPS) && u_random(100) < 50) flag = '*';
   if (flag == ' ') {
-      i = (player.diff * 5) + (player.d_level / 3);
-      i += u_random((player.diff * 10) + (player.d_level / 2));
-      if (has_intrinsic(A_RSPS)) i /= 2;
-      if (i < 1) i = 1;
-      player.effect[PE_POISON] += i;
+      player.effect[PE_POISON] += (player.diff*5+player.d_level / 3) +
+                      u_random(player.diff*5+player.d_level / 3);
       clear_prompt();
-      msg("Poisoned dart!!!",13);
-      stats.counts[STAT_POISONED]++;
+      msg("Poisoned!!",11);
       show_side();
     }
-  run_x = 0;
-  run_y = 0;
   }
 

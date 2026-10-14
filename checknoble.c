@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -13,14 +13,12 @@
 void check_noble() {
   char flag;
   char key;
-  Int32  class;
-  Int32  i;
-  class = -1;
-  for (i=0; i<NUM_CLASSES; i++)
-    if (classes[i].flags & CF_NOBLE) class = i+1;
-  if (class < 0) return;
   flag = ' ';
-  if (check_class_change(class)) flag = '*';
+  if (player.class == 4 && player.level >= 23) flag = '*';
+  if (player.class == 6 && player.level >= 38) flag = '*';
+  if (player.class == 8 && player.level >= 31) flag = '*';
+  if (player.class == 9 && player.level >= 26) flag = '*';
+  if (player.class == 10 && player.level >= 44) flag = '*';
   if (flag == '*') {
     textmode(3);
     textcolor(2);

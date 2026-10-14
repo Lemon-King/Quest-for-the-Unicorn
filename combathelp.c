@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -11,44 +11,28 @@
 #include "header.h"
 
 void combat_help() {
+  char key;
   textmode(3);
   textcolor(12); gotoxy(31,1);
   txt_writeln("Combat Commands:");
   txt_writeln("");
   textcolor(14);
-  col = 0;
-  row = 3;
-  help_item("1 - Move down left",30,17,13);
-  help_item("2 - Move down",30,17,13);
-  help_item("3 - Move down right",30,17,13);
-  help_item("4 - Move left",30,17,13);
-  help_item("6 - Move right",30,17,13);
-  help_item("7 - Move up left",30,17,13);
-  help_item("8 - Move up",30,17,13);
-  help_item("9 - Move up right",30,17,13);
-  help_item("f - Fire weapon",30,17,13);
-  help_item("g - Get item",30,17,13);
-  help_item("h - Healing",30,17,13);
-  help_item("H - Show icons",30,17,13);
-  help_item("i - inventory",30,17,13);
-  help_item("m - Cast magic spell",30,17,13);
-  help_item("p - Party commands",30,17,13);
-  help_item("P - Pick up and pack",30,17,13);
-  help_item("R - Record sheet",30,17,13);
-  help_item("T - Throw",30,17,13);
-  help_item("u - Use item",30,17,13);
-  help_item("v - View mode",30,17,13);
-  help_item("{ - Save weapon set",30,17,13);
-  help_item("[ - Load weapon set",30,17,13);
-  help_item("} - Save gear set",30,17,13);
-  help_item("] - Load gear set",30,17,13);
-  help_item("? - List of commands",30,17,13);
-  help_item("",30,17,13);
-  help_item("Any other key acts as",30,17,13);
-  help_item("rest 1 turn command",30,17,13);
+  txt_writeln("           8 - Move Up                        7 - Move Up Left");
+  txt_writeln("           2 - Move Down                      9 - Move Up Right");
+  txt_writeln("           4 - Move Left                      1 - Move Down Left");
+  txt_writeln("           6 - Move Right                     3 - Move Down Right");
+  txt_writeln("           f - Fire Weapon                    q - Quaff a Potion");
+  txt_writeln("           g - Get Item                       r - Read a scroll");
+  txt_writeln("           H - Show Icons                     R - Show Player Record");
+  txt_writeln("           i - Inventory                      T - Throw item");
+  txt_writeln("           m - Cast a Magic Spell             u - Use an item");
+  txt_writeln("           p - Party Commands                 v - View a direction");
+  txt_writeln("           ? - Show list of Commands          V - Sound on/off");
+  txt_writeln("           P - Pick up and pack               z - Zap a want");
+  txt_writeln("           h - Healing");
   gotoxy(28,24); textcolor(10);
   txt_write("Press any key to continue");
-  inkey();
+  key = inkey();
   show_screen();
   }
 

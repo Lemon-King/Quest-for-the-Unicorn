@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,24 +10,20 @@
 
 #include "header.h"
 
-void get_shop_items(Int32 otype1,Int32 otype2,Int32 otype3,Int32 otype4,Int32 otype5,Int32 otype6,Int32 rarity) {
-  Int32 i;
+void get_shop_items(int otype1,int otype2,int otype3,int otype4,int rarity) {
+  int i;
   n_shop_items = 0;
   i = 0;
   while (i >= 0) {
-    if (objects[i].control2 >= 0 &&
-        (objects[i].flags & OF_FOR_SALE) != 0 &&
+    if (objects[i].rarity >= rarity &&
         ( objects[i].otype == otype1 ||
           objects[i].otype == otype2 ||
           objects[i].otype == otype3 ||
-          objects[i].otype == otype4 ||
-          objects[i].otype == otype5 ||
-          objects[i].otype == otype6)) {
+          objects[i].otype == otype4)) {
       shop_items[n_shop_items++] = objects[i];
       }
     if (objects[i].otype >= 99) i=-1;
       else i++;
     }
-  sort_shop_items();
   }
 

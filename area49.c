@@ -1,6 +1,6 @@
 /*
  *******************************************************************
- *** This software is copyright 1985-2014 by Michael H Riley     ***
+ *** This software is copyright 1985-2007 by Michael H Riley     ***
  *** You have permission to use, modify, copy, and distribute    ***
  *** this software so long as this copyright notice is retained. ***
  *** This software may not be used in commercial applications    ***
@@ -10,13 +10,13 @@
 
 #include "header.h"
 
-void area49(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y) { 
+void area49(int damage) { 
   char buffer[32];
-  Int32  x,y;
-  Int32  x1,y1;
-  Int32  mon;
-  Int32  i;
-  x1 = center_x; y1 = center_y;
+  int  x,y;
+  int  x1,y1;
+  int  mon;
+  int  i;
+  x1 = player.x; y1 = player.y;
   if (x1<3) x1=3; else if (x1>97) x1 = 97;
   if (y1<3) y1=3; else if (y1>97) y1 = 97;
   for (x=x1-3; x<=x1+3; x++)
@@ -48,13 +48,6 @@ void area49(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y) {
             show_spot(x,y);
             }
           i = u_random(damage) + 1;
-          if (u_random(100) < get_crit()) {
-            i *= 2;
-            stats.counts[STAT_CRITS]++;
-            }
-          if (in_arena == 'Y') i = figure_damage(i,elem,&(player.monster[mon][a_mon]));
-            else  i = figure_damage(i,elem,&(player.monster[1][mon]));
-          stats_do_damage(i);
           if (in_arena == 'Y') player.monster[mon][a_mon].hp -= i;
             else player.monster[1][mon].hp -= i;
           if (in_arena == 'Y') i=player.monster[mon][a_mon].hp;
@@ -89,7 +82,6 @@ void area49(Int32 damage,Int32 elem,Int32 center_x,Int32 center_y) {
         else {
           clear_prompt();
           prompt("Fizzle. . .");
-          stats.counts[STAT_MISSES]++;
           }
         }
   }
